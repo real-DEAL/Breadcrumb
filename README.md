@@ -27,7 +27,7 @@
     - [Automatic Deployment](#automatic-deployment)
   - [Product Development](#product-development)
 - [Extra Credit](#extra-credit)
-
+- [Group Assignments](#group-assignments)
 
 
 ## Overview
@@ -169,7 +169,7 @@ You must implement 2-3 of the following:
 - [ ] Schedule architecture and product review with mentor
 
 
-## Groups
+## Group Assignments
 
 ### HR17 Greenfield Groups    
 
