@@ -173,98 +173,98 @@ You must implement 2-3 of the following:
 
 ### HR17 Greenfield Groups    
 
-####Team: Reckless Saturn
-* David Nguyen  (blankmaker)
-* Armando Perez (armandopmj)
-* Ly Mai  Le  (lmle)
-* Eddie Jimenez (phoenix16t)
+#### Team: Reckless Saturn
+- David Nguyen  (blankmaker)
+- Armando Perez (armandopmj)
+- Ly Mai  Le  (lmle)
+- Eddie Jimenez (phoenix16t)
 
 
-####Team: Gracious Unicorn
-* Jonathan  Ng  (codengjon)
-* Jonathan  Sadka (jonsadka)
-* Christopher McCloud (cmccloud)
-* Christopher Singhavong  (singalongwithme)
+#### Team: Gracious Unicorn
+- Jonathan  Ng  (codengjon)
+- Jonathan  Sadka (jonsadka)
+- Christopher McCloud (cmccloud)
+- Christopher Singhavong  (singalongwithme)
 
-####Team: Brave Beehive
-* Collin Wu (collinwu)
-* Mike  Luby  (mluby)
-* Jonathan  Warrick (JonathanWarrick)
-* Tommy Tan (gitSauced)
+#### Team: Brave Beehive
+- Collin Wu (collinwu)
+- Mike  Luby  (mluby)
+- Jonathan  Warrick (JonathanWarrick)
+- Tommy Tan (gitSauced)
 
-####Team: Common Badger   
-* Dominic Czarnota  (dczarnota)
-* Dan Thareja (danthareja)
-* Haiming Bao (nrobeR)
-* Park Tamaroon (loqi)
+#### Team: Common Badger   
+- Dominic Czarnota  (dczarnota)
+- Dan Thareja (danthareja)
+- Haiming Bao (nrobeR)
+- Park Tamaroon (loqi)
     
-####Team: Solid Creek
-* Collin Kokotas  (kokobeens)
-* Jacob Gribschaw (Zithrill)
-* Geoffrey  Abdallah  (gabdallah222)
-* Stefanie  Contreras (stefceror)
+#### Team: Solid Creek
+- Collin Kokotas  (kokobeens)
+- Jacob Gribschaw (Zithrill)
+- Geoffrey  Abdallah  (gabdallah222)
+- Stefanie  Contreras (stefceror)
 
-####Team: Navy Haystack   
-* Tejaswini Pingili (tpingili)
-* Tyler Lewis (tylerlewis)
-* Dara Bun (darabun)
-* Lawrence Kang (lawrencekang)
+#### Team: Navy Haystack   
+- Tejaswini Pingili (tpingili)
+- Tyler Lewis (tylerlewis)
+- Dara Bun (darabun)
+- Lawrence Kang (lawrencekang)
 
-####Team: Dangerous Vegetable
-* Wil Andrade (Alphabat)
-* Keenan Lidral-Porter  (kayellpeee)
-* Andrew Switlyk (ASwitlyk)
+#### Team: Dangerous Vegetable
+- Wil Andrade (Alphabat)
+- Keenan Lidral-Porter  (kayellpeee)
+- Andrew Switlyk (ASwitlyk)
 
-####Team: Global Mustard    
-* Jeffrey VanDalsum (jeffvan576)
-* Brandon Yun (yunbran)
-* Joseph Lowinske (lowi0008)
+#### Team: Global Mustard    
+- Jeffrey VanDalsum (jeffvan576)
+- Brandon Yun (yunbran)
+- Joseph Lowinske (lowi0008)
 
 
 ### Juniors(HR16)   
 
-####Team: Northern Moose
-* Etienne Tripier (etripier)
-* Matt  Kim (mattphoto)
-* Samantha  Puth  (sputh)
-* Sean  Chen  (seanchen1991)
+#### Team: Northern Moose
+- Etienne Tripier (etripier)
+- Matt  Kim (mattphoto)
+- Samantha  Puth  (sputh)
+- Sean  Chen  (seanchen1991)
     
-#### Team: Dangerous Wrench
-* Mario Ponticello  (eave)
-* Austin  Connelly  (aconnelly)
-* Lauren  Pappone (lpappone)
-* James Edwards (incrediblesound)
+####  Team: Dangerous Wrench
+- Mario Ponticello  (eave)
+- Austin  Connelly  (aconnelly)
+- Lauren  Pappone (lpappone)
+- James Edwards (incrediblesound)
     
-#### Team: Indigo Crayon
-* Aaron Melocik (SterlingVix)
-* Jim O'Brien (jimobrien)
-* Wesley  Pascual (seewes)
-* Iago  Prates  (iagowp)
+####  Team: Indigo Crayon
+- Aaron Melocik (SterlingVix)
+- Jim O'Brien (jimobrien)
+- Wesley  Pascual (seewes)
+- Iago  Prates  (iagowp)
 
-#### Team: Tidy Magenta   
-* Issaq Al-Ahmed  (iAl-Ahmed)
-* Jarrod  Ruhland (jangahroo)
-* Jimmy Jea (jimjea)
-* Kim Marquardt (robotBones)
+####  Team: Tidy Magenta   
+- Issaq Al-Ahmed  (iAl-Ahmed)
+- Jarrod  Ruhland (jangahroo)
+- Jimmy Jea (jimjea)
+- Kim Marquardt (robotBones)
 
-#### Team: Elastic Notorious    
-* Brandon McNary  (bmcnary)
-* Fleur Dragan  (fleur)
-* Samuel  Nelson  (SunJieMing)
-* Stacy Hseu  (shseu)
+####  Team: Elastic Notorious    
+- Brandon McNary  (bmcnary)
+- Fleur Dragan  (fleur)
+- Samuel  Nelson  (SunJieMing)
+- Stacy Hseu  (shseu)
 
-#### Team:Next Mars 
-* Jacob (Andrew)  Brassington (jabbrass)
-* Bo  Liu (liubolightning)
-* Jack  Lu  (JackTanRoo)
-* Daniel  Streit  (danielstreit)
+####  Team:Next Mars 
+- Jacob (Andrew)  Brassington (jabbrass)
+- Bo  Liu (liubolightning)
+- Jack  Lu  (JackTanRoo)
+- Daniel  Streit  (danielstreit)
 
-#### Team: Golden Lion 
-* Mike  Lam (myclamm)
-* Wai-Yin Kwan  (wykhuh)
-* Ben Rowles  (browles)
-* Kelly Walker  (kwalker3690)
-* Chun  Wang  (Chunhao137)
+####  Team: Golden Lion 
+- Mike  Lam (myclamm)
+- Wai-Yin Kwan  (wykhuh)
+- Ben Rowles  (browles)
+- Kelly Walker  (kwalker3690)
+- Chun  Wang  (Chunhao137)
 
 <!-- LINKS -->
 
