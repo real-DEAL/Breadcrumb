@@ -1,6 +1,6 @@
 # Greenfield Project
 
-<!-- 
+<!--
 ## Goals
 
   - Team Communication And Group Dynamics
@@ -9,7 +9,7 @@
   - Learn Project Architecture Fundamentals
   - Pragmatic Project Management (design And Implementation)
   - Writing A Maintainable Codebase
-  - Inheriting Legacy Code Base 
+  - Inheriting Legacy Code Base
 -->
 
 
@@ -36,7 +36,7 @@
 
 The Greenfield project begins on Week 6 Day 3 (Wednesday) runs through solo week, and ends on Week 7 Day 1 (Monday). During solo week you're expected to stay in contact with you group (via google hangouts, carrier pigeon, etc) and work 50% time (~5 hours per day).
 
-Your project must be feature __and__ code complete by the end of solo week. 
+Your project must be feature __and__ code complete by the end of solo week.
 
 You'll present you project to your cohort on Week 7 Day 1 (Monday). You also use Monday to wrap up any lose ends and make sure your project is ready to for hand-off to the next team.
 
@@ -90,7 +90,7 @@ Don't worry too much about choosing a name at this point. You'll likely refactor
 Create product vision by drafting a 'Project Summary'
   - [ ] Copy [_PRESS-RELEASE.md](_PRESS-RELEASE.md) into the root directory of your own project repo and complete the exercise described therein. Note that the actual instructions are hidden in a comment block. You'll need to view the raw file, not the rendered markdown version to see them.
   - [ ] Use github issues
-  
+
 #### Project Infrastructure
 In order to support your current team _and_ future contributers to your project, you'll need to document your project as you build it. It should be the case that, without any intervention or additional explanation from you, the next team of collaborators  (or yourself in six months) can dive in and figure out how to start hacking easily.
 
@@ -112,7 +112,7 @@ Be sure keep your project backlog (using github issues) up to date. These should
   - [AirBnB's](https://github.com/airbnb/javascript) and [The Google JS Style Guide](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml) are also excellent examples.
 
 ##### Project Readme
-Your project readme is the very first thing that users will see when they view your github project. It's the portal that must link to the other content files in the root of your repo. 
+Your project readme is the very first thing that users will see when they view your github project. It's the portal that must link to the other content files in the root of your repo.
 - [ ] Use [_README.md](_README.md) as a template to create a thorough readme.
   - It must link to the documentation you've created (as described by the items above).
 
@@ -171,7 +171,7 @@ You must implement 2-3 of the following:
 
 ## Group Assignments
 
-### HR17 Greenfield Groups    
+### HR17 Greenfield Groups
 
 #### Team: Reckless Saturn
 - David Nguyen  (blankmaker)
@@ -192,19 +192,19 @@ You must implement 2-3 of the following:
 - Jonathan  Warrick (JonathanWarrick)
 - Tommy Tan (gitSauced)
 
-#### Team: Common Badger   
+#### Team: Common Badger
 - Dominic Czarnota  (dczarnota)
 - Dan Thareja (danthareja)
 - Haiming Bao (nrobeR)
 - Park Tamaroon (loqi)
-    
+
 #### Team: Solid Creek
 - Collin Kokotas  (kokobeens)
 - Jacob Gribschaw (Zithrill)
 - Geoffrey  Abdallah  (gabdallah222)
 - Stefanie  Contreras (stefceror)
 
-#### Team: Navy Haystack   
+#### Team: Navy Haystack
 - Tejaswini Pingili (tpingili)
 - Tyler Lewis (tylerlewis)
 - Dara Bun (darabun)
@@ -215,51 +215,51 @@ You must implement 2-3 of the following:
 - Keenan Lidral-Porter  (kayellpeee)
 - Andrew Switlyk (ASwitlyk)
 
-#### Team: Global Mustard    
+#### Team: Global Mustard
 - Jeffrey VanDalsum (jeffvan576)
 - Brandon Yun (yunbran)
 - Joseph Lowinske (lowi0008)
 
 
-### Juniors(HR16)   
+### Juniors(HR16)
 
 #### Team: Northern Moose
 - Etienne Tripier (etripier)
 - Matt  Kim (mattphoto)
 - Samantha  Puth  (sputh)
 - Sean  Chen  (seanchen1991)
-    
-####  Team: Dangerous Wrench
+
+#### Team: Dangerous Wrench
 - Mario Ponticello  (eave)
 - Austin  Connelly  (aconnelly)
 - Lauren  Pappone (lpappone)
 - James Edwards (incrediblesound)
-    
-####  Team: Indigo Crayon
+
+#### Team: Indigo Crayon
 - Aaron Melocik (SterlingVix)
 - Jim O'Brien (jimobrien)
 - Wesley  Pascual (seewes)
 - Iago  Prates  (iagowp)
 
-####  Team: Tidy Magenta   
+#### Team: Tidy Magenta
 - Issaq Al-Ahmed  (iAl-Ahmed)
 - Jarrod  Ruhland (jangahroo)
 - Jimmy Jea (jimjea)
 - Kim Marquardt (robotBones)
 
-####  Team: Elastic Notorious    
+#### Team: Elastic Notorious
 - Brandon McNary  (bmcnary)
 - Fleur Dragan  (fleur)
 - Samuel  Nelson  (SunJieMing)
 - Stacy Hseu  (shseu)
 
-####  Team:Next Mars 
+#### Team: Next Mars
 - Jacob (Andrew)  Brassington (jabbrass)
 - Bo  Liu (liubolightning)
 - Jack  Lu  (JackTanRoo)
 - Daniel  Streit  (danielstreit)
 
-####  Team: Golden Lion 
+#### Team: Golden Lion
 - Mike  Lam (myclamm)
 - Wai-Yin Kwan  (wykhuh)
 - Ben Rowles  (browles)
