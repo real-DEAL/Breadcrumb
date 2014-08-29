@@ -103,23 +103,18 @@ Be sure keep your project backlog (using github issues) up to date. There should
 documentation of tasks completed (github provides this functionality automatically) and
 next steps/features in your project backlog so that your collaborators can just dive right in.
 
-You can use github issues to track both your project's backlog of tasks and
+You should use github issues to track both your project's backlog of tasks and
 fixes and to provide a way to track future goals. You can use labels to
 organize issues and milestones to group issues together and to visualize your
 progress.
 
-Sometimes github issues is not enough, for larger projects or projects with
-multiple repos, you can use tools like waffle.io allow you to manage github
-issues with a more powerful interface and can provide a kanban-board-like place
-to manage your project and workflow.
+You may want to take advantage of a tool like [waffle.io](waffle.io) to manage github 
+issues with a more powerful interface and can provide a kanban-board-like place to manage your 
+project and workflow.
 
 ##### Contribution Guide
 
-- [ ] Document your team's git workflow by copying [_CONTRIBUTING.md](_CONTRIBUTING.md) into the root directory of your repo. It follows the [forking workflow](https://www.atlassian.com/git/workflows#!workflow-forking).
-- The [Feature branch workflow](https://www.atlassian.com/git/workflows#!workflow-feature-branch) is another very simple, very popular method.
-- There are several other workflows you can choose from as well, but no matter which you choose, you should always have someone other than the person who wrote the code review it before it's merged into the central repository.
-  - [ ] Read this excellent (and brief) [article about pull requests](https://github.com/blog/1124-how-we-use-pull-requests-to-build-github)
-- Remember, you're welcome to use which ever git workflow you want, [_CONTRIBUTING.md](_CONTRIBUTING.md) is provided here as a suggestion (with the intention of you editing it). But whichever workflow you choose, you must document it well, and you __must__ be consistent.
+- [ ] Document your team's git workflow by copying [_CONTRIBUTING.md](_CONTRIBUTING.md) into the root directory of your repo and editing it suite your needs. It follows a [forking workflow](https://www.atlassian.com/git/workflows#!workflow-forking).
 
 The provided `CONTRIBUTING.md` advocates for a `git rebase` based workflow
 instead of a `git merge` based workflow. The advantage of a `rebase` based
@@ -136,6 +131,8 @@ Because `rebase` changes commits, you will have to push with the `-f` or
 way that git cannot resolve. You should _never_ rebase or push with force to
 the `master` branch of your repository, as that will invalidate everyone elses
 clones and checkouts of the repository.
+
+Remember, you're welcome to use which ever git workflow you want, [_CONTRIBUTING.md](_CONTRIBUTING.md) is provided here as a suggestion (with the intention of you editing it). But whichever workflow you choose, you must document it well, you __must__ be consistent, and you should always have someone other than the person who wrote the code review it before it's merged into the central repository.
 
 ##### Style Guide
 - [ ] Document your team's style guide by copying [_STYLE-GUIDE.md](_STYLE-GUIDE.md) into the root directory of your repo. [_STYLE-GUIDE.md](_STYLE-GUIDE.md) is provided as a template, you should edit it to reflect your agreed upon setup.
@@ -182,14 +179,15 @@ review of the changes and you should have a good back and forth where the code
 is refactored and improved before being merged in. This will guarantee a higher
 degree of code quality and will prevent careless errors from being merged into
 your application.
+- [ ] Read this excellent (and brief) [article about pull requests](https://github.com/blog/1124-how-we-use-pull-requests-to-build-github)
 
-If you use continuous integration, you will benefit even more from a
+With continuous integration, you will benefit even more from a
 pull request based workflow because you will always know that you are never
 merging breaking code into your master branch.
 
 ###### Speaking to each other
 
-You should use a persistent chat service like hipchat, slack, or irc to
+You may want to use a persistent chat service like [hipchat](5), [slack](6), or irc to
 communicate as a team so that you can have efficient asynchronous
 communication. This will make your team more accountable and efficient, so you
 don't have to stop everyone else's work to discuss small issues or request code
@@ -202,8 +200,6 @@ review.
 Use TDD.
 
 Test driven development is not valuable because it catches errors, but because it changes the way you think about interfaces between modules. Writing tests before you write code influences how you think about the process. It provides a safety net for performing refactoring and it documents the expected behavior of the system.
-
-Refer to Larry Davis's excellent [wellTested](https://github.com/hackreactor/wellTested) repo for some solid examples.
 
 You must implement _all_ of the following:
   - [ ] Include testing when defining your project scope
@@ -331,3 +327,7 @@ You must implement 2-3 of the following:
 [2]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Product_Owner
 [3]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Scrum_Master
 [4]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Development_Team
+[5]:https://www.hipchat.com/
+[6]:https://slack.com/
+[7]:
+[8]:
