@@ -24,6 +24,7 @@
   - [Misc.](#misc.)
 - [Group Assignments](#group-assignments)
 
+
 ## Overview
 
 ### Duration and Milestones
