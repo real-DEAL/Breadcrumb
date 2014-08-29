@@ -126,6 +126,10 @@ way that git cannot resolve. You should _never_ rebase or push with force to
 the `master` branch of your repository, as that will invalidate everyone elses
 clones and checkouts of the repository.
 
+##### `CONTRIBUTING.md` Workflow Diagram
+
+![](http://i.imgur.com/p0e4tQK.png)
+
 Remember, you're welcome to use which ever git workflow you want, `_CONTRIBUTING.md` is provided here as a suggestion (with the intention of you editing it). But whichever workflow you choose, you must document it well, you __must__ be consistent, and you should always have someone other than the person who wrote the code review it before it's merged into the central repository.
 
 #### Style Guide
