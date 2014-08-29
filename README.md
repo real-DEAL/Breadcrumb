@@ -1,16 +1,6 @@
 # Greenfield Project
 
-<!--
-## Goals
 
-  - Team Communication And Group Dynamics
-    - How To Work As Part Of A Team
-    - How To Manage Individual Needs And Expectations In Service A Shared Goal
-  - Learn Project Architecture Fundamentals
-  - Pragmatic Project Management (design And Implementation)
-  - Writing A Maintainable Codebase
-  - Inheriting Legacy Code Base
--->
 
 
 #### Table of Contents
@@ -88,7 +78,7 @@ Don't worry too much about choosing a name at this point. You'll likely refactor
 
 ### Product Design
 Create product vision by drafting a 'Project Summary'
-  - [ ] Copy [_PRESS-RELEASE.md](_PRESS-RELEASE.md) into the root directory of your own project repo and complete the exercise described therein. Note that the actual instructions are hidden in a comment block. You'll need to view the raw file, not the rendered markdown version to see them.
+  - [ ] Copy `_PRESS-RELEASE.md` into the root directory of your own project repo and complete the exercise described therein. Note that the actual instructions are hidden in a comment block. You'll need to view the raw file, not the rendered markdown version to see them.
   - [ ] Use github issues
 
 #### Project Infrastructure
@@ -97,23 +87,50 @@ In order to support your current team _and_ future contributers to your project,
 Document your project and codebase to the point that if you decide to push it to hacker-news, anyone with a solid understanding of JavaScript can (after reviewing your documentation and comments) start submitting pull requests. Plan on not having any face-to-face interaction with the next team of collaborators. The most effective and efficient way to accomplish this is to do it right from the very start. Don't wait till the last minute. That will never work.
   - [ ] Heavily comment all aspects of your code.
 
-Be sure keep your project backlog (using github issues) up to date. These should be clear documentation of tasks completed (github provides this functionality automatically) and next steps/features in your project backlog so that your collaborators can just dive right in.
+##### Project Backlog
+
+Be sure keep your project backlog (using github issues) up to date. There should be clear
+documentation of tasks completed (github provides this functionality automatically) and
+next steps/features in your project backlog so that your collaborators can just dive right in.
+
+You should use github issues to track both your project's backlog of tasks and
+fixes and to provide a way to track future goals. You can use labels to
+organize issues and milestones to group issues together and to visualize your
+progress.
+
+You may want to take advantage of a tool like [waffle.io](waffle.io) to manage github 
+issues with a more powerful interface and can provide a kanban-board-like place to manage your 
+project and workflow.
 
 ##### Contribution Guide
 
-- [ ] Document your team's git workflow by copying [_CONTRIBUTING.md](_CONTRIBUTING.md) into the root directory of your repo. It follows the [forking workflow](https://www.atlassian.com/git/workflows#!workflow-forking).
-- The [Feature branch workflow](https://www.atlassian.com/git/workflows#!workflow-feature-branch) is another very simple, very popular method.
-- There are several other workflows you can choose from as well, but no matter which you choose, you should always have someone other than the person who wrote the code review it before it's merged into the central repository.
-  - [ ] Read this excelent (and brief) [article about pull requests](https://github.com/blog/1124-how-we-use-pull-requests-to-build-github)
-- Remember, you're welcome to use which ever git workflow you want, [_CONTRIBUTING.md](_CONTRIBUTING.md) is provided here as a suggestion (with the intention of you editing it). But whichever workflow you choose, you must document it well, and you __must__ be consistent.
+- [ ] Document your team's git workflow by copying `_CONTRIBUTING.md` into the root directory of your repo and editing it suite your needs. It follows a [forking workflow](https://www.atlassian.com/git/workflows#!workflow-forking).
+
+The provided `_CONTRIBUTING.md` advocates for a `git rebase` based workflow
+instead of a `git merge` based workflow. The advantage of a `rebase` based
+workflow over `merge` is that a rebase, even one which fixes conflicts, does
+not introduce a new commit into your history. If you use `merge` and there are
+any conflicts, then you will get a new "merge commit" in your history. Over
+time, you can accrue hundreds of merge commits which can make your history
+significantly harder to read and introduce a much lower signal to noise ratio
+in your history. `rebase` avoids these problems by changing existing commits
+instead of creating a new one.
+
+Because `rebase` changes commits, you will have to push with the `-f` or
+`--force` flag to your branch after rebasing, as the history has changed in a
+way that git cannot resolve. You should _never_ rebase or push with force to
+the `master` branch of your repository, as that will invalidate everyone elses
+clones and checkouts of the repository.
+
+Remember, you're welcome to use which ever git workflow you want, `_CONTRIBUTING.md` is provided here as a suggestion (with the intention of you editing it). But whichever workflow you choose, you must document it well, you __must__ be consistent, and you should always have someone other than the person who wrote the code review it before it's merged into the central repository.
 
 ##### Style Guide
-- [ ] Document your team's style guide by copying [_STYLE-GUIDE.md](_STYLE-GUIDE.md) into the root directory of your repo. [_STYLE-GUIDE.md](_STYLE-GUIDE.md) is provided as a template, you should edit it to reflect your agreed upon setup.
+- [ ] Document your team's style guide by copying `_STYLE-GUIDE.md` into the root directory of your repo. `_STYLE-GUIDE.md` is provided as a template, you should edit it to reflect your agreed upon setup.
   - [AirBnB's](https://github.com/airbnb/javascript) and [The Google JS Style Guide](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml) are also excellent examples.
 
 ##### Project Readme
 Your project readme is the very first thing that users will see when they view your github project. It's the portal that must link to the other content files in the root of your repo.
-- [ ] Use [_README.md](_README.md) as a template to create a thorough readme.
+- [ ] Use `_README.md` as a template to create a thorough readme.
   - It must link to the documentation you've created (as described by the items above).
 
 ### Continuous Deployment
@@ -136,6 +153,36 @@ You must have a deployed website setup.
   );
   ```
 
+##### Team Communication
+
+###### New Code
+
+Your team should communicate new ideas for features or report important bugs
+through github issues or whatever tool you use to manage github issues, that
+way everyone on your project can see what important things are happening and
+there is always a repository of further work to be done.
+
+To introduce new code into your project, your team should _always_ make pull
+requests - never make commits and push directly to master. After you make a
+pull request, at least one other member of your team should do a thorough code
+review of the changes and you should have a good back and forth where the code
+is refactored and improved before being merged in. This will guarantee a higher
+degree of code quality and will prevent careless errors from being merged into
+your application.
+- [ ] Read this excellent (and brief) [article about pull requests](https://github.com/blog/1124-how-we-use-pull-requests-to-build-github)
+
+With continuous integration, you will benefit even more from a
+pull request based workflow because you will always know that you are never
+merging breaking code into your master branch.
+
+###### Speaking to each other
+
+You may want to use a persistent chat service like [hipchat](5), [slack](6), or irc to
+communicate as a team so that you can have efficient asynchronous
+communication. This will make your team more accountable and efficient, so you
+don't have to stop everyone else's work to discuss small issues or request code
+review.
+
 ## Extra Credit
 
 ### Testing and You
@@ -143,8 +190,6 @@ You must have a deployed website setup.
 Use TDD.
 
 Test driven development is not valuable because it catches errors, but because it changes the way you think about interfaces between modules. Writing tests before you write code influences how you think about the process. It provides a safety net for performing refactoring and it documents the expected behavior of the system.
-
-Refer to Larry Davis's excellent [wellTested](https://github.com/hackreactor/wellTested) repo for some solid examples.
 
 You must implement _all_ of the following:
   - [ ] Include testing when defining your project scope
@@ -272,3 +317,5 @@ You must implement 2-3 of the following:
 [2]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Product_Owner
 [3]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Scrum_Master
 [4]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Development_Team
+[5]:https://www.hipchat.com/
+[6]:https://slack.com/

@@ -86,7 +86,7 @@ your code merged into the main repo. Step 1 is to rebase upstream
 changes to the master branch into yours by running this command
 from your branch:
 
-```
+```bash
 git pull --rebase upstream master
 ```
 
@@ -103,9 +103,12 @@ and picking the versions you want. Be aware that these changes will show
 up in your pull request, so try and incorporate upstream changes as much
 as possible.
 
+You pick a file by `git add`ing it - you do not make commits during a
+rebase.
+
 Once you are done fixing conflicts for a specific commit, run:
 
-```
+```bash
 git rebase --continue
 ```
 
