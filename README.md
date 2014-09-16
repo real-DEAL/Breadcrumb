@@ -1,4 +1,4 @@
-# Greenfield Project
+# Thesis Project
 
 #### Table of Contents
 - [Overview](#overview)
@@ -19,39 +19,21 @@
     - [New Code](#new-code)
     - [Speaking to each other](#speaking-to-each-other)
   - [Product Development](#product-development)
-- [Extra Credit](#extra-credit)
-  - [Testing and You](#testing-and-you)
-  - [Misc.](#misc.)
-- [Group Assignments](#group-assignments)
+  - [Test Driven Development](#test-driven-development)
+- [Group Presentations](#group-presentations)
+- [Code Reviews](#code-reviews)
+- [Group Members](#groups-assignments)
 
 
 ## Overview
 
-### Duration and Milestones
+The Hack Reactor Thesis Project is your final and largest project as a student. It'll probably be the largest code base you share with potential employers. The project will last four weeks and will be the last step before you focus on hiring and job search.
 
-The Greenfield project begins on Week 6 Day 3 (Wednesday) runs through solo week, and ends on Week 7 Day 1 (Monday). During solo week you're expected to stay in contact with you group (via google hangouts, carrier pigeon, etc) and work 50% time (~5 hours per day).
+You'll begin by working with your team to define a solid infrastructure to support your project. 
 
-Your project must be feature __and__ code complete by the end of solo week.
+Use the lessons you learned during the greenfield-project and the legacy-project to help inform the decisions you make now.
 
-You'll present you project to your cohort on Week 7 Day 1 (Monday). You also use Monday to wrap up any lose ends and make sure your project is ready to for hand-off to the next team.
-
-On Week 7 Day 2, (Tuesday) you'll begin the Legacy Project.
-
-### Design
-
-You'll be randomly assigned to groups by cohort. You'll work with your team to generate a project idea, assign roles, and build something awesome. In the real world, you'll rarely have the opportunity to choose all of the people you collaborate with. Your success in the software engineering industry will, in large part, be determined by how well you're able to integrate with varied groups of engineers. The ability to contribute to a shared vision and iterate towards it effectively among peers is extremely valuable. This sprint will help you hone that skill.
-
-The Greenfield project is about:
-- group dynamics and collaboration
-- product design
-- product implementation
-- project architecture
-- project documentation
-- testing
-
-During the greenfield project, you must document your code, syntax styling, git workflow and feature roadmap in sufficient detail so that it can be handed to an arbitrary team with virtually no explanation.
-
-This repo contains templates that you'll use as a guide to successfully document and structure your project on github.
+Refer to [thesis-project](https://github.com/hackreactor/thesis-project) repo (referenced repeatedly below) that you'll need to refer to as a guide regarding how to successfully document and structure your project on github.
 
 ## Basic Requirements
 
@@ -60,13 +42,12 @@ This repo contains templates that you'll use as a guide to successfully document
 - [ ] Get into your assigned groups (end of this document)
 
 - Each member should spend five minutes (no talking) answering the following questions:
-- [ ] What are my 2 greatest technical strengths?
-- [ ] What are my 2 greatest technical challenges?
-- [ ] What are my personal goals for this project?
+  - [ ] What are my 2 greatest technical strengths?
+  - [ ] What are my 2 greatest technical challenges?
+  - [ ] What are my personal goals for this project?
 
-- [ ] Discuss your answers with your group. Get to know each other.
-
-- [ ] Begin brainstorming with your group about ideas in prep for the afternoon lecture.
+- Group Discussion
+  - [ ] Discuss your individual answers with your group. Get to know each other.
 
 ### Role Assignment
 As a group, decide which team members will fulfill each of the three core scrum roles.
@@ -192,13 +173,13 @@ review.
   );
   ```
 
-## Extra Credit
+### Test Driven Development
 
-### Testing and You
-
-Use TDD.
+During your Thesis Project, you'll be using TDD.
 
 Test driven development is not valuable because it catches errors, but because it changes the way you think about interfaces between modules. Writing tests before you write code influences how you think about the process. It provides a safety net for performing refactoring and it documents the expected behavior of the system.
+
+Refer to the the solution branch of the [testify](/curriculum/testify) for some solid examples
 
 You must implement _all_ of the following:
   - [ ] Include testing when defining your project scope
@@ -215,110 +196,186 @@ You must implement 2-3 of the following:
   - [ ] Code coverage reports for unit tests
   - [ ] Visual testing for your app’s look and feel
 
-### Misc.
-- [ ] Create a screencast demo of the product and share on landing page.
-- [ ] Write a technical blog post
-- [ ] Maximize project exposure via reddit stuff
-- [ ] Run usability tests, collect user feedback and simplify UI
-- [ ] Schedule architecture and product review with mentor
+### Group Presentations
+
+An important part of your thesis project is its presentation. You'll be debuting it at hiring day, and you'll speak eloquently about it in your interviews thereafter. Aprox. once per week as your project develops, you'll present your project to your cohort, and recieve specific feedback about how you can refine your delivery (see sylabus for specific dates).
+
+Your group presentations must be (at most) 3min long. Each group will have 3min to present to the class, then there'll be a 3-5min of Q&A and feedback from the fascilitator.
+
+In preparing for your presentations please make sure that you address the following specific issues/areas:
+  - Be sure to introduce yourselves as a first order of business 
+  - As a second order of business, explain the project to the audience at a high level before jumping into details 
+  - Try to coordinate tightly between the person speaking, at any time, and the person driving tech, at any time, who should ideally not be the same person, at any time 
+  - Do not start your presentation until technology is ready 
+  - Make sure all text on the screen that you require the audience to read is large enough to be read 
+  - Do not require the audience to read too much text on the screen 
+  - If you are pointing at the screen to make a point, ensure you point at the big screen not the small screen 
+  - Make sure you look towards the audience while speaking. Don't throw your voice at the screen.  
+  - Do not have off-mic conversations with your team while you are presenting. 
+  - Everything that you put into your presentation should make the case for why you or one of your teammates should be hired as a software engineer. If you have a lot of time left, there are a lot of things you could be saying about why you are awesome. 
+  - Speaking of time management, your presentation must run precisely 3 minutes long.
 
 
-## Group Assignments
+### Code Reviews 
+- __Start in late week 10__
+- Who gets one?: Student projects receive code reviews from Hack Reactor mentors. Hosted projects receive them from mentor engineers at the host company.
+- Format: Code reviews are 1-hour and have a dedicated Mentor and room. All team members are expected to join and are expected to provide the mentor with a focused set of questions or features/classess to examine and take feedback on in that time. Please do not expect to review 100% of your codebase.
+- [ ] Locate you calendar invite from the Instruction Team in your email
+  -  If you have difficulty finding it, reference this [schedule](https://docs.google.com/spreadsheets/d/1XXEWnBChT3oWxOWZX6tICwvwqkiE1wZbQX8dnxxIRig/edit#gid=220699446)
+- [ ] Maximize effectiveness by eliminating low level feedback by adhering to these guidlines for ["every code review ever"](https://github.com/hackreactor/curriculum/wiki/Projects:-Every-Code-Review-Ever) 
+- [ ] Implement Code Review feedback by the end of thesis project completion.
+- Extra Credit: Review [Getting and Giving Good Code Reviews](https://github.com/hackreactor/curriculum/wiki/Projects:-getting-and-giving-good-code-reviews)
 
-### HR17 Greenfield Groups
+<!-- 
+### Project Summaries 
 
-#### Team: Reckless Saturn
-- David Nguyen  (blankmaker)
-- Armando Perez (armandopmj)
-- Ly Mai  Le  (lmle)
-- Eddie Jimenez (phoenix16t)
-
-
-#### Team: Gracious Unicorn
-- Jonathan  Ng  (codengjon)
-- Jonathan  Sadka (jonsadka)
-- Christopher McCloud (cmccloud)
-- Christopher Singhavong  (singalongwithme)
-
-#### Team: Brave Beehive
-- Collin Wu (collinwu)
-- Mike  Luby  (mluby)
-- Jonathan  Warrick (JonathanWarrick)
-- Tommy Tan (gitSauced)
-
-#### Team: Common Badger
-- Dominic Czarnota  (dczarnota)
-- Dan Thareja (danthareja)
-- Haiming Bao (nrobeR)
-- Park Tamaroon (loqi)
-
-#### Team: Solid Creek
-- Collin Kokotas  (kokobeens)
-- Jacob Gribschaw (Zithrill)
-- Geoffrey  Abdallah  (gabdallah222)
-- Stefanie  Contreras (stefceror)
-
-#### Team: Navy Haystack
-- Tejaswini Pingili (tpingili)
-- Tyler Lewis (tylerlewis)
-- Dara Bun (darabun)
-- Lawrence Kang (lawrencekang)
-
-#### Team: Dangerous Vegetable
-- Wil Andrade (Alphabat)
-- Keenan Lidral-Porter  (kayellpeee)
-- Andrew Switlyk (ASwitlyk)
-
-#### Team: Global Mustard
-- Jeffrey VanDalsum (jeffvan576)
-- Brandon Yun (yunbran)
-- Joseph Lowinske (lowi0008)
+Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
+-->
 
 
-### Juniors(HR16)
 
-#### Team: Northern Moose
-- Etienne Tripier (etripier)
-- Matt  Kim (mattphoto)
-- Samantha  Puth  (sputh)
-- Sean  Chen  (seanchen1991)
 
-#### Team: Dangerous Wrench
-- Mario Ponticello  (eave)
-- Austin  Connelly  (aconnelly)
-- Lauren  Pappone (lpappone)
-- James Edwards (incrediblesound)
+## Groups Assignments:
 
-#### Team: Indigo Crayon
-- Aaron Melocik (SterlingVix)
-- Jim O'Brien (jimobrien)
-- Wesley  Pascual (seewes)
-- Iago  Prates  (iagowp)
 
-#### Team: Tidy Magenta
-- Issaq Al-Ahmed  (iAl-Ahmed)
-- Jarrod  Ruhland (jangahroo)
-- Jimmy Jea (jimjea)
-- Kim Marquardt (robotBones)
+### HR17:
 
-#### Team: Elastic Notorious
-- Brandon McNary  (bmcnary)
-- Fleur Dragan  (fleur)
-- Samuel  Nelson  (SunJieMing)
-- Stacy Hseu  (shseu)
+#### AirBnB for Pets
+- Domnic 
+- Tyler
+- Wil Andrade 
+- Jeffrey
 
-#### Team: Next Mars
-- Jacob (Andrew)  Brassington (jabbrass)
-- Bo  Liu (liubolightning)
-- Jack  Lu  (JackTanRoo)
-- Daniel  Streit  (danielstreit)
+#### 3D Printed Tessel Drone with Oculus
+- Mike Luby
+- Geoffrey - gabdallah222@gmail.com
+- Collin - collinkokotas@gmail.com
+- Jake - jacob.gribschaw@gmail.com
 
-#### Team: Golden Lion
-- Mike  Lam (myclamm)
-- Wai-Yin Kwan  (wykhuh)
-- Ben Rowles  (browles)
-- Kelly Walker  (kwalker3690)
-- Chun  Wang  (Chunhao137)
+#### Code Visualization for Learning
+- Christopher - mccloud.christopher@gmail.com
+- Jon Sadka - jonsadka@gmail.com
+- Dan - danthareja@gmail.com
+- Eddie - casadebanho@gmail.com
+
+#### Bitcoin Project
+- Keenan
+- Park - loqi@cruzio.com
+- Tommy - ttan08@gmail.com
+- Brandon - Justtopla@gmail.com
+
+
+#### Are you a robot?
+- Stefanie - stefsnow@gmail.com
+- Jonathan - jonathan.warrick@gmail.com
+- Collin - collinwu@gmail.com
+
+#### Tinder for Products
+- Dara - dara209@gmail.com
+- Joe - lowi0008@gmail.com
+- Haiming - mr.nrober@gmail.com
+- Ly - lymaile@gmail.com
+- Armando Perez - armandopmj@gmail.com
+
+
+### HR16
+
+#### Crowbar - A Rust templating engine
+- Jarrod
+- Sean - seanchen11235@gmail.com
+- Fleur - fleur.dragan@gmail.com  Daniel
+- Jim - Jim O'Brien
+
+
+#### Beer Recommendation App
+- Lauren P.
+- Samuel - s.benjamin.nelson@gmail.com
+- Bo - liubo0331@gmail.com
+- Mike - mikelam231@gmail.com
+- Iago - iagowp15@gmail.com
+
+
+#### Appception
+- Kelly
+- Wai-Yin -wykhuh@gmail.com
+- Aaron - amelocik@gmail.com
+
+#### Bitcoin Wallet
+- Jack
+- Austin - Ajjconnelly@gmail.com
+- Etienne - etripier@gmail.com
+- Issaq - issaq_al-ahmed@outlook.com
+
+
+### Hosted Company Projects
+####Famo.us
+- Stacy 	Hseu	stacy.hseu@gmail.com
+- David	Nguyen	davidnguyen84@gmail.com
+- Lawrence	Kang	lawrencekang@gmail.com
+- Jimmy	Jea	jimjea@gmail.com
+- Samantha	Puth	samantha.puth@gmail.com
+- Stacy	Hseu	stacy.hseu@gmail.com
+- Wesley	Pascual	doobix@gmail.com
+- Charles 	Wang	chunhao137@gmail.com
+- Ben	Rowles	rowlesben@gmail.com
+- Andrew	Brassington	jabbrass@zoho.com
+- Andrew Switlyk 
+
+#### Kinetech
+- James	Edwards	james.howe.edwards@gmail.com
+- Kim	Marquardt	kim.marquardt@gmailcom
+
+#### Wexus
+- Teja
+- Mario	Ponticello	mpontice@gmail.com
+- Brandon	McNary	brandonpmcnary@gmail.com
+
+
+#### Stroll
+- Jonathan	Ng	1jonathan.ng@gmail.com
+- Daniel	Streit	Daniel.Streit@gmail.com
+
+
+ 
+
+
+
+
+<!--
+### Presentation Order 2
+
+#### 6th Floor
+
+##### Morning
+  - PhotoYarn
+  - Kill Ionic
+  - Todo MVC
+  - JS AI Game
+
+##### Afternoon
+  - JobQuery
+  - Do It
+  - What Beer?
+  - DirtyBird
+  - CompGun
+  
+#### 8th Floor
+  
+##### Morning
+  - MVC (Dhruv)
+  - 3D Famo.us App
+  - GoodReads App
+  - Waddle
+  - Doing Fine
+
+##### Afternoon
+  - Specter
+  - Omnibus
+  - Clurtch
+  - PathBrite
+  - Pitch Perfect
+
+-->
 
 <!-- LINKS -->
 
@@ -326,5 +383,3 @@ You must implement 2-3 of the following:
 [2]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Product_Owner
 [3]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Scrum_Master
 [4]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Development_Team
-[5]:https://www.hipchat.com/
-[6]:https://slack.com/

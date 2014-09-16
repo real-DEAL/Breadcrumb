@@ -1,6 +1,6 @@
 machine:
   environment:
-    DOWNSTREAM: hackreactor/greenfield
+    DOWNSTREAM: hackreactor/thesis
 dependencies:
   pre:
     - npm install -g hackreactor-labs/problemify
