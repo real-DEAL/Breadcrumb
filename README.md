@@ -108,6 +108,8 @@ way that git cannot resolve. You should _never_ rebase or push with force to
 the `master` branch of your repository, as that will invalidate everyone elses
 clones and checkouts of the repository.
 
+Though it advocates for a slightly different version of the rebase workflow, the article, [A romance of a single dimension: linear git history in practice](http://www.thumbtack.com/engineering/linear-git-history/) does an excelent job of justifying the practice. I strongly recomend reading it, even if you choose a different option.
+
 ##### `CONTRIBUTING.md` Workflow Diagram
 
 ![](http://i.imgur.com/p0e4tQK.png)
