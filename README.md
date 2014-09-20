@@ -234,11 +234,7 @@ In preparing for your presentations please make sure that you address the follow
 Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
 -->
 
-
-
-
 ## Groups Presentations:
-
 
 ### HR17:
 
@@ -248,14 +244,10 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 - Code Visualization for Learning
 - Bitcoin Project
 
-
-
 #### Afternoon (on 8th):
 - Are you a robot?
 - Tinder for Products
-- Kinetech
-
-
+- Stroll
 
 ### HR16
 
@@ -266,11 +258,12 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 - Bitcoin Wallet
 
 ####Afternoon (on 6th):
-- Stroll
+- Kinetech
 - Wexus
-- Famo.us - Testing Framework (4)
-- Famo.us 2
-- Famo.us 3
+- Famo.us - Intro by Sam (1min)
+- Famo.us - Testing Framework
+- Famo.us - Physics Enginer
+- Famo.us - Carousels
 
 <!-- LINKS -->
 
