@@ -237,147 +237,37 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 
 
 
-## Groups Assignments:
+## Groups Presentations:
 
 
 ### HR17:
 
-#### AirBnB for Pets
-- Domnic 
-- Tyler
-- Wil Andrade 
-- Jeffrey
-
-#### 3D Printed Tessel Drone with Oculus
-- Mike Luby
-- Geoffrey - gabdallah222@gmail.com
-- Collin - collinkokotas@gmail.com
-- Jake - jacob.gribschaw@gmail.com
-
-#### Code Visualization for Learning
-- Christopher - mccloud.christopher@gmail.com
-- Jon Sadka - jonsadka@gmail.com
-- Dan - danthareja@gmail.com
-- Eddie - casadebanho@gmail.com
-
-#### Bitcoin Project
-- Keenan
-- Park - loqi@cruzio.com
-- Tommy - ttan08@gmail.com
-- Brandon - Justtopla@gmail.com
+####Morning (on 8th):
+- AirBnB for Pets
+- 3D Printed Tessel Drone with Oculus
+- Code Visualization for Learning
+- Bitcoin Project
 
 
-#### Are you a robot?
-- Stefanie - stefsnow@gmail.com
-- Jonathan - jonathan.warrick@gmail.com
-- Collin - collinwu@gmail.com
 
-#### Tinder for Products
-- Dara - dara209@gmail.com
-- Joe - lowi0008@gmail.com
-- Haiming - mr.nrober@gmail.com
-- Ly - lymaile@gmail.com
-- Armando Perez - armandopmj@gmail.com
+#### Afternoon (on 8th):
+- Are you a robot?
+- Tinder for Products
+- Kinetech
+- Stroll
 
 
 ### HR16
 
-#### Crowbar - A Rust templating engine
-- Jarrod
-- Sean - seanchen11235@gmail.com
-- Fleur - fleur.dragan@gmail.com  Daniel
-- Jim - Jim O'Brien
+####Morning (on 6th):
+- Crowbar - A Rust templating engine
+- Beer Recommendation App
+- Appception
+- Bitcoin Wallet
 
-
-#### Beer Recommendation App
-- Lauren P.
-- Samuel - s.benjamin.nelson@gmail.com
-- Bo - liubo0331@gmail.com
-- Mike - mikelam231@gmail.com
-- Iago - iagowp15@gmail.com
-
-
-#### Appception
-- Kelly
-- Wai-Yin -wykhuh@gmail.com
-- Aaron - amelocik@gmail.com
-
-#### Bitcoin Wallet
-- Jack
-- Austin - Ajjconnelly@gmail.com
-- Etienne - etripier@gmail.com
-- Issaq - issaq_al-ahmed@outlook.com
-
-
-### Hosted Company Projects
-####Famo.us
-- Stacy 	Hseu	stacy.hseu@gmail.com
-- David	Nguyen	davidnguyen84@gmail.com
-- Lawrence	Kang	lawrencekang@gmail.com
-- Jimmy	Jea	jimjea@gmail.com
-- Samantha	Puth	samantha.puth@gmail.com
-- Stacy	Hseu	stacy.hseu@gmail.com
-- Wesley	Pascual	doobix@gmail.com
-- Charles 	Wang	chunhao137@gmail.com
-- Ben	Rowles	rowlesben@gmail.com
-- Andrew	Brassington	jabbrass@zoho.com
-- Andrew Switlyk 
-
-#### Kinetech
-- James	Edwards	james.howe.edwards@gmail.com
-- Kim	Marquardt	kim.marquardt@gmailcom
-
-#### Wexus
-- Teja
-- Mario	Ponticello	mpontice@gmail.com
-- Brandon	McNary	brandonpmcnary@gmail.com
-
-
-#### Stroll
-- Jonathan	Ng	1jonathan.ng@gmail.com
-- Daniel	Streit	Daniel.Streit@gmail.com
-
-
- 
-
-
-
-
-<!--
-### Presentation Order 2
-
-#### 6th Floor
-
-##### Morning
-  - PhotoYarn
-  - Kill Ionic
-  - Todo MVC
-  - JS AI Game
-
-##### Afternoon
-  - JobQuery
-  - Do It
-  - What Beer?
-  - DirtyBird
-  - CompGun
-  
-#### 8th Floor
-  
-##### Morning
-  - MVC (Dhruv)
-  - 3D Famo.us App
-  - GoodReads App
-  - Waddle
-  - Doing Fine
-
-##### Afternoon
-  - Specter
-  - Omnibus
-  - Clurtch
-  - PathBrite
-  - Pitch Perfect
-
--->
+####Afternoon (on 6th):
+- Wexus
+- Famo.us (11)
 
 <!-- LINKS -->
 
