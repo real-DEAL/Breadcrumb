@@ -250,6 +250,7 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 - Stroll
 
 ### HR16
+[Feedback Notes](https://docs.google.com/a/hackreactor.com/document/d/1W0Cjn067whhHDloWa52hbAQ3keXzdZ1Aemg1qxncT90/edit#)
 
 ####Morning (on 6th):
 - Crowbar - A Rust templating engine
