@@ -254,7 +254,7 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 - Are you a robot?
 - Tinder for Products
 - Kinetech
-- Stroll
+
 
 
 ### HR16
@@ -266,8 +266,11 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 - Bitcoin Wallet
 
 ####Afternoon (on 6th):
+- Stroll
 - Wexus
-- Famo.us (11)
+- Famo.us - Testing Framework (4)
+- Famo.us 2
+- Famo.us 3
 
 <!-- LINKS -->
 
