@@ -234,37 +234,40 @@ In preparing for your presentations please make sure that you address the follow
 Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
 -->
 
-## Groups Presentations:
+## Groups Presentations (UPDATE ORDER):
 
 ### HR17:
 
 ####Morning (on 8th):
-- AirBnB for Pets
-- 3D Printed Tessel Drone with Oculus
-- Code Visualization for Learning
+- Stroll
+- Tinder for Products
+- Are you a robot?
 - Bitcoin Project
+- Code Visualization for Learning
+- 3D Printed Tessel Drone with Oculus
+- AirBnB for Pets
 
 #### Afternoon (on 8th):
-- Are you a robot?
-- Tinder for Products
-- Stroll
+- Code Visualization for Learning
+- 3D Printed Tessel Drone with Oculus
+- AirBnB for Pets
 
 ### HR16
 [Feedback Notes](https://docs.google.com/a/hackreactor.com/document/d/1W0Cjn067whhHDloWa52hbAQ3keXzdZ1Aemg1qxncT90/edit#)
 
 ####Morning (on 6th):
-- Crowbar - A Rust templating engine
-- Beer Recommendation App
-- Appception
-- Bitcoin Wallet
+- Famo.us - Carousels
+- Famo.us - Physics Enginer
+- Famo.us - Testing Framework
+- Famo.us - Intro by Sam (1min)
+- Wexus
+- Kinetech
 
 ####Afternoon (on 6th):
-- Kinetech
-- Wexus
-- Famo.us - Intro by Sam (1min)
-- Famo.us - Testing Framework
-- Famo.us - Physics Enginer
-- Famo.us - Carousels
+- Bitcoin Wallet
+- Appception
+- Beer Recommendation App
+- Crowbar - A Rust templating engine
 
 <!-- LINKS -->
 
