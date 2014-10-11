@@ -239,18 +239,18 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 ### HR17:
 
 ####Morning (on 8th):
-- Stroll
-- Tinder for Products
-- Are you a robot?
-- Bitcoin Project
 - Code Visualization for Learning
 - 3D Printed Tessel Drone with Oculus
 - AirBnB for Pets
 
+
+
 #### Afternoon (on 8th):
-- Code Visualization for Learning
-- 3D Printed Tessel Drone with Oculus
-- AirBnB for Pets
+- Stroll
+- Tinder for Products
+- Are you a robot?
+- Bitcoin Project
+
 
 ### HR16
 [Feedback Notes](https://docs.google.com/a/hackreactor.com/document/d/1W0Cjn067whhHDloWa52hbAQ3keXzdZ1Aemg1qxncT90/edit#)
