@@ -22,7 +22,7 @@
   - [Test Driven Development](#test-driven-development)
 - [Group Presentations](#group-presentations)
 - [Code Reviews](#code-reviews)
-- [Group Members](#groups-assignments)
+- [Thesis Project Groups](#thesis-project-groups)
 
 
 ## Overview
