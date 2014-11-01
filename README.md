@@ -234,40 +234,57 @@ In preparing for your presentations please make sure that you address the follow
 Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
 -->
 
-## Groups Presentations (UPDATE ORDER):
+## Thesis Project Groups
 
-### HR17:
+### HR18 Hack Reactor Project Groups
 
-####Morning (on 8th):
-- Code Visualization for Learning
-- 3D Printed Tessel Drone with Oculus
-- AirBnB for Pets
+#### Mountain Colt
+- Sean R, Andrew T, Will B, Liam S, Ralph S
+
+#### Ruby Planet
+- Jason E, Urvashi R, Will C, Greg F
+
+#### Diamond Falcon
+- Jamon D, Rick A, Rishi G, Mike H
+
+#### Covert Lobster
+- Jeff G, Adam B, Josh L, Justin P
+
+### HR19 Hack Reactor Project Groups
+
+#### Agate Panther
+- Satoko L, Teresa Y, Bryan E, Rich G
+ 
+#### Amber Storm
+- Tess M, Tyler G, Mike H, Shan S
+
+#### Golden Warning
+- Aric H, Greg N, Jasper S, Warren T
+
+#### Decisive Wizard
+- John H, Greg F, Nick S, Felipe B
+
+### Client Project Groups
+
+#### Bookstrap 
+- Alex J (HR18), Oleg Y (HR18), Andrew S (HR19), Katherine G (HR19)
+
+#### Germ Theory - Ebola Tracker
+- Supriya B (HR18), Ryo O (HR18), Jose M (HR18), Kevin M (HR18)
+
+#### ECG
+- Greg F (HR18), Kelly H (HR19), Chao X (HR19), Nick L (HR19)
+
+#### Famo.us
+- Peter S (HR18), Allen K (HR18),Spencer H (HR19), Allen P (HR19), Marc W (HR19), Morgan P (HR19), James F (HR19), Adam H (HR19), Sebastian D (HR19), Alejandro Z (HR19)
+
+#### Online Government Procurement 
+- Michael P (HR18), Moxi Z (HR18), Kia W (HR18), Johnny L (HR19)
+
+#### Kinetech
+- Tom V (HR18), Carl G (HR18), Brian I (HR19), Steve S (HR19)
 
 
-
-#### Afternoon (on 8th):
-- Stroll
-- Tinder for Products
-- Are you a robot?
-- Bitcoin Project
-
-
-### HR16
-[Feedback Notes](https://docs.google.com/a/hackreactor.com/document/d/1W0Cjn067whhHDloWa52hbAQ3keXzdZ1Aemg1qxncT90/edit#)
-
-####Morning (on 6th):
-- Famo.us - Carousels
-- Famo.us - Physics Enginer
-- Famo.us - Testing Framework
-- Famo.us - Intro by Sam (1min)
-- Wexus
-- Kinetech
-
-####Afternoon (on 6th):
-- Bitcoin Wallet
-- Appception
-- Beer Recommendation App
-- Crowbar - A Rust templating engine
 
 <!-- LINKS -->
 
