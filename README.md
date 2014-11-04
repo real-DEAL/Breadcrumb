@@ -234,8 +234,6 @@ In preparing for your presentations please make sure that you address the follow
 Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
 -->
 
-## Thesis Project Groups
-
 <!-- LINKS -->
 
 [1]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Roles
