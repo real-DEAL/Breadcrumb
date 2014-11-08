@@ -217,9 +217,9 @@ In preparing for your presentations please make sure that you address the follow
   - Everything that you put into your presentation should make the case for why you or one of your teammates should be hired as a software engineer. If you have a lot of time left, there are a lot of things you could be saying about why you are awesome. 
   - Speaking of time management, your presentation must run precisely 3 minutes long.
 
-#### HR18 Presentation Order
+#### HR18 Presentation Order (6th Floor)
 
-#### Morning Presentations
+#### 6th Floor Morning Presentations
 
 ###### Topaz Planet
 - Jason E, Urvashi R, Will C, Greg F
@@ -233,7 +233,7 @@ In preparing for your presentations please make sure that you address the follow
 ###### Online Government Procurement
 - Michael P (HR18), Moxi Z (HR18), Kia W (HR18), Johnny L (HR19)
 
-#### Afternoon Presentations
+#### 6th Floor Afternoon Presentations
 
 ###### Diamond Falcon
 - Jamon D, Rick A, Rishi G, Mike H
@@ -244,9 +244,9 @@ In preparing for your presentations please make sure that you address the follow
 ###### Mountain Colt
 - Sean R, Andrew T, Will B, Liam S, Ralph S
 
-#### HR19 Presentation Order
+#### HR19 Presentation Order (8th Floor)
 
-#### Morning Presentations
+#### 8th Floor Morning Presentations
 
 ###### Decisive Wizard
 - John H, Greg F, Nick S, Felipe B
@@ -260,7 +260,7 @@ In preparing for your presentations please make sure that you address the follow
 ###### Kinetech
 - Tom V (HR18), Carl G (HR18), Brian I (HR19), Steve S (HR19)
 
-#### Afternoon Presentations
+#### 8th Floor Afternoon Presentations
 
 ###### Agate Panther
 - Satoko L, Teresa Y, Bryan E, Rich G
