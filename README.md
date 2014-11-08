@@ -217,6 +217,59 @@ In preparing for your presentations please make sure that you address the follow
   - Everything that you put into your presentation should make the case for why you or one of your teammates should be hired as a software engineer. If you have a lot of time left, there are a lot of things you could be saying about why you are awesome. 
   - Speaking of time management, your presentation must run precisely 3 minutes long.
 
+#### HR18 Presentation Order
+
+#### Morning Presentations
+
+###### Topaz Planet
+- Jason E, Urvashi R, Will C, Greg F
+
+###### Germ Theory - Ebola Tracker
+- Supriya B (HR18), Ryo O (HR18), Jose M (HR18), Kevin M (HR18), Jameson G (HR18)
+
+###### Covert Lobster
+- Jeff G, Adam B, Josh L, Justin P
+
+###### Online Government Procurement
+- Michael P (HR18), Moxi Z (HR18), Kia W (HR18), Johnny L (HR19)
+
+#### Afternoon Presentations
+
+###### Diamond Falcon
+- Jamon D, Rick A, Rishi G, Mike H
+
+###### Bookstrap
+- Alex J (HR18), Oleg Y (HR18), Andrew S (HR19), Katherine G (HR19)
+
+###### Mountain Colt
+- Sean R, Andrew T, Will B, Liam S, Ralph S
+
+#### HR19 Presentation Order
+
+#### Morning Presentations
+
+###### Decisive Wizard
+- John H, Greg F, Nick S, Felipe B
+
+###### ECG
+- Kelly H (HR19), Chao X (HR19), Nick L (HR19), Matt K (HR19)
+
+###### Amber Storm
+- Tess M, Tyler G, Mike H, Shan S
+
+###### Kinetech
+- Tom V (HR18), Carl G (HR18), Brian I (HR19), Steve S (HR19)
+
+#### Afternoon Presentations
+
+###### Agate Panther
+- Satoko L, Teresa Y, Bryan E, Rich G
+
+###### Famo.us
+- Peter S (HR18), Allen K (HR18),Spencer H (HR19), Allen P (HR19), Marc W (HR19), Morgan P (HR19), James F (HR19), Adam H (HR19), Sebastian D (HR19), Alejandro Z (HR19)
+
+###### Golden Warning
+- Aric H, Greg N, Jasper S, Warren T
 
 ### Code Reviews 
 - __Start in late week 10__
