@@ -200,7 +200,7 @@ You must implement 2-3 of the following:
 
 ### Group Presentations
 
-An important part of your thesis project is its presentation. You'll be debuting it at hiring day, and you'll speak eloquently about it in your interviews thereafter. Aprox. once per week as your project develops, you'll present your project to your cohort, and recieve specific feedback about how you can refine your delivery (see sylabus for specific dates).
+An important part of your thesis project is its presentation. You'll be debuting it at hiring day, and you'll speak eloquently about it in your interviews thereafter. AT several points throughout the thesis project, you'll present your project to your cohort and recieve specific feedback about how you can refine your delivery (see sylabus for specific dates).
 
 Your group presentations must be (at most) 3min long. Each group will have 3min to present to the class, then there'll be a 3-5min of Q&A and feedback from the fascilitator.
 
