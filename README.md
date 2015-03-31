@@ -33,7 +33,7 @@ You'll begin by working with your team to define a solid infrastructure to suppo
 
 Use the lessons you learned during the greenfield-project and the legacy-project to help inform the decisions you make now.
 
-Refer to [thesis-project](https://github.com/hackreactor/thesis-project) repo (referenced repeatedly below) that you'll need to refer to as a guide regarding how to successfully document and structure your project on github.
+Refer to thesis-project repo (referenced repeatedly below) that you'll need to refer to as a guide regarding how to successfully document and structure your project on github.
 
 ## Basic Requirements
 
@@ -84,7 +84,7 @@ fixes and to provide a way to track future goals. You can use labels to
 organize issues and milestones to group issues together and to visualize your
 progress.
 
-You may want to take advantage of a tool like [waffle.io](waffle.io) to manage github 
+You may want to take advantage of a tool like [waffle.io](https://waffle.io) to manage github 
 issues with a more powerful interface and can provide a kanban-board-like place to manage your 
 project and workflow.
 
@@ -239,3 +239,5 @@ Fill out a project summary for your group [here](https://drive.google.com/drive/
 [2]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Product_Owner
 [3]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Scrum_Master
 [4]:http://en.wikipedia.org/wiki/Scrum_(software_development)#Development_Team
+[5]:https://www.hipchat.com/
+[6]:https://slack.com/
