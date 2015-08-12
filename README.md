@@ -4,7 +4,7 @@
 - [Overview](#overview)
   - [Duration and Milestones](#duration-and-milestones)
   - [Design](#design)
-- [Basic Requirements](#basic-requirements)
+- [Bare Minimum Requirements](#bare-minimum-requirements)
   - [Group Formation](#group-formation)
   - [Role Assignment](#role-assignment)
   - [Project Organization](#project-organization)
@@ -35,7 +35,7 @@ Use the lessons you learned during the greenfield-project and the legacy-project
 
 Refer to thesis-project repo (referenced repeatedly below) that you'll need to refer to as a guide regarding how to successfully document and structure your project on github.
 
-## Basic Requirements
+## Bare Minumum Requirements
 
 #### Group Formation
 
