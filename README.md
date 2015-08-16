@@ -198,25 +198,6 @@ You must implement 2-3 of the following:
   - [ ] Code coverage reports for unit tests
   - [ ] Visual testing for your app’s look and feel
 
-### Group Presentations
-
-An important part of your thesis project is its presentation. You'll be debuting it at hiring day, and you'll speak eloquently about it in your interviews thereafter. AT several points throughout the thesis project, you'll present your project to your cohort and recieve specific feedback about how you can refine your delivery (see sylabus for specific dates).
-
-Your group presentations must be (at most) 3min long. Each group will have 3min to present to the class, then there'll be a 3-5min of Q&A and feedback from the fascilitator.
-
-In preparing for your presentations please make sure that you address the following specific issues/areas:
-  - Be sure to introduce yourselves as a first order of business 
-  - As a second order of business, explain the project to the audience at a high level before jumping into details 
-  - Try to coordinate tightly between the person speaking, at any time, and the person driving tech, at any time, who should ideally not be the same person, at any time 
-  - Do not start your presentation until technology is ready 
-  - Make sure all text on the screen that you require the audience to read is large enough to be read 
-  - Do not require the audience to read too much text on the screen 
-  - If you are pointing at the screen to make a point, ensure you point at the big screen not the small screen 
-  - Make sure you look towards the audience while speaking. Don't throw your voice at the screen.  
-  - Do not have off-mic conversations with your team while you are presenting. 
-  - Everything that you put into your presentation should make the case for why you or one of your teammates should be hired as a software engineer. If you have a lot of time left, there are a lot of things you could be saying about why you are awesome. 
-  - Speaking of time management, your presentation must run precisely 3 minutes long.
-
 ### Code Reviews 
 - __Start in late week 10__
 - Who gets one?: Student projects receive code reviews from Hack Reactor mentors. Hosted projects receive them from mentor engineers at the host company.
