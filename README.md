@@ -193,6 +193,7 @@ You must implement 2-3 of the following:
   - [ ] Code coverage reports for unit tests
   - [ ] Visual testing for your app’s look and feel
 
+<!-- 
 ### Code Reviews 
 - __Start in late week 10__
 - Who gets one?: Student projects receive code reviews from Hack Reactor mentors. Hosted projects receive them from mentor engineers at the host company.
@@ -203,7 +204,7 @@ You must implement 2-3 of the following:
 - [ ] Implement Code Review feedback by the end of thesis project completion.
 - Extra Credit: Review [Getting and Giving Good Code Reviews](https://github.com/hackreactor/curriculum/wiki/Projects:-getting-and-giving-good-code-reviews)
 
-<!-- 
+
 ### Project Summaries 
 
 Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
