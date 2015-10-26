@@ -2,8 +2,6 @@
 
 #### Table of Contents
 - [Overview](#overview)
-  - [Duration and Milestones](#duration-and-milestones)
-  - [Design](#design)
 - [Bare Minimum Requirements](#bare-minimum-requirements)
   - [Group Formation](#group-formation)
   - [Role Assignment](#role-assignment)
@@ -20,9 +18,6 @@
     - [Speaking to each other](#speaking-to-each-other)
   - [Product Development](#product-development)
   - [Test Driven Development](#test-driven-development)
-- [Group Presentations](#group-presentations)
-- [Code Reviews](#code-reviews)
-- [Thesis Project Groups](#thesis-project-groups)
 
 
 ## Overview
