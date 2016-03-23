@@ -34,7 +34,7 @@ Refer to thesis-project repo (referenced repeatedly below) that you'll need to r
 
 #### Group Formation
 
-- [ ] Get into your assigned groups (end of this document)
+- [ ] Get into your assigned groups (link via Syllabus)
 
 - Each member should spend five minutes (no talking) answering the following questions:
   - [ ] What are my 2 greatest technical strengths?
