@@ -158,17 +158,7 @@ review.
 - [ ] Create a simple home page for your project.
   - If you're not sure where to start, checkout using GitHub pages. It's free, robust, and can easily be personalized to your own domain.
   - [ ] Make the landing page a salesman's dream (clear, flashy, cool design, etc)! Templates are your friends!
-- [ ] Add a sweet "Made a Hack Reactor" Banner with this simple script:
-
-  ```javascript
-  $('body').append(
-    '<a href="http://hackreactor.com"> \
-    <img style="position: fixed; top: 0; right: 0; border: 0;" \
-    src="http://i.imgur.com/x86kKmF.png" \
-    alt="Built at Hack Reactor"> \
-    </a>'
-  );
-  ```
+  - [ ] If your application requires users to create an account, create a 'demo' account so that when you link to your project on your resume, you can provide login credentials for this demo account, making it easy for the potential employer / recruiter to see your awesome work.
 
 ### Test Driven Development
 
