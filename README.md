@@ -24,7 +24,7 @@
 
 The Hack Reactor Thesis Project is your final and largest project as a student. It'll probably be the largest code base you share with potential employers. The project will last four weeks and will be the last step before you focus on hiring and job search.
 
-You'll begin by working with your team to define a solid infrastructure to support your project. 
+You'll begin by working with your team to define a solid infrastructure to support your project.
 
 Use the lessons you learned during the greenfield-project and the legacy-project to help inform the decisions you make now.
 
@@ -63,7 +63,7 @@ Create product vision by drafting a 'Project Summary'
   - [ ] Use github issues
 
 ### Project Infrastructure
-In order to support your current team _and_ future contributers to your project, you'll need to document your project as you build it. It should be the case that, without any intervention or additional explanation from you, the next team of collaborators  (or yourself in six months) can dive in and figure out how to start hacking easily.
+In order to support your current team _and_ future contributors to your project, you'll need to document your project as you build it. It should be the case that, without any intervention or additional explanation from you, the next team of collaborators  (or yourself in six months) can dive in and figure out how to start hacking easily.
 
 Document your project and codebase to the point that if you decide to push it to hacker-news, anyone with a solid understanding of JavaScript can (after reviewing your documentation and comments) start submitting pull requests. Plan on not having any face-to-face interaction with the next team of collaborators. The most effective and efficient way to accomplish this is to do it right from the very start. Don't wait till the last minute. That will never work.
   - [ ] Heavily comment all aspects of your code.
@@ -79,8 +79,8 @@ fixes and to provide a way to track future goals. You can use labels to
 organize issues and milestones to group issues together and to visualize your
 progress.
 
-You may want to take advantage of a tool like [waffle.io](https://waffle.io) to manage github 
-issues with a more powerful interface and can provide a kanban-board-like place to manage your 
+You may want to take advantage of a tool like [waffle.io](https://waffle.io) to manage github
+issues with a more powerful interface and can provide a kanban-board-like place to manage your
 project and workflow.
 
 #### Contribution Guide
@@ -183,21 +183,36 @@ You must implement 2-3 of the following:
   - [ ] Code coverage reports for unit tests
   - [ ] Visual testing for your app’s look and feel
 
-<!-- 
-### Code Reviews 
+### Project Timeline
+- Plan your work in two-day sprints.
+  - Sprint 1: Ideation
+  - Sprint 2: Research
+  - Sprint 3: Refinement
+  - Sprint 4: Begin MVP
+  - Sprint 5: Continue toward MVP
+  - Sprint 6: Complete MVP
+  - Sprint 7: Refactor and New Features
+  - Sprint 8: Refactor and New Features
+  - Sprint 9: Feature Freeze - after the conclusion of this sprint, no new features should be added
+  - Sprint 10: Feature Complete - at the conclusion of this sprint, all work on existing features should be finished
+  - Sprint 11: Polish
+  - Sprint 12: Presentations
+
+<!--
+### Code Reviews
 - __Start in late week 10__
 - Who gets one?: Student projects receive code reviews from Hack Reactor mentors. Hosted projects receive them from mentor engineers at the host company.
 - Format: Code reviews are 1-hour and have a dedicated Mentor and room. All team members are expected to join and are expected to provide the mentor with a focused set of questions or features/classess to examine and take feedback on in that time. Please do not expect to review 100% of your codebase.
 - [ ] Locate you calendar invite from the Instruction Team in your email
   -  If you have difficulty finding it, reference this [schedule](https://docs.google.com/spreadsheets/d/1XXEWnBChT3oWxOWZX6tICwvwqkiE1wZbQX8dnxxIRig/edit#gid=220699446)
-- [ ] Maximize effectiveness by eliminating low level feedback by adhering to these guidlines for ["every code review ever"](https://github.com/hackreactor/curriculum/wiki/Projects:-Every-Code-Review-Ever) 
+- [ ] Maximize effectiveness by eliminating low level feedback by adhering to these guidlines for ["every code review ever"](https://github.com/hackreactor/curriculum/wiki/Projects:-Every-Code-Review-Ever)
 - [ ] Implement Code Review feedback by the end of thesis project completion.
 - Extra Credit: Review [Getting and Giving Good Code Reviews](https://github.com/hackreactor/curriculum/wiki/Projects:-getting-and-giving-good-code-reviews)
 
 
-### Project Summaries 
+### Project Summaries
 
-Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE) 
+Fill out a project summary for your group [here](https://drive.google.com/drive/#folders/0B1sN34rdEL70MXZSUlRXTlVXaUE)
 -->
 
 <!-- LINKS -->
