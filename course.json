@@ -1,0 +1,16 @@
+{
+  "name": "Thesis",
+  "description": "Now for the crowning project of your Hack Reactor experience.",
+
+  "syllabus": [
+
+    { "title": "Thesis Repository", "type": "download", "id": "exercise", "folder": "code", "transform": ["problemify-export"] }
+
+  ],
+
+  "phases": {
+    "Sprint Solution": [
+      { "title": "Solution Code", "type": "download", "id": "solution", "folder": "code", "transform": ["problemify-solve"] }
+    ]
+  }
+}
