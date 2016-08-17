@@ -8,9 +8,5 @@
 
   ],
 
-  "phases": {
-    "Sprint Solution": [
-      { "title": "Solution Code", "type": "download", "id": "solution", "folder": "code", "transform": ["problemify-solve"] }
-    ]
-  }
+  "phases": {}
 }
