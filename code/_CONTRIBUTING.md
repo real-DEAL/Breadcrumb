@@ -33,7 +33,7 @@
 Use github’s interface to make a fork of the repo, then add that repo as an upstream remote:
 
 ```
-git remote add upstream https://github.com/hackreactor-labs/<NAME_OF_REPO>.git
+git remote add upstream https://github.com/reactorcore/<NAME_OF_REPO>.git
 ```
 
 ### Cut a namespaced feature branch from master
@@ -168,9 +168,9 @@ no problem getting your changes merged in.
 
 
 <!-- Links -->
-[style guide]: https://github.com/hackreactor-labs/style-guide
-[n-queens]: https://github.com/hackreactor-labs/n-queens
-[Underbar]: https://github.com/hackreactor-labs/underbar
+[style guide]: https://github.com/reactorcore/style-guide
+[n-queens]: https://github.com/reactorcore/n-queens
+[Underbar]: https://github.com/reactorcore/underbar
 [curriculum workflow diagram]: http://i.imgur.com/p0e4tQK.png
 [cons of merge]: https://f.cloud.github.com/assets/1577682/1458274/1391ac28-435e-11e3-88b6-69c85029c978.png
 [Bookstrap]: https://github.com/hackreactor/bookstrap
