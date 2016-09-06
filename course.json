@@ -4,7 +4,7 @@
 
   "syllabus": [
 
-    { "title": "Thesis Repository", "type": "download", "id": "exercise", "folder": "code", "transform": ["problemify-export"] }
+    { "title": "Thesis Repository", "type": "download", "postTransform": ["add-init-script"], "id": "exercise", "folder": "code", "transform": ["problemify-export"] }
 
   ]
 }
