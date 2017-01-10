@@ -1,10 +1,4 @@
 {
   "name": "Thesis Project",
-  "description": "Now for the crowning project of your Hack Reactor experience.",
-
-  "syllabus": [
-
-    { "title": "Thesis Repository", "type": "download", "postTransform": ["add-init-script"], "id": "exercise", "folder": "code", "transform": ["problemify-export"] }
-
-  ]
+  "description": "Now for the crowning project of your Hack Reactor experience."
 }
