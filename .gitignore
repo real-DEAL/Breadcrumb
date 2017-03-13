@@ -3,6 +3,18 @@ bower_components/
 *.log
 *.xcf
 
+www/lib
+.env
 build/
 dist/
 DS_STORE
+
+*.keystore
+*.sw*
+platforms
+plugins
+out
+.idea
+app/components
+.DS_Store
+.io-config.json
