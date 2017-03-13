@@ -1,20 +1,32 @@
 {
-  "name": "breadcrumb",
+  "name": "ionic-geofence",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "license": "MIT",
+  "author": "Tomasz Subik",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/livrush/course.thesis.git"
+    "url": "https://github.com/cowbell/ionic-geofence.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/livrush/course.thesis/issues"
+  "description": "Geofence Sample Application Built With Ionic",
+  "devDependencies": {
+    "appium": "^1.4.13",
+    "babel-core": "^6.4.5",
+    "babel-preset-es2015": "^6.3.13",
+    "bower": "~1.7.2",
+    "cordova": "~6.1.1",
+    "dotenv": "^2.0.0",
+    "gulp": "~3.9.0",
+    "gulp-protractor": "^2.1.0",
+    "gulp-util": "~3.0.5",
+    "ionic": "^1.7.14",
+    "protractor": "^3.0.0",
+    "run-sequence": "^1.1.4",
+    "shelljs": "~0.7.0",
+    "wd": "^0.4.0",
+    "wd-bridge": "0.0.2"
   },
-  "homepage": "https://github.com/livrush/course.thesis#readme"
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "ios"
+  ]
 }
