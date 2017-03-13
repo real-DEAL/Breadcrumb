@@ -42,6 +42,15 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
         },
       },
     })
+    .state('app.settings', {
+      url: '/settings',
+      views: {
+        menuContent: {
+          templateUrl: 'views/settings.html',
+          controller: 'AuthCtrl',
+        },
+      },
+    })
     .state('app.geofences', {
       url: '/geofences',
       views: {
