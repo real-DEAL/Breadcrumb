@@ -29,7 +29,7 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
       views: {
         menuContent: {
           templateUrl: 'views/profile.html',
-          controller: 'GeofencesCtrl',
+          controller: 'ProfileCtrl',
         },
       },
     })

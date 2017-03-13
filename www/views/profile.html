@@ -14,24 +14,40 @@
   </ion-nav-buttons>
 
   <ion-content>
-    <div class="card" ng-if="geofences.length == 0">
-      <div class="item item-text-wrap">
-        PROFILE
-      </div>
-      <div class="list">
-        <label class="item item-input">
-          <input type="text" placeholder="First Name">
-        </label>
-        <label class="item item-input">
-          <input type="text" placeholder="Last Name">
-        </label>
-        <label class="item item-input">
-          <textarea placeholder="Comments"></textarea>
-        </label>
-      </div>
+    <!-- USER INFORMATION -->
+    <div class="card">
+      <div id="logo"></div>
+      <li>{{ user.name }}</li>
+      <li>Score: {{ user.score }}</li>
+      <li>Completed trails: {{ user.finishedTrails }}</li>
+      <li>Time spent on trains: {{ user.totalTime }}</li>
     </div>
-    <div class="bar bar-footer bar-balanced">
-      <div class="title">Footer</div>
+
+    <!-- CURRENT TRAIL -->
+    <div class="card">
+      <li>{{ user.trail.name }}</li>
+
+      <a href="/">CONTINUE CURRNT TRAIL</a>
+    </div>
+
+    <!-- USER CREATED TRAILS -->
+    <div class="card">
+      <div ng-repeat="trail in trails track by $index">
+        <li>{{ trail.name }}</li>
+        <li>{{ trail.rating }} / 5</li>
+      </div>
+
+      <a href="/">VIEW MORE OF YOUR TRAILS</a>
+    </div>
+
+    <!-- FINISHED TRAILS -->
+    <div class="card">
+      <div ng-repeat="trail in trails track by $index">
+        <li>{{ trail.name }}</li>
+        <li>{{ trail.rating }} / 5</li>
+      </div>
+
+      <a href="/">VIEW MORE OF YOUR PAST TRAILS</a>
     </div>
   </ion-content>
 </ion-view>
