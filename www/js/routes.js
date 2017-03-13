@@ -15,6 +15,24 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
         },
       },
     })
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        menuContent: {
+          templateUrl: 'views/profile.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
+    })
+    .state('app.signUp', {
+      url: '/sign-up',
+      views: {
+        menuContent: {
+          templateUrl: 'views/signup.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
+    })
     .state('app.geofence-new', {
       url: '/geofence/new/:longitude,:latitude',
       views: {
