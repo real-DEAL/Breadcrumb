@@ -1,35 +1,35 @@
-angular.module("ionic-geofence").factory("GeofencePluginMock", function ($q, $log) {
-    return {
-        addOrUpdate: function (fences) {
-            var deffered = $q.defer();
+angular.module('ionic-geofence').factory('GeofencePluginMock', function ($q, $log) {
+  return {
+    addOrUpdate: (fences) => {
+      const deffered = $q.defer();
 
-            $log.log("Mocked geofence plugin addOrUpdate", fences);
-            deffered.resolve();
+      $log.log('Mocked geofence plugin addOrUpdate', fences);
+      deffered.resolve();
 
-            return deffered.promise;
-        },
-        remove: function (ids) {
-            var deffered = $q.defer();
+      return deffered.promise;
+    },
+    remove: (ids) => {
+      const deffered = $q.defer();
 
-            $log.log("Mocked geofence plugin remove", ids);
-            deffered.resolve();
+      $log.log('Mocked geofence plugin remove', ids);
+      deffered.resolve();
 
-            return deffered.promise;
-        },
-        removeAll: function () {
-            var deffered = $q.defer();
+      return deffered.promise;
+    },
+    removeAll: () => {
+      const deffered = $q.defer();
 
-            $log.log("Mocked geofence plugin removeAll");
-            deffered.resolve();
+      $log.log('Mocked geofence plugin removeAll');
+      deffered.resolve();
 
-            return deffered.promise;
-        },
-        initialize: function () {},
-        receiveTransition: function () {},
-        TransitionType: {
-            ENTER: 1,
-            EXIT: 2,
-            BOTH: 3
-        }
-    };
+      return deffered.promise;
+    },
+    initialize: () => {},
+    receiveTransition: () => {},
+    TransitionType: {
+      ENTER: 1,
+      EXIT: 2,
+      BOTH: 3,
+    },
+  };
 });
