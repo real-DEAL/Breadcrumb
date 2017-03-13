@@ -78,5 +78,8 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
   });
 })
 .controller('AppCtrl', function ($scope) {
-  $scope.scope = null;
+  // $scope.scope = null;
+  $scope.test = (input) => {
+    console.warn(input);
+  };
 });

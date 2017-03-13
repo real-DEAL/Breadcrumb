@@ -6,12 +6,21 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
       templateUrl: 'views/menu.html',
       controller: 'AppCtrl',
     })
-    .state('app.geofences', {
-      url: '/geofences',
+    .state('app.start', {
+      url: '/start',
       views: {
         menuContent: {
-          templateUrl: 'views/geofence/geofences.html',
+          templateUrl: 'views/start.html',
           controller: 'GeofencesCtrl',
+        },
+      },
+    })
+    .state('app.dashboard', {
+      url: '/dashboard',
+      views: {
+        menuContent: {
+          templateUrl: 'views/dashboard.html',
+          controller: 'ListCtrl',
         },
       },
     })
@@ -29,6 +38,15 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
       views: {
         menuContent: {
           templateUrl: 'views/signup.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
+    })
+    .state('app.geofences', {
+      url: '/geofences',
+      views: {
+        menuContent: {
+          templateUrl: 'views/geofence/geofences.html',
           controller: 'GeofencesCtrl',
         },
       },
@@ -68,5 +86,5 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
       },
     });
 
-  $urlRouterProvider.otherwise('/app/geofences');
+  $urlRouterProvider.otherwise('/app/dashboard');
 });

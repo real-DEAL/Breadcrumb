@@ -5,6 +5,14 @@
 }
 
 .title {
-  color: #000;
-  background: blue;
+  background: #000;
+}
+
+#logo {
+  background-color: red;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  border-radius: 50px;
 }

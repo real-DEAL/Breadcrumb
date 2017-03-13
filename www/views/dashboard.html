@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<ion-view >
+
+  <ion-nav-buttons side="left">
+
+
+  <ion-header-bar class="bar bar-header bar-royal" align-title="center">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    <h1 class="title">Breadcrumb</h1>
+    <div class="buttons pull-right">
+      <button class="button pull-right button-icon icon ion-plus" ng-click="createNew()"></button>
+      <button class="button pull-right button-icon icon ion-more" ng-click="more()"></button>
+    </div>
+  </ion-header-bar>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <div class="card" ng-repeat="trail in trails track by $index">
+      <div>
+        <li>{{ trail.name }}</li>
+        <li>{{ trail.rating }} / 5</li>
+      </div>
+      <div>
+        <li>{{ trail.length }} Miles</li>
+        <li>{{ trail.difficulty }} / 5</li>
+        <li>{{ trail.progress }} Complete</li>
+      </div>
+      <!-- HIDE -->
+      <div>
+        <li><div id="logo"></div></li>
+        <li>
+          <button class="button">
+            View
+          </button>
+        </li>
+        <li>
+          <button class="button" ng-click="test(trail.name)">
+            GO!
+          </button>
+        </li>
+      </div>
+    </div>
+
+
+  </ion-content>
+
+</ion-view>
