@@ -8,7 +8,7 @@ www/lib
 build/
 dist/
 DS_STORE
-
+.eslintrc.js
 *.keystore
 *.sw*
 platforms
