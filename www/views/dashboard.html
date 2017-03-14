@@ -18,28 +18,24 @@
 
     <div ng-repeat="trail in trails track by $index">
     <!-- <div class="card" ng-repeat="trail in trails track by $index"> -->
-      <div class="item item-divider">
-        {{ trail.name }} | {{ trail.rating }} / 5
+      <div class="row item item-divider">
+        <div class="col">{{ trail.name }}</div>
+        <div class="col">{{ trail.rating }} / 5</div>
       </div>
       <a class="item" href="#">
-        <div>
-          <li>{{ trail.length }} Miles</li>
-          <li>{{ trail.difficulty }} / 5</li>
-          <li>{{ trail.progress }} Complete</li>
+        <div class="row">
+          <div class="col">{{ trail.length }} Miles</div>
+          <div class="col">{{ trail.difficulty }} / 5</div>
+          <div class="col">{{ trail.progress }} Complete</div>
         </div>
         <!-- HIDE -->
         <div>
-          <li><div id="logo"></div></li>
-          <li>
-            <button class="button">
-              View
-            </button>
-          </li>
-          <li>
-            <button class="button" ng-click="test(trail.name)">
-              GO!
-            </button>
-          </li>
+          <div id="logo"></div>
+          <div class="row">
+            <button class="col button">View</button>
+            <button class="col button">GO!</button>
+          </div>
+
         </div>
       </a>
     </div>

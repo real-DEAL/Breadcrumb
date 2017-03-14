@@ -1,6 +1,6 @@
 // Ionic Geofence example App
 
-angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
+angular.module('ionic-geofence', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-directive'])
 .run(function (
   $window,
   $document,

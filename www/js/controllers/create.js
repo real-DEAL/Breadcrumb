@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('ionic-geofence')
-.controller('createTrailCtrl', function ($scope) {
+.controller('createTrailCtrl', function ($scope, TDCardDelegate) {
   $scope.trail = {
     name: '',
     description: '',
@@ -17,7 +17,7 @@ angular.module('ionic-geofence')
   };
 
   $scope.steps = [
-
+    1, 2, 3, 4, 5,
   ];
 
   $scope.trails = [
