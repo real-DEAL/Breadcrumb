@@ -6,32 +6,47 @@
     <div id="logo"><h1>LO<br>GO</h1></div>
 
     <div class="card" ng-if="geofences.length == 0">
-      <div class="row item item-divider">
-        <div class="col"><a href="#">Log in</a></div>
-        <div class="col"><a href="#">Sign up</a></div>
+      <div class="center row item item-divider">
+        <div class="col">Log in</div>
+        <div class="col">Sign up</div>
       </div>
+
       <div class="list">
         <label class="item item-input">
-          <input type="text" placeholder="First Name">
+          <input type="text" placeholder="Username">
         </label>
+
         <label class="item item-input">
-          <input type="text" placeholder="Last Name">
+          <input type="text" placeholder="Password">
         </label>
       </div>
     </div>
-    <button class="button button-full button-positive">
-      Log in
-    </button>
-    <button class="button button-full button-positive">
-      Sign up
-    </button>
+
+    <div class="row" ng-click="">
+      <button class="button button-full button-balanced">
+        Log in
+      </button>
+    </div>
+
+    <div class="row" ng-click="">
+      <button class="button button-full button-energized">
+        Sign up
+      </button>
+    </div>
     <br />
-    <button class="button button-full button-positive">
-      Log in with Facebook
-    </button>
-    <button class="button button-full button-positive">
-      Log in with Twitter
-    </button>
+
+    <div class="row" ng-click="">
+      <button class="button button-full button-positive">
+        Log in with Facebook
+      </button>
+    </div>
+
+    <div class="row" ng-click="">
+      <button class="button button-full button-calm">
+        Log in with Twitter
+      </button>
+    </div>
+
 
   </ion-content>
 

@@ -3,10 +3,8 @@
 
 angular.module('ionic-geofence')
 .controller('createTrailCtrl', function ($scope, Trail) {
-  $scope.style = function () {
-    return {
-      left: '2.5%',
-    };
+  $scope.state = {
+    review: false,
   };
 
   $scope.trail = {
@@ -17,7 +15,7 @@ angular.module('ionic-geofence')
     steps: 0,
     length: '',
     left: 2.5,
-    style: $scope.style(),
+    style: null,
   };
 
   $scope.step = function () {
@@ -26,7 +24,7 @@ angular.module('ionic-geofence')
       location: '',
       media: '',
       left: 2.5,
-      style: $scope.style(),
+      style: null,
     };
   };
 
@@ -34,36 +32,64 @@ angular.module('ionic-geofence')
   ];
 
   $scope.add = function () {
-    $scope.move(-100);
-    $scope.trail.steps += 1;
-    const step = $scope.step();
-    $scope.steps.push(step);
+    if (!$scope.state.review) {
+      $scope.move(-100);
+      $scope.trail.steps += 1;
+      const step = $scope.step();
+      $scope.steps.push(step);
+    }
   };
 
-  $scope.cardSwipedLeft = function () {
-    // console.log('LEFT SWIPE');
-    // $scope.addCard();
+  $scope.cardSwipedLeft = function (index) {
+    if (!$scope.steps.length || index === $scope.steps.length) {
+      return null;
+    }
+    return $scope.move(-100);
   };
 
   $scope.cardSwipedRight = function () {
-    // console.log('RIGHT SWIPE');
-    // $scope.addCard();
+    $scope.move(100);
   };
 
   $scope.move = function (num) {
-    let move = `${$scope.trail.left += num}%`;
-    let style = {
-      left: move,
-      'transition-duration': '500ms',
-    };
-    $scope.trail.style = style;
-    $scope.steps.forEach(function (step) {
-      move = `${step.left += num}%`;
-      style = {
+    if (!$scope.state.review) {
+      let move = `${$scope.trail.left += num}%`;
+      let style = {
         left: move,
         'transition-duration': '500ms',
       };
+      $scope.trail.style = style;
+      $scope.steps.forEach(function (step) {
+        move = `${step.left += num}%`;
+        style = {
+          left: move,
+          top: '0px',
+          'transition-duration': '500ms',
+        };
+        step.style = style;
+      });
+    }
+  };
+
+  $scope.review = function () {
+    $scope.state.review = true;
+    $scope.steps.forEach(function (step) {
+      const move = '-325px';
+      const style = {
+        left: step.left,
+        top: move,
+        'transition-duration': '1000ms',
+      };
+      console.log(style);
       step.style = style;
     });
+  };
+
+  $scope.edit = function () {
+    $scope.state.review = false;
+  };
+
+  $scope.submit = function () {
+    console.log(arguments);
   };
 });

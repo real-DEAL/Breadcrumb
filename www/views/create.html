@@ -2,19 +2,17 @@
 <ion-view >
 
   <ion-nav-buttons side="left">
-
-
-  <ion-header-bar class="bar bar-header bar-stable" align-title="center">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    <h1 class="title">Create Trail</h1>
-  </ion-header-bar>
+    <ion-header-bar class="bar bar-header bar-stable" align-title="center">
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <h1 class="title">Create Trail</h1>
+    </ion-header-bar>
   </ion-nav-buttons>
 
   <ion-content>
-
-    <div class="abs card" ng-style="trail.style">
+    <!-- TRAIL INFO -->
+    <div class="abs card" ng-style="trail.style" on-swipe-left="cardSwipedLeft(0)">
       <label class="item item-input">
-        <input type="text" ng-model="trail.name" placeholder="Name of trail">
+        <input type="text" class="center" ng-model="trail.name" placeholder="Name of trail">
       </label>
       <div class="card">
         <label class="item item-input">
@@ -46,43 +44,58 @@
       </div>
     </div>
 
-    <!-- <div> -->
-    <td-cards>
-      <td-card class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
-        <div class="item item-divider center">
-          Step {{ $index + 1 }}
+    <!-- STEPS -->
+    <div class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
+      <div class="item item-divider center">
+        Step {{ $index + 1 }}
+      </div>
+      <div class="card">
+        <div class="item item-divider center" ng-click="test('hey')">
+          <br> MEDIA UPLOAD <br><br>
         </div>
-        <div class="card">
-          <div class="item item-divider center">
-            <br> MEDIA UPLOAD <br><br>
-          </div>
-          <label class="item item-input">
-            <input type="text" ng-model="step.text" placeholder="Description">
-          </label>
-          <label class="item item-input">
-            <input type="text" ng-model="step.location" placeholder="Location">
-          </label>
-        </div>
-        <div class="row">
+        <label class="item item-input">
+          <input type="text" ng-model="step.text" placeholder="Description">
+        </label>
+        <label class="row item item-input">
           <div class="col">
-            <button class="button button-block" ng-click="move(100)">
-              Prev step
-            </button>
+            <input  type="text" ng-model="step.location" placeholder="Location">
           </div>
-          <div class="col">
-            <button class="button button-block" ng-click="move(-100)"
-            ng-if="steps.length > $index + 1">
-              Next step
-            </button>
-            <button class="button button-block" ng-click="add()" ng-if="steps.length === $index + 1">
-              Add step!
-            </button>
-          </div>
+          <button class="col col-20 button">
+            <i class="icon ion-location"></i>
+          </button>
+        </label>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button class="button button-block" ng-click="move(100)">
+            Prev step
+          </button>
         </div>
-
-
-      </td-card>
-    </td-cards>
+        <div class="col">
+          <button class="button button-block" ng-click="move(-100)"
+          ng-if="steps.length > $index + 1">
+            Next step
+          </button>
+          <button class="button button-block" ng-click="add()" ng-if="steps.length === $index + 1">
+            Add step!
+          </button>
+        </div>
+      </div>
+    </div>
   </ion-content>
 
+  <div class="bar bar-footer bar-royal" ng-click="review()" ng-if="steps.length > 1 && !state.review">
+    <div class="title">Review</div>
+  </div>
+
+  <div class="tabs tabs-icon-top" ng-if="state.review">
+    <a class="tab-item" ng-click="edit()">
+      <i class="icon ion-compose"></i>
+      Edit
+    </a>
+    <a class="tab-item" ng-click="submit()">
+      <i class="icon ion-checkmark-round"></i>
+      Submit
+    </a>
+  </div>
 </ion-view>
