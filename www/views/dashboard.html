@@ -12,24 +12,26 @@
 
   <ion-content>
 
-    <div ng-repeat="trail in trails track by $index">
+    <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
     <!-- <div class="card" ng-repeat="trail in trails track by $index"> -->
-      <div class="row item item-divider">
+      <div class="row item item-divider" ng-click="toggle($index)">
         <div class="col">{{ trail.name }}</div>
-        <div class="col">{{ trail.rating }} / 5</div>
+        <i class="ion-ios-star" ng-repeat="star in stars()"></i>
+        <i class="ion-ios-star-outline" ng-repeat="star in nostars()"></i>
+
       </div>
       <a class="item" href="#">
         <div class="row">
           <div class="col">{{ trail.length }} Miles</div>
-          <div class="col">{{ trail.difficulty }} / 5</div>
+          <div class="col"><i class="ion-ribbon-b" ng-repeat="hard in difficulty()"></i></div>
           <div class="col">{{ trail.progress }} Complete</div>
         </div>
         <!-- HIDE -->
         <div>
-          <div id="logo"></div>
+          <div class="logo"></div>
           <div class="row">
-            <button class="col button">View</button>
-            <button class="col button">GO!</button>
+            <button class="col button button-block">View</button>
+            <button class="col button button-block">GO!</button>
           </div>
 
         </div>
