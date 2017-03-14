@@ -6,12 +6,10 @@
     <div id="logo"><h1>LO<br>GO</h1></div>
 
     <div class="card" ng-if="geofences.length == 0">
-        <a class="tab-item">
-          Log in
-        </a>
-        <a class="tab-item">
-          Sign up
-        </a>
+      <div class="row item item-divider">
+        <div class="col"><a href="#">Log in</a></div>
+        <div class="col"><a href="#">Sign up</a></div>
+      </div>
       <div class="list">
         <label class="item item-input">
           <input type="text" placeholder="First Name">
@@ -20,20 +18,20 @@
           <input type="text" placeholder="Last Name">
         </label>
       </div>
-      <button class="button button-full button-positive">
-        Log in
-      </button>
-      <button class="button button-full button-positive">
-        Sign up
-      </button>
-      <br />
-      <button class="button button-full button-positive">
-        Log in with Facebook
-      </button>
-      <button class="button button-full button-positive">
-        Log in with Twitter
-      </button>
     </div>
+    <button class="button button-full button-positive">
+      Log in
+    </button>
+    <button class="button button-full button-positive">
+      Sign up
+    </button>
+    <br />
+    <button class="button button-full button-positive">
+      Log in with Facebook
+    </button>
+    <button class="button button-full button-positive">
+      Log in with Twitter
+    </button>
 
   </ion-content>
 
