@@ -2,10 +2,36 @@
 /* global TransitionType */
 
 angular.module('ionic-geofence')
-.controller('createTrailCtrl', function ($scope, Trail) {
-  $scope.state = {
-    review: false,
+.controller('createTrailCtrl', function ($scope) {
+  const moveX = function (step, num) {
+    const move = `${step.left += num}%`;
+    const style = {
+      left: move,
+      'transition-duration': '500ms',
+    };
+    step.style = style;
   };
+
+  const moveY = function (step, num) {
+    const style = {
+      transform: `translate(0px, ${num}px)`,
+      'transition-duration': '1000ms',
+    };
+    step.style = style;
+  };
+
+  const moveReset = function (step, index) {
+    step.left = 100 * index;
+    const move = `${step.left += 2.5}%`;
+    const style = {
+      top: '0px',
+      left: move,
+      'transition-duration': '1000ms',
+    };
+    step.style = style;
+  };
+
+  $scope.review = false;
 
   $scope.trail = {
     name: '',
@@ -32,11 +58,22 @@ angular.module('ionic-geofence')
   ];
 
   $scope.add = function () {
-    if (!$scope.state.review) {
+    if (!$scope.review) {
       $scope.move(-100);
       $scope.trail.steps += 1;
       const step = $scope.step();
       $scope.steps.push(step);
+    }
+  };
+
+  $scope.remove = function (index) {
+    if (!$scope.review) {
+      $scope.trail.steps -= 1;
+      $scope.steps.splice(index, 1);
+      moveReset($scope.trail, 0);
+      $scope.steps.forEach(function (step, ind) {
+        moveReset(step, ind + 1);
+      });
     }
   };
 
@@ -52,44 +89,31 @@ angular.module('ionic-geofence')
   };
 
   $scope.move = function (num) {
-    if (!$scope.state.review) {
-      let move = `${$scope.trail.left += num}%`;
-      let style = {
-        left: move,
-        'transition-duration': '500ms',
-      };
-      $scope.trail.style = style;
+    if (!$scope.review) {
+      moveX($scope.trail, num);
       $scope.steps.forEach(function (step) {
-        move = `${step.left += num}%`;
-        style = {
-          left: move,
-          top: '0px',
-          'transition-duration': '500ms',
-        };
-        step.style = style;
+        moveX(step, num);
       });
     }
   };
 
-  $scope.review = function () {
-    $scope.state.review = true;
+  $scope.reviewMap = function () {
+    $scope.review = true;
+    moveY($scope.trail, -450);
     $scope.steps.forEach(function (step) {
-      const move = '-325px';
-      const style = {
-        left: step.left,
-        top: move,
-        'transition-duration': '1000ms',
-      };
-      console.log(style);
-      step.style = style;
+      moveY(step, -325);
     });
   };
 
   $scope.edit = function () {
-    $scope.state.review = false;
+    $scope.review = false;
+    moveReset($scope.trail, 0);
+    $scope.steps.forEach(function (step, index) {
+      moveReset(step, index + 1);
+    });
   };
 
   $scope.submit = function () {
-    console.log(arguments);
+    return null;
   };
 });

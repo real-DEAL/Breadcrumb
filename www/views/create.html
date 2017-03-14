@@ -46,8 +46,9 @@
 
     <!-- STEPS -->
     <div class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
-      <div class="item item-divider center">
-        Step {{ $index + 1 }}
+      <div class="row item item-divider center">
+        <h1 class="title col">Step {{ $index + 1 }}</h1>
+        <i class="button icon col col-10 ion-close-round" ng-click="remove($index)"></i>
       </div>
       <div class="card">
         <div class="item item-divider center" ng-click="test('hey')">
@@ -84,11 +85,11 @@
     </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-royal" ng-click="review()" ng-if="steps.length > 1 && !state.review">
+  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="steps.length > 1 && !review">
     <div class="title">Review</div>
   </div>
 
-  <div class="tabs tabs-icon-top" ng-if="state.review">
+  <div class="tabs tabs-icon-top" ng-if="review">
     <a class="tab-item" ng-click="edit()">
       <i class="icon ion-compose"></i>
       Edit
