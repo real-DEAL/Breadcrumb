@@ -16,27 +16,35 @@
     <!-- <div class="card" ng-repeat="trail in trails track by $index"> -->
       <div class="row item item-divider" ng-click="toggle($index)">
         <div class="col">{{ trail.name }}</div>
-        <i class="ion-ios-star" ng-repeat="star in stars()"></i>
-        <i class="ion-ios-star-outline" ng-repeat="star in nostars()"></i>
+        <!-- <div class="col"></div> -->
+        <div class="col right">
+          {{ trail.length }} Miles -
+          <i class="ion-android-walk" ng-if="trail.transport === 1"></i>
+          <i class="ion-android-bicycle" ng-if="trail.transport === 2"></i>
+          <i class="ion-android-car" ng-if="trail.transport === 3"></i>
+          <i class="ion-android-bus" ng-if="trail.transport === 4"></i>
+        </div>
+      </div>
+
+      <div class="card"><div class="row">
+        <div class="col">
+          <i class="ion-ios-star" ng-repeat="star in stars()"></i><i class="ion-ios-star-outline" ng-repeat="star in nostars()"></i>
+        </div>
+        <div class="col center"><i class="ion-ribbon-b" ng-repeat="hard in difficulty()"></i></div>
+        <div class="col right" ng-if="trail.progress">{{ trail.progress }} Complete</div>
 
       </div>
-      <a class="item" href="#">
+      <!-- HIDE -->
+      <div>
+        <div class="logo"></div>
         <div class="row">
-          <div class="col">{{ trail.length }} Miles</div>
-          <div class="col"><i class="ion-ribbon-b" ng-repeat="hard in difficulty()"></i></div>
-          <div class="col">{{ trail.progress }} Complete</div>
+          <!-- <button class="col button button-block">View</button> -->
+          <button class="col button button-block">GO!</button>
         </div>
-        <!-- HIDE -->
-        <div>
-          <div class="logo"></div>
-          <div class="row">
-            <button class="col button button-block">View</button>
-            <button class="col button button-block">GO!</button>
-          </div>
 
-        </div>
-      </a>
-    </div>
+      </div>
+    </div></div>
+
 
 
   </ion-content>

@@ -17,11 +17,15 @@
   text-align: right;
 }
 
+a.item {
+  padding: 5px;
+}
+
 .logo {
   background-color: red;
   text-align: center;
   width: 100%;
-  height: 150px;
+  height: 200px;
   margin: auto;
   /*border-radius: 50px;*/
 }

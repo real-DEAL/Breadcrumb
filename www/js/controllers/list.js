@@ -6,6 +6,7 @@ angular.module('ionic-geofence')
   const closeStyle = {
     height: '45px',
     'transition-duration': '250ms',
+    overflow: 'hidden',
   };
 
   const trailmaker = function () {
@@ -14,11 +15,12 @@ angular.module('ionic-geofence')
 
   $scope.trail = {
     name: 'My first trail',
+    transport: 2,
     rating: 3,
     difficulty: 3,
     length: 25,
     progress: '50%',
-    style: { height: '45px' },
+    style: closeStyle,
   };
 
   $scope.stars = function () {
@@ -41,7 +43,7 @@ angular.module('ionic-geofence')
 
   $scope.open = function (index) {
     $scope.trails[index].style = {
-      height: '320px',
+      height: '400px',
       'transition-duration': '250ms',
     };
     $scope.trails.forEach(function (trail, place) {
