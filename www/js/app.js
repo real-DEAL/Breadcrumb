@@ -82,4 +82,4 @@ angular.module('ionic-geofence', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaf
   $scope.test = (input) => {
     console.warn(input);
   };
-});
+})

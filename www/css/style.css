@@ -16,3 +16,18 @@
   margin: auto;
   border-radius: 50px;
 }
+
+td-cards {
+  display: block;
+}
+
+td-card {
+  position: absolute;
+  /*left: 50%;*/
+  /*margin-top: 80px;*/
+  /*margin-bottom: 40px;
+  margin-left: -150px;*/
+  /*width: auto;*/
+  /*height: 300px;*/
+  /*border-radius: 6px;*/
+}

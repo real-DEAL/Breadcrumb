@@ -39,7 +39,7 @@
              </div>
            </label>
         </li>
-        <button class="button" ng-click="test('hey')">
+        <button class="button" ng-click="add()">
           Create trail!
         </button>
       </div>
@@ -47,7 +47,7 @@
 
     <!-- <div> -->
     <td-cards>
-      <td-card class="card" ng-repeat="step in steps track by $index">
+      <td-card class="card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)" on-partial-swipe="cardPartialSwipe(amt)">
         <label class="item item-input">
           <input type="text" ng-model="step.name" placeholder="Name of trail">
         </label>
@@ -61,7 +61,7 @@
           <label class="item item-input">
             <input type="text" ng-model="step.location" placeholder="Location">
           </label>
-          <button class="button" ng-click="test(trail.name)">
+          <button class="button" ng-click="add()">
             Add step!
           </button>
         </div>

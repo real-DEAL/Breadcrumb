@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('ionic-geofence')
-.controller('createTrailCtrl', function ($scope, TDCardDelegate) {
+.controller('createTrailCtrl', function ($scope) {
   $scope.trail = {
     name: '',
     description: '',
@@ -13,16 +13,30 @@ angular.module('ionic-geofence')
   };
 
   $scope.step = {
-
+    text: '',
+    location: '',
+    media: '',
   };
 
   $scope.steps = [
-    1, 2, 3, 4, 5,
   ];
 
-  $scope.trails = [
-    $scope.exampleTrail,
-    $scope.exampleTrail,
-    $scope.exampleTrail,
-  ];
+  $scope.add = function () {
+    const step = {
+      text: '',
+      location: '',
+      media: '',
+    };
+    $scope.steps.push(step);
+  };
+
+  $scope.cardSwipedLeft = function () {
+    console.log('LEFT SWIPE');
+    // $scope.addCard();
+  };
+
+  $scope.cardSwipedRight = function () {
+    console.log('RIGHT SWIPE');
+    // $scope.addCard();
+  };
 });
