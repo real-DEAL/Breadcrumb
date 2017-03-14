@@ -4,8 +4,8 @@
     display: block;
 }
 
-.title {
-  background: #000;
+.center {
+  text-align: center;
 }
 
 #logo {
@@ -21,13 +21,17 @@ td-cards {
   display: block;
 }
 
-td-card {
+.abs {
   position: absolute;
+  width: 90%;
+  left: 2.5%;
+  margin: auto;
+  /*margin: 50px;*/
   /*left: 50%;*/
   /*margin-top: 80px;*/
   /*margin-bottom: 40px;
   margin-left: -150px;*/
   /*width: auto;*/
   /*height: 300px;*/
-  /*border-radius: 6px;*/
+  border-radius: 15px;
 }
