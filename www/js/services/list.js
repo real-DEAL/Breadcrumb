@@ -21,7 +21,17 @@ angular.module('breadcrumb').factory('ListFact', function () {
     });
   };
 
+  const arrayMaker = (num) => {
+    const arr = [];
+    let i;
+    for (i = 0; i < num; i += 1) {
+      arr.push(i);
+    }
+    return arr;
+  };
+
   return {
     filter: filterListItems,
+    range: arrayMaker,
   };
 });

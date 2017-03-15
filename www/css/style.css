@@ -40,3 +40,10 @@
   /*padding-right: 6px;*/
   height: 65px;
 }
+
+.scrollText {
+  text-align: justify;
+  text-justify: inter-word;
+  height: 150px;
+  overflow: hidden;
+}

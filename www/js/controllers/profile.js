@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($scope) {
+.controller('ProfileCtrl', function ($scope, ListFact) {
   $scope.user = {
     name: 'NAME',
     score: 500,
@@ -10,8 +10,8 @@ angular.module('breadcrumb')
     totalTime: 0,
     trail: {
       name: `My ${Math.floor(Math.random() * 100)}th trail`,
-      stars: _.range(4),
-      nostars: _.range(1),
+      stars: ListFact.range(4),
+      nostars: ListFact.range(1),
       progress: `${Math.floor(Math.random() * 100)}%`,
     },
   };
@@ -24,19 +24,13 @@ angular.module('breadcrumb')
     return {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
       transport: tran,
-      stars: _.range(stars),
-      nostars: _.range(noStars),
-      difficulty: _.range(difficulty),
+      stars: ListFact.range(stars),
+      nostars: ListFact.range(noStars),
+      difficulty: ListFact.range(difficulty),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
       progress: `${Math.floor(Math.random() * 100)}%`,
     };
   };
-
-  $scope.stars = () => _.range($scope.trail.rating);
-
-  $scope.nostars = () => _.range(5 - $scope.trail.rating);
-
-  $scope.difficulty = () => _.range($scope.trail.difficulty);
 
   $scope.exampleTrail = {
     name: 'My first trail',
