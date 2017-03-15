@@ -1,6 +1,6 @@
 // Ionic Geofence example App
 
-angular.module('ionic-geofence', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-directive'])
+angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-directive'])
 .run(function (
   $window,
   $document,
@@ -82,4 +82,4 @@ angular.module('ionic-geofence', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaf
   $scope.test = (input) => {
     console.warn(input);
   };
-})
+});

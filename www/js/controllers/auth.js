@@ -1,7 +1,7 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 /* global TransitionType */
 
-angular.module('ionic-geofence')
+angular.module('breadcrumb')
 .controller('AuthCtrl', function ($scope) {
   $scope.user = {
     name: 'NAME',

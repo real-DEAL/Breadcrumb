@@ -1,12 +1,6 @@
-angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProvider) {
+angular.module('breadcrumb').config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('app', {
-      url: '/app',
-      abstract: true,
-      templateUrl: 'views/menu.html',
-      controller: 'AppCtrl',
-    })
-    .state('app.start', {
+    .state('start', {
       url: '/start',
       views: {
         menuContent: {
@@ -14,6 +8,21 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
           controller: 'GeofencesCtrl',
         },
       },
+    })
+    .state('start.signUp', {
+      url: '/sign-up',
+      views: {
+        menuContent: {
+          templateUrl: 'views/signup.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
+    })
+    .state('app', {
+      url: '/app',
+      abstract: true,
+      templateUrl: 'views/menu.html',
+      controller: 'AppCtrl',
     })
     .state('app.dashboard', {
       url: '/dashboard',
@@ -39,15 +48,6 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
         menuContent: {
           templateUrl: 'views/profile.html',
           controller: 'ProfileCtrl',
-        },
-      },
-    })
-    .state('app.signUp', {
-      url: '/sign-up',
-      views: {
-        menuContent: {
-          templateUrl: 'views/signup.html',
-          controller: 'GeofencesCtrl',
         },
       },
     })

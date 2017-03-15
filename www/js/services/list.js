@@ -2,7 +2,7 @@
 /* global TransitionType */
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('ionic-geofence').factory('ListFact', function () {
+angular.module('breadcrumb').factory('ListFact', function () {
   const filterListItems = function (list, type, value) {
     const items = list.slice();
     if (value) {

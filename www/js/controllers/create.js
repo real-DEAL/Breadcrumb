@@ -1,13 +1,13 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 /* global TransitionType */
 
-angular.module('ionic-geofence')
+angular.module('breadcrumb')
 .controller('createTrailCtrl', function ($scope) {
   const moveX = function (step, num) {
     const move = `${step.left += num}%`;
     const style = {
       left: move,
-      'transition-duration': '500ms',
+      'transition-duration': '250ms',
     };
     step.style = style;
   };
@@ -54,15 +54,14 @@ angular.module('ionic-geofence')
     };
   };
 
-  $scope.steps = [
-  ];
+  $scope.steps = [];
 
   $scope.add = function () {
     if (!$scope.review) {
-      $scope.move(-100);
-      $scope.trail.steps += 1;
       const step = $scope.step();
       $scope.steps.push(step);
+      $scope.move(-100);
+      $scope.trail.steps += 1;
     }
   };
 

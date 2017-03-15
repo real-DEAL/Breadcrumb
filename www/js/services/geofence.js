@@ -2,7 +2,7 @@
 /* global TransitionType */
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('ionic-geofence').factory('Geofence', function (
+angular.module('breadcrumb').factory('Geofence', function (
   $rootScope,
   $window,
   $q,

@@ -1,4 +1,4 @@
-angular.module('ionic-geofence').controller('GeofencesCtrl', function (
+angular.module('breadcrumb').controller('GeofencesCtrl', function (
   $scope,
   $ionicActionSheet,
   $timeout,
