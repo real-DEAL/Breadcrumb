@@ -60,7 +60,7 @@ angular.module('breadcrumb')
     location: '',
     media: '',
     left: 2.5,
-    style: null,
+    style: { 'animation-name': 'moveInFromRight' },
   });
 
   $scope.steps = [];
