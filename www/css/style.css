@@ -47,13 +47,6 @@
   overflow: hidden;
 }
 
-.review {
-  position: absolute;
-  top: 850px;
-  animation-duration: 1000ms;
-  animation-fill-mode: forwards;
-}
-
 .abs {
   position: absolute;
   left: 2.5%;
@@ -61,12 +54,12 @@
   margin: auto;
   animation-duration: 250ms;
   animation-fill-mode: forwards;
-  /*border-radius: 15px;
-  border: 1px solid #ddd;*/
 }
 
-.display {
-  display: none;
+.review {
+  position: absolute;
+  top: 850px;
+  animation-duration: 1000ms;
 }
 
 .textbox {
@@ -74,8 +67,7 @@
 }
 
 .scrollText {
+  height: 150px;
   text-align: justify;
   text-justify: inter-word;
-  height: 150px;
-  overflow: hidden;
 }

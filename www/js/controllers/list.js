@@ -27,11 +27,6 @@ angular.module('breadcrumb')
     };
   };
 
-  $scope.overflowStyle = {
-    height: '150px',
-    overflow: 'scroll',
-  };
-
   $scope.specificTransport = false;
 
   $scope.trail = {

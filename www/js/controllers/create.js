@@ -33,10 +33,6 @@ angular.module('breadcrumb')
 
   $scope.review = {
     check: false,
-    // style: {
-    //   position: 'absolute',
-    //   top: '850px',
-    // },
   };
 
   $scope.noOverflow = {

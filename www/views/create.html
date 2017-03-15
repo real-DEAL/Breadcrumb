@@ -90,9 +90,11 @@
         Review steps for <strong>{{ trail.name }}</strong>
       </div>
       <div class="logo"></div>
-      <div ng-repeat="step in steps track by $index" class="row">
-        <div class="col col-10">{{ $index + 1 }}</div>
-        <div class="col">{{ step.location }}</div>
+      <div ng-style="overflowStyle">
+        <div ng-repeat="step in steps track by $index" class="row">
+          <div class="col col-10">{{ $index + 1 }}</div>
+          <div class="col">{{ step.location }}</div>
+        </div>
       </div>
     </div>
   </ion-content>
