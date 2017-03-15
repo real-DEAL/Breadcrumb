@@ -33,7 +33,6 @@
              </div>
            </label>
         </li>
-
         <button class="button button-block" ng-click="add()" ng-if="!steps.length">
           Create trail!
         </button>
@@ -54,18 +53,20 @@
         <div class="item item-divider center" ng-click="test('hey')">
           <h1>MEDIA UPLOAD</h1>
         </div>
-        <label class="item item-input">
+
+        <label class="item item-input textbox">
           <input type="text" ng-model="step.text" placeholder="Description">
         </label>
-        <label class="row item item-input">
-          <div class="col">
-            <input  type="text" ng-model="step.location" placeholder="Location">
-          </div>
-          <button class="col col-20 button">
+
+        <div class="item item-input textbox">
+          <input class="col" type="text" ng-model="step.location" placeholder="Location">
+
+          <button class="col col-10 button">
             <i class="icon ion-navigate"></i>
           </button>
-        </label>
+        </div>
       </div>
+
       <div class="row">
         <div class="col">
           <button class="button button-block" ng-click="move(100)">

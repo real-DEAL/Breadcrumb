@@ -10,7 +10,7 @@
 
   <ion-content>
 
-    <div class="trailItem" ng-repeat="trail in trails track by $index" ng-style="trail.style">
+    <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
 
       <div class="row item item-divider" ng-click="toggle($index)">
         <div class="col center">{{ trail.name }}</div>

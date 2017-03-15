@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('createTrailCtrl', function ($scope) {
+.controller('CreateTrailCtrl', function ($scope) {
   const moveX = function (step, num) {
     const move = `${step.left += num}%`;
     const style = {
@@ -58,9 +58,9 @@ angular.module('breadcrumb')
 
   $scope.add = function () {
     if (!$scope.review) {
+      $scope.move(-100);
       const step = $scope.step();
       $scope.steps.push(step);
-      $scope.move(-100);
       $scope.trail.steps += 1;
     }
   };
