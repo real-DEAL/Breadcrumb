@@ -24,6 +24,15 @@ angular.module('breadcrumb').config(function ($stateProvider, $urlRouterProvider
         },
       },
     })
+    .state('app.search', {
+      url: '/search',
+      views: {
+        menuContent: {
+          templateUrl: 'views/search.html',
+          controller: 'ListCtrl',
+        },
+      },
+    })
     .state('app.create', {
       url: '/create',
       views: {
