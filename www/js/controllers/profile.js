@@ -16,7 +16,7 @@ angular.module('breadcrumb')
     },
   };
 
-  const trailmaker = function () {
+  const trailmaker = () => {
     const tran = Math.floor(Math.random() * 4) + 1;
     const stars = Math.floor(Math.random() * 5);
     const noStars = 5 - stars;
@@ -32,17 +32,11 @@ angular.module('breadcrumb')
     };
   };
 
-  $scope.stars = function () {
-    return _.range($scope.trail.rating);
-  };
+  $scope.stars = () => _.range($scope.trail.rating);
 
-  $scope.nostars = function () {
-    return _.range(5 - $scope.trail.rating);
-  };
+  $scope.nostars = () => _.range(5 - $scope.trail.rating);
 
-  $scope.difficulty = function () {
-    return _.range($scope.trail.difficulty);
-  };
+  $scope.difficulty = () => _.range($scope.trail.difficulty);
 
   $scope.exampleTrail = {
     name: 'My first trail',

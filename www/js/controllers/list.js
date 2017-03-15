@@ -9,13 +9,14 @@ angular.module('breadcrumb')
     overflow: 'hidden',
   };
 
-  const trailmaker = function () {
+  const trailmaker = () => {
     const tran = Math.floor(Math.random() * 4) + 1;
     const stars = Math.floor(Math.random() * 5);
     const noStars = 5 - stars;
     const difficulty = Math.floor(Math.random() * 5) + 1;
     return {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       transport: tran,
       rating: _.range(stars),
       nostars: _.range(noStars),
@@ -24,7 +25,6 @@ angular.module('breadcrumb')
       progress: Math.floor(Math.random() * 100),
       style: closeStyle,
     };
-    // return Object.create($scope.trail);
   };
 
   $scope.specificTransport = false;
@@ -39,47 +39,41 @@ angular.module('breadcrumb')
     style: closeStyle,
   };
 
-  $scope.stars = function () {
-    return _.range($scope.trail.rating);
-  };
+  $scope.stars = () => _.range($scope.trail.rating);
 
-  $scope.nostars = function () {
-    return _.range(5 - $scope.trail.rating);
-  };
+  $scope.nostars = () => _.range(5 - $scope.trail.rating);
 
-  $scope.difficulty = function () {
-    return _.range($scope.trail.difficulty);
-  };
+  $scope.difficulty = () => _.range($scope.trail.difficulty);
 
-  $scope.toggle = function (index) {
-    return $scope.trails[index].style.height === '73px' ?
+  $scope.toggle = index => (
+    $scope.trails[index].style.height === '73px' ?
     $scope.open(index) :
-    $scope.close(index);
-  };
+    $scope.close(index)
+  );
 
-  $scope.open = function (index) {
+  $scope.open = (index) => {
     $scope.trails[index].style = {
       height: '400px',
       overflow: 'hidden',
       'transition-duration': '250ms',
     };
-    $scope.trails.forEach(function (trail, place) {
+    $scope.trails.forEach((trail, place) => {
       if (place !== index) {
         $scope.close(place);
       }
     });
   };
 
-  $scope.close = function (index) {
+  $scope.close = (index) => {
     $scope.trails[index].style = closeStyle;
   };
 
-  $scope.filter = function (type, value) {
+  $scope.filter = (type, value) => {
     if (type === 'transport') $scope.specificTransport = true;
     $scope.trails = ListFact.filter($scope.trails, type, value);
   };
 
-  $scope.reset = function () {
+  $scope.reset = () => {
     $scope.specificTransport = false;
     $scope.trails = ListFact.filter($scope.trailsCache, 'name');
   };

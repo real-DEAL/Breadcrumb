@@ -3,7 +3,7 @@
 
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope) {
-  const moveX = function (step, num) {
+  const moveX = (step, num) => {
     const move = `${step.left += num}%`;
     const style = {
       left: move,
@@ -12,7 +12,7 @@ angular.module('breadcrumb')
     step.style = style;
   };
 
-  const moveY = function (step, num) {
+  const moveY = (step, num) => {
     const style = {
       transform: `translate(0px, ${num}px)`,
       'transition-duration': '1000ms',
@@ -20,7 +20,7 @@ angular.module('breadcrumb')
     step.style = style;
   };
 
-  const moveReset = function (step, index) {
+  const moveReset = (step, index) => {
     step.left = 100 * index;
     const move = `${step.left += 2.5}%`;
     const style = {
@@ -44,19 +44,17 @@ angular.module('breadcrumb')
     style: null,
   };
 
-  $scope.step = function () {
-    return {
-      text: '',
-      location: '',
-      media: '',
-      left: 2.5,
-      style: null,
-    };
-  };
+  $scope.step = () => ({
+    text: '',
+    location: '',
+    media: '',
+    left: 2.5,
+    style: null,
+  });
 
   $scope.steps = [];
 
-  $scope.add = function () {
+  $scope.add = () => {
     if (!$scope.review) {
       $scope.move(-100);
       const step = $scope.step();
@@ -65,54 +63,52 @@ angular.module('breadcrumb')
     }
   };
 
-  $scope.remove = function (index) {
+  $scope.remove = (index) => {
     if (!$scope.review) {
       $scope.trail.steps -= 1;
       $scope.steps.splice(index, 1);
       moveReset($scope.trail, 0);
-      $scope.steps.forEach(function (step, ind) {
+      $scope.steps.forEach((step, ind) => {
         moveReset(step, ind + 1);
       });
     }
   };
 
-  $scope.cardSwipedLeft = function (index) {
+  $scope.cardSwipedLeft = (index) => {
     if (!$scope.steps.length || index === $scope.steps.length) {
       return null;
     }
     return $scope.move(-100);
   };
 
-  $scope.cardSwipedRight = function () {
+  $scope.cardSwipedRight = () => {
     $scope.move(100);
   };
 
-  $scope.move = function (num) {
+  $scope.move = (num) => {
     if (!$scope.review) {
       moveX($scope.trail, num);
-      $scope.steps.forEach(function (step) {
+      $scope.steps.forEach((step) => {
         moveX(step, num);
       });
     }
   };
 
-  $scope.reviewMap = function () {
+  $scope.reviewMap = () => {
     $scope.review = true;
     moveY($scope.trail, -450);
-    $scope.steps.forEach(function (step) {
+    $scope.steps.forEach((step) => {
       moveY(step, -325);
     });
   };
 
-  $scope.edit = function () {
+  $scope.edit = () => {
     $scope.review = false;
     moveReset($scope.trail, 0);
-    $scope.steps.forEach(function (step, index) {
+    $scope.steps.forEach((step, index) => {
       moveReset(step, index + 1);
     });
   };
 
-  $scope.submit = function () {
-    return null;
-  };
+  $scope.submit = () => null;
 });
