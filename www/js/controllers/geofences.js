@@ -8,15 +8,12 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
   $state,
   Geolocation,
   Geofence,
-  $ionicLoading,
-  Directions
+  $ionicLoading
 ) {
   $ionicLoading.show({ template: 'Getting geofences from device...', duration: 5000 });
   // var directionsDisplay = new google.maps.DirectionsRenderer();
   const directionsService = new google.maps.DirectionsService();
-  const geocoder = new google.maps.Geocoder();
   $scope.geofences = [];
-
 
   Geofence.getAll().then((geofences) => {
     $ionicLoading.hide();
@@ -82,37 +79,27 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
   const computeTotalDistance = (response) => {
     let total = 0;
     const myRoute = response.routes[0];
-    myRoute.legs.forEach((leg) => { total += leg.distance.value; })
+    myRoute.legs.forEach((leg) => { total += leg.distance.value; });
     total /= 1000;
-    console.warn(total, 'km total')
+    console.warn(total, 'km total');
+  };
+  const totalMiles = (response) => {
+    const myRoute = response.routes[0].legs[0].distance.text;
+      console.warn(myRoute);
   };
   const computeTotalDuration = (response) => {
-    let total = 0;
-    const myRoute = response.routes[0];
-    myRoute.legs.forEach((leg) => { total += leg.duration.value; })
-    console.warn(total, 'mins total')
+    // let total = 0;
+    const myRoute = response.routes[0].legs[0].duration.text;
+    // myRoute.legs.forEach((leg) => { total += leg.duration.value; });
+    console.warn(myRoute, 'mins total');
   };
-
-
   const arrayPathAddOn = (response) => {
     let res = '';
     const myRoute = response.routes[0];
     res = myRoute.overview_polyline;
-    // .replace("\\\\", "\\");
-http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=enc:{aiuD|qzdPFbAEhAK~@Qn@w@jB_@bAIVe@jFfGv@`@JLHLL\~@LfAs@~JGbAAzCBrBgM`@uPt@mMl@qRx@aGVoDJeELcAHmDJ_Jb@iCXgDXgFTuOl@}FZkFT]}Fy@sMKuAWu@OgAQqCm@yIi@gE_@aGUoDu@gKe@uE_AeGc@sCq@iE{BgOwAuIk@{Ca@mBoCiN{A{HQ}@u@gD]}Ag@yAEK_A_CwAmCaEmHoFmJoFuJsB}DmBeEoB{EqBqE_FeK}CgGgC_FsFuKoDaHK[e@_AgCaFu@{AQU_@u@mKoSc@q@u@eAiAoA{AwAmA{@oAu@}EmCuD{BqMqHo@_@cHwD{KkGeCuAsAm@kCkAe@UoF}BoFcB{Cy@aB]c@OeFk@iFOuC@oADyCb@wA\[N{B`Bw@p@m@p@oA~Aw@pA{@jBu@xBYlAW`BIl@G~@E~AKfE[hMg@lSKfKAjC@|JXpt@BtEC|DAbAOpCQlAqBbKIh@G?C@GDUv@k@bB]x@{@dBq@jA_AtBu@~Ai@n@KH_@Nm@HY?uDq@]Ds@OcAScAO_KsB my url
-    // myRoute.legs.forEach((leg) => {
-    //   console.log(leg, 'leg')
-    //   leg.steps.forEach(step => {
-    //     console.warn(step.start_location.lat(),'step')
-    //     res += step.start_location.lat() + ',' + step.start_location.lng() + '|';
-    //   })
-    // });
     return res;
   };
-  // const url = 'http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=';
   const url = 'http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=enc:';
-
-
   $scope.addPath = () => {
     const request = {
       origin: $scope.directions.origin,
@@ -121,18 +108,14 @@ http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=enc:{aiuD|qzdPFb
     };
     directionsService.route(request, (response, status) => {
       if (status === google.maps.DirectionsStatus.OK) {
-        console.log(response, 'response')
         computeTotalDistance(response);
         computeTotalDuration(response);
+        totalMiles(response);
         arrayPathAddOn(response);
         console.warn(`${url}${arrayPathAddOn(response)}`);
-
       } else {
-        console.warn('Google route unsuccesful!');
+        console.warn('Google route unsuccessful!');
       }
     });
-    console.warn('Added path')
-    Directions.fetchStaticMap()
   };
-
 });
