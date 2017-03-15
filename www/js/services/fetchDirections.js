@@ -30,9 +30,10 @@ angular.module('ionic-geofence').factory('Directions', function ($http) {
   const fetchStaticMap = (steps) => { //or array of crumbs
     // loop through the steps to make an output like this
     // how to make it based on the length???
-    const convertSteps = steps => {
+    const convertGeocode = steps => {
       steps = `${long},${lat}|${long},${lat}|${long},${lat}|${long},${lat}|${long},${lat}`;
     };
+    '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' + mapCenter.lat() + ',' + mapCenter.lng() + '&maptype=' + map.getMapTypeId() + '&zoom=' + map.getZoom() + '&size=400x400&sensor=false">'
     const staticUrl = 'https://maps.googleapis.com/maps/api/staticmap';
     const size = '400x400';
     const path = `color${color}:|weight:${weight}|${convertSteps(steps)}|&sensor=false`;
