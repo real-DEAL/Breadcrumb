@@ -30,6 +30,10 @@ a.item {
   /*border-radius: 50px;*/
 }
 
+.trailItem {
+  background: #red;
+}
+
 td-cards {
   display: block;
 }

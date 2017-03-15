@@ -4,13 +4,27 @@
 angular.module('ionic-geofence')
 .controller('ListCtrl', function ($scope) {
   const closeStyle = {
-    height: '45px',
+    height: '73px',
     'transition-duration': '250ms',
     overflow: 'hidden',
   };
 
   const trailmaker = function () {
-    return Object.create($scope.trail);
+    const tran = Math.floor(Math.random() * 4) + 1;
+    const stars = Math.floor(Math.random() * 5);
+    const noStars = 5 - stars;
+    const difficulty = Math.floor(Math.random() * 5) + 1;
+    return {
+      name: 'My first trail',
+      transport: tran,
+      stars: _.range(stars),
+      nostars: _.range(noStars),
+      difficulty: _.range(difficulty),
+      length: (Math.floor(Math.random() * 5) + 2) * tran,
+      progress: `${Math.floor(Math.random() * 100)}%`,
+      style: closeStyle,
+    };
+    // return Object.create($scope.trail);
   };
 
   $scope.trail = {
@@ -36,7 +50,7 @@ angular.module('ionic-geofence')
   };
 
   $scope.toggle = function (index) {
-    return $scope.trails[index].style.height === '45px' ?
+    return $scope.trails[index].style.height === '73px' ?
     $scope.open(index) :
     $scope.close(index);
   };
@@ -44,6 +58,7 @@ angular.module('ionic-geofence')
   $scope.open = function (index) {
     $scope.trails[index].style = {
       height: '400px',
+      overflow: 'hidden',
       'transition-duration': '250ms',
     };
     $scope.trails.forEach(function (trail, place) {
@@ -58,6 +73,14 @@ angular.module('ionic-geofence')
   };
 
   $scope.trails = [
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
+    trailmaker(),
     trailmaker(),
     trailmaker(),
     trailmaker(),

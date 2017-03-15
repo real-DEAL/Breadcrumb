@@ -12,7 +12,7 @@
 
   <ion-content>
 
-    <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
+    <div class="trailItem" ng-repeat="trail in trails track by $index" ng-style="trail.style">
     <!-- <div class="card" ng-repeat="trail in trails track by $index"> -->
       <div class="row item item-divider" ng-click="toggle($index)">
         <div class="col">{{ trail.name }}</div>
@@ -26,24 +26,25 @@
         </div>
       </div>
 
-      <div class="card"><div class="row">
-        <div class="col">
-          <i class="ion-ios-star" ng-repeat="star in stars()"></i><i class="ion-ios-star-outline" ng-repeat="star in nostars()"></i>
+      <!-- <div class="card"> -->
+        <div class="row item">
+          <div class="col">
+            <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+          </div>
+          <div class="col center"><i class="ion-ribbon-b" ng-repeat="hard in trail.difficulty"></i></div>
+          <div class="col right" ng-if="trail.progress">{{ trail.progress }} Complete</div>
         </div>
-        <div class="col center"><i class="ion-ribbon-b" ng-repeat="hard in difficulty()"></i></div>
-        <div class="col right" ng-if="trail.progress">{{ trail.progress }} Complete</div>
-
-      </div>
-      <!-- HIDE -->
-      <div>
+      <!-- </div> -->
+      <div class="card">
         <div class="logo"></div>
         <div class="row">
-          <!-- <button class="col button button-block">View</button> -->
-          <button class="col button button-block">GO!</button>
+          <button class="col button button-block" ng-if="!trail.progress">GO!</button>
+          <button class="col button button-block" ng-if="trail.progress">Continue!</button>
         </div>
 
       </div>
-    </div></div>
+
+  </div>
 
 
 
