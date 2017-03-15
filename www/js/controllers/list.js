@@ -18,9 +18,9 @@ angular.module('breadcrumb')
       name: `Trail ${Math.floor(Math.random() * 100)}`,
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
       transport: tran,
-      rating: _.range(stars),
-      nostars: _.range(noStars),
-      difficulty: _.range(difficulty),
+      rating: ListFact.range(stars),
+      nostars: ListFact.range(noStars),
+      difficulty: ListFact.range(difficulty),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
       progress: Math.floor(Math.random() * 100),
       style: closeStyle,
@@ -39,12 +39,6 @@ angular.module('breadcrumb')
     style: closeStyle,
   };
 
-  $scope.stars = () => _.range($scope.trail.rating);
-
-  $scope.nostars = () => _.range(5 - $scope.trail.rating);
-
-  $scope.difficulty = () => _.range($scope.trail.difficulty);
-
   $scope.toggle = index => (
     $scope.trails[index].style.height === '73px' ?
     $scope.open(index) :
@@ -53,7 +47,7 @@ angular.module('breadcrumb')
 
   $scope.open = (index) => {
     $scope.trails[index].style = {
-      height: '400px',
+      height: '550px',
       overflow: 'hidden',
       'transition-duration': '250ms',
     };

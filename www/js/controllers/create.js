@@ -14,8 +14,8 @@ angular.module('breadcrumb')
 
   const moveY = (step, num) => {
     const style = {
-      transform: `translate(0px, ${num}px)`,
       'transition-duration': '1000ms',
+      transform: `translate(0px, ${num}px)`,
     };
     step.style = style;
   };
@@ -24,14 +24,21 @@ angular.module('breadcrumb')
     step.left = 100 * index;
     const move = `${step.left += 2.5}%`;
     const style = {
+      'transition-duration': '1000ms',
       top: '0px',
       left: move,
-      'transition-duration': '1000ms',
     };
     step.style = style;
   };
 
-  $scope.review = false;
+  $scope.review = {
+    check: false,
+  };
+
+  $scope.noOverflow = {
+    height: '700px',
+    overflow: 'hidden',
+  };
 
   $scope.trail = {
     name: '',
@@ -49,13 +56,13 @@ angular.module('breadcrumb')
     location: '',
     media: '',
     left: 2.5,
-    style: null,
+    style: { 'animation-name': 'moveInFromRight' },
   });
 
   $scope.steps = [];
 
   $scope.add = () => {
-    if (!$scope.review) {
+    if (!$scope.review.check) {
       $scope.move(-100);
       const step = $scope.step();
       $scope.steps.push(step);
@@ -64,7 +71,7 @@ angular.module('breadcrumb')
   };
 
   $scope.remove = (index) => {
-    if (!$scope.review) {
+    if (!$scope.review.check) {
       $scope.trail.steps -= 1;
       $scope.steps.splice(index, 1);
       moveReset($scope.trail, 0);
@@ -86,7 +93,7 @@ angular.module('breadcrumb')
   };
 
   $scope.move = (num) => {
-    if (!$scope.review) {
+    if (!$scope.review.check) {
       moveX($scope.trail, num);
       $scope.steps.forEach((step) => {
         moveX(step, num);
@@ -95,19 +102,26 @@ angular.module('breadcrumb')
   };
 
   $scope.reviewMap = () => {
-    $scope.review = true;
+    $scope.review.check = true;
     moveY($scope.trail, -450);
     $scope.steps.forEach((step) => {
       moveY(step, -325);
     });
+    moveY($scope.review, 0);
+    $scope.review.style = {
+      'animation-name': 'moveUp',
+    };
   };
 
   $scope.edit = () => {
-    $scope.review = false;
+    $scope.review.check = false;
     moveReset($scope.trail, 0);
     $scope.steps.forEach((step, index) => {
       moveReset(step, index + 1);
     });
+    $scope.review.style = {
+      'animation-name': 'moveDown',
+    };
   };
 
   $scope.submit = () => null;

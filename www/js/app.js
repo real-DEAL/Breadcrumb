@@ -82,4 +82,9 @@ angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-
   $scope.test = (input) => {
     console.warn(input);
   };
+
+  $scope.overflowStyle = {
+    height: '150px',
+    overflow: 'scroll',
+  };
 });

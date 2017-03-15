@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ion-view >
+<ion-view>
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header bar-stable" align-title="center">
@@ -47,7 +47,7 @@
     <div class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
       <div class="row item item-divider center">
         <h1 class="title col">Step {{ $index + 1 }}</h1>
-        <i class="button icon col col-10 ion-close-round" ng-click="remove($index)"></i>
+        <i class="button icon col col-10 ion-trash-b" ng-click="remove($index)"></i>
       </div>
       <div class="card">
         <div class="item item-divider center" ng-click="test('hey')">
@@ -84,13 +84,26 @@
         </div>
       </div>
     </div>
+
+    <div class="abs card review" ng-style="review.style">
+      <div class="item item-divider center">
+        Review steps for <strong>{{ trail.name }}</strong>
+      </div>
+      <div class="logo"></div>
+      <div ng-style="overflowStyle">
+        <div ng-repeat="step in steps track by $index" class="row">
+          <div class="col col-10">{{ $index + 1 }}</div>
+          <div class="col">{{ step.location }}</div>
+        </div>
+      </div>
+    </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="steps.length > 1 && !review">
-    <div class="title">Review</div>
+  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="steps.length > 1 && !review.check">
+    <div class="title">Review and submit</div>
   </div>
 
-  <div class="tabs tabs-icon-top" ng-if="review">
+  <div class="tabs tabs-icon-top" ng-if="review.check">
     <a class="tab-item" ng-click="edit()">
       <i class="icon ion-compose"></i>
       Edit

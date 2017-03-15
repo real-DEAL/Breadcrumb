@@ -35,7 +35,7 @@
       </div>
 
       <div class="card">
-        <div class="item item-text-wrap">{{ trail.description }}</div>
+        <div class="item item-text-wrap scrollText" ng-style="overflowStyle">{{ trail.description }}</div>
         <div class="logo"></div>
         <div class="row">
           <button class="col button button-block" ng-if="!trail.progress">
