@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope) {
+.controller('CreateTrailCtrl', function ($scope, Trail) {
   const moveX = (step, num) => {
     const move = `${step.left += num}%`;
     const style = {
@@ -67,6 +67,7 @@ angular.module('breadcrumb')
       const step = $scope.step();
       $scope.steps.push(step);
       $scope.trail.steps += 1;
+      console.warn($scope.step, 'step');
     }
   };
 
@@ -111,6 +112,8 @@ angular.module('breadcrumb')
     $scope.review.style = {
       'animation-name': 'moveUp',
     };
+    console.warn($scope.steps, '$scope.steps Array ');
+    Trail.addPath($scope.steps);
   };
 
   $scope.edit = () => {
