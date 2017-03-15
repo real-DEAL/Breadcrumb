@@ -1,11 +1,11 @@
 {
-  "name": "ionic-geofence",
+  "name": "breadcrumb",
   "version": "1.0.0",
   "license": "MIT",
   "author": "Tomasz Subik",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cowbell/ionic-geofence.git"
+    "url": "https://github.com/real-DEAL/breadcrumb.git"
   },
   "description": "Geofence Sample Application Built With Ionic",
   "devDependencies": {

@@ -1,4 +1,4 @@
-angular.module('ionic-geofence').directive('hideKeyboardOnEnter', function ($window) {
+angular.module('breadcrumb').directive('hideKeyboardOnEnter', function ($window) {
   return {
     restrict: 'A',
     link: (scope, element) => {

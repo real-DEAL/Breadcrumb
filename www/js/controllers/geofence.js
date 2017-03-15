@@ -1,7 +1,7 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 /* global TransitionType */
 
-angular.module('ionic-geofence').controller('GeofenceCtrl', function (
+angular.module('breadcrumb').controller('GeofenceCtrl', function (
   $scope,
   $ionicLoading,
   $state,
