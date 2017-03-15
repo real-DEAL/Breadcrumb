@@ -1,4 +1,6 @@
 angular.module('breadcrumb').controller('GeofencesCtrl', function (
+/* eslint no-param-reassign: ["error", { "props": false }]*/
+/* global someFunction google:true, angular:true, window:true*/
   $scope,
   $ionicActionSheet,
   $timeout,
@@ -9,8 +11,11 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
   $ionicLoading
 ) {
   $ionicLoading.show({ template: 'Getting geofences from device...', duration: 5000 });
-
+  // var directionsDisplay = new google.maps.DirectionsRenderer();
+  const directionsService = new google.maps.DirectionsService();
+  const geocoder = new google.maps.Geocoder();
   $scope.geofences = [];
+
 
   Geofence.getAll().then((geofences) => {
     $ionicLoading.hide();
@@ -39,7 +44,7 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
   };
 
   $scope.editGeofence = (geofence) => {
-    $state.go('geofence-edit', { geofenceId: geofence.id, });
+    $state.go('geofence-edit', { geofenceId: geofence.id });
   };
 
   $scope.removeGeofence = (geofence) => {
@@ -65,5 +70,57 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
         window.location.href = 'cdvtests/index.html';
       },
     });
+  };
+
+  $scope.directions = {
+    origin: 'Collins St, Melbourne, Australia',
+    destination: 'MCG Melbourne, Australia',
+    showList: false,
+  };
+  const computeTotalDistance = (response) => {
+    let total = 0;
+    const myRoute = response.routes[0];
+    myRoute.legs.forEach((leg) => { total += leg.distance.value; })
+    total /= 1000;
+    console.warn(total, 'km total')
+  };
+  const computeTotalDuration = (response) => {
+    let total = 0;
+    const myRoute = response.routes[0];
+    myRoute.legs.forEach((leg) => { total += leg.duration.value; })
+    console.warn(total, 'mins total')
+  };
+  $scope.addPath = () => {
+    const request = {
+      origin: $scope.directions.origin,
+      destination: $scope.directions.destination,
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+    };
+    directionsService.route(request, (response, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        console.log(response, 'response')
+        computeTotalDistance(response);
+        computeTotalDuration(response);
+      } else {
+        console.warn('Google route unsuccesful!');
+      }
+    });
+    console.warn('Added path')
+  };
+  $scope.getMap = () => {
+    const request = {
+      origin: $scope.directions.origin,
+      destination: $scope.directions.destination,
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+    };
+    directionsService.route(request, (response, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        computeTotalDistance(response);
+        computeTotalDuration(response);
+      } else {
+        console.warn('Google route unsuccessful!');
+      }
+    });
+    console.warn('Get map');
   };
 });

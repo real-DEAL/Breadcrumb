@@ -111,6 +111,15 @@ angular.module('breadcrumb').config(function ($stateProvider, $urlRouterProvider
           return $q.reject(`Cannot find geofence with id: ${$stateParams.geofenceId}`);
         },
       },
+    })
+    .state('app.addPath', {
+      url: '/addPath',
+      views: {
+        menuContent: {
+          templateUrl: 'views/maps/addPath.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
     });
 
   $urlRouterProvider.otherwise('/app/dashboard');

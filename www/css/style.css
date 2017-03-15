@@ -66,8 +66,10 @@
   height: 65px;
 }
 
+
 .scrollText {
   height: 150px;
   text-align: justify;
   text-justify: inter-word;
+
 }
