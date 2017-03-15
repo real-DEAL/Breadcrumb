@@ -19,15 +19,18 @@ angular.module('breadcrumb').factory('Trail', function (
     const myRoute = response.routes[0];
     myRoute.legs.forEach((leg) => { total += leg.distance.value; });
     total /= 1000;
+    return total;
     console.warn(total, 'km total');
   };
   const totalMiles = (response) => {
     const myRoute = response.routes[0].legs[0].distance.text;
     console.warn(myRoute);
+    return myRoute;
   };
   const computeTotalDuration = (response) => {
     const myRoute = response.routes[0].legs[0].duration.text;
     console.warn(myRoute, 'mins total');
+    return myRoute;
   };
   const arrayPathAddOn = (response) => {
     let res = '';
@@ -41,13 +44,14 @@ angular.module('breadcrumb').factory('Trail', function (
   //   destination: '748 Camp St, New Orleans, LA 70130',
   //   showList: false,
   // };
-  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=enc:';
+  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=200x200&path=enc:';
   const addPath = (directions) => {
+    console.log('add path called')
     console.log(directions, 'directions array')
     console.log(directions[0].location, 'first crumb')
     console.log(directions[directions.length - 2].location, 'last crumb')
     console.log(directions[directions.length - 2], 'last crumb obj')
-
+    let obj = {};
 
     // directions = [{location: ''}, {location: ''}]
     const request = {
@@ -56,17 +60,29 @@ angular.module('breadcrumb').factory('Trail', function (
       destination: directions[directions.length - 2].location,
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
-    directionsService.route(request, (response, status) => {
-      if (status === google.maps.DirectionsStatus.OK) {
-        computeTotalDistance(response);
-        computeTotalDuration(response);
-        totalMiles(response);
-        arrayPathAddOn(response);
-        console.warn(`${url}${arrayPathAddOn(response)}`);
-      } else {
-        console.warn('Google route unsuccessful!');
-      }
+    return new Promise(function(resolve, reject) {
+      directionsService.route(request, (response, status) => {
+        if (status === google.maps.DirectionsStatus.OK) {
+          arrayPathAddOn(response);
+          console.warn(`${url}${arrayPathAddOn(response)}`);
+          obj = {
+            image: `${url}${arrayPathAddOn(response)}`,
+            miles: totalMiles(response),
+            km: computeTotalDistance(response),
+            duration: computeTotalDuration(response),
+          };
+          resolve(obj)
+        } else {
+          console.warn('Fetch failed');
+          reject('failed')
+        }
+        console.log(obj, 'obj')
+        return obj;
+      });
     });
+
+    // .then(res => res);
+    return obj;
   };
   return {
     trailFactory,

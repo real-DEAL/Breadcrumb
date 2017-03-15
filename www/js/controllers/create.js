@@ -31,6 +31,18 @@ angular.module('breadcrumb')
     step.style = style;
   };
 
+  $scope.map = {};
+
+  $scope.getImage = function(src) {
+  if (src !== "") {
+    return src;
+  } else {
+   return "//:0";
+  }
+};
+
+  $scope.staticMap = '';
+
   $scope.review = {
     check: false,
   };
@@ -101,20 +113,41 @@ angular.module('breadcrumb')
       });
     }
   };
-
-  $scope.reviewMap = () => {
-    $scope.review.check = true;
-    moveY($scope.trail, -450);
-    $scope.steps.forEach((step) => {
-      moveY(step, -325);
-    });
-    moveY($scope.review, 0);
-    $scope.review.style = {
-      'animation-name': 'moveUp',
-    };
-    console.warn($scope.steps, '$scope.steps Array ');
-    Trail.addPath($scope.steps);
+  setTimeout(function(){
+/*map loading logic*/
+$scope.reviewMap = () => {
+  $scope.review.check = true;
+  moveY($scope.trail, -450);
+  $scope.steps.forEach((step) => {
+    moveY(step, -325);
+  });
+  moveY($scope.review, 0);
+  $scope.review.style = {
+    'animation-name': 'moveUp',
   };
+  console.warn($scope.steps, '$scope.steps Array ');
+  Trail.addPath($scope.steps)
+  .then(data => {
+    console.log(data.image, 'the image url what it returns')
+    let url = 'http://orig00.deviantart.net/c2bb/f/2012/106/2/b/15sct_kqyw2q3iozbguqkugfjeg5sckzsew_400x400_by_iceykim-d4wc7re.jpg';
+    // $scope.map = {
+    //   // {
+    //   'background-image': 'url(' + url + ')'
+    // };
+      // 'background-image': `url(${url})`
+    // };
+
+  $scope.staticMap = data.image;
+
+    // $scope.getImage(url);
+
+    // console.log($scope.map, 'the map image')
+  });
+
+
+};
+
+  }, 10000);
 
   $scope.edit = () => {
     $scope.review.check = false;

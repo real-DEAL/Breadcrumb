@@ -89,7 +89,12 @@
       <div class="item item-divider center">
         Review steps for <strong>{{ trail.name }}</strong>
       </div>
-      <div class="logo"></div>
+      <!-- <div class="logo" ng-style="{'background-image': 'url(' + url + ')'}"> -->
+      <div class="logo">
+        <!-- <img ng-src="http://maps.googleapis.com/maps/api/staticmap?size=400x400&path=enc:uywuDpzvdPqE{@x@yFPDvFfAd@JjL|B`B\pDr@~@RJTFd@GL?PAJAZFd@BHRZPJNDf@AVOR[\iA\kAdAcC|DwIrAyCn@uBb@}A@[t@}DTcBJwABk@BkA@wCAoEBYA}AIgn@GmQ?{AE{WEsPAyDFuAPuBVuAn@mBx@kBh@y@lAcBb@a@fAw@~@g@r@Yn@OxB[rAMlBAzHTlHZ`ETzEp@~Ad@PJfDjAFBjAb@xEjCfOrIjAt@~EpCnGlDzGvDbH~DvBnAp@f@nAjA^Vl@t@\f@x@nAlChFjEtIfChFFJv@|ALNzAvCp@rAxI|PbJrQb@`A`FlKr@rA`@bAfBbElBfEhDpG`BtC~LtT|@zAhAvBp@bBl@bBn@zBf@tB\rBv@xFFb@f@tCxAfK^jCd@rC|AfIlCzMv@vDJf@h@jCp@vD\fC`@`El@jJp@xKGLDpAHhC`@nGJnFVxD|@nNZ|E@d@n@CF?^Ah@AjFWn@?bDO`Qy@fFWtHo@~Ia@tFWlEQvFQdLg@hH[`UaAfGYvOi@fAG`@g@AqB@wDXaFCuBIq@IYMgA]_AMMMIa@KgGw@d@kFHW^cAv@kBPo@J_ADiAGcA" /> -->
+        <!-- <img ng-show="staticMap" ng-src="{{staticMap}}"> -->
+        <img src="{{staticMap}}" />
+      </div>
       <div ng-style="overflowStyle">
         <div ng-repeat="step in steps track by $index" class="row">
           <div class="col col-10">{{ $index + 1 }}</div>

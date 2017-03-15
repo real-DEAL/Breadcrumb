@@ -14,7 +14,6 @@ angular.module('breadcrumb').controller('GeofencesCtrl', function (
   // var directionsDisplay = new google.maps.DirectionsRenderer();
   const directionsService = new google.maps.DirectionsService();
   $scope.geofences = [];
-
   Geofence.getAll().then((geofences) => {
     $ionicLoading.hide();
     $scope.geofences = geofences;
