@@ -1,5 +1,20 @@
 /* Empty. Add your own CSS if you like */
 
+@keyframes moveUp {
+    0%   {transform: translate(0px, 0px)}
+    100% {transform: translate(0px, -750px)}
+}
+
+@keyframes moveDown {
+    0%   {transform: translate(0px, -750px)}
+    100% {transform: translate(0px, 0px)}
+}
+
+@keyframes moveInfromRight {
+    0%   {transform: translate(100%, 0px)}
+    100% {transform: translate(2.5%, 0px)}
+}
+
 .platform-android .action-sheet-cancel {
   display: block;
 }
@@ -20,11 +35,23 @@
 }
 
 .logo {
-  background-color: red;
+  background-color: grey;
   text-align: center;
   width: 100%;
   height: 200px;
   margin: auto;
+}
+
+.noOverflow {
+  height: 500px;
+  overflow: hidden;
+}
+
+.review {
+  position: absolute;
+  top: 850px;
+  animation-duration: 1000ms;
+  animation-fill-mode: forwards;
 }
 
 .abs {
@@ -32,7 +59,12 @@
   left: 2.5%;
   width: 90%;
   margin: auto;
-  border-radius: 15px;
+  /*border-radius: 15px;
+  border: 1px solid #ddd;*/
+}
+
+.display {
+  display: none;
 }
 
 .textbox {
