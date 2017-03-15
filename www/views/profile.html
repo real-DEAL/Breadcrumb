@@ -11,11 +11,14 @@
 
   <ion-content>
     <!-- USER INFORMATION -->
-    <div class="card ">
+    <div class="padding w-75">
       <div class="row row-center">
-        <div class="logo col"></div>
+        <div class="col">
+          <div class="profilePic">
+            <h2>{{ user.name }}goeshere</h2>
+          </div>
+        </div>
         <div class="col center">
-          <h2>{{ user.name }}</h2>
           <h3>Score: {{ user.score }}</h3>
           <p>Completed trails: {{ user.finishedTrails }}
           <br>Total time: {{ user.totalTime }}</p>
@@ -29,7 +32,7 @@
         <div class="col">{{ user.trail.name }}</div>
         <div class="col center">{{ user.trail.progress }} complete</div>
         <div class="col right">
-          <i class="ion-ios-star" ng-repeat="star in user.trail.stars track by $index"></i><i class="ion-ios-star-outline" ng-repeat="star in user.trail.nostars track by $index"></i>
+          <i class="ion-ios-star" ng-repeat="star in user.trail.stars track by $index"></i><i class="ion-ios-star-outline" ng-repeat="star in user.trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
@@ -42,7 +45,7 @@
       <div class="row" ng-repeat="trail in userTrails track by $index">
         <div class="col">{{ trail.name }}</div>
         <div class="col right">
-          <i class="ion-ios-star" ng-repeat="star in trail.stars track by $index"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars track by $index"></i>
+          <i class="ion-ios-star" ng-repeat="star in trail.stars track by $index"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
@@ -55,7 +58,7 @@
       <div class="row" ng-repeat="trail in pastTrails track by $index">
         <div class="col">{{ trail.name }}</div>
         <div class="col right">
-          <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+          <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.emptyStars"></i>
         </div>
       </div>
       <div class="item item-divider">
