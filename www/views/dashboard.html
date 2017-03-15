@@ -2,52 +2,56 @@
 <ion-view >
 
   <ion-nav-buttons side="left">
-
-
-  <ion-header-bar class="bar bar-header bar-stable" align-title="center">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-    <h1 class="title">Breadcrumb</h1>
-  </ion-header-bar>
+    <ion-header-bar class="bar bar-header bar-stable" align-title="center">
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <h1 class="title">Breadcrumb</h1>
+    </ion-header-bar>
   </ion-nav-buttons>
 
   <ion-content>
 
     <div class="trailItem" ng-repeat="trail in trails track by $index" ng-style="trail.style">
-    <!-- <div class="card" ng-repeat="trail in trails track by $index"> -->
+
       <div class="row item item-divider" ng-click="toggle($index)">
-        <div class="col">{{ trail.name }}</div>
-        <!-- <div class="col"></div> -->
-        <div class="col right">
-          {{ trail.length }} Miles -
+        <div class="col center">{{ trail.name }}</div>
+      </div>
+
+      <div class="row item">
+        <div class="col col-10 right" ng-click="filter('transport', trail.transport)">
           <i class="ion-android-walk" ng-if="trail.transport === 1"></i>
           <i class="ion-android-bicycle" ng-if="trail.transport === 2"></i>
           <i class="ion-android-car" ng-if="trail.transport === 3"></i>
           <i class="ion-android-bus" ng-if="trail.transport === 4"></i>
         </div>
+        <div class="col" ng-click="filter('length')">
+          {{ trail.length }} Miles
+        </div>
+        <div class="col col-33 center" ng-click="filter('difficulty')">
+          <i class="ion-ribbon-b" ng-repeat="hard in trail.difficulty"></i>
+        </div>
+        <div class="col col-33 right" ng-click="filter('rating')">
+          <i class="ion-ios-star" ng-repeat="star in trail.rating"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+        </div>
       </div>
 
-      <!-- <div class="card"> -->
-        <div class="row item">
-          <div class="col">
-            <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
-          </div>
-          <div class="col center"><i class="ion-ribbon-b" ng-repeat="hard in trail.difficulty"></i></div>
-          <div class="col right" ng-if="trail.progress">{{ trail.progress }} Complete</div>
-        </div>
-      <!-- </div> -->
       <div class="card">
         <div class="logo"></div>
         <div class="row">
-          <button class="col button button-block" ng-if="!trail.progress">GO!</button>
-          <button class="col button button-block" ng-if="trail.progress">Continue!</button>
-        </div>
+          <button class="col button button-block" ng-if="!trail.progress">
+            GO!
+          </button>
 
+          <button class="col button button-block" ng-if="trail.progress">
+            <span ng-if="100 - trail.progress < 20">Only</span>
+            {{ 100 - trail.progress }}% remaining! Let's go!
+          </button>
+        </div>
       </div>
 
-  </div>
-
-
-
+    </div>
   </ion-content>
 
+  <div class="bar bar-footer bar-balanced" ng-click="reset()" ng-if="specificTransport">
+    <div class="title">View all transport types</div>
+  </div>
 </ion-view>

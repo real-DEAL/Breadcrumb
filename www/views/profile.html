@@ -11,39 +11,55 @@
 
   <ion-content>
     <!-- USER INFORMATION -->
-    <div class="card">
-      <div class="logo"></div>
-      <li>{{ user.name }}</li>
-      <li>Score: {{ user.score }}</li>
-      <li>Completed trails: {{ user.finishedTrails }}</li>
-      <li>Time spent on trains: {{ user.totalTime }}</li>
+    <div class="card row row-center">
+
+      <div class="logo col"></div>
+      <div class="col center">
+        <h2>{{ user.name }}</h2>
+        <h3>Score: {{ user.score }}</h3>
+        <p>Completed trails: {{ user.finishedTrails }}
+        <br>Total time: {{ user.totalTime }}</p>
+      </div>
     </div>
 
     <!-- CURRENT TRAIL -->
     <div class="card">
-      <li>{{ user.trail.name }}</li>
-
-      <a href="/">CONTINUE CURRNT TRAIL</a>
+      <div class="row">
+        <div class="col">{{ user.trail.name }}</div>
+        <div class="col center">{{ user.trail.progress }} complete</div>
+        <div class="col right">
+          <i class="ion-ios-star" ng-repeat="star in user.trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in user.trail.nostars"></i>
+        </div>
+      </div>
+      <div class="item item-divider">
+        <a href="/">CONTINUE LATEST TRAIL</a>
+      </div>
     </div>
 
     <!-- USER CREATED TRAILS -->
     <div class="card">
-      <div ng-repeat="trail in trails track by $index">
-        <li>{{ trail.name }}</li>
-        <li>{{ trail.rating }} / 5</li>
+      <div class="row" ng-repeat="trail in userTrails track by $index">
+        <div class="col">{{ trail.name }}</div>
+        <div class="col right">
+          <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+        </div>
       </div>
-
-      <a href="/">VIEW MORE OF YOUR TRAILS</a>
+      <div class="item item-divider">
+        <a href="/">VIEW MORE TRAILS YOU'VE MADE</a>
+      </div>
     </div>
 
     <!-- FINISHED TRAILS -->
     <div class="card">
-      <div ng-repeat="trail in trails track by $index">
-        <li>{{ trail.name }}</li>
-        <li>{{ trail.rating }} / 5</li>
+      <div class="row" ng-repeat="trail in pastTrails track by $index">
+        <div class="col">{{ trail.name }}</div>
+        <div class="col right">
+          <i class="ion-ios-star" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+        </div>
       </div>
-
-      <a href="/">VIEW MORE OF YOUR PAST TRAILS</a>
+      <div class="item item-divider">
+        <a href="/">VIEW MORE OF YOUR PAST TRAILS</a>
+      </div>
     </div>
   </ion-content>
 </ion-view>

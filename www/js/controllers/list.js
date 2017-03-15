@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('ionic-geofence')
-.controller('ListCtrl', function ($scope) {
+.controller('ListCtrl', function ($scope, ListFact) {
   const closeStyle = {
     height: '73px',
     'transition-duration': '250ms',
@@ -15,17 +15,19 @@ angular.module('ionic-geofence')
     const noStars = 5 - stars;
     const difficulty = Math.floor(Math.random() * 5) + 1;
     return {
-      name: 'My first trail',
+      name: `Trail ${Math.floor(Math.random() * 100)}`,
       transport: tran,
-      stars: _.range(stars),
+      rating: _.range(stars),
       nostars: _.range(noStars),
       difficulty: _.range(difficulty),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
-      progress: `${Math.floor(Math.random() * 100)}%`,
+      progress: Math.floor(Math.random() * 100),
       style: closeStyle,
     };
     // return Object.create($scope.trail);
   };
+
+  $scope.specificTransport = false;
 
   $scope.trail = {
     name: 'My first trail',
@@ -33,7 +35,7 @@ angular.module('ionic-geofence')
     rating: 3,
     difficulty: 3,
     length: 25,
-    progress: '50%',
+    progress: 50,
     style: closeStyle,
   };
 
@@ -72,7 +74,17 @@ angular.module('ionic-geofence')
     $scope.trails[index].style = closeStyle;
   };
 
-  $scope.trails = [
+  $scope.filter = function (type, value) {
+    if (type === 'transport') $scope.specificTransport = true;
+    $scope.trails = ListFact.filter($scope.trails, type, value);
+  };
+
+  $scope.reset = function () {
+    $scope.specificTransport = false;
+    $scope.trails = ListFact.filter($scope.trailsCache, 'name');
+  };
+
+  $scope.trailsCache = [
     trailmaker(),
     trailmaker(),
     trailmaker(),
@@ -90,4 +102,6 @@ angular.module('ionic-geofence')
     trailmaker(),
     trailmaker(),
   ];
+
+  $scope.trails = ListFact.filter($scope.trailsCache, 'name');
 });
