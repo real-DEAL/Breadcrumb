@@ -90,3 +90,19 @@
   width: 70%;
   margin: auto;
 }
+
+.s-1x {
+  font-size: 1.5em;
+}
+
+.s-1-5x {
+  font-size: 1.5em;
+}
+
+.s-2x {
+  font-size: 2em;
+}
+
+.row+.row {
+  padding: 10px !important;
+}

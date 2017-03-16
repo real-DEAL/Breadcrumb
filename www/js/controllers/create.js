@@ -80,9 +80,9 @@ angular.module('breadcrumb')
   };
 
   $scope.remove = (index) => {
+    $scope.steps.splice(index, 1);
     if (!$scope.review.check) {
       $scope.trail.steps -= 1;
-      $scope.steps.splice(index, 1);
       moveReset($scope.trail, 0);
       $scope.steps.forEach((step, ind) => {
         moveReset(step, ind + 1);

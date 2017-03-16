@@ -4,7 +4,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('ListFact', function () {
   const closeStyle = {
-    height: '73px',
+    height: '95px',
     'transition-duration': '250ms',
     overflow: 'hidden',
   };
@@ -20,7 +20,7 @@ angular.module('breadcrumb').factory('ListFact', function () {
 
   const trailMaker = () => {
     const tran = Math.floor(Math.random() * 4) + 1;
-    const stars = Math.floor(Math.random() * 5);
+    const stars = Math.floor(Math.random() * 6);
     const emptyStars = 5 - stars;
     const difficulty = Math.floor(Math.random() * 5) + 1;
 

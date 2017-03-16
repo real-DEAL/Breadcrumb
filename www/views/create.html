@@ -47,7 +47,9 @@
     <div class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
       <div class="row item item-divider center">
         <h1 class="title col">Step {{ $index + 1 }}</h1>
-        <i class="button icon col col-10 ion-trash-b" ng-click="remove($index)"></i>
+        <div class="col col-10">
+          <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
+        </div>
       </div>
       <div class="card">
         <div class="item item-divider center" ng-click="test('hey')">
@@ -60,10 +62,9 @@
 
         <div class="item item-input textbox">
           <input class="col" type="text" ng-model="step.location" placeholder="Location">
-
-          <button class="col col-10 button">
-            <i class="icon ion-navigate"></i>
-          </button>
+          <div class="col col-10" ng-click="test()">
+            <i class="positive icon ion-navigate s-1x"></i>
+          </div>
         </div>
       </div>
 
@@ -78,7 +79,7 @@
           ng-if="steps.length > $index + 1">
             Next step
           </button>
-          <button class="button button-block" ng-click="add()" ng-if="steps.length === $index + 1">
+          <button class="button button-block button-energized" ng-click="add()" ng-if="steps.length === $index + 1">
             Add step!
           </button>
         </div>
