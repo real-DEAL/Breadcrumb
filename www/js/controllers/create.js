@@ -3,14 +3,7 @@
 
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $location, Trail, Map) {
-  const moveX = (crumb, num) => {
-    const move = `${crumb.left += num}%`;
-    const style = {
-      left: move,
-      'transition-duration': '250ms',
-    };
-    crumb.style = style;
-  };
+
 
   const addresses = [
     '727 Mandeville St, New Orleans, LA, 70117',
@@ -21,6 +14,15 @@ angular.module('breadcrumb')
   ];
 
   const i = () => Math.floor(Math.random() * 5);
+
+  const moveX = (crumb, num) => {
+    const move = `${crumb.left += num}%`;
+    const style = {
+      left: move,
+      'transition-duration': '250ms',
+    };
+    crumb.style = style;
+  };
 
   const moveY = (crumb, num) => {
     const style = {
@@ -43,31 +45,68 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
-  $scope.map = {};
+  $scope.trailTypes = [
+    'adventure',
+    'mystery',
+    'casual',
+    'tour',
+    'scavenger',
+    'nature',
+    'history',
+  ].sort();
 
-  $scope.time = '';
+  $scope.step = 0;
 
-  $scope.distance = '';
+  $scope.changeStep = (change) => {
+    if (change) {
+      $scope.step += 1;
+    } else if (!change) {
+      $scope.step -= 1;
+    }
+    if ($scope.step < 0) {
+      $scope.step = $scope.trailTypes.length - 1;
+    } else if ($scope.step === $scope.trailTypes.length) {
+      $scope.step -= $scope.trailTypes.length;
+    }
+    console.log($scope.step);
+    $scope.trail.type = $scope.trailTypes[$scope.step];
+  };
 
-  $scope.staticMap = '';
+  $scope.difficulty = {
+    1: 'easy',
+    2: 'normal',
+    3: 'hard',
+  };
+
+  $scope.transport = {
+    WALKING: 'walk',
+    BICYCLING: 'bicycle',
+    TRANSIT: 'bus',
+    DRIVING: 'car',
+  };
+
+  $scope.money = (boolean) => {
+    $scope.trail.requires_money = !boolean;
+    if (boolean) $scope.moneyStyle = null;
+    else $scope.moneyStyle = { color: '#33CD61' };
+  };
+
+  $scope.moneyStyle = null;
 
   $scope.review = {
     check: false,
     style: { display: 'none' },
   };
 
-  $scope.noOverflow = {
-    height: '700px',
-    overflow: 'hidden',
-  };
-
   $scope.trail = {
     name: 'Liv\'s trail',
     description: 'A trail that takes you places',
-    type: '',
+    type: $scope.trailTypes[0],
+    map: '',
+    time: '',
     length: '',
     requires_money: false,
-    transport: null,
+    transport: '',
     crumbs: 0,
     left: 2.5,
     style: null,
@@ -91,17 +130,10 @@ angular.module('breadcrumb')
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
-<<<<<<< HEAD
-      const step = $scope.step();
-      $scope.steps.push(step);
-      $scope.trail.steps += 1;
-      console.warn($scope.trail, 'trail')
-=======
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       console.warn($scope.crumb, 'crumb');
->>>>>>> (feature) trails and crumbs save to database
     }
   };
 
@@ -142,12 +174,12 @@ angular.module('breadcrumb')
     Map.add($scope.steps, $scope.trail.transport)
     .then((data) => {
       $scope.loading = { display: 'none' };
-      $scope.staticMap = data.image;
-      $scope.time = data.time;
-      $scope.distance = data.miles;
+      $scope.trail.map = data.image;
+      $scope.trail.time = data.time;
+      $scope.trail.length = data.miles;
       moveY($scope.trail, -475);
       $scope.crumbs.forEach((crumb) => {
-        moveY(crumb, -325);
+        moveY(crumb, -400);
       });
       $scope.review.style = {
         'animation-name': 'moveUp',

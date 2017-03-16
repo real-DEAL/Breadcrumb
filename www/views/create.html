@@ -12,28 +12,55 @@
   <ion-content scroll="false">
     <!-- TRAIL INFO -->
     <div class="abs card" ng-style="trail.style" on-swipe-left="cardSwipedLeft(0)">
+      <!-- TRAIL NAME -->
       <label class="item item-input">
-        <input type="text" class="center" ng-model="trail.name" placeholder="Name of trail">
+        <input type="text" class="center s-2x" ng-model="trail.name" placeholder="Name of trail">
       </label>
       <div class="card">
-        <label class="item item-input">
+
+        <!-- TRAIL DESCRIPTION -->
+        <label class="list item item-input">
           <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
         </label>
-        <ion-list ng-click="test(trail.transport)">
-          <ion-radio ng-model="trail.transport" ng-value="'WALKING'" selected>Walk</ion-radio>
-          <ion-radio ng-model="trail.transport" ng-value="'BICYCLING'">Bike</ion-radio>
-          <ion-radio ng-model="trail.transport" ng-value="'TRANSIT'">Public transport</ion-radio>
-          <ion-radio ng-model="trail.transport" ng-value="'DRIVING'">Car</ion-radio>
-        </ion-list>
-        <li class="item item-toggle">
-          Need money
-            <label class="toggle toggle-balanced">
-              <input type="checkbox">
-              <div class="track">
-                <div class="handle"></div>
-             </div>
-           </label>
-        </li>
+
+        <!-- TRAIL TYPE -->
+        <div class="row list center">
+          <div class="col col-30">
+            Type:
+          </div>
+          <div class="col dark center">
+            <i class="ion-arrow-left-b s-2x" ng-click="changeStep(false)"></i>
+          </div>
+          <div class="col dark center">
+            <span>{{ trailTypes[step] }}</span>
+          </div>
+          <div class="col dark center">
+            <i class="ion-arrow-right-b s-2x" ng-click="changeStep(true)"></i>
+          </div>
+        </div>
+
+        <!-- TRAIL DIFFICULTY -->
+        <div class="list row center">
+          <div class="col col-30">
+            Difficulty:
+          </div>
+          <div class="col royal s-2x">
+            <i class="ion-ribbon-b"></i>
+            <i class="ion-ribbon-b"></i>
+            <i class="ion-ribbon-b"></i>
+          </div>
+        </div>
+
+        <!-- TRAIL TRANSPORT AND MONEY -->
+        <div class="row calm s-2x center" ng-click="test(trail.requires_money)">
+
+          <!-- TRANSPORT -->
+          <i ng-repeat="(name, type) in transport" class="ion-android-{{ type }} col" ng-value="name" ng-model="trail.transport" ng-click="trail.transport = type"></i>
+
+          <!-- MONEY -->
+          <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
+        </div>
+
         <button class="button button-block" ng-click="add()" ng-if="!crumbs.length">
           Create trail!
         </button>
@@ -47,18 +74,16 @@
     <!-- crumbS -->
     <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
       <div class="row item item-divider center">
-        <h1 class="title col">crumb {{ $index + 1 }}</h1>
+        <h1 class="title col">
+          <input class="clearInput" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }}">
+        </h1>
         <div class="col col-10">
           <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
         </div>
       </div>
       <div class="card">
-        <div class="item item-divider center" ng-click="test('hey')">
-          <h1>MEDIA UPLOAD</h1>
-        </div>
-
         <label class="item item-input textbox">
-          <input type="text" ng-model="crumb.text" placeholder="Description">
+          <input type="text" ng-model="crumb.description" placeholder="Description">
         </label>
 
         <div class="item item-input textbox">
@@ -66,6 +91,10 @@
           <div class="col col-10" ng-click="test()">
             <i class="positive icon ion-navigate s-1x"></i>
           </div>
+        </div>
+
+        <div class="item item-divider center" ng-click="test('hey')">
+          <h1>MEDIA UPLOAD</h1>
         </div>
       </div>
 
@@ -92,11 +121,11 @@
         Review crumbs for <strong>{{ trail.name }}</strong>
       </div>
       <div class="center reviewMap">
-        <img src="{{staticMap}}" />
+        <img src="{{ trail.map }}" />
       </div>
-      <div class="row">
-        <div class="col">Total time: <strong>{{ time }}</strong></div>
-        <div class="col right">Total distance: <strong>{{ distance }}</strong></div>
+      <div class="row center">
+        <div class="col">Total time: <br><strong>{{ trail.time }}</strong></div>
+        <div class="col">Total distance: <br><strong>{{ trail.length }}</strong></div>
       </div>
       <div ng-style="overflowStyle">
         <div ng-repeat="crumb in crumbs track by $index" class="row">

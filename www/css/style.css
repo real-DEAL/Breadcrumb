@@ -2,11 +2,11 @@
 
 @keyframes moveUp {
     0%   {transform: translate(0px, 0px)}
-    100% {transform: translate(0px, -750px)}
+    100% {transform: translate(0px, -820px)}
 }
 
 @keyframes moveDown {
-    0%   {transform: translate(0px, -750px)}
+    0%   {transform: translate(0px, -820px)}
     100% {transform: translate(0px, 0px)}
 }
 
@@ -25,6 +25,13 @@
   opacity: 0.5;
   position: absolute;
   z-index: 99;
+}
+
+.clearInput {
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  height: 150%;
 }
 
 .platform-android .action-sheet-cancel {
