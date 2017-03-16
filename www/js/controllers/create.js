@@ -12,6 +12,16 @@ angular.module('breadcrumb')
     step.style = style;
   };
 
+  const addresses = [
+    '727 Mandeville St, New Orleans, LA, 70117',
+    '15828 196th Pl NE, Woodinville, WA, 98077',
+    '748 Camp St, New Orleans, LA 70130',
+    '24700 McBean Pkwy, Valencia, CA 91355',
+    '60 Lincoln Center Plaza, New York, NY 10023',
+  ];
+
+  const i = () => Math.floor(Math.random() * 5);
+
   const moveY = (step, num) => {
     const style = {
       'transition-duration': '1000ms',
@@ -31,6 +41,8 @@ angular.module('breadcrumb')
     step.style = style;
   };
 
+  $scope.loading = { display: 'none' };
+
   $scope.map = {};
 
   $scope.time = '';
@@ -41,6 +53,7 @@ angular.module('breadcrumb')
 
   $scope.review = {
     check: false,
+    style: { display: 'none' },
   };
 
   $scope.noOverflow = {
@@ -61,7 +74,7 @@ angular.module('breadcrumb')
 
   $scope.step = () => ({
     text: '',
-    location: '',
+    location: addresses[i()],
     media: '',
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
@@ -111,20 +124,21 @@ angular.module('breadcrumb')
   };
 
   $scope.reviewMap = () => {
+    $scope.loading = null;
     $scope.review.check = true;
-    moveY($scope.trail, -450);
-    $scope.steps.forEach((step) => {
-      moveY(step, -325);
-    });
-    moveY($scope.review, 0);
-    $scope.review.style = {
-      'animation-name': 'moveUp',
-    };
     Trail.addPath($scope.steps, $scope.trail.transport)
     .then((data) => {
+      $scope.loading = { display: 'none' };
       $scope.staticMap = data.image;
       $scope.time = data.time;
       $scope.distance = data.miles;
+      moveY($scope.trail, -475);
+      $scope.steps.forEach((step) => {
+        moveY(step, -325);
+      });
+      $scope.review.style = {
+        'animation-name': 'moveUp',
+      };
       $scope.$apply();
       console.warn(data, 'data');
     });

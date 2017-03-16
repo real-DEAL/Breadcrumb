@@ -15,6 +15,18 @@
     100% {transform: translate(0%, 0px)}
 }
 
+#loading {
+  background-color: #000;
+  background-image: url('../img/loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 99;
+}
+
 .platform-android .action-sheet-cancel {
   display: block;
 }
@@ -27,6 +39,7 @@
   text-align: center;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   margin: auto;
 }
 
@@ -68,22 +81,23 @@
   animation-fill-mode: forwards;
 }
 
+.createCard {
+  height: 600px;
+}
+
 .review {
   position: absolute;
-  top: 850px;
+  top: 835px;
   animation-duration: 1000ms;
+}
+
+.reviewMap {
+  height: 450px;
+  padding: 25px;
 }
 
 .textbox {
   height: 65px;
-}
-
-
-.scrollText {
-  height: 150px;
-  text-align: justify;
-  text-justify: inter-word;
-
 }
 
 .w-75 {

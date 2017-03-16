@@ -20,7 +20,6 @@ angular.module('breadcrumb').factory('Trail', function (
     myRoute.legs.forEach((leg) => { total += leg.distance.value; });
     total /= 1000; // in km
     return total;
-    console.warn(total, 'km total');
   };
   const totalMiles = (response) => {
     const myRoute = response.routes[0].legs[0].distance.text;
@@ -42,7 +41,7 @@ angular.module('breadcrumb').factory('Trail', function (
     const arr = [];
     const wypts = directions.slice(1, directions.length - 2);
     wypts.forEach((point) => {
-      let obj = {
+      const obj = {
         location: '',
         stopover: true,
       };
@@ -51,6 +50,7 @@ angular.module('breadcrumb').factory('Trail', function (
     });
     return arr;
   };
+
   const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&path=enc:';
   const addPath = (directions, transport) => {
     let obj = {};

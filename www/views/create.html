@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <ion-view>
+  <div id="loading" ng-style="loading"></div>
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header bar-stable" align-title="center">
@@ -8,7 +9,7 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content scroll="false">
     <!-- TRAIL INFO -->
     <div class="abs card" ng-style="trail.style" on-swipe-left="cardSwipedLeft(0)">
       <label class="item item-input">
@@ -90,14 +91,14 @@
       <div class="item item-divider center">
         Review steps for <strong>{{ trail.name }}</strong>
       </div>
-      <div class="logo">
+      <div class="center reviewMap">
         <img src="{{staticMap}}" />
       </div>
+      <div class="row">
+        <div class="col">Total time: <strong>{{ time }}</strong></div>
+        <div class="col right">Total distance: <strong>{{ distance }}</strong></div>
+      </div>
       <div ng-style="overflowStyle">
-        <div class="row">
-          <div class="col">Total time: <strong>{{ time }}</strong></div>
-          <div class="col right">Total distance: <strong>{{ distance }}</strong></div>
-        </div>
         <div ng-repeat="step in steps track by $index" class="row">
           <div class="col col-10">{{ $index + 1 }}</div>
           <div class="col">{{ step.location }}</div>

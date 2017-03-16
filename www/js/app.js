@@ -84,7 +84,7 @@ angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-
   };
 
   $scope.overflowStyle = {
-    'max-height': '160px',
+    'max-height': '125px',
     overflow: 'scroll',
   };
 });
