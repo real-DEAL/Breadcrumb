@@ -13,24 +13,24 @@
     <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
 
       <div class="row item item-divider" ng-click="toggle($index)">
-        <div class="col center">{{ trail.name }}</div>
+        <div class="col center s-1x">{{ trail.name }}</div>
       </div>
 
-      <div class="row item">
-        <div class="col col-10 right" ng-click="filter('transport', trail.transport)">
+      <div class="row item center">
+        <div class="col col-10 right balanced s-1x" ng-click="filter('transport', trail.transport)">
           <i class="ion-android-walk" ng-if="trail.transport === 1"></i>
           <i class="ion-android-bicycle" ng-if="trail.transport === 2"></i>
           <i class="ion-android-car" ng-if="trail.transport === 3"></i>
           <i class="ion-android-bus" ng-if="trail.transport === 4"></i>
         </div>
-        <div class="col" ng-click="filter('length')">
+        <div class="col left" ng-click="filter('length')">
           {{ trail.length }} Miles
         </div>
         <div class="col col-33 center" ng-click="filter('difficulty')">
-          <i class="ion-ribbon-b" ng-repeat="hard in trail.difficulty"></i>
+          <i class="ion-ribbon-b calm s-1x" ng-repeat="hard in trail.difficulty"></i>
         </div>
-        <div class="col col-33 right" ng-click="filter('rating')">
-          <i class="ion-ios-star" ng-repeat="star in trail.rating"></i><i class="ion-ios-star-outline" ng-repeat="star in trail.nostars"></i>
+        <div class="col col-33 right" ng-click="filter('stars')">
+          <i class="ion-ios-star gold s-1x" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline gold s-1x" ng-repeat="star in trail.emptyStars"></i>
         </div>
       </div>
 

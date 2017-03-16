@@ -1,4 +1,5 @@
 node_modules/
+notes/
 bower_components/
 *.log
 *.xcf
@@ -20,3 +21,4 @@ out
 app/components
 .DS_Store
 .io-config.json
+notes.js

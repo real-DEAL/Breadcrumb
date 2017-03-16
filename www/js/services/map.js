@@ -2,30 +2,10 @@
 /* global TransitionType */
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('Trail', function ($http) {
-  const submitTrail = (trail, crumbs) => (
-    $http({
-      method: 'POST',
-      url: 'http://54.203.104.113/trails',
-      data: trail,
-      json: true,
-    })
-    .then((response) => {
-      const trail_id = response.data.data[0].id;
-      crumbs.forEach((crumb, index) => {
-        crumb.trail_id = trail_id;
-        crumb.order_number = index + 1;
-        return $http({
-          method: 'POST',
-          url: 'http://54.203.104.113/crumbs',
-          data: crumb,
-          json: true,
-        });
-      });
-    })
-  );
-
+angular.module('breadcrumb').factory('Map', function () {
   const directionsService = new google.maps.DirectionsService();
+
+  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
 
   const computeTotalDistance = (response) => {
     let total = 0;
@@ -34,22 +14,26 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
     total /= 1000; // in km
     return total;
   };
+
   const totalMiles = (response) => {
     const myRoute = response.routes[0].legs[0].distance.text;
     console.warn(myRoute);
     return myRoute;
   };
+
   const computeTotalDuration = (response) => {
     const myRoute = response.routes[0].legs[0].duration.text;
     console.warn(myRoute, 'mins total');
     return myRoute;
   };
+
   const arrayPathAddOn = (response) => {
     let res = '';
     const myRoute = response.routes[0];
     res = myRoute.overview_polyline;
     return res;
   };
+
   const wayPointsMakers = (directions) => {
     const arr = [];
     const wypts = directions.slice(1, directions.length - 2);
@@ -64,14 +48,13 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
     return arr;
   };
 
-  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
-  const addPath = (directions, transport) => {
+  const addPath = (directions) => {
     let obj = {};
     const request = {
       origin: directions[0].location,
       waypoints: wayPointsMakers(directions),
       destination: directions[directions.length - 2].location,
-      travelMode: google.maps.DirectionsTravelMode[transport],
+      travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {
@@ -95,8 +78,8 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
       });
     });
   };
+
   return {
     add: addPath,
-    submit: submitTrail,
   };
 });

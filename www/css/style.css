@@ -2,17 +2,36 @@
 
 @keyframes moveUp {
     0%   {transform: translate(0px, 0px)}
-    100% {transform: translate(0px, -750px)}
+    100% {transform: translate(0px, -820px)}
 }
 
 @keyframes moveDown {
-    0%   {transform: translate(0px, -750px)}
+    0%   {transform: translate(0px, -820px)}
     100% {transform: translate(0px, 0px)}
 }
 
 @keyframes moveInFromRight {
     0%   {transform: translate(100%, 0px)}
     100% {transform: translate(0%, 0px)}
+}
+
+.loading {
+  background-color: #000;
+  background-image: url('../img/loading.gif');
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 99;
+}
+
+.clearInput {
+  width: 100%;
+  text-align: center;
+  background: transparent;
+  height: 150%;
 }
 
 .platform-android .action-sheet-cancel {
@@ -27,7 +46,8 @@
   text-align: center;
   display: flex;
   align-items: center;
-
+  justify-content: space-around;
+  margin: auto;
 }
 
 .right {
@@ -35,11 +55,23 @@
 }
 
 .logo {
-  background-color: grey;
+  /*background-color: grey;*/
   text-align: center;
   width: 100%;
   height: 200px;
   margin: auto;
+}
+
+.profilePic {
+  background-color: grey;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  border-radius: 75px;
+  background-image: url('temp.png');
 }
 
 .noOverflow {
@@ -56,9 +88,13 @@
   animation-fill-mode: forwards;
 }
 
+.createCard {
+  height: 600px;
+}
+
 .review {
   position: absolute;
-  top: 850px;
+  top: 835px;
   animation-duration: 1000ms;
 }
 
@@ -66,8 +102,23 @@
   height: 65px;
 }
 
-.scrollText {
-  height: 150px;
-  text-align: justify;
-  text-justify: inter-word;
+.w-75 {
+  width: 70%;
+  margin: auto;
+}
+
+.s-1x {
+  font-size: 1.5em;
+}
+
+.s-1-5x {
+  font-size: 1.5em;
+}
+
+.s-2x {
+  font-size: 2em;
+}
+
+.row+.row {
+  padding: 10px !important;
 }
