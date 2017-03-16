@@ -2,13 +2,7 @@
 /* global TransitionType */
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('Trail', function (
-  $rootScope,
-  $window,
-  $q,
-  $log,
-  $ionicLoading
-) {
+angular.module('breadcrumb').factory('Trail', function () {
   const trailFactory = {
 
   };
@@ -51,7 +45,7 @@ angular.module('breadcrumb').factory('Trail', function (
     return arr;
   };
 
-  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&path=enc:';
+  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
   const addPath = (directions, transport) => {
     let obj = {};
     const request = {
