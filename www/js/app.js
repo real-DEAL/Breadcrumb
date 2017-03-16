@@ -93,7 +93,6 @@ angular.module('breadcrumb', [
 })
 .controller('AppCtrl', function ($scope, auth, store, $state) {
   $scope.logout = () => {
-    console.log('I GOT CAAAALLLLEEEDDDDD SIIIIGGGNNNNOOOUUUTTTT');
     auth.signout();
     store.remove('token');
     store.remove('profile');
