@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, Trail, $location) {
+.controller('CreateTrailCtrl', function ($scope, $location, Trail, Map) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = {
@@ -67,7 +67,7 @@ angular.module('breadcrumb')
     type: '',
     length: '',
     requires_money: false,
-    transport: '',
+    transport: null,
     crumbs: 0,
     left: 2.5,
     style: null,
@@ -139,7 +139,7 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
-    Trail.add($scope.steps, $scope.trail.transport)
+    Map.add($scope.steps, $scope.trail.transport)
     .then((data) => {
       $scope.loading = { display: 'none' };
       $scope.staticMap = data.image;

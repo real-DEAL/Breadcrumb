@@ -2,8 +2,10 @@
 /* global TransitionType */
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('MapFactory', function () {
+angular.module('breadcrumb').factory('Map', function () {
   const directionsService = new google.maps.DirectionsService();
+
+  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
 
   const computeTotalDistance = (response) => {
     let total = 0;
@@ -12,22 +14,26 @@ angular.module('breadcrumb').factory('MapFactory', function () {
     total /= 1000; // in km
     return total;
   };
+
   const totalMiles = (response) => {
     const myRoute = response.routes[0].legs[0].distance.text;
     console.warn(myRoute);
     return myRoute;
   };
+
   const computeTotalDuration = (response) => {
     const myRoute = response.routes[0].legs[0].duration.text;
     console.warn(myRoute, 'mins total');
     return myRoute;
   };
+
   const arrayPathAddOn = (response) => {
     let res = '';
     const myRoute = response.routes[0];
     res = myRoute.overview_polyline;
     return res;
   };
+
   const wayPointsMakers = (directions) => {
     const arr = [];
     const wypts = directions.slice(1, directions.length - 2);
@@ -41,7 +47,7 @@ angular.module('breadcrumb').factory('MapFactory', function () {
     });
     return arr;
   };
-  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
+
   const addPath = (directions) => {
     let obj = {};
     const request = {
@@ -72,8 +78,8 @@ angular.module('breadcrumb').factory('MapFactory', function () {
       });
     });
   };
+
   return {
-    trailFactory,
-    addPath,
+    add: addPath,
   };
 });
