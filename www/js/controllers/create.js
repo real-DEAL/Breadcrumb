@@ -85,6 +85,8 @@ angular.module('breadcrumb')
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
 
+  $scope.location = {};
+
   $scope.difficulty = {
     0: {
       type: 'easy',
