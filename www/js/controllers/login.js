@@ -15,6 +15,7 @@ angular.module('breadcrumb')
       store.set('profile', profile);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
+      // TODO: erase after done with auth
       for (let k in profile) {
         console.log(k+': ' + profile[k]);
       }
