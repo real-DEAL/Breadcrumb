@@ -3,8 +3,6 @@
 
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $location, Trail, Map) {
-
-
   const addresses = [
     '727 Mandeville St, New Orleans, LA, 70117',
     '15828 196th Pl NE, Woodinville, WA, 98077',

@@ -15,7 +15,7 @@
     100% {transform: translate(0%, 0px)}
 }
 
-#loading {
+.loading {
   background-color: #000;
   background-image: url('../img/loading.gif');
   background-position: center;
@@ -96,10 +96,6 @@
   position: absolute;
   top: 835px;
   animation-duration: 1000ms;
-}
-
-.reviewMap {
-  /*height: 40px;*/
 }
 
 .textbox {
