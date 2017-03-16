@@ -28,7 +28,7 @@ angular.module('breadcrumb')
         data: {
           requiresLogin: true,
         },
-      }),
+      })
       .state('app.dashboard', {
         url: '/dashboard',
         views: {
@@ -36,9 +36,6 @@ angular.module('breadcrumb')
             templateUrl: 'views/dashboard.html',
             controller: 'ListCtrl',
           },
-        },
-        data: {
-          requiresLogin: true,
         },
       })
       .state('app.create', {
@@ -48,9 +45,6 @@ angular.module('breadcrumb')
             templateUrl: 'views/create.html',
             controller: 'CreateTrailCtrl',
           },
-        },
-        data: {
-          requiresLogin: true,
         },
       })
       .state('app.search', {
@@ -70,9 +64,6 @@ angular.module('breadcrumb')
             controller: 'ProfileCtrl',
           },
         },
-        data: {
-          requiresLogin: true,
-        },
       })
       .state('app.settings', {
         url: '/settings',
@@ -82,9 +73,6 @@ angular.module('breadcrumb')
             controller: 'AuthCtrl',
           },
         },
-        data: {
-          requiresLogin: true,
-        },
       })
       .state('app.geofences', {
         url: '/geofences',
@@ -93,9 +81,6 @@ angular.module('breadcrumb')
             templateUrl: 'views/geofence/geofences.html',
             controller: 'GeofencesCtrl',
           },
-        },
-        data: {
-          requiresLogin: true,
         },
       })
       .state('app.geofence-new', {
@@ -113,9 +98,6 @@ angular.module('breadcrumb')
               latitude: parseFloat($stateParams.latitude),
             });
           },
-        },
-        data: {
-          requiresLogin: true,
         },
       })
       .state('app.geofence-edit', {

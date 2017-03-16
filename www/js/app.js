@@ -81,7 +81,6 @@ angular.module('breadcrumb', [
     });
 
     $rootScope.$on('$locationChangeStart', () => {
-      console.log('locationchangestart');
       if (!auth.isAuthenticated) {
         const token = store.get('token');
         if (token) {

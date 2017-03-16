@@ -30,12 +30,4 @@ angular.module('breadcrumb')
   });
 
   $scope.doAuth();
-
-  // $scope.logout = () => {
-  //   auth.signout();
-  //   store.remove('token');
-  //   store.remove('profile');
-  //   store.remove('refreshToken');
-  //   $state.go('app.dashboard', {}, { reload: true });
-  // };
 });
