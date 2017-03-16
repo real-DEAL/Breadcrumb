@@ -68,7 +68,6 @@ angular.module('breadcrumb')
     } else if ($scope.step === $scope.trailTypes.length) {
       $scope.step -= $scope.trailTypes.length;
     }
-    console.log($scope.step);
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
 
@@ -171,7 +170,7 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
-    Map.add($scope.steps, $scope.trail.transport)
+    Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
       $scope.loading = { display: 'none' };
       $scope.trail.map = data.image;

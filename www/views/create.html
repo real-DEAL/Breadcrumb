@@ -55,7 +55,7 @@
         <div class="row calm s-2x center" ng-click="test(trail.requires_money)">
 
           <!-- TRANSPORT -->
-          <i ng-repeat="(name, type) in transport" class="ion-android-{{ type }} col" ng-value="name" ng-model="trail.transport" ng-click="trail.transport = type"></i>
+          <i ng-repeat="(name, type) in transport" class="ion-android-{{ type }} col" ng-click="trail.transport = name"></i>
 
           <!-- MONEY -->
           <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
@@ -71,7 +71,7 @@
       </div>
     </div>
 
-    <!-- crumbS -->
+    <!-- CRUMBS -->
     <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
       <div class="row item item-divider center">
         <h1 class="title col">
