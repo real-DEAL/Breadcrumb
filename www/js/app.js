@@ -1,6 +1,13 @@
 // Ionic Geofence example App
 
-angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-directive'])
+angular.module('breadcrumb', [
+  'ionic',
+  'ionic.contrib.ui.tinderCards',
+  'leaflet-directive',
+  'auth0',
+  'angular-storage',
+  'angular-jwt',
+])
 .run(function (
   $window,
   $document,
@@ -9,7 +16,9 @@ angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-
   $ionicPlatform,
   $log,
   $rootScope,
-  GeofencePluginMock
+  GeofencePluginMock,
+  auth,
+  store
 ) {
   $ionicPlatform.ready(function () {
     $log.log('Ionic ready');
@@ -70,15 +79,26 @@ angular.module('breadcrumb', ['ionic', 'ionic.contrib.ui.tinderCards', 'leaflet-
     $window.geofence.initialize(() => {
       $log.log('Geofence plugin initialized');
     });
-  });
 
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
-    $log.log('stateChangeError', error, toState, toParams, fromState, fromParams);
-    $state.go('geofences');
+    $rootScope.$on('$locationChangeStart', () => {
+      if (!auth.isAuthenticated) {
+        const token = store.get('token');
+        if (token) {
+          auth.authenticate(store.get('profile'), token);
+        }
+      }
+    });
   });
 })
-.controller('AppCtrl', function ($scope) {
-  // $scope.scope = null;
+.controller('AppCtrl', function ($scope, auth, store, $state) {
+  $scope.logout = () => {
+    auth.signout();
+    store.remove('token');
+    store.remove('profile');
+    store.remove('refreshToken');
+    $state.go('start', {}, { reload: true });
+  };
+
   $scope.test = (input) => {
     console.warn(input);
   };

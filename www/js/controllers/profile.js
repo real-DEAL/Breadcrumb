@@ -1,5 +1,4 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
 
 angular.module('breadcrumb')
 .controller('ProfileCtrl', function ($scope, ListFact) {
