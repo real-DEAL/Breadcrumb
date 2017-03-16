@@ -2,14 +2,14 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, Trail) {
-  const moveX = (step, num) => {
-    const move = `${step.left += num}%`;
+.controller('CreateTrailCtrl', function ($scope, Trail, $location) {
+  const moveX = (crumb, num) => {
+    const move = `${crumb.left += num}%`;
     const style = {
       left: move,
       'transition-duration': '250ms',
     };
-    step.style = style;
+    crumb.style = style;
   };
 
   const addresses = [
@@ -22,23 +22,23 @@ angular.module('breadcrumb')
 
   const i = () => Math.floor(Math.random() * 5);
 
-  const moveY = (step, num) => {
+  const moveY = (crumb, num) => {
     const style = {
       'transition-duration': '1000ms',
       transform: `translate(0px, ${num}px)`,
     };
-    step.style = style;
+    crumb.style = style;
   };
 
-  const moveReset = (step, index) => {
-    step.left = 100 * index;
-    const move = `${step.left += 2.5}%`;
+  const moveReset = (crumb, index) => {
+    crumb.left = 100 * index;
+    const move = `${crumb.left += 2.5}%`;
     const style = {
       'transition-duration': '1000ms',
       top: '0px',
       left: move,
     };
-    step.style = style;
+    crumb.style = style;
   };
 
   $scope.loading = { display: 'none' };
@@ -62,49 +62,62 @@ angular.module('breadcrumb')
   };
 
   $scope.trail = {
-    name: '',
-    description: '',
-    transport: '',
-    money: false,
-    steps: 0,
+    name: 'Liv\'s trail',
+    description: 'A trail that takes you places',
+    type: '',
     length: '',
+    requires_money: false,
+    transport: '',
+    crumbs: 0,
     left: 2.5,
     style: null,
   };
 
-  $scope.step = () => ({
-    text: '',
+  $scope.crumb = () => ({
+    name: '',
+    description: '',
     location: addresses[i()],
+    text: '',
     media: '',
+    image: '',
+    video: '',
+    ar: '',
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
 
-  $scope.steps = [];
+  $scope.crumbs = [];
 
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
+<<<<<<< HEAD
       const step = $scope.step();
       $scope.steps.push(step);
       $scope.trail.steps += 1;
       console.warn($scope.trail, 'trail')
+=======
+      $scope.trail.crumbs += 1;
+      const crumb = $scope.crumb();
+      $scope.crumbs.push(crumb);
+      console.warn($scope.crumb, 'crumb');
+>>>>>>> (feature) trails and crumbs save to database
     }
   };
 
   $scope.remove = (index) => {
-    $scope.steps.splice(index, 1);
+    $scope.crumbs.splice(index, 1);
     if (!$scope.review.check) {
-      $scope.trail.steps -= 1;
+      $scope.trail.crumbs -= 1;
       moveReset($scope.trail, 0);
-      $scope.steps.forEach((step, ind) => {
-        moveReset(step, ind + 1);
+      $scope.crumbs.forEach((crumb, ind) => {
+        moveReset(crumb, ind + 1);
       });
     }
   };
 
   $scope.cardSwipedLeft = (index) => {
-    if (!$scope.steps.length || index === $scope.steps.length) {
+    if (!$scope.crumbs.length || index === $scope.crumbs.length) {
       return null;
     }
     return $scope.move(-100);
@@ -117,8 +130,8 @@ angular.module('breadcrumb')
   $scope.move = (num) => {
     if (!$scope.review.check) {
       moveX($scope.trail, num);
-      $scope.steps.forEach((step) => {
-        moveX(step, num);
+      $scope.crumbs.forEach((crumb) => {
+        moveX(crumb, num);
       });
     }
   };
@@ -126,15 +139,15 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
-    Trail.addPath($scope.steps, $scope.trail.transport)
+    Trail.add($scope.steps, $scope.trail.transport)
     .then((data) => {
       $scope.loading = { display: 'none' };
       $scope.staticMap = data.image;
       $scope.time = data.time;
       $scope.distance = data.miles;
       moveY($scope.trail, -475);
-      $scope.steps.forEach((step) => {
-        moveY(step, -325);
+      $scope.crumbs.forEach((crumb) => {
+        moveY(crumb, -325);
       });
       $scope.review.style = {
         'animation-name': 'moveUp',
@@ -145,16 +158,24 @@ angular.module('breadcrumb')
   };
 
 
-  $scope.edit = () => {
+  $scope.reset = () => {
     $scope.review.check = false;
     moveReset($scope.trail, 0);
-    $scope.steps.forEach((step, index) => {
-      moveReset(step, index + 1);
+    $scope.crumbs.forEach((crumb, index) => {
+      moveReset(crumb, index + 1);
     });
     $scope.review.style = {
       'animation-name': 'moveDown',
     };
   };
 
-  $scope.submit = () => null;
+  $scope.submit = () => {
+    $scope.loading = null;
+    Trail.submit($scope.trail, $scope.crumbs)
+    .then(() => {
+      $scope.reset();
+      $scope.loading = { display: 'none' };
+      $location.path('/dashboard');
+    });
+  };
 });

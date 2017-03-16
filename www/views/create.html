@@ -34,20 +34,20 @@
              </div>
            </label>
         </li>
-        <button class="button button-block" ng-click="add()" ng-if="!steps.length">
+        <button class="button button-block" ng-click="add()" ng-if="!crumbs.length">
           Create trail!
         </button>
         <button class="button button-block" ng-click="move(-100)"
-        ng-if="steps.length">
-          Next step
+        ng-if="crumbs.length">
+          Next crumb
         </button>
       </div>
     </div>
 
-    <!-- STEPS -->
-    <div class="abs card card-{{$index}}" ng-repeat="step in steps track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="step.style">
+    <!-- crumbS -->
+    <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
       <div class="row item item-divider center">
-        <h1 class="title col">Step {{ $index + 1 }}</h1>
+        <h1 class="title col">crumb {{ $index + 1 }}</h1>
         <div class="col col-10">
           <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
         </div>
@@ -58,11 +58,11 @@
         </div>
 
         <label class="item item-input textbox">
-          <input type="text" ng-model="step.text" placeholder="Description">
+          <input type="text" ng-model="crumb.text" placeholder="Description">
         </label>
 
         <div class="item item-input textbox">
-          <input class="col" type="text" ng-model="step.location" placeholder="Location">
+          <input class="col" type="text" ng-model="crumb.location" placeholder="Location">
           <div class="col col-10" ng-click="test()">
             <i class="positive icon ion-navigate s-1x"></i>
           </div>
@@ -72,16 +72,16 @@
       <div class="row">
         <div class="col">
           <button class="button button-block" ng-click="move(100)">
-            Prev step
+            Prev crumb
           </button>
         </div>
         <div class="col">
           <button class="button button-block" ng-click="move(-100)"
-          ng-if="steps.length > $index + 1">
-            Next step
+          ng-if="crumbs.length > $index + 1">
+            Next crumb
           </button>
-          <button class="button button-block button-energized" ng-click="add()" ng-if="steps.length === $index + 1">
-            Add step!
+          <button class="button button-block button-energized" ng-click="add()" ng-if="crumbs.length === $index + 1">
+            Add crumb!
           </button>
         </div>
       </div>
@@ -89,7 +89,7 @@
 
     <div class="abs card review" ng-style="review.style">
       <div class="item item-divider center">
-        Review steps for <strong>{{ trail.name }}</strong>
+        Review crumbs for <strong>{{ trail.name }}</strong>
       </div>
       <div class="center reviewMap">
         <img src="{{staticMap}}" />
@@ -99,20 +99,20 @@
         <div class="col right">Total distance: <strong>{{ distance }}</strong></div>
       </div>
       <div ng-style="overflowStyle">
-        <div ng-repeat="step in steps track by $index" class="row">
+        <div ng-repeat="crumb in crumbs track by $index" class="row">
           <div class="col col-10">{{ $index + 1 }}</div>
-          <div class="col">{{ step.location }}</div>
+          <div class="col">{{ crumb.location }}</div>
         </div>
       </div>
     </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="steps.length > 1 && !review.check">
+  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
     <div class="title">Review and submit</div>
   </div>
 
   <div class="tabs tabs-icon-top" ng-if="review.check">
-    <a class="tab-item" ng-click="edit()">
+    <a class="tab-item" ng-click="reset()">
       <i class="icon ion-compose"></i>
       Edit
     </a>
