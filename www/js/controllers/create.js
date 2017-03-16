@@ -70,22 +70,79 @@ angular.module('breadcrumb')
   };
 
   $scope.difficulty = {
-    1: 'easy',
-    2: 'normal',
-    3: 'hard',
+    0: {
+      type: 'easy',
+      style: null,
+    },
+    1: {
+      type: 'medium',
+      style: null,
+    },
+    2: {
+      type: 'hard',
+      style: null,
+    },
+  };
+
+  $scope.fillDifficulty = (diff) => {
+    const fill = {
+      color: 'purple',
+    };
+    $scope.difficulty[0].style = null;
+    $scope.difficulty[1].style = null;
+    $scope.difficulty[2].style = null;
+    if (diff === 'easy' || diff === 'medium' || diff === 'hard') {
+      $scope.difficulty[0].style = fill;
+    }
+    if (diff === 'medium' || diff === 'hard') {
+      $scope.difficulty[1].style = fill;
+    }
+    if (diff === 'hard') {
+      $scope.difficulty[2].style = fill;
+    }
+    $scope.trail.difficulty = diff;
   };
 
   $scope.transport = {
-    WALKING: 'walk',
-    BICYCLING: 'bicycle',
-    TRANSIT: 'bus',
-    DRIVING: 'car',
+    WALKING: {
+      type: 'walk',
+      style: null,
+    },
+    BICYCLING: {
+      type: 'bicycle',
+      style: null,
+    },
+    TRANSIT: {
+      type: 'bus',
+      style: null,
+    },
+    DRIVING: {
+      type: 'car',
+      style: null,
+    },
+  };
+
+  $scope.transChange = (type) => {
+    $scope.transport.WALKING.style = null;
+    $scope.transport.BICYCLING.style = null;
+    $scope.transport.TRANSIT.style = null;
+    $scope.transport.DRIVING.style = null;
+    $scope.transport[type].style = {
+      'background-color': '#F8F8F8',
+      'border-radius': '50px',
+    };
   };
 
   $scope.money = (boolean) => {
     $scope.trail.requires_money = !boolean;
     if (boolean) $scope.moneyStyle = null;
-    else $scope.moneyStyle = { color: '#33CD61' };
+    else {
+      $scope.moneyStyle = {
+        'background-color': '#F8F8F8',
+        'border-radius': '50px',
+        color: '#33CD61',
+      };
+    }
   };
 
   $scope.moneyStyle = null;
@@ -99,25 +156,26 @@ angular.module('breadcrumb')
     name: 'Liv\'s trail',
     description: 'A trail that takes you places',
     type: $scope.trailTypes[0],
-    map: '',
-    time: '',
-    length: '',
+    difficulty: null,
+    map: null,
+    time: null,
+    length: null,
     requires_money: false,
-    transport: '',
+    transport: null,
     crumbs: 0,
     left: 2.5,
     style: null,
   };
 
   $scope.crumb = () => ({
-    name: '',
-    description: '',
+    name: null,
+    description: null,
     location: addresses[i()],
-    text: '',
-    media: '',
-    image: '',
-    video: '',
-    ar: '',
+    text: null,
+    media: null,
+    image: null,
+    video: null,
+    ar: null,
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });

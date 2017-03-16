@@ -123,6 +123,10 @@
   padding: 10px !important;
 }
 
+.margin-h {
+  margin: 0 10px;
+}
+
 .arCamera {
   background: transparent;
   height: 200px%;

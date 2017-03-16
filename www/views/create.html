@@ -28,34 +28,37 @@
           <div class="col col-30">
             Type:
           </div>
-          <div class="col dark center">
-            <i class="ion-arrow-left-b s-2x" ng-click="changeStep(false)"></i>
+          <div class="col dark center" ng-click="changeStep(false)">
+            <i class="ion-arrow-left-b s-2x"></i>
           </div>
           <div class="col dark center">
             <span>{{ trailTypes[step] }}</span>
           </div>
-          <div class="col dark center">
-            <i class="ion-arrow-right-b s-2x" ng-click="changeStep(true)"></i>
+          <div class="col dark center" ng-click="changeStep(true)">
+            <i class="ion-arrow-right-b s-2x"></i>
           </div>
         </div>
 
         <!-- TRAIL DIFFICULTY -->
         <div class="list row center">
-          <div class="col col-30">
+          <div class="col">
             Difficulty:
           </div>
-          <div class="col royal s-2x">
-            <i class="ion-ribbon-b"></i>
-            <i class="ion-ribbon-b"></i>
-            <i class="ion-ribbon-b"></i>
+          <div class="col s-2x">
+            <i
+              class="ion-ribbon-b padding"
+              ng-repeat="(key, level) in difficulty"
+              ng-style="difficulty[key].style"
+              ng-click="fillDifficulty(level.type)"
+            ></i>
           </div>
         </div>
 
         <!-- TRAIL TRANSPORT AND MONEY -->
-        <div class="row calm s-2x center" ng-click="test(trail.requires_money)">
+        <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
 
           <!-- TRANSPORT -->
-          <i ng-repeat="(name, type) in transport" class="ion-android-{{ type }} col" ng-click="trail.transport = name"></i>
+          <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col" ng-click="trail.transport = name"></i>
 
           <!-- MONEY -->
           <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
