@@ -52,13 +52,13 @@ angular.module('breadcrumb').factory('Trail', function (
     return arr;
   };
   const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x200&path=enc:';
-  const addPath = (directions) => {
+  const addPath = (directions, transport) => {
     let obj = {};
     const request = {
       origin: directions[0].location,
       waypoints: wayPointsMakers(directions),
       destination: directions[directions.length - 2].location,
-      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+      travelMode: google.maps.DirectionsTravelMode[transport],
     };
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {

@@ -19,10 +19,10 @@
           <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
         </label>
         <ion-list ng-model="trail.transport">
-          <ion-radio>Walk</ion-radio>
-          <ion-radio>Bike</ion-radio>
-          <ion-radio>Public transport</ion-radio>
-          <ion-radio>Car</ion-radio>
+          <ion-radio ng-model="trail.transport" ng-value="'WALKING'">Walk</ion-radio>
+          <ion-radio ng-model="trail.transport" ng-value="'BICYCLING'">Bike</ion-radio>
+          <ion-radio ng-model="trail.transport" ng-value="'TRANSIT'">Public transport</ion-radio>
+          <ion-radio ng-model="trail.transport" ng-value="'DRIVING'">Car</ion-radio>
         </ion-list>
         <li class="item item-toggle">
           Need money

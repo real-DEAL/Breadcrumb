@@ -75,7 +75,7 @@ angular.module('breadcrumb')
       const step = $scope.step();
       $scope.steps.push(step);
       $scope.trail.steps += 1;
-      console.warn($scope.step, 'step');
+      console.warn($scope.trail, 'trail')
     }
   };
 
@@ -120,12 +120,13 @@ angular.module('breadcrumb')
     $scope.review.style = {
       'animation-name': 'moveUp',
     };
-    Trail.addPath($scope.steps)
+    Trail.addPath($scope.steps, $scope.trail.transport)
     .then((data) => {
       $scope.staticMap = data.image;
       $scope.time = data.time;
       $scope.distance = data.miles;
       $scope.$apply();
+      console.warn(data, 'data');
     });
   };
 
