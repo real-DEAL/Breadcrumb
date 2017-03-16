@@ -3,7 +3,9 @@ angular.module('breadcrumb')
     $urlRouterProvider,
     authProvider,
     $httpProvider,
-    jwtInterceptorProvider) {
+    jwtInterceptorProvider,
+    jwtOptionsProvider
+  ) {
     $stateProvider
       .state('start', {
         url: '/start',
@@ -137,6 +139,10 @@ angular.module('breadcrumb')
     });
 
     $urlRouterProvider.otherwise('/start');
+
+    jwtOptionsProvider.config({
+      whiteListedDomains: ['http://54.203.104.113/'],
+    });
 
     jwtInterceptorProvider.tokenGetter = (store, jwtHelper, auth) => {
       const idToken = store.get('token');

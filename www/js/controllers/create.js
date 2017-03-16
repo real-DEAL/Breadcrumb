@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $location, Trail, Map) {
+.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map) {
   const addresses = [
     '727 Mandeville St, New Orleans, LA, 70117',
     '15828 196th Pl NE, Woodinville, WA, 98077',
@@ -204,7 +204,7 @@ angular.module('breadcrumb')
     .then(() => {
       $scope.reset();
       $scope.loading = { display: 'none' };
-      $location.path('/dashboard');
+      $state.go('app.dashboard');
     });
   };
 });
