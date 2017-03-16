@@ -96,6 +96,8 @@
         <img src="{{staticMap}}" />
       </div>
       <div ng-style="overflowStyle">
+        <span>Total time: {{ time }}</span>
+        <span>Total distance: {{ distance }}</span>
         <div ng-repeat="step in steps track by $index" class="row">
           <div class="col col-10">{{ $index + 1 }}</div>
           <div class="col">{{ step.location }}</div>
