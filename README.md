@@ -13,8 +13,8 @@ Each trail will have multiple stop points for travelers to experience. The user 
 - **Product owner**: [Eric Periou](https://github.com/eperiou/)
 - **Scrum Master**: [Olivia Sabo-Rush](https://github.com/livrush/)
 - **Development team**:
- - [Devin Fields](https://github.com/defields923/)
- - [Alice Lai](https://github.com/aplai168/)
+  - [Devin Fields](https://github.com/defields923/)
+  - [Alice Lai](https://github.com/aplai168/)
 
 ----------
 

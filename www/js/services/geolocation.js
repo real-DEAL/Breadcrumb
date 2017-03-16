@@ -1,4 +1,4 @@
-angular.module('ionic-geofence').factory('Geolocation', function ($q, $interval) {
+angular.module('breadcrumb').factory('Geolocation', function ($q, $interval) {
   let currentPositionCache = null;
 
   return {

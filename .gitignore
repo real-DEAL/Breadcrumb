@@ -1,7 +1,10 @@
 node_modules/
+notes/
 bower_components/
 *.log
 *.xcf
+.env
+.eslintrc.js
 
 www/lib
 .env
@@ -18,3 +21,4 @@ out
 app/components
 .DS_Store
 .io-config.json
+notes.js

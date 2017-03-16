@@ -1,4 +1,6 @@
-angular.module('ionic-geofence').controller('GeofencesCtrl', function (
+angular.module('breadcrumb').controller('GeofencesCtrl', function (
+/* eslint no-param-reassign: ["error", { "props": false }]*/
+/* global someFunction google:true, angular:true, window:true*/
   $scope,
   $ionicActionSheet,
   $timeout,
@@ -39,7 +41,7 @@ angular.module('ionic-geofence').controller('GeofencesCtrl', function (
   };
 
   $scope.editGeofence = (geofence) => {
-    $state.go('geofence-edit', { geofenceId: geofence.id, });
+    $state.go('geofence-edit', { geofenceId: geofence.id });
   };
 
   $scope.removeGeofence = (geofence) => {

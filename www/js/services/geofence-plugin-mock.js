@@ -1,4 +1,4 @@
-angular.module('ionic-geofence').factory('GeofencePluginMock', function ($q, $log) {
+angular.module('breadcrumb').factory('GeofencePluginMock', function ($q, $log) {
   return {
     addOrUpdate: (fences) => {
       const deffered = $q.defer();

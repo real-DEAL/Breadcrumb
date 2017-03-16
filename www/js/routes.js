@@ -1,10 +1,73 @@
-angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProvider) {
+angular.module('breadcrumb').config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('app', {
       url: '/app',
       abstract: true,
       templateUrl: 'views/menu.html',
       controller: 'AppCtrl',
+    })
+    .state('app.start', {
+      url: '/start',
+      views: {
+        menuContent: {
+          templateUrl: 'views/start.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
+    })
+    .state('app.dashboard', {
+      url: '/dashboard',
+      views: {
+        menuContent: {
+          templateUrl: 'views/dashboard.html',
+          controller: 'ListCtrl',
+        },
+      },
+    })
+    .state('app.search', {
+      url: '/search',
+      views: {
+        menuContent: {
+          templateUrl: 'views/search.html',
+          controller: 'ListCtrl',
+        },
+      },
+    })
+    .state('app.create', {
+      url: '/create',
+      views: {
+        menuContent: {
+          templateUrl: 'views/create.html',
+          controller: 'CreateTrailCtrl',
+        },
+      },
+    })
+    .state('app.profile', {
+      url: '/profile',
+      views: {
+        menuContent: {
+          templateUrl: 'views/profile.html',
+          controller: 'ProfileCtrl',
+        },
+      },
+    })
+    .state('app.signUp', {
+      url: '/sign-up',
+      views: {
+        menuContent: {
+          templateUrl: 'views/signup.html',
+          controller: 'AuthCtrl',
+        },
+      },
+    })
+    .state('app.settings', {
+      url: '/settings',
+      views: {
+        menuContent: {
+          templateUrl: 'views/settings.html',
+          controller: 'AuthCtrl',
+        },
+      },
     })
     .state('app.geofences', {
       url: '/geofences',
@@ -48,7 +111,16 @@ angular.module('ionic-geofence').config(function ($stateProvider, $urlRouterProv
           return $q.reject(`Cannot find geofence with id: ${$stateParams.geofenceId}`);
         },
       },
+    })
+    .state('app.addPath', {
+      url: '/addPath',
+      views: {
+        menuContent: {
+          templateUrl: 'views/maps/addPath.html',
+          controller: 'GeofencesCtrl',
+        },
+      },
     });
 
-  $urlRouterProvider.otherwise('/app/geofences');
+  $urlRouterProvider.otherwise('/app/dashboard');
 });

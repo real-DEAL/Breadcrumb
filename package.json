@@ -1,11 +1,11 @@
 {
-  "name": "ionic-geofence",
+  "name": "breadcrumb",
   "version": "1.0.0",
   "license": "MIT",
   "author": "Tomasz Subik",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cowbell/ionic-geofence.git"
+    "url": "https://github.com/real-DEAL/breadcrumb.git"
   },
   "description": "Geofence Sample Application Built With Ionic",
   "devDependencies": {
@@ -34,5 +34,10 @@
   "cordovaPlugins": [],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "dependencies": {
+    "cloudinary": "^1.8.0",
+    "cordova-plugin-geolocation": "^2.4.2",
+    "lodash": "^4.17.4"
+  }
 }

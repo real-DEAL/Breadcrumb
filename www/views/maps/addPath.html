@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<ion-view title="Add Your Path">
+  <ion-nav-buttons side="left">
+    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    <button class="button button-icon icon ion-checkmark" ng-click="addPath()"></button>
+  </ion-nav-buttons>
+  <ion-header-bar class="bar-positive" align-title="left">
+    <div class="buttons pull-left">
+
+    </div>
+    <h1 class="title">Hello!!</h1>
+    <div class="buttons pull-right">
+
+    </div>
+  </ion-header-bar>
+  <ion-content scroll="false">
+    <label class="item item-input">
+      <input type="text" placeholder="Enter origin" ng-model="directions.origin" hide-keyboard-on-enter>
+    </label>
+    <label class="item item-input">
+      <input type="text" placeholder="Enter destination" ng-model="directions.destination" hide-keyboard-on-enter>
+    </label>
+  </ion-content>
+</ion-view>

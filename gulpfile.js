@@ -65,7 +65,7 @@ gulp.task("test:integration:sauce", ["upload-apk-to-sauce"], function () {
 gulp.task("upload-apk-to-sauce", ["build-debug"], function () {
     const apk_path = path.resolve("platforms/android/build/outputs/apk/android-debug.apk");
 
-    sh.exec(`curl -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY -X POST http://saucelabs.com/rest/v1/storage/$SAUCE_USERNAME/ionic-geofence-debug.apk?overwrite=true -H 'Content-Type: application/octet-stream' --data-binary @${apk_path}`);
+    sh.exec(`curl -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY -X POST http://saucelabs.com/rest/v1/storage/$SAUCE_USERNAME/breadcrumb-debug.apk?overwrite=true -H 'Content-Type: application/octet-stream' --data-binary @${apk_path}`);
 });
 
 gulp.task("watch", function () {
