@@ -2,6 +2,9 @@ angular.module('breadcrumb')
 .controller('LoginCtrl', function ($scope, auth, $state, store) {
   $scope.doAuth = () => {
     auth.signin({
+      socialBigButtons: true,
+      allowSignUpAction: false,
+      allowedConnections: ['twitter', 'facebook', 'google'],
       authParams: {
         scope: 'openid offline_access',
         device: 'Mobile device',
@@ -9,7 +12,8 @@ angular.module('breadcrumb')
       standalone: true,
       autoclose: true,
       rememberLastLogin: false,
-      allowSignUp: false,
+      closable: false,
+
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
       store.set('profile', profile);
