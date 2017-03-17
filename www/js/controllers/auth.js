@@ -27,7 +27,6 @@ angular.module('breadcrumb')
   $scope.username = null;
   $scope.email = null;
 
-
   $scope.test = input => console.warn(input);
 
   $scope.updateUser = (username, email) => {
