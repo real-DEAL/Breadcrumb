@@ -7,22 +7,33 @@
     <form>
       <div class="card">
         <div class="item item-divider">
-          Change Username
+          Confirm Username
         </div>
         <label class="item item-input">
           <input type="text" ng-model="username" placeholder="Enter Username" required>
         </label>
       </div>
 
-      <div class="card">
+      <div class="card" ng-if="!emailInStore()">
         <div class="item item-divider">
-          Change Email
+          Confirm Email
         </div>
         <label class="item item-input">
           <input type="text" ng-model="email" placeholder="Enter Email">
         </label>
       </div>
-      <button class="button button-full button-energized" ng-click="updateUser(username, email)">
+      <button
+        class="button button-full button-energized"
+        ng-click="updateUser(username)"
+        ng-if="emailInStore()"
+      >
+        Submit
+      </button>
+      <button
+        class="button button-full button-energized"
+        ng-click="updateUser(username, email)"
+        ng-if="!emailInStore()"
+      >
         Submit
       </button>
     </form>
