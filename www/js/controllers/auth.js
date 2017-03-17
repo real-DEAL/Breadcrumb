@@ -29,7 +29,19 @@ angular.module('breadcrumb')
 
   $scope.test = input => console.warn(input);
 
+  $scope.emailInStore = () => {
+    const profile = store.get('profile');
+    if (profile.email) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.updateUser = (username, email) => {
-    getUpdateUserFact(store.get('profile').user_id, { username, email });
+    const profile = store.get('profile');
+    if (email === undefined) {
+      email = profile.email;
+    }
+    getUpdateUserFact(profile.user_id, { username, email });
   };
 });
