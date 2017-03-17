@@ -25,6 +25,7 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = closeStyle;
+        console.log(trail.transport);
         // TODO: Integrate actual algorithm to calculate rating from trail.score
         const stars = trail.rating || Math.floor(Math.random() * 6);
         const emptyStars = 5 - stars;
@@ -38,28 +39,23 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
     })
   );
 
-    const deleteTrail = (index) => (
+  const deleteTrail = (trail) => {
+    $http({
+      method: 'DELETE',
+      url: `http://192.168.99.100/trails/${trail.id}`,
+      // json: true,
+    })
+    .then(res => console.warn(res))
+    .catch(res => console.error(res));
+    trail.crumb.forEach((crumb) => {
       $http({
         method: 'DELETE',
-        url: 'http://192.168.99.100/trails',
-        // json: true,
+        url: `http://192.168.99.100/crumbs/${crumb.id}`,
       })
-      .then((response) => {
-        const data = [];
-        response.data.data.forEach((trail) => {
-          trail.style = closeStyle;
-          // TODO: Integrate actual algorithm to calculate rating from trail.score
-          const stars = trail.rating || Math.floor(Math.random() * 6);
-          const emptyStars = 5 - stars;
-          const difficulty = trail.difficulty;
-          trail.stars = arrayMaker(stars);
-          trail.emptyStars = arrayMaker(emptyStars);
-          trail.difficulty = arrayMaker(difficulty);
-          data.push(trail);
-        });
-        return data;
-      })
-    );
+      .then(res => console.warn(res))
+      .catch(res => console.error(res));
+    });
+  };
 
   const filterListItems = (list, type, value) => {
     const items = list.slice();

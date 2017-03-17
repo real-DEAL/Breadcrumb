@@ -75,20 +75,6 @@ angular.module('breadcrumb').factory('Data', function () {
     };
   };
 
-  const oldUser = {
-    name: 'NAME',
-    picture: '',
-    score: 500,
-    finishedTrails: 3,
-    totalTime: 0,
-    trail: {
-      name: `My ${Math.floor(Math.random() * 100)}th trail`,
-      stars: arrayMaker(4),
-      emptyStars: arrayMaker(1),
-      progress: `${Math.floor(Math.random() * 100)}%`,
-    },
-  };
-
   return {
     trail: trailMaker,
     address: randomFromArray(addresses),

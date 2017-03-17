@@ -16,7 +16,7 @@
       <div class="row item item-divider" ng-click="toggle($index)">
         <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
         <div class="col center s-1x">{{ trail.name }}</div>
-        <i class="ion-backspace assertive margin-h s-1x right" ng-click="test(trail.id)"></i>
+        <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i>
       </div>
 
       <div class="row item center">
@@ -25,7 +25,7 @@
         <div class="col col-10 right balanced s-1x" ng-click="filter('transport', trail.transport)">
           <i class="ion-android-walk" ng-if="trail.transport === 'WALKING'"></i>
           <i class="ion-android-bicycle" ng-if="trail.transport === 'BICYCLING'"></i>
-          <i class="ion-android-car" ng-if="trail.transport === 'CAR'"></i>
+          <i class="ion-android-car" ng-if="trail.transport === 'DRIVING'"></i>
           <i class="ion-android-bus" ng-if="trail.transport === 'TRANSIT'"></i>
         </div>
 
