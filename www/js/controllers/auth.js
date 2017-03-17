@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('AuthCtrl', function ($scope) {
+.controller('AuthCtrl', function ($scope, store, getUpdateUserFact) {
   $scope.user = {
     name: 'NAME',
     score: 500,
@@ -24,4 +24,12 @@ angular.module('breadcrumb')
     $scope.exampleTrail,
     $scope.exampleTrail,
   ];
+  $scope.username = null;
+  $scope.email = null;
+
+  $scope.test = input => console.warn(input);
+
+  $scope.updateUser = (username, email) => {
+    getUpdateUserFact(store.get('profile').user_id, { username, email });
+  };
 });
