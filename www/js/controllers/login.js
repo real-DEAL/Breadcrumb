@@ -3,8 +3,8 @@ angular.module('breadcrumb')
   $scope.doAuth = () => {
     auth.signin({
       socialBigButtons: true,
-      allowSignUpAction: false,
-      allowedConnections: ['twitter', 'facebook'],
+      allowSignUpAction: true,
+      connections: ['Username-Password-Authentication', 'twitter', 'facebook'],
       authParams: {
         scope: 'openid offline_access',
         device: 'Mobile device',
