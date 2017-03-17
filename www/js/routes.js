@@ -146,7 +146,11 @@ angular.module('breadcrumb')
     $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({
-      whiteListedDomains: ['http://54.203.104.113/'],
+      whiteListedDomains: [
+        'http://54.203.104.113/',
+        'http://172.24.2.65:8100',
+        'http://192.168.99.100/',
+      ],
     });
 
     jwtInterceptorProvider.tokenGetter = (store, jwtHelper, auth) => {
