@@ -5,6 +5,7 @@ angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
+
     const style = {
       left: move,
       'transition-duration': '250ms',
@@ -85,7 +86,10 @@ angular.module('breadcrumb')
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
 
-  $scope.location = {};
+  $scope.location = {}; // this is the shared scope with the directive and is in the View
+    // how can I replace this ?
+
+  $scope.obj = {};
 
   $scope.difficulty = {
     0: {
@@ -214,14 +218,18 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
+
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
+      console.warn($scope.location, '$scope.location in add()')
+      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
     }
   };
+
 
   $scope.remove = (index) => {
     $scope.crumbs.splice(index, 1);

@@ -5,6 +5,7 @@ bower_components/
 *.xcf
 .env
 .eslintrc.js
+sampleDirective.js
 
 www/lib
 .env

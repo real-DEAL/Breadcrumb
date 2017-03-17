@@ -206,6 +206,7 @@
 .row+.row {
   padding: 10px !important;
 }
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 .margin-h {
@@ -259,3 +260,5 @@
 /*#map {
    height: 100%;
  }*/
+=======
+>>>>>>> (feature) directive speaks to controller for location

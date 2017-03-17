@@ -1,0 +1,369 @@
+<% include ../../partials/head_alt.html %>
+
+<body class="external-page sb-l-c sb-r-c" ng-app="RegistrationApp">
+
+  <!-- Start: Main -->
+  <div id="main" class="animated fadeIn">
+
+    <!-- Start: Content-Wrapper -->
+    <section id="content_wrapper">
+
+      <!-- begin canvas animation bg -->
+      <!-- <div id="canvas-wrapper">
+        <canvas id="demo-canvas"></canvas>
+      </div> -->
+
+      <!-- Begin: Content -->
+      <section id="content">
+
+
+<div class="container">
+  <div class="admin-form theme-info tab-pane mw600" id="register" role="tabpanel">
+
+    <div class="row mb15 table-layout">
+      <div class="col-xs-6 va-m pln">
+        <a class="alt-brand" href="/">
+          <img src="/assets/images/bondfarlogo-white.png" class="logo" alt="Bond Far">
+        </a>
+      </div>
+
+      <div class="col-xs-6 va-b pr5">
+        <div class="login-links">
+          <a href="/registration" class="active" title="Sign Up">Sign Up</a>
+          <span class="text-white"> | </span>
+          <a href="/signin" class="" title="Sign In">Sign In</a>
+        </div>
+      </div>
+    </div>
+
+    <form method="post" ng-controller="RegistrationController" ng-submit="submit()" name="form"  enctype="multipart/form-data" novalidate>
+      <div ng-switch="step" class="panel panel-danger heading-border">
+        <div class="panel-heading text-center">
+          <span class="panel-title">
+            <i class="fa fa-pencil-square"></i>Sign Up
+          </span>
+        </div>
+        <!-- end .form-header section -->
+
+        <div class="panel-body p25" ng-cloak ng-show="state.completed">
+          <div class="alert alert-success" role="alert">
+            <strong>Success!</strong> You'll recieve an email shortly asking you to confirm your email address.
+            Once you confirm your email address, you'll be able to sign in to the site.
+          </div>
+        </div>
+        <div class="panel-body p25" ng-cloak ng-hide="state.completed">
+
+          <% while(alert = flash.shift()) { %>
+            <div class="alert alert-<%= alert.type %>" role="alert">
+              <%= alert.message %>
+            </div>
+          <% } %>
+
+          <!-- Registration Alerts -->
+          <div class="alert alert-danger" role="alert" ng-cloak ng-show="state.error">
+            {{ state.error.message }}
+          </div>
+
+          <!-- page 1 -->
+          <div ng-switch-when=1>
+
+            <div class="section-divider mt10 mb40">
+              <span>Tell us about yourself.</span>
+            </div>
+            <!-- .section-divider -->
+
+            <div class="section">
+              <label for="name" class="field prepend-icon" ng-class="{'state-error': state.validating && form.name.$invalid}">
+                <input type="text" name="name" id="name" class="gui-input" placeholder="Full Name" ng-model="data.name" required ng-disabled="state.submitting">
+                <label for="name" class="field-icon">
+                  <i class="fa fa-user"></i>
+                </label>
+              </label>
+              <em for="name" class="state-error" ng-cloak ng-show="state.validating && form.name.$error.required">You must enter your full name.</em>
+            </div>
+            <!-- end section -->
+
+
+            <!-- TODO: uncoomment for .edu-->
+            <!-- <div class="section">
+              <label for="email" class="field prepend-icon" ng-class="{'state-error': state.validating && form.email.$invalid}">
+                <input type="email" name="email" id="email" class="gui-input" placeholder="Email address" ng-model="data.email" ng-pattern="emailFormat" required ng-disabled="state.submitting">
+                <label for="email" class="field-icon">
+                  <i class="fa fa-envelope"></i>
+                </label>
+              </label>
+              <em for="email" class="state-error" ng-cloak ng-show="state.validating && form.email.$invalid">
+                <span ng-show="state.validating && form.email.$error.required">You must enter your email address.</span>
+                <span ng-show="state.validating && form.email.$error.email">You must enter a valid email address.</span>
+                <span ng-show="state.validating && form.email.$error.pattern">Email Must be .edu or .edu.cn</span>
+              </em>
+            </div> -->
+            <!-- end section -->
+
+            <!-- TODO: comment if using .edu -->
+            <div class="section">
+              <label for="email" class="field prepend-icon" ng-class="{'state-error': state.validating && form.email.$invalid}">
+                <input type="email" name="email" id="email" class="gui-input" placeholder="Email address" ng-model="data.email" required ng-disabled="state.submitting">
+                <label for="email" class="field-icon">
+                  <i class="fa fa-envelope"></i>
+                </label>
+              </label>
+              <em for="email" class="state-error" ng-cloak ng-show="state.validating && form.email.$invalid">
+                <span ng-show="state.validating && form.email.$error.required">You must enter your email address.</span>
+                <span ng-show="state.validating && form.email.$error.email">You must enter a valid email address.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+
+            <div class="section">
+              <label for="password" class="field prepend-icon" ng-class="{'state-error': state.validating && form.password.$invalid}">
+                <input type="password" name="password" id="password" class="gui-input" placeholder="Create a password" ng-model="data.password" required ng-minlength="6" ng-disabled="state.submitting">
+                <label for="password" class="field-icon">
+                  <i class="fa fa-lock"></i>
+                </label>
+              </label>
+              <em for="password" class="state-error" ng-cloak ng-show="state.validating && form.password.$invalid">
+                <span ng-show="state.validating && form.password.$error.required">You must enter a password</span>
+                <span ng-show="state.validating && form.password.$error.minlength">Your password must be at least 6 characters.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <label for="confirmPassword" class="field prepend-icon" ng-class="{'state-error': state.validating && form.confirmPassword.$invalid}">
+                <input type="password" name="confirmPassword" id="confirmPassword" class="gui-input" placeholder="Confirm your password" ng-model="data.confirmPassword" required ng-minlength="6" ng-pattern="data.password" ng-disabled="state.submitting">
+                <label for="confirmPassword" class="field-icon">
+                  <i class="fa fa-unlock-alt"></i>
+                </label>
+              </label>
+              <em for="confirmPassword" class="state-error" ng-cloak ng-show="state.validating && form.confirmPassword.$invalid">
+                <span ng-show="state.validating && form.confirmPassword.$error.required">You must confirm your password.</span>
+                <span ng-show="state.validating && form.confirmPassword.$error.pattern">Your password and password confirmation do not match.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <label class="field select" ng-class="{'state-error': state.validating && form.timezone.$invalid}">
+                <select id="timezone" name="timezone" class="form-control" ng-model="data.timezone" required ng-disabled="state.submitting">
+                  <option value="">What timezone are you in?</option>
+                  <% timezones.forEach(function(timezone) { %>
+                    <option value="<%= timezone %>"><%= timezonesReformatted[timezone] %></option>
+                  <% }); %>
+                </select>
+                <i class="arrow"></i>
+              </label>
+              <em for="timezone" class="state-error" ng-cloak ng-show="state.validating && form.timezone.$invalid">
+                <span ng-show="state.validating && form.timezone.$error.required">You must select your timezone.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <div class="row">
+                <div class="col-xs-4">
+                  <label for="student1" class="option block option-primary mt10">
+                    <input type="radio" name="purpose" id="student1" value="student1" ng-model="data.purpose" ng-disabled="state.submitting">
+                    <span class="radio"></span> Learn English
+                  </label>
+                  <label for="teacher1" class="option option-primary block inline">
+                    <input type="radio" name="purpose" id="teacher1" value="teacher1" ng-model="data.purpose" ng-disabled="state.submitting">
+                    <span class="radio"></span> Teach English
+                  </label>
+                  <label for="student2" class="option block option-primary mt10">
+                    <input type="radio" name="purpose" id="student2" value="student2" ng-model="data.purpose" ng-disabled="state.submitting">
+                    <span class="radio"></span> Learn Chinese
+                  </label>
+                  <label for="teacher2" class="option option-primary block inline">
+                    <input type="radio" name="purpose" id="teacher2" value="teacher2" ng-model="data.purpose" ng-disabled="state.submitting">
+                    <span class="radio"></span> Teach Chinese
+                  </label>
+                </div>
+                <div class="col-xs-8">
+                </div>
+              </div>
+            </div>
+
+            <button type="button" ng-click="setStep(2); $event.stopPropagation();" class="admin-form button">Next</button>
+          </div>
+          <!-- end section -->
+
+          <!-- page 2 -->
+          <div ng-switch-when=2>
+
+            <div class="section-divider mt10 mb40">
+              <span>Give us some more details.</span>
+            </div>
+            <!-- .section-divider -->
+
+
+            <div class="section text-center">
+              <h5>Add A Profile Photo:</h5>
+              <img style="width:100px; padding-bottom: 10px" ngf-thumbnail="data.file || '/assets/images/user.jpg'"/>
+
+              <label style="margin:0 auto; display: block; width: 50%" for="file" class="field prepend-icon append-button file" ng-class="{'state-error': state.validating && form.file.$invalid}">
+                <input
+                 type="file"
+                 ngf-select
+                 ng-model="data.file"
+                 name="file"
+                 ngf-pattern="'image/*'"
+                 accept="image/*"
+                 required
+                 ngf-max-size="10MB"
+                 ngf-resize="{width: 100, height: 100}"
+                />
+              </label>
+              <em for="file" class="state-error" ng-cloak ng-show="state.validating && form.file.$invalid">
+                <span ng-show="state.validating && form.file.$error.required">You must enter a Photo less than 10MB.</span>
+              </em>
+            </div>
+
+            <!-- <input type="file" ng-file-select="fileSelected($files)" accept="'image/*'"> -->
+
+
+            <!-- end section -->
+
+            <div class="section">
+              <label for="hometown" class="field prepend-icon" ng-class="{'state-error': state.validating && form.hometown.$invalid}">
+                <input name="hometown" id="hometown" placeholder="Hometown" required ng-disabled="state.submitting" ng-model="data.hometown" class="gui-input" googleplace/>
+                <label for="hometown" class="field-icon">
+                  <i class="fa fa-home"></i>
+                </label>
+              </label>
+              <em for="hometown" class="state-error" ng-cloak ng-show="state.validating && form.hometown.$invalid">
+                <span ng-show="state.validating && form.hometown.$error.required">You must enter a Hometown.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <label for="summary" class="field prepend-icon" ng-class="{'state-error': state.validating && form.summary.$invalid}">
+                <textarea type="text" name="summary" id="summary" rows="3" class="gui-input" placeholder="Short Summary" ng-model="data.summary" required ng-disabled="state.submitting"></textarea>
+                <label for="summary" class="field-icon">
+                  <i class="fa fa-edit"></i>
+                </label>
+              </label>
+              <em for="summary" class="state-error" ng-cloak ng-show="state.validating && form.summary.$invalid">
+                <span ng-show="state.validating && form.summary.$error.required">Pleae Fill Out Your Short Summary.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <!-- <div>
+              <label for="interests" class="field select" ng-class="{'state-error': state.validating && form.interests.$invalid}">
+                <select id="interests" name="interests" class="multiselect" ng-model="data.interests" required ng-disabled="state.submitting">
+                  <option value=""> -- select an interest -- </option>
+                  <option value="sports">Sports</option>
+                  <option value="classical">Classical Music</option>
+                  <option value="fishing">Fishing</option>
+                  <option value="history">American History</option>
+                  <option value="cycling">Cycling</option>
+                  <option value="sushi">Sushi</option>
+                </select>
+                <i class="arrow"></i>
+              </label>
+            </div> -->
+            <!-- end section -->
+            <h5>Select your interests:</h5>
+            <div class="section">
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.history">American History
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.classical">Classical Music
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.cycling">Cycling
+                  </label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.fishing">Fishing
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.sports">Sports
+                  </label>
+                </div>
+                <div class="col-sm-4">
+                  <label>
+                    <input type="checkbox" ng-model="data.interests.sushi">Sushi
+                  </label>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="section-divider mt10 mb40">
+              <span>Education</span>
+            </div>
+
+            <div class="section">
+              <label for="university" class="field prepend-icon" ng-class="{'state-error': state.validating && form.university.$invalid}">
+                <input name="university" id="university" placeholder="Select A University" required ng-disabled="state.submitting" ng-model="data.university" class="gui-input" googleplace/>
+                <label for="unversity" class="field-icon">
+                  <i class="fa fa-university"></i>
+                </label>
+              </label>
+              <em for="university" class="state-error" ng-cloak ng-show="state.validating && form.university.$invalid">
+                <span ng-show="state.validating && form.university.$error.required">Please enter your university.</span>
+              </em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <label for="major" class="field prepend-icon" ng-class="{'state-error': state.validating && form.major.$invalid}">
+                <input type="text" name="major" id="major" class="gui-input" placeholder="What Is Your Major" ng-model="data.major" required ng-disabled="state.submitting">
+                <label for="major" class="field-icon">
+                  <i class="fa fa-bookmark"></i>
+                </label>
+              </label>
+              <em for="major" class="state-error" ng-cloak ng-show="state.validating && form.major.$error.required">You must enter your Major.</em>
+            </div>
+            <!-- end section -->
+
+            <div class="section">
+              <label for="education" class="field select" ng-class="{'state-error': state.validating && form.major.$invalid}">
+                <select id="education" name="education" class="gui-input" ng-model="data.education" required ng-disabled="state.submitting">
+                  <option value=""> -- Select Education Level -- </option>
+                  <option value="freshman">Freshman</option>
+                  <option value="sophomore">Sophomore</option>
+                  <option value="junior">Junior</option>
+                  <option value="senior">Senior</option>
+                  <option value="graduate">Graduate</option>
+                </select>
+                <i class="arrow"></i>
+              </label>
+              <em for="education" class="state-error" ng-cloak ng-show="state.validating && form.education.$error.required">You must enter your Education Level.</em>
+            </div>
+            <!-- end section -->
+
+
+            <button type="button" class="button admin-form" ng-click="setStep(1)">Previous</button>
+
+          </div>
+        </div>
+        <!-- end .form-body section -->
+        <div ng-switch-when=2 class="panel-footer" ng-cloak ng-hide="state.completed">
+          <button type="submit" class="button" ng-class="{'btn-primary': !state.submitting}" ng-disabled="state.submitting">Create Account</button>
+        </div>
+        <!-- end .form-footer section -->
+      </div>
+    </form>
+
+  </div>
+  <!-- end .admin-form section -->
+</div>
+
+<% include ../../partials/tail_alt.html %>

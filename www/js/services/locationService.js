@@ -1,15 +1,15 @@
-angular.module('breadcrumb')
-.factory('LocationService', function($q){
-  var autocompleteService = new google.maps.places.AutocompleteService();
-  var detailsService = new google.maps.places.PlacesService(document.createElement("input"));
+const bread = angular.module('breadcrumb')
+bread.factory('LocationService', function ($q) {
+  const autocompleteService = new google.maps.places.AutocompleteService();
+  const detailsService = new google.maps.places.PlacesService(document.createElement("input"));
   return {
     searchAddress: function(input) {
-      var deferred = $q.defer();
+      const deferred = $q.defer();
 
       autocompleteService.getPlacePredictions({
-        input: input
+        input: input,
       }, function(result, status) {
-        if(status == google.maps.places.PlacesServiceStatus.OK){
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
           console.log(status);
           deferred.resolve(result);
         }else{
@@ -20,21 +20,25 @@ angular.module('breadcrumb')
       return deferred.promise;
     },
     getDetails: function(placeId) {
-      var deferred = $q.defer();
+      const deferred = $q.defer();
       detailsService.getDetails({placeId: placeId}, function(result) {
         deferred.resolve(result);
       });
       return deferred.promise;
     }
   };
-})
-.directive('locationSuggestion', function ($ionicModal, LocationService){
+});
+bread.directive('locationSuggestion', function ($ionicModal, LocationService, Trail, $rootScope){
   return {
     restrict: 'A',
     scope: {
-      location: '='
+      location: '=',
+      fromDir2Ctrl: '=method',
+      // step: '=',
+      // dataFromDirective: '&',
+      // selectedLocation: '=',
     },
-    link: function($scope, element){
+    link: function($scope, element, scope){
       console.log('locationSuggestion started!');
       $scope.search = {};
       $scope.search.suggestions = [];
@@ -63,13 +67,13 @@ angular.module('breadcrumb')
         $scope.close = function() {
           $scope.modal.hide();
         };
-        $scope.choosePlace = function(place) {
+        $scope.choosePlace = function(place, Ctrl) {
           LocationService.getDetails(place.place_id).then(function(location) {
             $scope.location = location;
             $scope.close();
           });
         };
       });
-    }
-  }
+    },
+  };
 });
