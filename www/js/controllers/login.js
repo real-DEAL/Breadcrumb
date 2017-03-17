@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('LoginCtrl', function ($scope, auth, $state, store) {
+.controller('LoginCtrl', function ($scope, auth, $state, store, getUpdateUserFact, $http) {
   $scope.doAuth = () => {
     auth.signin({
       socialBigButtons: true,
@@ -19,13 +19,24 @@ angular.module('breadcrumb')
       store.set('profile', profile);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
-      // TODO: erase after done with auth
-      for (let k in profile) {
-        console.log(k+': ' + profile[k]);
-      }
-      $state.go('app.dashboard');
+      $http({
+        method: 'GET',
+        url: 'http://54.203.104.113/users',
+        json: true,
+        params: {
+          social_login: profile.user_id,
+        },
+      })
+      .then((response) => {
+        const data = response.data.data[0];
+        if (data) {
+          store.set('username', data.username);
+          $state.go('app.dashboard');
+        }
+        $state.go('settings');
+      });
     }, (error) => {
-      console.warn('There was an error logging in', error);
+      console.error('There was an error logging in', error);
     });
   };
 
