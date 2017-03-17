@@ -4,7 +4,7 @@ angular.module('breadcrumb')
     auth.signin({
       socialBigButtons: true,
       allowSignUpAction: false,
-      allowedConnections: ['twitter', 'facebook', 'google'],
+      allowedConnections: ['twitter', 'facebook'],
       authParams: {
         scope: 'openid offline_access',
         device: 'Mobile device',

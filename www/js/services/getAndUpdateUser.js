@@ -1,7 +1,6 @@
 angular.module('breadcrumb')
-.factory('getUpdateUserFact', function ($http, $state, store) {
+.factory('getUpdateUserFact', function ($http, $state) {
   return (socialID, userInfo) => {
-    console.log(socialID, userInfo);
     $http({
       method: 'GET',
       url: 'http://54.203.104.113/users',
@@ -12,7 +11,6 @@ angular.module('breadcrumb')
     })
     .then((response) => {
       const data = response.data.data[0];
-      console.log(data);
       userInfo.social_login = socialID;
       userInfo.password = socialID;
       if (data) {
@@ -32,7 +30,6 @@ angular.module('breadcrumb')
           console.error(error);
         });
       }
-      console.log(typeof socialID);
       return $http({
         method: 'POST',
         url: 'http://54.203.104.113/users',

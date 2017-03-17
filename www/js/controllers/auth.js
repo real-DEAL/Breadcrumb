@@ -27,11 +27,9 @@ angular.module('breadcrumb')
   $scope.username = null;
   $scope.email = null;
 
-  $scope.test = (input) => console.log(input);
+  $scope.test = input => console.warn(input);
 
   $scope.updateUser = (username, email) => {
-    console.log(username, email);
-    getUpdateUserFact(store.get('profile').user_id,
-   { username: username, email: email });
+    getUpdateUserFact(store.get('profile').user_id, { username, email });
   };
 });
