@@ -91,16 +91,21 @@ angular.module('breadcrumb')
     $scope.difficulty[0].style = null;
     $scope.difficulty[1].style = null;
     $scope.difficulty[2].style = null;
-    if (diff === 'easy' || diff === 'medium' || diff === 'hard') {
+    if (diff === 'easy') {
+      $scope.trail.difficulty = 1;
       $scope.difficulty[0].style = fill;
     }
-    if (diff === 'medium' || diff === 'hard') {
+    if (diff === 'medium') {
+      $scope.trail.difficulty = 2;
+      $scope.difficulty[0].style = fill;
       $scope.difficulty[1].style = fill;
     }
     if (diff === 'hard') {
+      $scope.trail.difficulty = 3;
+      $scope.difficulty[0].style = fill;
+      $scope.difficulty[1].style = fill;
       $scope.difficulty[2].style = fill;
     }
-    $scope.trail.difficulty = diff;
   };
 
   $scope.transport = {
@@ -188,7 +193,6 @@ angular.module('breadcrumb')
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
-      console.warn($scope.crumb, 'crumb');
     }
   };
 
@@ -240,7 +244,6 @@ angular.module('breadcrumb')
         'animation-name': 'moveUp',
       };
       $scope.$apply();
-      console.warn(data, 'data');
     });
   };
 

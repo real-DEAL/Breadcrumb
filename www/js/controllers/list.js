@@ -3,6 +3,7 @@
 
 angular.module('breadcrumb')
 .controller('ListCtrl', function ($scope, ListFact) {
+
   $scope.specificTransport = false;
 
   $scope.trail = {
@@ -48,24 +49,9 @@ angular.module('breadcrumb')
     $scope.trails = ListFact.filter($scope.trailsCache, 'name');
   };
 
-  $scope.trailsCache = [
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-  ];
+  $scope.trailsCache = ListFact.get().then((trails) => {
+    $scope.trails = ListFact.filter(trails, 'name');
+  });
 
-  $scope.trails = ListFact.filter($scope.trailsCache, 'name');
+  $scope.trails = null;
 });

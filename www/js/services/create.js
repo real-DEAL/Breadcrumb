@@ -6,7 +6,7 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
   const submitTrail = (trail, crumbs) => (
     $http({
       method: 'POST',
-      url: 'http://54.203.104.113/trails',
+      url: 'http://192.168.99.100/trails',
       data: trail,
       json: true,
     })
@@ -17,7 +17,7 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
         crumb.order_number = index + 1;
         return $http({
           method: 'POST',
-          url: 'http://54.203.104.113/crumbs',
+          url: 'http://192.168.99.100/crumbs',
           data: crumb,
           json: true,
         });

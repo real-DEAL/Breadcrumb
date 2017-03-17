@@ -123,13 +123,19 @@
       <div class="item item-divider center">
         Review crumbs for <strong>{{ trail.name }}</strong>
       </div>
+
+      <!-- MAP -->
       <div class="center reviewMap">
         <img src="{{ trail.map }}" />
       </div>
+
+      <!-- TIME AND DISTANCE -->
       <div class="row center">
         <div class="col">Total time: <br><strong>{{ trail.time }}</strong></div>
         <div class="col">Total distance: <br><strong>{{ trail.length }}</strong></div>
       </div>
+
+      <!-- CRUMBS -->
       <div ng-style="overflowStyle">
         <div ng-repeat="crumb in crumbs track by $index" class="row">
           <div class="col col-10">{{ $index + 1 }}</div>

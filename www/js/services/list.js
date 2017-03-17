@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('ListFact', function () {
+angular.module('breadcrumb').factory('ListFact', function ($http) {
   const closeStyle = {
     height: '95px',
     'transition-duration': '250ms',
@@ -14,6 +14,30 @@ angular.module('breadcrumb').factory('ListFact', function () {
     }
     return arr;
   };
+
+  const getTrails = () => (
+    $http({
+      method: 'GET',
+      url: 'http://192.168.99.100/trails',
+      // json: true,
+    })
+    .then((response) => {
+      const data = [];
+      response.data.data.forEach((trail) => {
+        trail.style = closeStyle;
+        // TODO: Integrate actual algorithm to calculate rating from trail.score
+        const stars = Math.floor(Math.random() * 6);
+        const emptyStars = 5 - stars;
+        const difficulty = trail.difficulty;
+        trail.stars = arrayMaker(stars);
+        trail.emptyStars = arrayMaker(emptyStars);
+        trail.difficulty = arrayMaker(difficulty);
+        data.push(trail);
+      });
+      console.log(data);
+      return data;
+    })
+  );
 
   const trailMaker = () => {
     const tran = Math.floor(Math.random() * 4) + 1;
@@ -35,6 +59,7 @@ angular.module('breadcrumb').factory('ListFact', function () {
   };
 
   const filterListItems = (list, type, value) => {
+    console.log(list);
     const items = list.slice();
     if (value) {
       return items.filter(item => item[type] === value);
@@ -53,6 +78,7 @@ angular.module('breadcrumb').factory('ListFact', function () {
   };
 
   return {
+    get: getTrails,
     close: closeStyle,
     range: arrayMaker,
     trail: trailMaker,

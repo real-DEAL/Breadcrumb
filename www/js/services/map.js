@@ -17,13 +17,11 @@ angular.module('breadcrumb').factory('Map', function () {
 
   const totalMiles = (response) => {
     const myRoute = response.routes[0].legs[0].distance.text;
-    console.warn(myRoute);
     return myRoute;
   };
 
   const computeTotalDuration = (response) => {
     const myRoute = response.routes[0].legs[0].duration.text;
-    console.warn(myRoute, 'mins total');
     return myRoute;
   };
 
@@ -58,10 +56,8 @@ angular.module('breadcrumb').factory('Map', function () {
     };
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {
-        console.warn(request, 'request');
         if (status === google.maps.DirectionsStatus.OK) {
           arrayPathAddOn(response);
-          console.warn(`${url}${arrayPathAddOn(response)}`);
           obj = {
             image: `${url}${arrayPathAddOn(response)}`,
             miles: totalMiles(response),
@@ -70,10 +66,8 @@ angular.module('breadcrumb').factory('Map', function () {
           };
           resolve(obj);
         } else {
-          console.warn('Fetch failed');
           reject('failed');
         }
-        console.warn(obj, 'obj');
         return obj;
       });
     });
