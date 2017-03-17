@@ -174,6 +174,9 @@ function RegistrationController($scope, Registration, Upload) {
 
 
 
+
+
+
       <div class="list">
         <label class="item item-input">
           <input type="text" data-method="watchValue()" location-suggestion location="location" placeholder="Location" ng-model="location.formatted_address">

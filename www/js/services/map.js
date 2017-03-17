@@ -34,7 +34,7 @@ angular.module('breadcrumb').factory('Map', function () {
 
   const wayPointsMakers = (directions) => {
     const arr = [];
-    const wypts = directions.slice(1, directions.length - 2);
+    const wypts = directions.slice(2, directions.length - 1);
     wypts.forEach((point) => {
       const obj = {
         location: '',
@@ -49,9 +49,9 @@ angular.module('breadcrumb').factory('Map', function () {
   const addPath = (directions) => {
     let obj = {};
     const request = {
-      origin: directions[0].location,
+      origin: directions[1].location,
       waypoints: wayPointsMakers(directions),
-      destination: directions[directions.length - 2].location,
+      destination: directions[directions.length - 1].location,
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
     return new Promise(function (resolve, reject) {
@@ -72,7 +72,6 @@ angular.module('breadcrumb').factory('Map', function () {
       });
     });
   };
-
   return {
     add: addPath,
   };

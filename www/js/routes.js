@@ -32,9 +32,9 @@ angular.module('breadcrumb')
         abstract: true,
         templateUrl: 'views/menu.html',
         controller: 'AppCtrl',
-        data: {
-          requiresLogin: true,
-        },
+        // data: {
+        //   requiresLogin: true,
+        // },
       })
       .state('app.dashboard', {
         url: '/dashboard',
@@ -151,7 +151,6 @@ angular.module('breadcrumb')
       clientID: 'WjzyvWzAQ8jN72gc0NR6pWBEG8gWM2Wn',
       loginState: 'login',
     });
-
     $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({

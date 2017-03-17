@@ -33,10 +33,6 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService, Tr
     restrict: 'A',
     scope: {
       location: '=',
-      fromDir2Ctrl: '=method',
-      // step: '=',
-      // dataFromDirective: '&',
-      // selectedLocation: '=',
     },
     link: function($scope, element, scope){
       console.log('locationSuggestion started!');
@@ -70,6 +66,7 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService, Tr
         $scope.choosePlace = function(place, Ctrl) {
           LocationService.getDetails(place.place_id).then(function(location) {
             $scope.location = location;
+            console.warn($scope.location, '$scope.location in directive')
             $scope.close();
           });
         };
@@ -77,3 +74,8 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService, Tr
     },
   };
 });
+
+// fromDir2Ctrl: '=method',
+// // step: '=',
+// // dataFromDirective: '&',
+// // selectedLocation: '=',
