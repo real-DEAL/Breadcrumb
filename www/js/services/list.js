@@ -26,7 +26,7 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
       response.data.data.forEach((trail) => {
         trail.style = closeStyle;
         // TODO: Integrate actual algorithm to calculate rating from trail.score
-        const stars = Math.floor(Math.random() * 6);
+        const stars = trail.rating || Math.floor(Math.random() * 6);
         const emptyStars = 5 - stars;
         const difficulty = trail.difficulty;
         trail.stars = arrayMaker(stars);
@@ -34,7 +34,6 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
         trail.difficulty = arrayMaker(difficulty);
         data.push(trail);
       });
-      console.log(data);
       return data;
     })
   );
@@ -44,10 +43,9 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
     const stars = Math.floor(Math.random() * 6);
     const emptyStars = 5 - stars;
     const difficulty = Math.floor(Math.random() * 5) + 1;
-
     return {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      description: '',
       transport: tran,
       stars: arrayMaker(stars),
       emptyStars: arrayMaker(emptyStars),
@@ -59,7 +57,6 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
   };
 
   const filterListItems = (list, type, value) => {
-    console.log(list);
     const items = list.slice();
     if (value) {
       return items.filter(item => item[type] === value);

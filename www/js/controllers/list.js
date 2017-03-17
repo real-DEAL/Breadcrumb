@@ -3,8 +3,8 @@
 
 angular.module('breadcrumb')
 .controller('ListCtrl', function ($scope, ListFact) {
-
   $scope.specificTransport = false;
+  $scope.loading = null;
 
   $scope.trail = {
     name: 'My first trail',
@@ -40,17 +40,23 @@ angular.module('breadcrumb')
   };
 
   $scope.filter = (type, value) => {
+    $scope.loading = null;
     $scope.trails = ListFact.filter($scope.trails, type, value);
+    $scope.loading = { display: 'none' };
     if (type === 'transport') $scope.specificTransport = true;
   };
 
   $scope.reset = () => {
+    $scope.loading = null;
     $scope.specificTransport = false;
     $scope.trails = ListFact.filter($scope.trailsCache, 'name');
+    $scope.loading = { display: 'none' };
   };
 
   $scope.trailsCache = ListFact.get().then((trails) => {
     $scope.trails = ListFact.filter(trails, 'name');
+    $scope.loading = { display: 'none' };
+    $scope.trailsCache = ListFact.filter(trails, 'name');
   });
 
   $scope.trails = null;
