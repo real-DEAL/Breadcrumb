@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('AuthCtrl', function ($scope) {
+.controller('AuthCtrl', function ($scope, store, getUpdateUserFact) {
   $scope.user = {
     name: 'NAME',
     score: 500,
@@ -24,4 +24,24 @@ angular.module('breadcrumb')
     $scope.exampleTrail,
     $scope.exampleTrail,
   ];
+  $scope.username = null;
+  $scope.email = null;
+
+  $scope.test = input => console.warn(input);
+
+  $scope.emailInStore = () => {
+    const profile = store.get('profile');
+    if (profile.email) {
+      return true;
+    }
+    return false;
+  };
+
+  $scope.updateUser = (username, email) => {
+    const profile = store.get('profile');
+    if (email === undefined) {
+      email = profile.email;
+    }
+    getUpdateUserFact(profile.user_id, { username, email });
+  };
 });

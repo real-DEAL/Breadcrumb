@@ -22,6 +22,11 @@ angular.module('breadcrumb')
         templateUrl: 'views/signup.html',
         controller: 'AuthCtrl',
       })
+      .state('settings', {
+        url: '/settings',
+        templateUrl: 'views/settingsNoUser.html',
+        controller: 'AuthCtrl',
+      })
       .state('app', {
         url: '/app',
         abstract: true,
@@ -68,7 +73,7 @@ angular.module('breadcrumb')
         },
       })
       .state('app.settings', {
-        url: '/settings',
+        url: '/updatesettings',
         views: {
           menuContent: {
             templateUrl: 'views/settings.html',
