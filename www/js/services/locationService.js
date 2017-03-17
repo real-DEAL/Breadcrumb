@@ -1,72 +1,69 @@
-const bread = angular.module('breadcrumb')
+const bread = angular.module('breadcrumb');
 bread.factory('LocationService', function ($q) {
   const autocompleteService = new google.maps.places.AutocompleteService();
-  const detailsService = new google.maps.places.PlacesService(document.createElement("input"));
+  const detailsService = new google.maps.places.PlacesService(document.createElement('input'));
   return {
-    searchAddress: function(input) {
+    searchAddress: (input) => {
       const deferred = $q.defer();
 
       autocompleteService.getPlacePredictions({
-        input: input,
-      }, function(result, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          console.log(status);
+        input,
+      }, (result, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
           deferred.resolve(result);
-        }else{
-          deferred.reject(status)
+        } else {
+          deferred.reject(status);
         }
       });
 
       return deferred.promise;
     },
-    getDetails: function(placeId) {
+    getDetails: (placeId) => {
       const deferred = $q.defer();
-      detailsService.getDetails({placeId: placeId}, function(result) {
+      detailsService.getDetails({ placeId }, (result) => {
         deferred.resolve(result);
       });
       return deferred.promise;
-    }
+    },
   };
 });
-bread.directive('locationSuggestion', function ($ionicModal, LocationService, Trail, $rootScope){
+bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
   return {
     restrict: 'A',
     scope: {
       location: '=',
     },
-    link: function($scope, element, scope){
-      console.log('locationSuggestion started!');
+    link: ($scope, element) => {
       $scope.search = {};
       $scope.search.suggestions = [];
-      $scope.search.query = "";
+      $scope.search.query = '';
       $ionicModal.fromTemplateUrl('views/location.html', {
         scope: $scope,
-        focusFirstInput: true
+        focusFirstInput: true,
       }).then(function (modal) {
         $scope.modal = modal;
       });
-      element[0].addEventListener('focus', function(event) {
+      element[0].addEventListener('focus', () => {
         $scope.open();
       });
-      $scope.$watch('search.query', function(newValue) {
+      $scope.$watch('search.query', (newValue) => {
         if (newValue) {
-          LocationService.searchAddress(newValue).then(function(result) {
+          LocationService.searchAddress(newValue).then((result) => {
             $scope.search.error = null;
             $scope.search.suggestions = result;
-          }, function(status){
-            $scope.search.error = "There was an error :( " + status;
+          }, (status) => {
+            $scope.search.error = `There was an error :( ${status}`;
           });
-        };
-        $scope.open = function() {
+        }
+        $scope.open = () => {
           $scope.modal.show();
         };
-        $scope.close = function() {
+        $scope.close = () => {
           $scope.modal.hide();
         };
-        $scope.choosePlace = function(place, Ctrl) {
-          LocationService.getDetails(place.place_id).then(function(location) {
+        $scope.choosePlace = (place) => {
+          LocationService.getDetails(place.place_id).then((location) => {
             $scope.location = location;
-            console.warn($scope.location, '$scope.location in directive')
             $scope.close();
           });
         };
@@ -74,8 +71,3 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService, Tr
     },
   };
 });
-
-// fromDir2Ctrl: '=method',
-// // step: '=',
-// // dataFromDirective: '&',
-// // selectedLocation: '=',

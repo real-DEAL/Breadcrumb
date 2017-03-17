@@ -6,6 +6,7 @@ bower_components/
 .env
 .eslintrc.js
 sampleDirective.js
+sampleView.js
 
 www/lib
 .env

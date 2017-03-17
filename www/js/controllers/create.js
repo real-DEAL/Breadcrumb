@@ -227,8 +227,6 @@ angular.module('breadcrumb')
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       crumb.location = arg;
-      console.warn(arg, 'arg add()')
-      console.warn(crumb, 'crumb add()')
       $scope.crumbs.push(crumb);
     }
   };
@@ -268,7 +266,6 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
-    console.warn($scope.crumbs, 'array in ReviewMap of Crumbs')
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
       console.log(data);
@@ -308,7 +305,6 @@ angular.module('breadcrumb')
       $scope.trail = trailMaker();
       $scope.loading = { display: 'none' };
       $state.go('app.dashboard');
-    })
-    ;
+    });
   };
 });
