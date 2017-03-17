@@ -3,8 +3,26 @@
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('Trail', function ($http) {
-  const submitTrail = (trail, crumbs) => (
-    $http({
+  const submitTrail = (trail, crumbs) => {
+    const length = parseInt(trail.length.replace(/\D/g, ''), 10);
+    console.log(length);
+    if (!trail.transport) {
+      trail.transport = 'WALKING';
+      if (length > 5) {
+        trail.transport = 'BICYCLE';
+      } else if (length > 20) {
+        trail.transport = 'DRIVING';
+      }
+    }
+    if (!trail.difficulty) {
+      trail.difficulty = 1;
+      if (length > 5) {
+        trail.difficulty = 2;
+      } else if (length > 20) {
+        trail.difficulty = 3;
+      }
+    }
+    return $http({
       method: 'POST',
       url: 'http://192.168.99.100/trails',
       data: trail,
@@ -23,7 +41,7 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
         });
       });
     })
-  );
+  };
 
   const directionsService = new google.maps.DirectionsService();
 

@@ -14,7 +14,9 @@
     <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
 
       <div class="row item item-divider" ng-click="toggle($index)">
+        <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
         <div class="col center s-1x">{{ trail.name }}</div>
+        <i class="ion-backspace assertive margin-h s-1x right" ng-click="test(trail.id)"></i>
       </div>
 
       <div class="row item center">

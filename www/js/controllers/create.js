@@ -2,17 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map) {
-  const addresses = [
-    '727 Mandeville St, New Orleans, LA, 70117',
-    '15828 196th Pl NE, Woodinville, WA, 98077',
-    '748 Camp St, New Orleans, LA 70130',
-    '24700 McBean Pkwy, Valencia, CA 91355',
-    '60 Lincoln Center Plaza, New York, NY 10023',
-  ];
-
-  const i = () => Math.floor(Math.random() * 5);
-
+.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = {
@@ -158,8 +148,8 @@ angular.module('breadcrumb')
   };
 
   $scope.trail = {
-    name: 'Liv\'s trail',
-    description: 'A trail that takes you places',
+    name: Data.trailName(),
+    description: Data.description(),
     type: $scope.trailTypes[0],
     difficulty: null,
     map: null,
@@ -167,15 +157,15 @@ angular.module('breadcrumb')
     length: null,
     requires_money: false,
     transport: null,
-    crumbs: 0,
+    crumbs: {},
     left: 2.5,
     style: null,
   };
 
   $scope.crumb = () => ({
     name: null,
-    description: null,
-    location: addresses[i()],
+    description: Data.crumbDescription(),
+    location: Data.address(),
     text: null,
     media: null,
     image: null,
@@ -190,7 +180,7 @@ angular.module('breadcrumb')
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
-      $scope.trail.crumbs += 1;
+      $scope.trail.crumbs = $scope.crumbs.slice();
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
     }
@@ -199,7 +189,7 @@ angular.module('breadcrumb')
   $scope.remove = (index) => {
     $scope.crumbs.splice(index, 1);
     if (!$scope.review.check) {
-      $scope.trail.crumbs -= 1;
+      $scope.trail.crumbs = $scope.crumbs.slice();
       moveReset($scope.trail, 0);
       $scope.crumbs.forEach((crumb, ind) => {
         moveReset(crumb, ind + 1);
@@ -261,6 +251,7 @@ angular.module('breadcrumb')
 
   $scope.submit = () => {
     $scope.loading = null;
+    $scope.crumbs.pop();
     Trail.submit($scope.trail, $scope.crumbs)
     .then(() => {
       $scope.reset();

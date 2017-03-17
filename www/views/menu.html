@@ -8,28 +8,34 @@
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu side="left" width="175">
+  <ion-side-menu side="left" width="200">
     <header class="bar bar-header bar-stable" menu-toggle="left">
       <h1 class="title">USERNAME</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
         <ion-item nav-clear menu-close ui-sref="app.search">
+          <i class="ion-search margin-h"></i>
           Search
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.dashboard">
+          <i class="ion-navicon-round margin-h"></i>
           Dashboard
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.profile">
+          <i class="ion-person margin-h"></i>
           Profile
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.create">
-          Create trail
+          <i class="ion-edit margin-h"></i>
+          Create Trail
         </ion-item>
         <ion-item nav-clear menu-close ui-sref="app.settings">
+          <i class="ion-wrench margin-h"></i>
           Settings
         </ion-item>
         <ion-item nav-clear menu-close ng-click="logout()">
+          <i class="ion-log-out margin-h"></i>
           Log out
         </ion-item>
       </ion-list>

@@ -38,23 +38,28 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
     })
   );
 
-  const trailMaker = () => {
-    const tran = Math.floor(Math.random() * 4) + 1;
-    const stars = Math.floor(Math.random() * 6);
-    const emptyStars = 5 - stars;
-    const difficulty = Math.floor(Math.random() * 5) + 1;
-    return {
-      name: `Trail ${Math.floor(Math.random() * 100)}`,
-      description: '',
-      transport: tran,
-      stars: arrayMaker(stars),
-      emptyStars: arrayMaker(emptyStars),
-      difficulty: arrayMaker(difficulty),
-      length: (Math.floor(Math.random() * 5) + 2) * tran,
-      progress: Math.floor(Math.random() * 100),
-      style: closeStyle,
-    };
-  };
+    const deleteTrail = (index) => (
+      $http({
+        method: 'DELETE',
+        url: 'http://192.168.99.100/trails',
+        // json: true,
+      })
+      .then((response) => {
+        const data = [];
+        response.data.data.forEach((trail) => {
+          trail.style = closeStyle;
+          // TODO: Integrate actual algorithm to calculate rating from trail.score
+          const stars = trail.rating || Math.floor(Math.random() * 6);
+          const emptyStars = 5 - stars;
+          const difficulty = trail.difficulty;
+          trail.stars = arrayMaker(stars);
+          trail.emptyStars = arrayMaker(emptyStars);
+          trail.difficulty = arrayMaker(difficulty);
+          data.push(trail);
+        });
+        return data;
+      })
+    );
 
   const filterListItems = (list, type, value) => {
     const items = list.slice();
@@ -76,9 +81,9 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
 
   return {
     get: getTrails,
+    del: deleteTrail,
     close: closeStyle,
     range: arrayMaker,
-    trail: trailMaker,
     filter: filterListItems,
   };
 });

@@ -11,7 +11,7 @@
 
   <ion-content>
     <!-- USER INFORMATION -->
-    <div class="padding w-75">
+    <div class="padding">
       <div class="row row-center">
         <div class="col">
           <div class="profilePic" ng-style="userPic">
@@ -19,9 +19,9 @@
           </div>
         </div>
         <div class="col center">
-          <h3>Score: {{ user.score }}</h3>
-          <p>Completed trails: {{ user.finishedTrails }}
-          <br>Total time: {{ user.totalTime }}</p>
+          <h3>Score: {{ user.score || 0 }}</h3>
+          <p>Completed trails: {{ user.finishedTrails || 0 }}
+          <br>Total time: {{ user.totalTime || 0 }}</p>
         </div>
       </div>
     </div>
