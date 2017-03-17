@@ -207,20 +207,21 @@
         </div>
       </div>
     </div>
+    <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
+      <div class="title">Review and submit</div>
+    </div>
+
+    <div class="tabs tabs-icon-top" ng-if="review.check">
+      <a class="tab-item" ng-click="reset()">
+        <i class="icon ion-compose"></i>
+        Edit
+      </a>
+      <a class="tab-item" ng-click="submit()">
+        <i class="icon ion-checkmark-round"></i>
+        Submit
+      </a>
+    </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
-    <div class="title">Review and submit</div>
-  </div>
 
-  <div class="tabs tabs-icon-top" ng-if="review.check">
-    <a class="tab-item" ng-click="reset()">
-      <i class="icon ion-compose"></i>
-      Edit
-    </a>
-    <a class="tab-item" ng-click="submit()">
-      <i class="icon ion-checkmark-round"></i>
-      Submit
-    </a>
-  </div>
 </ion-view>
