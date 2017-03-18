@@ -7,6 +7,7 @@ angular.module('breadcrumb', [
   'auth0',
   'angular-storage',
   'angular-jwt',
+  'ngCordova',
 ])
 .run(function (
   $window,

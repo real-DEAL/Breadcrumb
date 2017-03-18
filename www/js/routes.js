@@ -32,9 +32,9 @@ angular.module('breadcrumb')
         abstract: true,
         templateUrl: 'views/menu.html',
         controller: 'AppCtrl',
-        // data: {
-        //   requiresLogin: true,
-        // },
+        data: {
+          requiresLogin: true,
+        },
       })
       .state('app.dashboard', {
         url: '/dashboard',
@@ -60,6 +60,10 @@ angular.module('breadcrumb')
           menuContent: {
             templateUrl: 'views/create.html',
             controller: 'CreateTrailCtrl',
+          },
+          'mapContent@app.create': {
+            templateUrl: 'views/map.html',
+            controller: 'MapCtrl',
           },
         },
       })
