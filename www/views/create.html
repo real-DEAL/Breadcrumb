@@ -76,6 +76,8 @@
 
     <!-- CRUMBS -->
     <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
+
+      <!-- NAME -->
       <div class="row item item-divider center">
         <h1 class="title col">
           <input class="clearInput" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }}">
@@ -84,11 +86,15 @@
           <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
         </div>
       </div>
+
       <div class="card">
+      <!-- DESCRIPTION -->
+      What should the traveler do?
         <label class="item item-input textbox">
           <input type="text" ng-model="crumb.description" placeholder="Description">
         </label>
 
+        <!-- LOCATION -->
         <div class="item item-input textbox">
           <input class="col" type="text" ng-model="crumb.location" placeholder="Location">
           <div class="col col-10" ng-click="test()">
@@ -96,11 +102,13 @@
           </div>
         </div>
 
+        <!-- MEDIA BUTTON -->
         <div class="item item-divider center" ng-click="test('hey')">
           <h1>MEDIA UPLOAD</h1>
         </div>
       </div>
 
+      <!-- BUTTONS -->
       <div class="row">
         <div class="col">
           <button class="button button-block" ng-click="move(100)">

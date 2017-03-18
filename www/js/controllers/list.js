@@ -24,7 +24,7 @@ angular.module('breadcrumb')
 
   $scope.open = (index) => {
     $scope.trails[index].style = {
-      height: '575px',
+      height: '650px',
       overflow: 'hidden',
       'transition-duration': '250ms',
     };

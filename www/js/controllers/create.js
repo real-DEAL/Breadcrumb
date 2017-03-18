@@ -31,6 +31,21 @@ angular.module('breadcrumb')
     crumb.style = style;
   };
 
+  const trailMaker = () => ({
+    name: Data.trailName(),
+    description: Data.description(),
+    type: $scope.trailTypes[0],
+    difficulty: null,
+    map: null,
+    time: null,
+    length: null,
+    requires_money: false,
+    transport: null,
+    crumbs: {},
+    left: 2.5,
+    style: null,
+  });
+
   $scope.loading = { display: 'none' };
 
   $scope.trailTypes = [
@@ -147,20 +162,7 @@ angular.module('breadcrumb')
     style: { display: 'none' },
   };
 
-  $scope.trail = {
-    name: Data.trailName(),
-    description: Data.description(),
-    type: $scope.trailTypes[0],
-    difficulty: null,
-    map: null,
-    time: null,
-    length: null,
-    requires_money: false,
-    transport: null,
-    crumbs: {},
-    left: 2.5,
-    style: null,
-  };
+  $scope.trail = trailMaker();
 
   $scope.crumb = () => ({
     name: null,
@@ -255,8 +257,11 @@ angular.module('breadcrumb')
     Trail.submit($scope.trail, $scope.crumbs)
     .then(() => {
       $scope.reset();
+      $scope.crumbs = [];
+      $scope.trail = trailMaker();
       $scope.loading = { display: 'none' };
       $state.go('app.dashboard');
-    });
+    })
+    ;
   };
 });

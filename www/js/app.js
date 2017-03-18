@@ -104,7 +104,7 @@ angular.module('breadcrumb', [
   };
 
   $scope.overflowStyle = {
-    'max-height': '125px',
+    'max-height': '100px',
     overflow: 'scroll',
   };
 });

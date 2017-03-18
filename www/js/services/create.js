@@ -7,21 +7,14 @@
 angular.module('breadcrumb').factory('Trail', function ($http) {
   const submitTrail = (trail, crumbs) => {
     const length = trail.length.replace(/\D/g, '');
-    console.log(length, trail.transport);
     if (!trail.transport) {
-      console.log(length, length < 6);
-      console.log(length, length > 5);
-      if (length < 6) {
-        trail.transport = 'WALKING';
-      }
+      trail.transport = 'WALKING';
       if (length > 5) {
         trail.transport = 'BICYCLING';
-      }
-      if (length > 20) {
+      } else if (length > 20) {
         trail.transport = 'DRIVING';
       }
     }
-    console.log(trail.transport);
     if (!trail.difficulty) {
       trail.difficulty = 1;
       if (length > 5) {
@@ -30,7 +23,6 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
         trail.difficulty = 3;
       }
     }
-    console.log(trail);
     return $http({
       method: 'POST',
       url: 'http://192.168.99.100/trails',
@@ -49,7 +41,8 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
           json: true,
         });
       });
-    });
+    })
+    .catch(err => err);
   };
 
   return {

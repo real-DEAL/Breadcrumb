@@ -5,7 +5,7 @@
 angular.module('breadcrumb').factory('Map', function () {
   const directionsService = new google.maps.DirectionsService();
 
-  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=300x300&path=enc:';
+  const url = 'http://maps.googleapis.com/maps/api/staticmap?size=355x250&path=enc:';
 
   const computeTotalDistance = (response) => {
     let total = 0;
