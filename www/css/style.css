@@ -15,6 +15,19 @@
     100% {transform: translate(0%, 0px)}
 }
 
+@keyframes float {
+    0%   {transform: translate(0px, 0px)}
+    50%   {transform: translate(0px, 50px)}
+    100% {transform: translate(0px, 0px)}
+}
+
+.float {
+  animation-name: float;
+  animation-duration: 2000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
 .a0-header, .logo {
   background-image: url('../img/temp.png') !important;
   background-position: center !important;

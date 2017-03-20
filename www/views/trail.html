@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<ion-view >
+  <div class="loading" ng-style="loading"></div>
+
+  <ion-nav-buttons side="left">
+    <ion-header-bar class="bar bar-stable" align-title="center">
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <h1 class="title">Trail</h1>
+    </ion-header-bar>
+  </ion-nav-buttons>
+
+  <ion-content>
+
+    <!-- CRUMB EXPLANATION -->
+    <div ng-if="page.description" class="margin-top">
+
+      <!-- TRAIL NAME -->
+      <h1 class="t-center">{{ trail.name }}</h1>
+
+      <div class="card float float42 t-center">
+        <!-- CRUMB NUMBER -->
+        <div class="item item-divider">
+          <h2>Crumb #{{ crumbs[crumb].order_number }}</h2>
+        </div>
+
+        <!-- CRUMB NAME -->
+        <div class="item item-text-wrap">
+          {{ crumbs[crumb].name }} Name of Crumb
+        </div>
+
+        <!-- IMAGE -->
+        <div class="item item-text-wrap">
+          <img src="../img/temp.png" alt="" width="200">
+        </div>
+
+        <!-- ADDRESS -->
+        <div class="item item-text-wrap">
+          {{ crumbs[crumb].description }}
+          <br>Address goes here
+        </div>
+      </div>
+
+      <div class="t-center margin-top">
+        <button class="button" ng-click="switch('description')">Let's go!</button>
+      </div>
+    </div>
+
+
+    <!-- DISCOVERY -->
+    <div ng-if="page.found" class="margin-top">
+
+      <div class="card t-center" style="min-height: 450px;">
+
+        <!-- MEDIA BUTTONS -->
+        <div class="bubbles" ng-style="bubbles">
+          <div class="center bubble float float27 inline" ng-if="crumbs[crumb].text" ng-click="media('text')">
+            <i class="center-v ion-document-text"></i>
+          </div>
+          <div class="center bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="media('ar')">
+            <i class="center-v ion-camera center"></i>
+          </div>
+          <div class="center bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
+            <i class="center-v ion-image"></i>
+          </div>
+          <div class="center bubble float float37 inline" ng-if="crumbs[crumb].video" ng-click="media('video')">
+            <i class="center-v ion-ios-videocam"></i>
+          </div>
+          <div class="center bubble float float22 inline" ng-if="crumbs[crumb].audio" ng-click="media('audio')">
+            <i class="center-v ion-headphone"></i>
+          </div>
+        </div>
+        <div ng-if="page.media.show" style="height: 110px;"></div>
+
+        <!-- CONGRATULATIONS -->
+        <h2 class="padding" ng-if="!page.media.show">You found a crumb!</h2>
+
+        <img ng-if="!page.media.show" src="../img/breadbreadbread.gif" alt="" width="200" class="round">
+
+        <h4 ng-if="!page.media.show">Check out its cool content!</h4>
+
+        <!-- MEDIA -->
+        <div ng-if="page.media.show">
+          <div ng-if="page.media.text">
+            {{ crumbs[crumb].text }}
+          </div>
+          <div ng-if="page.media.image">
+            <img src="{{ crumbs[crumb].image }}" alt="" width="300">
+          </div>
+          <div ng-if="page.media.audio">
+            {{ crumbs[crumb].audio }}
+          </div>
+          <div ng-if="page.media.video">
+            <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
+          </div>
+          <div ng-if="page.media.ar">
+            {{ crumbs[crumb] }}
+          </div>
+        </div>
+
+      </div>
+
+      <div class="t-center">
+        <button class="button" ng-click="switch('next')">Continue!</button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

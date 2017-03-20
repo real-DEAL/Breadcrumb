@@ -15,10 +15,28 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
     return arr;
   };
 
-  const getTrails = () => (
-    $http({
+  const getTrails = (request) => {
+    let link = 'http://192.168.99.100/trails';
+    // let link = 'http://54.203.104.113/trails';
+    if (request) {
+      link += '?';
+      // TODO: search by username
+      if (request.username) {
+        link += `user_id=${request.username}`;
+      }
+      if (request.difficulty !== 'Any') {
+        link += `difficulty=${request.difficulty}`;
+      }
+      if (request.rating !== 'Any') {
+        link += `rating=${request.rating}`;
+      }
+      if (request.transport !== 'Any') {
+        link += `transport=${request.transport}`;
+      }
+    }
+    return $http({
       method: 'GET',
-      url: 'http://192.168.99.100/trails',
+      url: link,
     })
     .then((response) => {
       const data = [];
@@ -34,12 +52,13 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
         data.push(trail);
       });
       return data;
-    })
-  );
+    });
+  };
 
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
+      // url: `http://54.203.104.113//trails/${trail.id}`,
       url: `http://192.168.99.100/trails/${trail.id}`,
     })
     .then(res => console.warn(res))

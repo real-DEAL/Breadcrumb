@@ -224,6 +224,7 @@ angular.module('breadcrumb')
     $scope.review.check = true;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
+      console.log(data);
       $scope.loading = { display: 'none' };
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
@@ -238,7 +239,6 @@ angular.module('breadcrumb')
       $scope.$apply();
     });
   };
-
 
   $scope.reset = () => {
     $scope.review.check = false;

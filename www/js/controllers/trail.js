@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $state, ListFact) {
+.controller('TrailCtrl', function ($scope, $state, ListFact) {
   $scope.specificTransport = false;
   $scope.loading = null;
 

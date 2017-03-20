@@ -45,6 +45,15 @@ angular.module('breadcrumb')
           },
         },
       })
+      .state('app.trail', {
+        url: '/trail',
+        views: {
+          menuContent: {
+            templateUrl: 'views/trail.html',
+            controller: 'TrailCtrl',
+          },
+        },
+      })
       .state('app.create', {
         url: '/create',
         views: {

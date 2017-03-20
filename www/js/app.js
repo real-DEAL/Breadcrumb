@@ -21,7 +21,7 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
-    $log.log('Ionic ready');
+    // $log.log('Ionic ready');
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -31,7 +31,7 @@ angular.module('breadcrumb', [
       $window.StatusBar.styleDefault();
     }
     if ($window.geofence === undefined) {
-      $log.warn('Geofence Plugin not found. Using mock instead.');
+      // $log.warn('Geofence Plugin not found. Using mock instead.');
       $window.geofence = GeofencePluginMock;
       $window.TransitionType = GeofencePluginMock.TransitionType;
     }
