@@ -2,84 +2,87 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $state, ListFact) {
-  $scope.specificTransport = false;
+.controller('TrailCtrl', function ($scope, $sce, ListFact) {
   $scope.loading = null;
 
-  $scope.trail = {
-    name: 'My first trail',
-    transport: 2,
-    rating: 3,
-    difficulty: 3,
-    length: 25,
-    progress: 50,
-    style: ListFact.close,
+  $scope.page = {
+    description: false,
+    map: false,
+    found: true,
+    media: {},
+    challenge: false,
   };
 
-  $scope.toggle = index => (
-    $scope.trails[index].style.height === '95px' ?
-    $scope.open(index) :
-    $scope.close(index)
-  );
+  $scope.now = {
+    image: 1,
+    text: 1,
+    ar: 0,
+    video: 0,
+    audio: 1,
+  };
 
-  $scope.open = (index) => {
-    $scope.trails[index].style = {
-      height: '650px',
-      overflow: 'hidden',
-      'transition-duration': '250ms',
-    };
-    $scope.trails.forEach((trail, place) => {
-      if (place !== index) {
-        $scope.close(place);
-      }
+  $scope.bubbles = {
+    top: '320px',
+  };
+
+  $scope.crumb = 0;
+
+  $scope.crumbs = [];
+
+  $scope.trail = ListFact.get().then((trails) => {
+    $scope.crumbs = trails[0].crumb;
+    $scope.trail = trails[0];
+    $scope.loading = { display: 'none' };
+    $scope.crumbs.unshift({
+      data: null,
+      description: 'Check out the awesome grafitti near here!',
+      id: 31,
+      image: '../img/breadfalls.gif',
+      latitude: null,
+      longitude: null,
+      name: null,
+      notification_id: null,
+      open_app_on_click: null,
+      order_number: 0,
+      radius: null,
+      small_icon: null,
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      title: null,
+      trail_id: 14,
+      vibration: null,
+      video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
     });
-  };
-
-  $scope.close = (index) => {
-    $scope.trails[index].style = ListFact.close;
-  };
-
-// TODO: splice deleted trail from dashboard display
-  $scope.delete = (trail, index) => {
-    $scope.trails.splice(index, 1);
-    ListFact.del(trail);
-  };
-
-  $scope.filter = (type, value) => {
-    $scope.loading = null;
-    $scope.trails = ListFact.filter($scope.trails, type, value);
-    $scope.loading = { display: 'none' };
-    if (type === 'transport') $scope.specificTransport = true;
-  };
-
-  $scope.reset = () => {
-    $scope.loading = null;
-    $scope.specificTransport = false;
-    $scope.trails = ListFact.filter($scope.trailsCache, 'name');
-    $scope.loading = { display: 'none' };
-  };
-
-  $scope.trailsCache = ListFact.get().then((trails) => {
-    $scope.trails = ListFact.filter(trails, 'name');
-    $scope.loading = { display: 'none' };
-    $scope.trailsCache = ListFact.filter(trails, 'name');
   });
 
-  $scope.trails = null;
+  $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
 
-  // SEARCH
-
-  $scope.search = {
-    username: null,
-    trailName: null,
-    trailLength: 'Any',
-    transport: 'Any',
-    rating: 'Any',
-    difficulty: 'Any',
+  $scope.switch = (type) => {
+    switch (type) {
+      case 'description':
+        $scope.page.description = false;
+        $scope.page.found = true;
+        break;
+      case 'next':
+        $scope.crumb += 1;
+        $scope.page.found = false;
+        $scope.page.description = true;
+        break;
+      default: $scope.page.description = true;
+    }
   };
 
-  $scope.searchFilter = (request) => {
-    ListFact.get(request);
-    $state.go('app.dashboard');
+  $scope.media = (type) => {
+    $scope.bubbles = {
+      top: '0px',
+    };
+    $scope.page.media = {
+      show: true,
+      image: false,
+      ar: false,
+      audio: false,
+      video: false,
+      text: false,
+    };
+    $scope.page.media[type] = true;
   };
 });

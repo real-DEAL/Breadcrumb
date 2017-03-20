@@ -17,30 +17,56 @@
 
 @keyframes float {
     0%   {transform: translate(0px, 0px)}
-    50%   {transform: translate(0px, 50px)}
+    50%   {transform: translate(0px, 30px)}
     100% {transform: translate(0px, 0px)}
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.float-container {
+  margin: 25px 0 50px;
 }
 
 .float {
   animation-name: float;
-  animation-duration: 2000ms;
   animation-iteration-count: infinite;
   animation-timing-function: ease-in-out;
 }
 
-.a0-header, .logo {
-  background-image: url('../img/temp.png') !important;
-  background-position: center !important;
-  background-size: cover !important;
+.float22 {
+  animation-duration: 2200ms;
+}
+
+.float27 {
+  animation-duration: 2700ms;
+}
+
+.float32 {
+  animation-duration: 3200ms;
+}
+
+.float37 {
+  animation-duration: 3700ms;
+}
+
+.float42 {
+  animation-name: float;
+  animation-duration: 4200ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.logo {
+  background-image: url('../img/temp.png');
+  background-position: center;
+  background-size: cover;
   text-align: center;
   height: 200px;
   width: 200px;
-  border-radius: 100px !important;
-  margin: 25px auto !important;
-}
-
-.a0-header > * {
-  display: none;
+  border-radius: 100px;
+  margin: 25px auto;
 }
 
 .loading {
@@ -68,6 +94,14 @@
 
 .left {
   text-align: left;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 50px;
 }
 
 .center {
@@ -138,6 +172,24 @@
   font-size: 2em;
 }
 
+.bubbles {
+  position: absolute;
+  width: 95%;
+  transition-duration: 1000ms;
+  margin: 10px 0 35px;
+}
+
+.bubble {
+  font-size: 2em;
+  color: white;
+  background: black;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin: 0 5px;
+  position: relative;
+}
+
 .row+.row {
   padding: 10px !important;
 }
@@ -146,8 +198,9 @@
   margin: 0 10px;
 }
 
-.arCamera {
-  background: transparent;
-  height: 200px%;
-  width: 100px%;
+.center-v {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
