@@ -38,7 +38,7 @@ angular.module('breadcrumb')
   $scope.creds = {};
   $scope.updateUser = () => {
     const profile = store.get('profile');
-    if ($scope.creds.email === undefined) {
+    if (!$scope.creds.email) {
       $scope.creds.email = profile.email;
     }
     getUpdateUserFact(profile.user_id, {
