@@ -89,7 +89,7 @@ angular.module('breadcrumb').factory('Geofence', function (
         notification: {
           id: this.getNextNotificationId(),
           title: crumb.title,
-          text: crumb.text,
+          text: crumb.name,
           icon: crumb.icon,
           openAppOnClick: true,
         },

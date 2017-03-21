@@ -7,12 +7,6 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
-    // TODO: move later
-      .state('trail-test', {
-        url: '/trail',
-        templateUrl: 'views/trail-fence-test.html',
-        controller: 'TrailCtrl',
-      })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
@@ -149,7 +143,7 @@ angular.module('breadcrumb')
       loginState: 'login',
     });
 
-    $urlRouterProvider.otherwise('/trail');
+    $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({
       whiteListedDomains: ['http://54.203.104.113/'],

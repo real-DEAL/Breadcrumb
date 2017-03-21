@@ -13,9 +13,6 @@ angular.module('breadcrumb')
       const data = response.data.data[0];
       userInfo.social_login = socialID;
       userInfo.password = socialID;
-      for (let k in userInfo) {
-        console.log(userInfo[k]);
-      }
       if (data) {
         return $http({
           method: 'PUT',
