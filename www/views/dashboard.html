@@ -57,7 +57,7 @@
 
         <!-- GO BUTTON -->
         <div class="row">
-          <button class="col button button-block" ng-if="!trail.progress" ui-sref="app.trail">
+          <button class="col button button-block" ng-if="!trail.progress" ng-click="setTrail(trail.id)" ui-sref="app.trail">
             GO!
           </button>
 

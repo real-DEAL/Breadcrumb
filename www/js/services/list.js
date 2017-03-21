@@ -16,10 +16,11 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
   };
 
   const getTrails = (request) => {
-    console.log('getting trails');
     let link = 'http://192.168.99.100/trails';
     // let link = 'http://54.203.104.113/trails';
-    if (request) {
+    if (request === 'id') {
+      link += `?id=${localStorage.getItem('trail')}`;
+    } else if (request) {
       link += '?';
       // TODO: search by username
       if (request.username) {

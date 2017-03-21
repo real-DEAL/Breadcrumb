@@ -103,6 +103,10 @@ angular.module('breadcrumb', [
     console.warn(input);
   };
 
+  $scope.setTrail = (id) => {
+    localStorage.setItem('trail', id);
+  };
+
   $scope.user = localStorage.getItem('username').replace(/['"]+/g, '');
 
   $scope.overflowStyle = {

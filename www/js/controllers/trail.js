@@ -1,6 +1,5 @@
 angular.module('breadcrumb')
 .controller('TrailCtrl', function ($scope, $sce, ListFact) {
-  console.log('trail cntrl');
   $scope.loading = null;
 
   $scope.page = {
@@ -19,8 +18,7 @@ angular.module('breadcrumb')
 
   $scope.crumbs = [];
 
-  $scope.trail = ListFact.get().then((trails) => {
-    console.log('hey');
+  $scope.trail = ListFact.get('id').then((trails) => {
     $scope.crumbs = trails[0].crumb;
     $scope.trail = trails[0];
     $scope.loading = { display: 'none' };
