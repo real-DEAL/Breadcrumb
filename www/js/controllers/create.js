@@ -2,17 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map) {
-  const addresses = [
-    '727 Mandeville St, New Orleans, LA, 70117',
-    '15828 196th Pl NE, Woodinville, WA, 98077',
-    '748 Camp St, New Orleans, LA 70130',
-    '24700 McBean Pkwy, Valencia, CA 91355',
-    '60 Lincoln Center Plaza, New York, NY 10023',
-  ];
-
-  const i = () => Math.floor(Math.random() * 5);
-
+.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = {
@@ -41,7 +31,33 @@ angular.module('breadcrumb')
     crumb.style = style;
   };
 
+  const trailMaker = () => ({
+    name: Data.trailName(),
+    description: Data.description(),
+    type: $scope.trailTypes[0],
+    difficulty: null,
+    map: null,
+    time: null,
+    length: null,
+    requires_money: false,
+    transport: null,
+    crumbs: {},
+    left: 2.5,
+    style: null,
+  });
+
   $scope.loading = { display: 'none' };
+
+  $scope.info = {
+    show: false,
+    name: 'Description',
+    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
+  };
+
+  $scope.toggleInfo = () => {
+    $scope.info.show = !$scope.info.show;
+    console.log($scope.info.show);
+  };
 
   $scope.trailTypes = [
     'adventure',
@@ -70,22 +86,84 @@ angular.module('breadcrumb')
   };
 
   $scope.difficulty = {
-    1: 'easy',
-    2: 'normal',
-    3: 'hard',
+    0: {
+      type: 'easy',
+      style: null,
+    },
+    1: {
+      type: 'medium',
+      style: null,
+    },
+    2: {
+      type: 'hard',
+      style: null,
+    },
+  };
+
+  $scope.fillDifficulty = (diff) => {
+    const fill = {
+      color: 'purple',
+    };
+    $scope.difficulty[0].style = null;
+    $scope.difficulty[1].style = null;
+    $scope.difficulty[2].style = null;
+    if (diff === 'easy') {
+      $scope.trail.difficulty = 1;
+      $scope.difficulty[0].style = fill;
+    }
+    if (diff === 'medium') {
+      $scope.trail.difficulty = 2;
+      $scope.difficulty[0].style = fill;
+      $scope.difficulty[1].style = fill;
+    }
+    if (diff === 'hard') {
+      $scope.trail.difficulty = 3;
+      $scope.difficulty[0].style = fill;
+      $scope.difficulty[1].style = fill;
+      $scope.difficulty[2].style = fill;
+    }
   };
 
   $scope.transport = {
-    WALKING: 'walk',
-    BICYCLING: 'bicycle',
-    TRANSIT: 'bus',
-    DRIVING: 'car',
+    WALKING: {
+      type: 'walk',
+      style: null,
+    },
+    BICYCLING: {
+      type: 'bicycle',
+      style: null,
+    },
+    TRANSIT: {
+      type: 'bus',
+      style: null,
+    },
+    DRIVING: {
+      type: 'car',
+      style: null,
+    },
+  };
+
+  $scope.transChange = (type) => {
+    $scope.transport.WALKING.style = null;
+    $scope.transport.BICYCLING.style = null;
+    $scope.transport.TRANSIT.style = null;
+    $scope.transport.DRIVING.style = null;
+    $scope.transport[type].style = {
+      'background-color': '#F8F8F8',
+      'border-radius': '50px',
+    };
   };
 
   $scope.money = (boolean) => {
     $scope.trail.requires_money = !boolean;
     if (boolean) $scope.moneyStyle = null;
-    else $scope.moneyStyle = { color: '#33CD61' };
+    else {
+      $scope.moneyStyle = {
+        'background-color': '#F8F8F8',
+        'border-radius': '50px',
+        color: '#33CD61',
+      };
+    }
   };
 
   $scope.moneyStyle = null;
@@ -95,49 +173,43 @@ angular.module('breadcrumb')
     style: { display: 'none' },
   };
 
-  $scope.trail = {
-    name: 'Liv\'s trail',
-    description: 'A trail that takes you places',
-    type: $scope.trailTypes[0],
-    map: '',
-    time: '',
-    length: '',
-    requires_money: false,
-    transport: '',
-    crumbs: 0,
-    left: 2.5,
-    style: null,
-  };
+  $scope.trail = trailMaker();
 
   $scope.crumb = () => ({
-    name: '',
-    description: '',
-    location: addresses[i()],
-    text: '',
-    media: '',
-    image: '',
-    video: '',
-    ar: '',
+    clue: null,
+    description: Data.crumbDescription(),
+    name: null,
+    media_text: null,
+    image: null,
+    video: null,
+    audio: null,
+    ar: null,
+    location: Data.address(),
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
 
   $scope.crumbs = [];
 
+  $scope.media = false;
+
+  $scope.toggleMedia = () => {
+    $scope.media = !$scope.media;
+  };
+
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
-      $scope.trail.crumbs += 1;
+      $scope.trail.crumbs = $scope.crumbs.slice();
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
-      console.warn($scope.crumb, 'crumb');
     }
   };
 
   $scope.remove = (index) => {
     $scope.crumbs.splice(index, 1);
     if (!$scope.review.check) {
-      $scope.trail.crumbs -= 1;
+      $scope.trail.crumbs = $scope.crumbs.slice();
       moveReset($scope.trail, 0);
       $scope.crumbs.forEach((crumb, ind) => {
         moveReset(crumb, ind + 1);
@@ -170,6 +242,7 @@ angular.module('breadcrumb')
     $scope.review.check = true;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
+      console.log(data);
       $scope.loading = { display: 'none' };
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
@@ -182,10 +255,8 @@ angular.module('breadcrumb')
         'animation-name': 'moveUp',
       };
       $scope.$apply();
-      console.warn(data, 'data');
     });
   };
-
 
   $scope.reset = () => {
     $scope.review.check = false;
@@ -200,11 +271,15 @@ angular.module('breadcrumb')
 
   $scope.submit = () => {
     $scope.loading = null;
+    $scope.crumbs.pop();
     Trail.submit($scope.trail, $scope.crumbs)
     .then(() => {
       $scope.reset();
+      $scope.crumbs = [];
+      $scope.trail = trailMaker();
       $scope.loading = { display: 'none' };
       $state.go('app.dashboard');
-    });
+    })
+    ;
   };
 });

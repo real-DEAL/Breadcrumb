@@ -10,33 +10,39 @@
 
   <ion-content>
 
-
-
     <div class="card">
+
+      <!-- USERNAME -->
       <label class="item item-input textbox">
-        <input type="text" placeholder="Username">
+        <input type="text" placeholder="Username"  ng-model="search.username">
       </label>
+
+      <!-- TRAIL NAME -->
       <label class="item item-input textbox">
-        <input type="text" placeholder="Trail name">
+        <input type="text" placeholder="Trail name" ng-model="search.trailName">
       </label>
+
+      <!-- TRAIL LENGTH -->
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Trail length
           </div>
-          <select>
+          <select ng-model="search.trailLength">
             <option selected>less than 5 miles</option>
             <option>between 5 and 15 miles</option>
             <option>greater than 15 miles</option>
           </select>
         </label>
       </div>
+
+      <!-- TRANSPORT -->
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Transport
           </div>
-          <select>
+          <select ng-model="search.transport">
             <option selected>Any</option>
             <option>Walk</option>
             <option>Bike</option>
@@ -45,12 +51,14 @@
           </select>
         </label>
       </div>
+
+      <!-- RATING -->
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Rating
           </div>
-          <select>
+          <select ng-model="search.rating">
             <option selected>Any</option>
             <option>5 stars</option>
             <option>4 stars</option>
@@ -60,12 +68,14 @@
           </select>
         </label>
       </div>
+
+      <!-- DIFFICULTY -->
       <div class="list">
         <label class="item item-input item-select">
           <div class="input-label">
             Difficulty
           </div>
-          <select>
+          <select ng-model="search.difficulty">
             <option selected>Any</option>
             <option>Low</option>
             <option>Medium</option>
@@ -78,6 +88,6 @@
   </ion-content>
 
   <div class="bar bar-footer bar-balanced">
-    <div class="title">Search</div>
+    <div class="title" ng-click="searchFilter(search)">Search</div>
   </div>
 </ion-view>

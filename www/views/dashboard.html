@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <ion-view >
+  <div class="loading" ng-style="loading"></div>
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header bar-stable" align-title="center">
@@ -13,32 +14,50 @@
     <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
 
       <div class="row item item-divider" ng-click="toggle($index)">
+        <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
         <div class="col center s-1x">{{ trail.name }}</div>
+        <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i>
       </div>
 
       <div class="row item center">
+
+        <!-- TRANSPORT -->
         <div class="col col-10 right balanced s-1x" ng-click="filter('transport', trail.transport)">
-          <i class="ion-android-walk" ng-if="trail.transport === 1"></i>
-          <i class="ion-android-bicycle" ng-if="trail.transport === 2"></i>
-          <i class="ion-android-car" ng-if="trail.transport === 3"></i>
-          <i class="ion-android-bus" ng-if="trail.transport === 4"></i>
+          <i class="ion-android-walk" ng-if="trail.transport === 'WALKING'"></i>
+          <i class="ion-android-bicycle" ng-if="trail.transport === 'BICYCLING'"></i>
+          <i class="ion-android-car" ng-if="trail.transport === 'DRIVING'"></i>
+          <i class="ion-android-bus" ng-if="trail.transport === 'TRANSIT'"></i>
         </div>
+
+        <!-- LENGTH -->
         <div class="col left" ng-click="filter('length')">
-          {{ trail.length }} Miles
+          {{ trail.length }}
         </div>
+
+        <!-- DIFFICULTY -->
         <div class="col col-33 center" ng-click="filter('difficulty')">
           <i class="ion-ribbon-b calm s-1x" ng-repeat="hard in trail.difficulty"></i>
         </div>
+
+        <!-- RATING -->
         <div class="col col-33 right" ng-click="filter('stars')">
           <i class="ion-ios-star gold s-1x" ng-repeat="star in trail.stars"></i><i class="ion-ios-star-outline gold s-1x" ng-repeat="star in trail.emptyStars"></i>
         </div>
       </div>
 
       <div class="card">
+
+        <!-- MAP -->
+        <div class="center reviewMap">
+          <img src="{{ trail.map }}" />
+        </div>
+
+        <!-- DESCRIPTION -->
         <div class="item item-text-wrap scrollText" ng-style="overflowStyle">{{ trail.description }}</div>
-        <div class="logo"></div>
+
+        <!-- GO BUTTON -->
         <div class="row">
-          <button class="col button button-block" ng-if="!trail.progress">
+          <button class="col button button-block" ng-if="!trail.progress" ng-click="setTrail(trail.id)" ui-sref="app.trail">
             GO!
           </button>
 

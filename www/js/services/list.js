@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('ListFact', function () {
+angular.module('breadcrumb').factory('ListFact', function ($http) {
   const closeStyle = {
     height: '95px',
     'transition-duration': '250ms',
@@ -15,23 +15,56 @@ angular.module('breadcrumb').factory('ListFact', function () {
     return arr;
   };
 
-  const trailMaker = () => {
-    const tran = Math.floor(Math.random() * 4) + 1;
-    const stars = Math.floor(Math.random() * 6);
-    const emptyStars = 5 - stars;
-    const difficulty = Math.floor(Math.random() * 5) + 1;
+  const getTrails = (request) => {
+    let link = 'http://192.168.99.100/trails';
+    // let link = 'http://54.203.104.113/trails';
+    if (request === 'id') {
+      link += `?id=${localStorage.getItem('trail')}`;
+    } else if (request) {
+      link += '?';
+      // TODO: search by username
+      if (request.username) {
+        link += `user_id=${request.username}`;
+      }
+      if (request.difficulty !== 'Any') {
+        link += `difficulty=${request.difficulty}`;
+      }
+      if (request.rating !== 'Any') {
+        link += `rating=${request.rating}`;
+      }
+      if (request.transport !== 'Any') {
+        link += `transport=${request.transport}`;
+      }
+    }
+    return $http({
+      method: 'GET',
+      url: link,
+    })
+    .then((response) => {
+      const data = [];
+      response.data.data.forEach((trail) => {
+        trail.style = closeStyle;
+        // TODO: Integrate actual algorithm to calculate rating from trail.score
+        const stars = trail.rating || Math.floor(Math.random() * 6);
+        const emptyStars = 5 - stars;
+        const difficulty = trail.difficulty;
+        trail.stars = arrayMaker(stars);
+        trail.emptyStars = arrayMaker(emptyStars);
+        trail.difficulty = arrayMaker(difficulty);
+        data.push(trail);
+      });
+      return data;
+    });
+  };
 
-    return {
-      name: `Trail ${Math.floor(Math.random() * 100)}`,
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-      transport: tran,
-      stars: arrayMaker(stars),
-      emptyStars: arrayMaker(emptyStars),
-      difficulty: arrayMaker(difficulty),
-      length: (Math.floor(Math.random() * 5) + 2) * tran,
-      progress: Math.floor(Math.random() * 100),
-      style: closeStyle,
-    };
+  const deleteTrail = (trail) => {
+    $http({
+      method: 'DELETE',
+      // url: `http://54.203.104.113//trails/${trail.id}`,
+      url: `http://192.168.99.100/trails/${trail.id}`,
+    })
+    .then(res => console.warn(res))
+    .catch(res => console.error(res));
   };
 
   const filterListItems = (list, type, value) => {
@@ -53,9 +86,10 @@ angular.module('breadcrumb').factory('ListFact', function () {
   };
 
   return {
+    get: getTrails,
+    del: deleteTrail,
     close: closeStyle,
     range: arrayMaker,
-    trail: trailMaker,
     filter: filterListItems,
   };
 });

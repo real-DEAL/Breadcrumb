@@ -2,8 +2,9 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, ListFact) {
+.controller('ListCtrl', function ($scope, $state, ListFact) {
   $scope.specificTransport = false;
+  $scope.loading = null;
 
   $scope.trail = {
     name: 'My first trail',
@@ -23,7 +24,7 @@ angular.module('breadcrumb')
 
   $scope.open = (index) => {
     $scope.trails[index].style = {
-      height: '575px',
+      height: '650px',
       overflow: 'hidden',
       'transition-duration': '250ms',
     };
@@ -38,34 +39,47 @@ angular.module('breadcrumb')
     $scope.trails[index].style = ListFact.close;
   };
 
+// TODO: splice deleted trail from dashboard display
+  $scope.delete = (trail, index) => {
+    $scope.trails.splice(index, 1);
+    ListFact.del(trail);
+  };
+
   $scope.filter = (type, value) => {
+    $scope.loading = null;
     $scope.trails = ListFact.filter($scope.trails, type, value);
+    $scope.loading = { display: 'none' };
     if (type === 'transport') $scope.specificTransport = true;
   };
 
   $scope.reset = () => {
+    $scope.loading = null;
     $scope.specificTransport = false;
     $scope.trails = ListFact.filter($scope.trailsCache, 'name');
+    $scope.loading = { display: 'none' };
   };
 
-  $scope.trailsCache = [
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
-  ];
+  $scope.trailsCache = ListFact.get().then((trails) => {
+    $scope.trails = ListFact.filter(trails, 'name');
+    $scope.loading = { display: 'none' };
+    $scope.trailsCache = ListFact.filter(trails, 'name');
+  });
 
-  $scope.trails = ListFact.filter($scope.trailsCache, 'name');
+  $scope.trails = null;
+
+  // SEARCH
+
+  $scope.search = {
+    username: null,
+    trailName: null,
+    trailLength: 'Any',
+    transport: 'Any',
+    rating: 'Any',
+    difficulty: 'Any',
+  };
+
+  $scope.searchFilter = (request) => {
+    ListFact.get(request);
+    $state.go('app.dashboard');
+  };
 });

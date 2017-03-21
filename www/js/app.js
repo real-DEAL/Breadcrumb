@@ -21,7 +21,8 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
-    $log.log('Ionic ready');
+    $rootScope.pinged = false;
+    // $log.log('Ionic ready');
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -31,7 +32,7 @@ angular.module('breadcrumb', [
       $window.StatusBar.styleDefault();
     }
     if ($window.geofence === undefined) {
-      $log.warn('Geofence Plugin not found. Using mock instead.');
+      // $log.warn('Geofence Plugin not found. Using mock instead.');
       $window.geofence = GeofencePluginMock;
       $window.TransitionType = GeofencePluginMock.TransitionType;
     }
@@ -48,11 +49,7 @@ angular.module('breadcrumb', [
               title: 'Geofence transition',
               text: 'Without notification',
             };
-            $ionicLoading.show({
-              template: `${geo.notification.title}: ${geo.notification.text}`,
-              noBackdrop: true,
-              duration: 2000,
-            });
+            $rootScope.pinged = true;
           });
         });
       }
@@ -103,8 +100,14 @@ angular.module('breadcrumb', [
     console.warn(input);
   };
 
+  $scope.setTrail = (id) => {
+    localStorage.setItem('trail', id);
+  };
+
+  $scope.user = JSON.parse(localStorage.getItem('username'));
+
   $scope.overflowStyle = {
-    'max-height': '125px',
+    'max-height': '100px',
     overflow: 'scroll',
   };
 });

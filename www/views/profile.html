@@ -9,19 +9,30 @@
   </ion-header-bar>
   </ion-nav-buttons>
 
+
+<!-- current_trail:null
+profile_picture:null
+savedtrail:Array[0]
+score:null
+social_login:"auth0|58cc8798b9b35a2347ca7a3a"
+total_completed:null
+trail:Array[0]
+length:0
+username:"liv" -->
+
   <ion-content>
     <!-- USER INFORMATION -->
-    <div class="padding w-75">
+    <div class="padding">
       <div class="row row-center">
         <div class="col">
-          <div class="profilePic">
-            <h2>{{ user.name }}goeshere</h2>
+          <div class="profilePic" ng-style="userPic">
+            <h2>{{ user.username }}</h2>
           </div>
         </div>
         <div class="col center">
-          <h3>Score: {{ user.score }}</h3>
-          <p>Completed trails: {{ user.finishedTrails }}
-          <br>Total time: {{ user.totalTime }}</p>
+          <h3>Score: {{ user.score || 0 }}</h3>
+          <p>Completed trails: {{ user.total_completed || 0 }}
+          <br>Total time: {{ user.totalTime || 0 }}</p>
         </div>
       </div>
     </div>

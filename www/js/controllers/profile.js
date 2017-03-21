@@ -1,30 +1,23 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($scope, ListFact) {
-  $scope.user = {
-    name: 'NAME',
-    picture: '',
-    score: 500,
-    finishedTrails: 3,
-    totalTime: 0,
-    trail: {
-      name: `My ${Math.floor(Math.random() * 100)}th trail`,
-      stars: ListFact.range(4),
-      emptyStars: ListFact.range(1),
-      progress: `${Math.floor(Math.random() * 100)}%`,
-    },
+.controller('ProfileCtrl', function ($scope, ListFact, Data) {
+  $scope.user = JSON.parse(localStorage.user);
+
+  $scope.userPic = {
+    'background-image': `url('${$scope.user.profile_picture}')`,
+    'background-position': 'center',
   };
 
   $scope.userTrails = [
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
+    Data.trail(),
+    Data.trail(),
+    Data.trail(),
   ];
 
   $scope.pastTrails = [
-    ListFact.trail(),
-    ListFact.trail(),
-    ListFact.trail(),
+    Data.trail(),
+    Data.trail(),
+    Data.trail(),
   ];
 });

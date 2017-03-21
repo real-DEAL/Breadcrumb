@@ -1,4 +1,4 @@
-angular.module('breadcrumb').controller('TrailCtrl', function ($scope, Geofence, $ionicLoading) {
+angular.module('breadcrumb').controller('TrailFenceCtrl', function ($scope, Geofence, $ionicLoading) {
   $scope.data = {
     id: 1,
     user_id: 1,
