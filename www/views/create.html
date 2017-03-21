@@ -87,9 +87,14 @@
     <!-- CRUMBS -->
     <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
 
-      <!-- NAME -->
+      <!-- NAMES -->
       <div class="item item-divider item-icon-right">
-        <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }}">
+
+        <!-- CLUE -->
+        <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.clue" placeholder="crumb {{ $index + 1 }} clue" ng-if="!media">
+
+        <!-- NAME -->
+        <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }} name" ng-if="media">
         <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
       </div>
 
@@ -108,18 +113,22 @@
             <input class="full" type="text" ng-model="crumb.location" placeholder="Location">
           </div>
 
-          <!-- MEDIA BUTTON -->
+          <!-- MEDIA SWITCH BUTTON -->
           <div class="item item-divider center" ng-click="toggleMedia()">
             <h1>UPLOAD MEDIA</h1>
           </div>
         </div>
 
+        <!-- CRUMB MEDIA -->
         <div ng-if="media">
+
+          <!-- CRUMB TEXT -->
           <div class="item item-icon-right textbox">
             <i class="positive icon ion-information-circled" ng-click="toggleInfo()"></i>
-            <input type="text" ng-model="crumb.text" placeholder="Crumb reveal text">
+            <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
           </div>
 
+          <!-- MEDIA UPLOAD BUTTONS -->
           <div class="center padding margin-v">
             <div class="center bubble inline" ng-click="test('image')">
               <i class="center-v ion-camera center"></i>

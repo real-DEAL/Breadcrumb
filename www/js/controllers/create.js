@@ -176,14 +176,15 @@ angular.module('breadcrumb')
   $scope.trail = trailMaker();
 
   $scope.crumb = () => ({
-    name: null,
+    clue: null,
     description: Data.crumbDescription(),
-    location: Data.address(),
-    text: null,
-    media: null,
+    name: null,
+    media_text: null,
     image: null,
     video: null,
+    audio: null,
     ar: null,
+    location: Data.address(),
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
