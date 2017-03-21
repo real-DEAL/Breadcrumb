@@ -3,6 +3,7 @@
 
 angular.module('breadcrumb')
 .controller('ListCtrl', function ($scope, $state, ListFact) {
+  console.log('list cntrl');
   $scope.specificTransport = false;
   $scope.loading = null;
 

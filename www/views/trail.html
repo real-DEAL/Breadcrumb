@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <ion-view >
-  <div class="loading" ng-style="loading"></div>
+  <!-- <div class="loading" ng-style="loading"></div> -->
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-stable" align-title="center">
@@ -19,13 +19,13 @@
 
       <div class="card float float42 t-center">
         <!-- CRUMB NUMBER -->
-        <div class="item item-divider">
-          <h2>Crumb #{{ crumbs[crumb].order_number }}</h2>
+        <div class="item item-divider s-2x">
+          CLUE #{{ crumbs[crumb].order_number }}
         </div>
 
         <!-- CRUMB NAME -->
         <div class="item item-text-wrap">
-          {{ crumbs[crumb].name }} Name of Crumb
+          {{ crumbs[crumb].clue }}
         </div>
 
         <!-- IMAGE -->
@@ -36,7 +36,6 @@
         <!-- ADDRESS -->
         <div class="item item-text-wrap">
           {{ crumbs[crumb].description }}
-          <br>Address goes here
         </div>
       </div>
 
@@ -72,7 +71,10 @@
         <div ng-if="page.media.show" style="height: 110px;"></div>
 
         <!-- CONGRATULATIONS -->
-        <h2 class="padding" ng-if="!page.media.show">You found a crumb!</h2>
+        <h2 class="padding" ng-if="!page.media.show">
+          You found a crumb!
+          <!-- <br>{{ crumbs[crumb].name }}! -->
+        </h2>
 
         <img ng-if="!page.media.show" src="../img/breadbreadbread.gif" alt="" width="200" class="round">
 
@@ -81,7 +83,7 @@
         <!-- MEDIA -->
         <div ng-if="page.media.show">
           <div ng-if="page.media.text">
-            {{ crumbs[crumb].text }}
+            {{ crumbs[crumb].media_text }}
           </div>
           <div ng-if="page.media.image">
             <img src="{{ crumbs[crumb].image }}" alt="" width="300">

@@ -1,8 +1,6 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
-
 angular.module('breadcrumb')
 .controller('TrailCtrl', function ($scope, $sce, ListFact) {
+  console.log('trail cntrl');
   $scope.loading = null;
 
   $scope.page = {
@@ -11,14 +9,6 @@ angular.module('breadcrumb')
     found: false,
     media: {},
     challenge: false,
-  };
-
-  $scope.now = {
-    image: 1,
-    text: 1,
-    ar: 0,
-    video: 0,
-    audio: 1,
   };
 
   $scope.bubbles = {
@@ -30,6 +20,7 @@ angular.module('breadcrumb')
   $scope.crumbs = [];
 
   $scope.trail = ListFact.get().then((trails) => {
+    console.log('hey');
     $scope.crumbs = trails[0].crumb;
     $scope.trail = trails[0];
     $scope.loading = { display: 'none' };
@@ -39,22 +30,13 @@ angular.module('breadcrumb')
       trail_id: 14,
       order_number: 0,
       clue: 'Someone\'s Circle',
-      description: 'Check out the awesome grafitti near here!',
+      description: 'A famous genera\'s statue, surrounded by controversy!',
       name: 'Lee\'s Circle',
       media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
       image: '../img/breadfalls.gif',
       video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
       ar: null,
       audio: null,
-      small_icon: null,
-      title: 'You found a crumb!',
-      text: '',
-      notification_id: null,
-      open_app_on_click: null,
-      vibration: null,
-      latitude: null,
-      longitude: null,
-      radius: null,
     });
   });
 
