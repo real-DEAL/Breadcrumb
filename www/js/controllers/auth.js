@@ -24,8 +24,6 @@ angular.module('breadcrumb')
     $scope.exampleTrail,
     $scope.exampleTrail,
   ];
-  // $scope.username = null;
-  // $scope.email = null;
 
   $scope.test = input => console.warn(input);
 
@@ -37,11 +35,15 @@ angular.module('breadcrumb')
     return false;
   };
 
-  $scope.updateUser = (username, email) => {
+  $scope.creds = {};
+  $scope.updateUser = () => {
     const profile = store.get('profile');
-    if (email === undefined) {
-      email = profile.email;
+    if ($scope.creds.email === undefined) {
+      $scope.creds.email = profile.email;
     }
-    getUpdateUserFact(profile.user_id, { username, email });
+    getUpdateUserFact(profile.user_id, {
+      username: $scope.creds.username,
+      email: $scope.creds.email,
+    });
   };
 });

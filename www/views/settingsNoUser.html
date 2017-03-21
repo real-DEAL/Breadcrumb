@@ -4,13 +4,13 @@
     <h1 class="title">Add Info</h1>
   </ion-header-bar>
   <ion-content>
-    <form>
+    <form ng-submit="updateUser()">
       <div class="card">
         <div class="item item-divider">
           Confirm Username
         </div>
         <label class="item item-input">
-          <input type="text" ng-model="username" placeholder="Enter Username" required>
+          <input type="text" ng-model="creds.username" placeholder="Enter Username" required/>
         </label>
       </div>
 
@@ -19,20 +19,12 @@
           Confirm Email
         </div>
         <label class="item item-input">
-          <input type="text" ng-model="email" placeholder="Enter Email">
+          <input type="text" ng-model="creds.email" placeholder="Enter Email"/>
         </label>
       </div>
       <button
         class="button button-full button-energized"
-        ng-click="updateUser(username)"
-        ng-if="emailInStore()"
-      >
-        Submit
-      </button>
-      <button
-        class="button button-full button-energized"
-        ng-click="updateUser(username, email)"
-        ng-if="!emailInStore()"
+        type="submit"
       >
         Submit
       </button>
