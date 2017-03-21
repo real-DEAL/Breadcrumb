@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, ListFact) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
   $scope.loading = null;
 
   $scope.page = {
@@ -8,6 +8,7 @@ angular.module('breadcrumb')
     found: false,
     media: {},
     challenge: false,
+    finish: false,
   };
 
   $scope.bubbles = {
@@ -19,38 +20,56 @@ angular.module('breadcrumb')
   $scope.crumbs = [];
 
   $scope.trail = ListFact.get('id').then((trails) => {
-    $scope.crumbs = trails[0].crumb;
     $scope.trail = trails[0];
+    $scope.crumbs = trails[0].crumb;
+    Geofence.addOrUpdate($scope.crumbs[0]);
     $scope.loading = { display: 'none' };
-    $scope.crumbs.unshift({
-      data: null,
-      id: 31,
-      trail_id: 14,
-      order_number: 0,
-      clue: 'Someone\'s Circle',
-      description: 'A famous genera\'s statue, surrounded by controversy!',
-      name: 'Lee\'s Circle',
-      media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      image: '../img/breadfalls.gif',
-      video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
-      ar: null,
-      audio: null,
-    });
+    // $scope.crumbs.unshift({
+    //   data: null,
+    //   id: 31,
+    //   trail_id: 14,
+    //   order_number: 0,
+    //   clue: 'Someone\'s Circle',
+    //   description: 'A famous genera\'s statue, surrounded by controversy!',
+    //   name: 'Lee\'s Circle',
+    // media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    //   image: '../img/breadfalls.gif',
+    //   video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
+    //   ar: null,
+    //   audio: null,
+    // });
   });
 
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
+
+  $rootScope.$watch('pinged', () => {
+    if ($rootScope.pinged) {
+      $scope.switch('found');
+    }
+  });
 
   $scope.switch = (type) => {
     switch (type) {
       case 'description':
         $scope.page.description = false;
+        break;
+      case 'found':
         $scope.page.found = true;
         break;
       case 'next':
         $scope.crumb += 1;
-        $scope.page.found = false;
-        $scope.page.description = true;
-        $scope.page.media.show = false;
+        $rootScope.pinged = false;
+        Geofence.removeAll();
+        if ($scope.crumb === $scope.crumbs.length) {
+          $scope.page.found = false;
+          $scope.page.media.show = false;
+          $scope.page.finish = true;
+        } else {
+          Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
+          $scope.page.found = false;
+          $scope.page.media.show = false;
+          $scope.page.description = true;
+        }
         break;
       default: $scope.page.description = true;
     }
