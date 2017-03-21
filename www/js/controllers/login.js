@@ -30,10 +30,10 @@ angular.module('breadcrumb')
       .then((response) => {
         const data = response.data.data[0];
         if (data) {
-          store.set('username', data.username);
-          $state.go('app.dashboard');
+          store.set('user', data);
+          return $state.go('app.dashboard');
         }
-        $state.go('settings');
+        return $state.go('settings');
       });
     }, (error) => {
       console.error('There was an error logging in', error);

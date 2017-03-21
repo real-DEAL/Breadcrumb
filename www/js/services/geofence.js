@@ -78,8 +78,23 @@ angular.module('breadcrumb').factory('Geofence', function (
       return self._geofencesPromise.promise;
     },
 
-    addOrUpdate(geofence) {
+    addOrUpdate(crumb) {
       const self = this;
+      const geofence = {
+        id: UUIDjs.create().toString(),
+        latitude: crumb.latitude,
+        longitude: crumb.longitude,
+        radius: 100,
+        transitionType: 1,
+        notification: {
+          id: this.getNextNotificationId(),
+          title: crumb.title,
+          text: crumb.text,
+          icon: crumb.icon,
+          openAppOnClick: true,
+        },
+        challenge: crumb.challenge,
+      };
 
       return $window.geofence.addOrUpdate(geofence).then(() => {
         const searched = self.findById(geofence.id);

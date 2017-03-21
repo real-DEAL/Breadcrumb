@@ -122,3 +122,9 @@
 .row+.row {
   padding: 10px !important;
 }
+
+.arCamera {
+  background: transparent;
+  height: 200px%;
+  width: 100px%;
+}
