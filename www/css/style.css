@@ -198,9 +198,25 @@
   margin: 0 10px;
 }
 
+.margin-v {
+  margin: 10px 0;
+}
+
+.margin-n {
+  margin: 0;
+}
+
 .center-v {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.full {
+  width: 100%;
+}
+
+.transparent {
+  background: transparent;
 }

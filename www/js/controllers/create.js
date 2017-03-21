@@ -179,6 +179,12 @@ angular.module('breadcrumb')
 
   $scope.crumbs = [];
 
+  $scope.media = false;
+
+  $scope.toggleMedia = () => {
+    $scope.media = !$scope.media;
+  };
+
   $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);

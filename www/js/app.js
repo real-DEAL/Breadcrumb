@@ -103,6 +103,8 @@ angular.module('breadcrumb', [
     console.warn(input);
   };
 
+  $scope.user = localStorage.getItem('username').replace(/['"]+/g, '');
+
   $scope.overflowStyle = {
     'max-height': '100px',
     overflow: 'scroll',

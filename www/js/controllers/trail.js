@@ -6,9 +6,9 @@ angular.module('breadcrumb')
   $scope.loading = null;
 
   $scope.page = {
-    description: false,
+    description: true,
     map: false,
-    found: true,
+    found: false,
     media: {},
     challenge: false,
   };
