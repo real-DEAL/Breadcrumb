@@ -48,6 +48,17 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
+  $scope.info = {
+    show: false,
+    name: 'Description',
+    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
+  };
+
+  $scope.toggleInfo = () => {
+    $scope.info.show = !$scope.info.show;
+    console.log($scope.info.show);
+  };
+
   $scope.trailTypes = [
     'adventure',
     'mystery',

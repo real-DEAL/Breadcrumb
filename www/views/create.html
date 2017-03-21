@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <ion-view>
   <div class="loading" ng-style="loading"></div>
+  <div class="black"  ng-if="info.show" ng-click="toggleInfo()"></div>
+  <div class="card info t-center" ng-if="info.show">
+    <div class="item item-divider">
+      {{ info.name }}
+    </div>
+    <div class="item item-text-wrap">
+      {{ info.text }}
+    </div>
+  </div>
+
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header bar-stable" align-title="center">
@@ -87,10 +97,10 @@
 
         <div ng-if="!media">
           <!-- DESCRIPTION -->
-          <label class="item textbox item-icon-right">
-            <i class="energized icon ion-information-circled" ng-click="test()"></i>
+          <div class="item item-icon-right textbox">
+            <i class="energized icon ion-information-circled" ng-click="toggleInfo()"></i>
             <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
-          </label>
+          </div>
 
           <!-- LOCATION -->
           <div class="item item-icon-right textbox">
@@ -106,7 +116,7 @@
 
         <div ng-if="media">
           <div class="item item-icon-right textbox">
-            <i class="positive icon ion-information-circled" ng-click="test()"></i>
+            <i class="positive icon ion-information-circled" ng-click="toggleInfo()"></i>
             <input type="text" ng-model="crumb.text" placeholder="Crumb reveal text">
           </div>
 
