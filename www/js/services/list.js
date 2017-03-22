@@ -16,7 +16,11 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
   };
 
   const getTrails = (request) => {
+<<<<<<< HEAD
     // let link = 'http://192.168.99.100/trails';
+=======
+    // let link = 'http://54.203.104.113/trails';
+>>>>>>> (feature) successful test of geofence trail
     let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
       link += `?id=${$rootScope.trailID}`;
@@ -30,6 +34,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
       }
       console.log(link);
     }
+    console.log(link);
     return $http({
       method: 'GET',
       url: link,
@@ -48,6 +53,9 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
         data.push(trail);
       });
       return data;
+    })
+    .catch((err) => {
+      console.error(err);
     });
   };
 
@@ -55,7 +63,11 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
     $http({
       method: 'DELETE',
       url: `http://54.203.104.113/trails/${trail.id}`,
+<<<<<<< HEAD
       // url: `http://192.168.99.100/trails/${trail.id}`,
+=======
+      // url: `http://54.203.104.113/trails/${trail.id}`,
+>>>>>>> (feature) successful test of geofence trail
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));

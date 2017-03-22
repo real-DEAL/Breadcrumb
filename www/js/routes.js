@@ -7,6 +7,11 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
+      // .state('test', {
+      //   url: '/test',
+      //   templateUrl: 'views/test.html',
+      //   controller: 'TrailFenceCtrl',
+      // })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
