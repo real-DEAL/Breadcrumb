@@ -40,7 +40,6 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
         link += `transport=${request.transport}`;
       }
     }
-    console.log(link);
     return $http({
       method: 'GET',
       url: link,

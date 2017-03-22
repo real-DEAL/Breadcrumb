@@ -66,9 +66,9 @@ angular.module('breadcrumb', [
             duration: 2000,
           });
 
-          $state.go('geofence', {
-            geofenceId: notificationData.id,
-          });
+          // $state.go('geofence', {
+          //   geofenceId: notificationData.id,
+          // });
         });
       }
     };
