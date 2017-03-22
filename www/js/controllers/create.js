@@ -307,4 +307,44 @@ angular.module('breadcrumb')
       $state.go('app.dashboard');
     });
   };
+
+
+// Leaflet Map ------------------------------------------------
+  const geofence = {
+    latitude: 42.23432,
+    longitude: 50.34134,
+    radius: 13,
+  };
+  $scope.TransitionType = TransitionType;
+
+  $scope.center = {
+    lat: geofence.latitude,
+    lng: geofence.longitude,
+    zoom: 12,
+  };
+  $scope.markers = {
+    marker: {
+      draggable: true,
+      lat: geofence.latitude,
+      lng: geofence.longitude,
+      icon: {},
+    },
+  };
+  $scope.paths = {
+    circle: {
+      type: 'circle',
+      radius: geofence.radius,
+      latlngs: $scope.markers.marker,
+      clickable: false,
+    },
+  };
+
+  $scope.tiles = {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    options: {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  };
+
+
 });

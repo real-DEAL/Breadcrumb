@@ -94,15 +94,15 @@ angular.module('breadcrumb')
           },
         },
       })
-      .state('app.geofences', {
-        url: '/geofences',
-        views: {
-          menuContent: {
-            templateUrl: 'views/geofence/geofences.html',
-            controller: 'GeofencesCtrl',
-          },
-        },
-      })
+      // .state('app.geofences', {
+      //   url: '/geofences',
+      //   views: {
+      //     menuContent: {
+      //       templateUrl: 'views/geofence/geofences.html',
+      //       controller: 'GeofencesCtrl',
+      //     },
+      //   },
+      // })
       .state('app.geofence-new', {
         url: '/geofence/new/:longitude,:latitude',
         views: {
