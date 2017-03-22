@@ -114,7 +114,7 @@
           </div>
 
           <!-- MEDIA SWITCH BUTTON -->
-          <div class="item item-divider center" ng-click="toggleMedia()">
+          <div class="item item-divider center" ng-click="toggleMedia('media')">
             <h1>UPLOAD MEDIA</h1>
           </div>
         </div>
@@ -130,18 +130,30 @@
 
           <!-- MEDIA UPLOAD BUTTONS -->
           <div class="center padding margin-v">
-            <div class="center bubble inline" ng-click="test('image')">
+            <div class="center bubble inline" ng-click="toggleMedia('image')">
               <i class="center-v ion-camera center"></i>
             </div>
-            <div class="center bubble inline" ng-click="test('audio')">
+            <div class="center bubble inline" ng-click="toggleMedia('audio')">
               <i class="center-v ion-mic-a"></i>
             </div>
-            <div class="center bubble inline" ng-click="test('video')">
+            <div class="center bubble inline" ng-click="toggleMedia('video')">
               <i class="center-v ion-ios-videocam"></i>
             </div>
           </div>
 
-          <div class="item item-divider center" ng-click="toggleMedia()">
+          <div>
+            <label class="item item-input" ng-if="mediaType.image">
+              <input type="text" placeholder="Image link" ng-model="crumb.image">
+            </label>
+            <label class="item item-input" ng-if="mediaType.audio">
+              <input type="text" placeholder="Audio link" ng-model="crumb.audio">
+            </label>
+            <label class="item item-input" ng-if="mediaType.video">
+              <input type="text" placeholder="Video link" ng-model="crumb.video">
+            </label>
+          </div>
+
+          <div class="item item-divider center" ng-click="toggleMedia('media')">
             <h1>FINISH MEDIA</h1>
           </div>
         </div>

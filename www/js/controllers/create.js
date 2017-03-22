@@ -193,8 +193,23 @@ angular.module('breadcrumb')
 
   $scope.media = false;
 
-  $scope.toggleMedia = () => {
-    $scope.media = !$scope.media;
+  $scope.mediaType = {
+    image: false,
+    audio: false,
+    video: false,
+  };
+
+  $scope.toggleMedia = (type) => {
+    if (type === 'media') {
+      $scope.media = !$scope.media;
+    }
+    const state = $scope.mediaType[type];
+    $scope.mediaType = {
+      image: false,
+      audio: false,
+      video: false,
+    };
+    $scope.mediaType[type] = !state;
   };
 
   $scope.add = () => {

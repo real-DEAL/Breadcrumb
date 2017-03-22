@@ -3,10 +3,12 @@
 angular.module('breadcrumb')
 .controller('ProfileCtrl', function ($scope, ListFact, Data) {
   $scope.user = JSON.parse(localStorage.user);
+  // $scope.user.pic = JSON.parse(localStorage.profile).picture;
 
   $scope.userPic = {
-    'background-image': `url('${$scope.user.profile_picture}')`,
+    'background-image': `url('${JSON.parse(localStorage.profile).picture}')`,
     'background-position': 'center',
+    'background-size': 'cover',
   };
 
   $scope.userTrails = [
