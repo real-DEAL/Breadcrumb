@@ -79,11 +79,12 @@ angular.module('breadcrumb').factory('Geofence', function (
     },
 
     addOrUpdate(crumb) {
+      console.log(crumb);
       const self = this;
       const geofence = {
         id: UUIDjs.create().toString(),
-        latitude: crumb.latitude,
-        longitude: crumb.longitude,
+        latitude: Number(crumb.latitude),
+        longitude: Number(crumb.longitude),
         radius: 100,
         transitionType: 1,
         notification: {
@@ -93,8 +94,8 @@ angular.module('breadcrumb').factory('Geofence', function (
           icon: crumb.icon,
           openAppOnClick: true,
         },
-        challenge: crumb.challenge,
       };
+      console.log(geofence);
 
       return $window.geofence.addOrUpdate(geofence).then(() => {
         const searched = self.findById(geofence.id);

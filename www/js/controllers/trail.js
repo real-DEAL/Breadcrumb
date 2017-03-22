@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence, $ionicLoading) {
   $scope.loading = null;
 
   $scope.page = {
