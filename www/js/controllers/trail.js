@@ -52,6 +52,7 @@ angular.module('breadcrumb')
     switch (type) {
       case 'description':
         $scope.page.description = false;
+        $scope.page.found = true;
         break;
       case 'found':
         $scope.page.found = true;

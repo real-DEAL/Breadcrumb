@@ -233,3 +233,22 @@
 .transparent {
   background: transparent;
 }
+
+.finish {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 75px);
+}
+
+.rating {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 250px);
+}
+
+.rating li {
+  display: inline;
+  font-size: 2.5em;
+}

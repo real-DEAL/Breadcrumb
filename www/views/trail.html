@@ -86,7 +86,7 @@
             {{ crumbs[crumb].media_text }}
           </div>
           <div ng-if="page.media.image">
-            <img src="{{ crumbs[crumb].image }}" alt="" width="300">
+            <img ng-src="{{ crumbs[crumb].image }}" alt="" width="300">
           </div>
           <div ng-if="page.media.audio">
             {{ crumbs[crumb].audio }}
@@ -110,19 +110,23 @@
     <div ng-if="page.finish" class="margin-top">
 
       <div class="card t-center" style="min-height: 450px;">
-        <h1>
-          Congrats!
-          <br>You finished the trail!!
-        </h1>
+        <div class="finish">
+          <h1>Congrats!</h1>
+          <h3>You finished the trail!!</h3>
+        </div>
 
-        <p>Rate this trail?</p>
-        <ul>
-          <li><i class="ion-android-star-outline s-2x"></i></li>
-          <li><i class="ion-android-star-outline s-2x"></i></li>
-          <li><i class="ion-android-star-outline s-2x"></i></li>
-          <li><i class="ion-android-star-outline s-2x"></i></li>
-          <li><i class="ion-android-star-outline s-2x"></i></li>
-        </ul>
+        <div class="rating">
+          <h4>Rate this trail?</h4>
+          <ul class="energized">
+            <li><i class="ion-android-star-outline s-2x"></i></li>
+            <li><i class="ion-android-star-outline s-2x"></i></li>
+            <li><i class="ion-android-star-outline s-2x"></i></li>
+            <li><i class="ion-android-star-outline s-2x"></i></li>
+            <li><i class="ion-android-star-outline s-2x"></i></li>
+          </ul>
+        </div>
+
+        <button class="button button-full" ui-sref="app.dashboard">Back to dashboard</button>
       </div>
 
     </div>
