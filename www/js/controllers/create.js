@@ -236,10 +236,12 @@ angular.module('breadcrumb')
         $scope.crumbs[$scope.trail.crumbs - 2].latitude = arg.geometry.location.lat();
         $scope.crumbs[$scope.trail.crumbs - 2].longitude = arg.geometry.location.lng();
         $scope.crumbs[$scope.trail.crumbs - 2].address = arg.formatted_address;
-
         console.warn($scope.crumbs, 'crumbs array')
         console.warn($scope.geofence, 'geofence updated')
       }
+      // $scope.$watch('geofence', () => {
+      //   $scope.center;
+      // });
 
     }
   };
