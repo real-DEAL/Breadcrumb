@@ -67,6 +67,15 @@ angular.module('breadcrumb')
 
   $scope.trails = null;
 
+  $scope.refresh = () => {
+    $scope.loading = null;
+    $scope.trailsCache = ListFact.get().then((trails) => {
+      $scope.trails = ListFact.filter(trails, 'name');
+      $scope.loading = { display: 'none' };
+      $scope.trailsCache = ListFact.filter(trails, 'name');
+    });
+  };
+
   // SEARCH
 
   $scope.search = {

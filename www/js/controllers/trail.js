@@ -33,7 +33,7 @@ angular.module('breadcrumb')
     //   description: 'A famous genera\'s statue, surrounded by controversy!',
     //   name: 'Lee\'s Circle',
     // media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    //   image: '../img/breadfalls.gif',
+    //   image: 'http://res.cloudinary.com/realdeal/image/upload/v1490205277/breadfalls_cnvvbe.gif',
     //   video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
     //   ar: null,
     //   audio: null,
@@ -52,6 +52,7 @@ angular.module('breadcrumb')
     switch (type) {
       case 'description':
         $scope.page.description = false;
+        $scope.page.found = true;
         break;
       case 'found':
         $scope.page.found = true;
