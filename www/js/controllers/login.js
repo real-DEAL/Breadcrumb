@@ -28,6 +28,7 @@ angular.module('breadcrumb')
         },
       })
       .then((response) => {
+        console.log(response, 'response')
         const data = response.data.data[0];
         if (data) {
           store.set('user', data);

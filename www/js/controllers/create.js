@@ -222,27 +222,22 @@ angular.module('breadcrumb')
   };
 
 
-  $scope.add = () => {
+  $scope.add = (arg) => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
-      console.warn($scope.location, '$scope.location in add()')
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
-      console.warn(arg, 'arg from add()')
+      console.warn(arg, 'arg from add()');
       // $scope.initMap();
       $scope.crumbs.push(crumb);
       if ($scope.trail.crumbs > 1) {
         $scope.crumbs[$scope.trail.crumbs - 2].latitude = arg.geometry.location.lat();
         $scope.crumbs[$scope.trail.crumbs - 2].longitude = arg.geometry.location.lng();
         $scope.crumbs[$scope.trail.crumbs - 2].address = arg.formatted_address;
-        console.warn($scope.crumbs, 'crumbs array')
-        console.warn($scope.geofence, 'geofence updated')
+        console.warn($scope.crumbs, 'crumbs array');
+        console.warn($scope.geofence, 'geofence updated');
       }
-      // $scope.$watch('geofence', () => {
-      //   $scope.center;
-      // });
-
     }
   };
 

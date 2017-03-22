@@ -65,6 +65,7 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
         $scope.choosePlace = (place) => {
           LocationService.getDetails(place.place_id).then((location) => {
             $scope.location = location;
+            console.warn($scope.location, '$scope.location')
             $scope.close();
           });
         };
