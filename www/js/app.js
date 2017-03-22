@@ -104,7 +104,7 @@ angular.module('breadcrumb', [
     localStorage.setItem('trail', id);
   };
 
-  $scope.user = JSON.parse(localStorage.getItem('username'));
+  $scope.user = JSON.parse(localStorage.user).username;
 
   $scope.overflowStyle = {
     'max-height': '100px',

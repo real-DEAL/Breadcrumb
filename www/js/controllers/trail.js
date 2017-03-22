@@ -20,6 +20,7 @@ angular.module('breadcrumb')
   $scope.crumbs = [];
 
   $scope.trail = ListFact.get('id').then((trails) => {
+    console.log(trails[0].crumb.sort());
     $scope.trail = trails[0];
     $scope.crumbs = trails[0].crumb;
     Geofence.addOrUpdate($scope.crumbs[0]);
