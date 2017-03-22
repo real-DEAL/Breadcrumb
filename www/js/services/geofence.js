@@ -79,7 +79,6 @@ angular.module('breadcrumb').factory('Geofence', function (
     },
 
     addOrUpdate(crumb) {
-      console.log(crumb);
       const self = this;
       const geofence = {
         id: UUIDjs.create().toString(),
@@ -95,7 +94,6 @@ angular.module('breadcrumb').factory('Geofence', function (
           openAppOnClick: true,
         },
       };
-      console.log(geofence);
 
       return $window.geofence.addOrUpdate(geofence).then(() => {
         const searched = self.findById(geofence.id);

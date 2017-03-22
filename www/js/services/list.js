@@ -34,7 +34,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
       }
       console.log(link);
     }
-    console.log(link);
     return $http({
       method: 'GET',
       url: link,
