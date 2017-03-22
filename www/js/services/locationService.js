@@ -32,6 +32,7 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
     restrict: 'A',
     scope: {
       location: '=',
+      // geofence: '=',
     },
     link: ($scope, element) => {
       $scope.search = {};
@@ -64,6 +65,10 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
         $scope.choosePlace = (place) => {
           LocationService.getDetails(place.place_id).then((location) => {
             $scope.location = location;
+            // console.log(location, 'location')
+            // $scope.geofence.latitude = location.geometry.location.lat();
+
+            // as soon as the location is chosen, make it show up on the map
             $scope.close();
           });
         };

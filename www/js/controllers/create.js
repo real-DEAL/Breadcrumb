@@ -3,6 +3,7 @@
 
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
+
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
 
@@ -190,7 +191,9 @@ angular.module('breadcrumb')
     video: null,
     audio: null,
     ar: null,
-    location: Data.address(),
+    latitude: null,
+    longitude: null,
+    address: Data.address(),
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
@@ -226,8 +229,18 @@ angular.module('breadcrumb')
       console.warn($scope.location, '$scope.location in add()')
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
-      crumb.location = arg;
+      console.warn(arg, 'arg from add()')
+      // $scope.initMap();
       $scope.crumbs.push(crumb);
+      if ($scope.trail.crumbs > 1) {
+        $scope.crumbs[$scope.trail.crumbs - 2].latitude = arg.geometry.location.lat();
+        $scope.crumbs[$scope.trail.crumbs - 2].longitude = arg.geometry.location.lng();
+        $scope.crumbs[$scope.trail.crumbs - 2].address = arg.formatted_address;
+
+        console.warn($scope.crumbs, 'crumbs array')
+        console.warn($scope.geofence, 'geofence updated')
+      }
+
     }
   };
 
@@ -310,30 +323,30 @@ angular.module('breadcrumb')
 
 
 // Leaflet Map ------------------------------------------------
-  const geofence = {
-    latitude: 42.23432,
-    longitude: 50.34134,
+  $scope.geofence = {
+    latitude: 29.9511,
+    longitude: -90.0715,
     radius: 13,
   };
   $scope.TransitionType = TransitionType;
 
   $scope.center = {
-    lat: geofence.latitude,
-    lng: geofence.longitude,
+    lat: $scope.geofence.latitude,
+    lng: $scope.geofence.longitude,
     zoom: 12,
   };
   $scope.markers = {
     marker: {
       draggable: true,
-      lat: geofence.latitude,
-      lng: geofence.longitude,
+      lat: $scope.geofence.latitude,
+      lng: $scope.geofence.longitude,
       icon: {},
     },
   };
   $scope.paths = {
     circle: {
       type: 'circle',
-      radius: geofence.radius,
+      radius: $scope.geofence.radius,
       latlngs: $scope.markers.marker,
       clickable: false,
     },
@@ -345,6 +358,4 @@ angular.module('breadcrumb')
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   };
-
-
 });

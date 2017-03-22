@@ -86,7 +86,6 @@
 
     <!-- CRUMBS -->
     <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
-<<<<<<< HEAD
 
       <!-- NAMES -->
       <div class="item item-divider item-icon-right">
@@ -112,6 +111,7 @@
       </div>
 
       <div class="card">
+<<<<<<< HEAD
 
         <div ng-if="!media">
           <!-- DESCRIPTION -->
@@ -188,7 +188,7 @@
           ng-if="crumbs.length > $index + 1">
             Next crumb
           </button>
-          <button class="button button-block button-energized" ng-click="add(location.formatted_address)" ng-if="crumbs.length === $index + 1">
+          <button class="button button-block button-energized" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
             Add crumb!
           </button>
         </div>
