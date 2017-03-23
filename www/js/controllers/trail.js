@@ -20,28 +20,19 @@ angular.module('breadcrumb')
   $scope.crumbs = [];
 
   $scope.trail = ListFact.get('id').then((trails) => {
-    console.log(trails[0].crumb.sort());
     $scope.trail = trails[0];
     $scope.crumbs = trails[0].crumb;
     Geofence.addOrUpdate($scope.crumbs[0]);
     $scope.loading = { display: 'none' };
-    // $scope.crumbs.unshift({
-    //   data: null,
-    //   id: 31,
-    //   trail_id: 14,
-    //   order_number: 0,
-    //   clue: 'Someone\'s Circle',
-    //   description: 'A famous genera\'s statue, surrounded by controversy!',
-    //   name: 'Lee\'s Circle',
-    // media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    //   image: 'http://res.cloudinary.com/realdeal/image/upload/v1490205277/breadfalls_cnvvbe.gif',
-    //   video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
-    //   ar: null,
-    //   audio: null,
-    // });
   });
 
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
+
+  $scope.startTrail = ListFact.get('id').then((trails) => {
+    $scope.trail = trails[0];
+    $scope.crumbs = trails[0].crumb;
+    $scope.loading = { display: 'none' };
+  });
 
   $rootScope.$watch('pinged', () => {
     if ($rootScope.pinged) {
@@ -54,9 +45,11 @@ angular.module('breadcrumb')
       case 'description':
         $scope.page.description = false;
         $scope.page.found = true;
+        Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
         break;
       case 'found':
         $scope.page.found = true;
+        $scope.page.description = false;
         break;
       case 'next':
         $scope.crumb += 1;
@@ -65,11 +58,12 @@ angular.module('breadcrumb')
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
+          $scope.bubbles = { top: '320px' };
           $scope.page.finish = true;
         } else {
-          Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
           $scope.page.found = false;
           $scope.page.media.show = false;
+          $scope.bubbles = { top: '320px' };
           $scope.page.description = true;
         }
         break;

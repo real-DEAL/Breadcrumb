@@ -6,7 +6,7 @@ angular.module('breadcrumb')
   // $scope.user.pic = JSON.parse(localStorage.profile).picture;
 
   $scope.userPic = {
-    'background-image': `url('${JSON.parse(localStorage.profile).picture}')`,
+    'background-image': `url('${$scope.user.profile_picture}')`,
     'background-position': 'center',
     'background-size': 'cover',
   };

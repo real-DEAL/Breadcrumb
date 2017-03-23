@@ -101,18 +101,14 @@
 
       <div class="card">
 
-        <div class="row item item-divider center map-div">
-
-          <!-- map -->
-          <div id="mapid"></div>
-
-          <div style="width: 100%; position: absolute; top: 0px; bottom: 0px;" data-tap-disabled="true">
-            <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
-          </div>
-        </div>
-          <!-- map ends -->
-
         <div ng-if="!media">
+          <!-- MAP -->
+          <div class="row item item-divider center map-div">
+
+            <div class="map" data-tap-disabled="true">
+              <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
+            </div>
+          </div>
 
           <!-- DESCRIPTION -->
           <div class="item item-icon-right textbox">
@@ -214,8 +210,8 @@
       <!-- CRUMBS -->
       <div ng-style="overflowStyle">
         <div ng-repeat="crumb in trail.crumbs track by $index" class="row">
-          <div class="col col-10">{{ $index + 1 }}</div>
-          <div class="col">{{ crumb.location }}</div>
+          <div class="col col-10 t-center">{{ $index + 1 }}</div>
+          <div class="col">{{ crumb.address }}</div>
         </div>
       </div>
     </div>

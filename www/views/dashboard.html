@@ -58,13 +58,12 @@
 
         <!-- GO BUTTON -->
         <div class="row">
-          <button class="col button button-block" ng-if="!trail.progress" ng-click="setTrail(trail.id)" ui-sref="app.trail">
-            GO!
-          </button>
-
-          <button class="col button button-block" ng-if="trail.progress">
-            <span ng-if="100 - trail.progress < 20">Only</span>
-            {{ 100 - trail.progress }}% remaining! Let's go!
+          <button class="col button button-block" ng-click="setTrail(trail.id)" ui-sref="app.trail">
+            <span ng-if="!trail.progress">Start!</span>
+            <span ng-if="trail.progress">
+              <span ng-if="100 - trail.progress < 20">Only</span>
+              {{ 100 - trail.progress }}% remaining! Let's go!
+            </span>
           </button>
         </div>
       </div>

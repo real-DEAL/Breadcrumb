@@ -219,7 +219,6 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
-
   $scope.add = (arg) => {
     if (!$scope.review.check) {
       $scope.move(-100);
