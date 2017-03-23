@@ -21,6 +21,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
     if (request === 'id') {
       link += `?id=${$rootScope.trailID}`;
     } else if (request) {
+      console.log(request);
       link += '?';
       // TODO: search by username
       if (request.username) {
