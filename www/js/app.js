@@ -98,6 +98,8 @@ angular.module('breadcrumb', [
     store.remove('token');
     store.remove('profile');
     store.remove('refreshToken');
+    store.remove('pic');
+    store.remove('user');
     $state.go('start', {}, { reload: true });
   };
 

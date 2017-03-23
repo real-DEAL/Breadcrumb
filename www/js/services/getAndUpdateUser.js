@@ -13,6 +13,11 @@ angular.module('breadcrumb')
       const data = response.data.data[0];
       userInfo.social_login = socialID;
       userInfo.password = socialID;
+
+      const pic = store.get('pic');
+      if (pic) {
+        userInfo.profile_picture = pic;
+      }
       if (data) {
         return $http({
           method: 'PUT',
