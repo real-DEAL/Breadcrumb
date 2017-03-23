@@ -1,4 +1,4 @@
-angular.module('breadcrumb').controller('CameraCtrl', function (
+angular.module('breadcrumb').factory('CameraFact', function (
   $scope
 ) {
   $scope.takePicture = () => {
