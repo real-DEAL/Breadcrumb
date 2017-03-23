@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <ion-view>
   <div class="loading" ng-style="loading"></div>
@@ -100,23 +101,55 @@
 
       <div class="card">
 
+        <div class="row item item-divider center map-div">
+
+          <!-- map -->
+          <div id="mapid"></div>
+
+          <div style="width: 100%; position: absolute; top: 0px; bottom: 0px;" data-tap-disabled="true">
+            <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
+          </div>
+        </div>
+          <!-- map ends -->
+
         <div ng-if="!media">
+
           <!-- DESCRIPTION -->
           <div class="item item-icon-right textbox">
             <i class="energized icon ion-information-circled" ng-click="toggleInfo()"></i>
             <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
           </div>
 
+
           <!-- LOCATION -->
           <div class="item item-icon-right textbox">
             <i class="positive icon ion-navigate" ng-click="test()"></i>
-            <input class="full" type="text" ng-model="crumb.location" placeholder="Location">
+            <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
           </div>
 
           <!-- MEDIA SWITCH BUTTON -->
           <div class="item item-divider center" ng-click="toggleMedia('media')">
             <h1>UPLOAD MEDIA</h1>
           </div>
+
+          <!-- BUTTONS -->
+          <div class="row" ng-if="!media">
+            <div class="col">
+              <button class="button button-block" ng-click="move(100)">
+                Prev crumb
+              </button>
+            </div>
+            <div class="col">
+              <button class="button button-block" ng-click="move(-100)"
+              ng-if="crumbs.length > $index + 1">
+                Next crumb
+              </button>
+              <button class="button button-block button-energized" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
+                Add crumb!
+              </button>
+            </div>
+          </div>
+
         </div>
 
         <!-- CRUMB MEDIA -->
@@ -158,24 +191,6 @@
           </div>
         </div>
 
-      </div>
-
-      <!-- BUTTONS -->
-      <div class="row" ng-if="!media">
-        <div class="col">
-          <button class="button button-block" ng-click="move(100)">
-            Prev crumb
-          </button>
-        </div>
-        <div class="col">
-          <button class="button button-block" ng-click="move(-100)"
-          ng-if="crumbs.length > $index + 1">
-            Next crumb
-          </button>
-          <button class="button button-block button-energized" ng-click="add()" ng-if="crumbs.length === $index + 1">
-            Add crumb!
-          </button>
-        </div>
       </div>
 
     </div>

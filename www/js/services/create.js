@@ -31,9 +31,9 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
       json: true,
     })
     .then((response) => {
-      const trail_id = response.data.data[0].id;
+      const trailId = response.data.data[0].id;
       crumbs.forEach((crumb, index) => {
-        crumb.trail_id = trail_id;
+        crumb.trail_id = trailId;
         crumb.order_number = index + 1;
         return $http({
           method: 'POST',
@@ -46,7 +46,6 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
     })
     .catch(err => err);
   };
-
   return {
     submit: submitTrail,
   };

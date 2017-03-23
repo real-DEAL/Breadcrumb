@@ -215,6 +215,14 @@
   margin: 10px 0;
 }
 
+#map {
+  height: 250px;
+  width: 100%;
+}
+
+.map-div {
+  height: 250px;
+}
 .margin-n {
   margin: 0;
 }
@@ -225,6 +233,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 
 .full {
   width: 100%;
@@ -252,3 +261,9 @@
   display: inline;
   font-size: 2.5em;
 }
+
+
+
+/*#map {
+   height: 100%;
+ }*/

@@ -40,7 +40,7 @@ angular.module('breadcrumb').factory('Map', function () {
         location: '',
         stopover: true,
       };
-      obj.location = point.location;
+      obj.location = point.address;
       arr.push(obj);
     });
     return arr;
@@ -49,9 +49,9 @@ angular.module('breadcrumb').factory('Map', function () {
   const addPath = (directions) => {
     let obj = {};
     const request = {
-      origin: directions[0].location,
+      origin: directions[0].address,
       waypoints: wayPointsMakers(directions),
-      destination: directions[directions.length - 2].location,
+      destination: directions[directions.length - 2].address,
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
     return new Promise(function (resolve, reject) {
@@ -72,7 +72,6 @@ angular.module('breadcrumb').factory('Map', function () {
       });
     });
   };
-
   return {
     add: addPath,
   };

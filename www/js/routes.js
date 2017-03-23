@@ -61,6 +61,10 @@ angular.module('breadcrumb')
             templateUrl: 'views/create.html',
             controller: 'CreateTrailCtrl',
           },
+          'mapContent@app.create': {
+            templateUrl: 'views/map.html',
+            controller: 'MapCtrl',
+          },
         },
       })
       .state('app.search', {
@@ -90,15 +94,15 @@ angular.module('breadcrumb')
           },
         },
       })
-      .state('app.geofences', {
-        url: '/geofences',
-        views: {
-          menuContent: {
-            templateUrl: 'views/geofence/geofences.html',
-            controller: 'GeofencesCtrl',
-          },
-        },
-      })
+      // .state('app.geofences', {
+      //   url: '/geofences',
+      //   views: {
+      //     menuContent: {
+      //       templateUrl: 'views/geofence/geofences.html',
+      //       controller: 'GeofencesCtrl',
+      //     },
+      //   },
+      // })
       .state('app.geofence-new', {
         url: '/geofence/new/:longitude,:latitude',
         views: {
@@ -151,7 +155,6 @@ angular.module('breadcrumb')
       clientID: 'WjzyvWzAQ8jN72gc0NR6pWBEG8gWM2Wn',
       loginState: 'login',
     });
-
     $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({

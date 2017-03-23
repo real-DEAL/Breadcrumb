@@ -5,6 +5,7 @@ angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
+
     const style = {
       left: move,
       'transition-duration': '250ms',
@@ -56,7 +57,6 @@ angular.module('breadcrumb')
 
   $scope.toggleInfo = () => {
     $scope.info.show = !$scope.info.show;
-    console.log($scope.info.show);
   };
 
   $scope.trailTypes = [
@@ -84,6 +84,11 @@ angular.module('breadcrumb')
     }
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
+
+  $scope.location = {}; // this is the shared scope with the directive and is in the View
+    // how can I replace this ?
+
+  $scope.obj = {};
 
   $scope.difficulty = {
     0: {
@@ -184,7 +189,9 @@ angular.module('breadcrumb')
     video: null,
     audio: null,
     ar: null,
-    location: Data.address(),
+    latitude: null,
+    longitude: null,
+    address: null,
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
@@ -212,12 +219,19 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
-  $scope.add = () => {
+
+  $scope.add = (arg) => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
+      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
+      if ($scope.crumbs.length > 1) {
+        $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
+        $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
+        $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
+      }
     }
   };
 
@@ -257,7 +271,6 @@ angular.module('breadcrumb')
     $scope.review.check = true;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
-      console.log(data);
       $scope.loading = { display: 'none' };
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
@@ -294,7 +307,44 @@ angular.module('breadcrumb')
       $scope.trail = trailMaker();
       $scope.loading = { display: 'none' };
       $state.go('app.dashboard');
-    })
-    ;
+    });
+  };
+
+
+// Leaflet Map ------------------------------------------------
+  $scope.geofence = {
+    latitude: 29.9511,
+    longitude: -90.0715,
+    radius: 13,
+  };
+  $scope.TransitionType = TransitionType;
+
+  $scope.center = {
+    lat: $scope.geofence.latitude,
+    lng: $scope.geofence.longitude,
+    zoom: 12,
+  };
+  $scope.markers = {
+    marker: {
+      draggable: true,
+      lat: $scope.geofence.latitude,
+      lng: $scope.geofence.longitude,
+      icon: {},
+    },
+  };
+  $scope.paths = {
+    circle: {
+      type: 'circle',
+      radius: $scope.geofence.radius,
+      latlngs: $scope.markers.marker,
+      clickable: false,
+    },
+  };
+
+  $scope.tiles = {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    options: {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
   };
 });
