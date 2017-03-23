@@ -24,3 +24,4 @@ app/components
 .DS_Store
 .io-config.json
 notes.js
+www/views/test.html
