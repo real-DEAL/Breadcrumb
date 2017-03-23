@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.factory('getUpdateUserFact', function ($http, $state) {
+.factory('getUpdateUserFact', function ($http, $state, store) {
   return (socialID, userInfo) => {
     $http({
       method: 'GET',
@@ -13,6 +13,11 @@ angular.module('breadcrumb')
       const data = response.data.data[0];
       userInfo.social_login = socialID;
       userInfo.password = socialID;
+
+      const pic = store.get('pic');
+      if (pic) {
+        userInfo.profile_picture = pic;
+      }
       if (data) {
         return $http({
           method: 'PUT',
@@ -23,7 +28,8 @@ angular.module('breadcrumb')
             id: data[0].id,
           },
         })
-        .then(() => {
+        .then((res) => {
+          store.set('user', res.data.data[0]);
           $state.go('app.dashboard');
         })
         .catch((error) => {
@@ -36,7 +42,8 @@ angular.module('breadcrumb')
         data: userInfo,
         json: true,
       })
-      .then(() => {
+      .then((res) => {
+        store.set('user', res.data.data[0]);
         $state.go('app.dashboard');
       })
       .catch((error) => {

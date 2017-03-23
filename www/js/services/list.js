@@ -54,6 +54,9 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
         data.push(trail);
       });
       return data;
+    })
+    .catch((err) => {
+      console.error(err);
     });
   };
 

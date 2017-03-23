@@ -1,12 +1,12 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($scope, ListFact, Data) {
-  $scope.user = JSON.parse(localStorage.user);
+.controller('ProfileCtrl', function ($scope, ListFact, Data, store) {
+  $scope.user = store.get('user');
   // $scope.user.pic = JSON.parse(localStorage.profile).picture;
 
   $scope.userPic = {
-    'background-image': `url('${JSON.parse(localStorage.profile).picture}')`,
+    'background-image': `url('${store.get('user').profile_picture}')`,
     'background-position': 'center',
     'background-size': 'cover',
   };

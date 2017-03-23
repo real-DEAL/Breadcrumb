@@ -30,7 +30,7 @@
 
         <!-- IMAGE -->
         <div class="item item-text-wrap">
-          <img src="../img/temp.png" alt="" width="200">
+          <img src="http://res.cloudinary.com/realdeal/image/upload/v1490205278/temp_ul9ax0.png" alt="" width="200">
         </div>
 
         <!-- ADDRESS -->
@@ -89,6 +89,7 @@
             <img ng-src="{{ crumbs[crumb].image }}" alt="" width="300">
           </div>
           <div ng-if="page.media.audio">
+            // TODO: fix, currently just rendering raw object data
             {{ crumbs[crumb].audio }}
           </div>
           <div ng-if="page.media.video">

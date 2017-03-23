@@ -20,7 +20,7 @@ angular.module('breadcrumb')
   $scope.crumbs = [];
 
   $scope.trail = ListFact.get('id').then((trails) => {
-    console.log(trails[0].crumb.sort());
+    trails[0].crumb.sort((a, b) => a.order_number - b.order_number);
     $scope.trail = trails[0];
     $scope.crumbs = trails[0].crumb;
     Geofence.addOrUpdate($scope.crumbs[0]);
@@ -41,7 +41,7 @@ angular.module('breadcrumb')
     // });
   });
 
-  $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
+  $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
   $rootScope.$watch('pinged', () => {
     if ($rootScope.pinged) {
@@ -53,7 +53,8 @@ angular.module('breadcrumb')
     switch (type) {
       case 'description':
         $scope.page.description = false;
-        $scope.page.found = true;
+        // TODO: delete 56, just for testing
+        // $scope.page.found = true;
         break;
       case 'found':
         $scope.page.found = true;

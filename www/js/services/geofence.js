@@ -9,25 +9,6 @@ angular.module('breadcrumb').factory('Geofence', function (
     _geofences: [],
     _geofencesPromise: null,
 
-    create(attributes) {
-      const defaultGeofence = {
-        id: UUIDjs.create().toString(),
-        latitude: 50,
-        longitude: 50,
-        radius: 100,
-        transitionType: TransitionType.ENTER,
-        notification: {
-          id: this.getNextNotificationId(),
-          title: 'You\'ve found a crumb!!!',
-          text: '',
-          icon: 'res://ic_menu_mylocation',
-          openAppOnClick: true,
-        },
-      };
-
-      return angular.extend(defaultGeofence, attributes);
-    },
-
     loadFromLocalStorage() {
       const result = localStorage.geofences;
       let geofences = [];
@@ -61,29 +42,12 @@ angular.module('breadcrumb').factory('Geofence', function (
       return this.loadFromLocalStorage();
     },
 
-    getAll() {
-      const self = this;
-
-      if (!self._geofencesPromise) {
-        self._geofencesPromise = $q.defer();
-        self.loadFromDevice().then(function (geofences) {
-          self._geofences = geofences;
-          self._geofencesPromise.resolve(geofences);
-        }, function (reason) {
-          $log.error('Error fetching geofences', reason);
-          self._geofencesPromise.reject(reason);
-        });
-      }
-
-      return self._geofencesPromise.promise;
-    },
-
     addOrUpdate(crumb) {
       const self = this;
       const geofence = {
         id: UUIDjs.create().toString(),
-        latitude: crumb.latitude,
-        longitude: crumb.longitude,
+        latitude: Number(crumb.latitude),
+        longitude: Number(crumb.longitude),
         radius: 100,
         transitionType: 1,
         notification: {
@@ -93,7 +57,6 @@ angular.module('breadcrumb').factory('Geofence', function (
           icon: crumb.icon,
           openAppOnClick: true,
         },
-        challenge: crumb.challenge,
       };
 
       return $window.geofence.addOrUpdate(geofence).then(() => {
@@ -121,24 +84,24 @@ angular.module('breadcrumb').factory('Geofence', function (
       return undefined;
     },
 
-    remove(geofence) {
-      const self = this;
-
-      $ionicLoading.show({
-        template: 'Removing geofence...',
-      });
-      $window.geofence.remove(geofence.id).then(function () {
-        $ionicLoading.hide();
-        self._geofences.splice(self._geofences.indexOf(geofence), 1);
-        self.saveToLocalStorage();
-      }, function (reason) {
-        $log.error('Error while removing geofence', reason);
-        $ionicLoading.show({
-          template: 'Error while removing geofence',
-          duration: 1500,
-        });
-      });
-    },
+    // remove(geofence) {
+    //   const self = this;
+    //
+    //   $ionicLoading.show({
+    //     template: 'Removing geofence...',
+    //   });
+    //   $window.geofence.remove(geofence.id).then(function () {
+    //     $ionicLoading.hide();
+    //     self._geofences.splice(self._geofences.indexOf(geofence), 1);
+    //     self.saveToLocalStorage();
+    //   }, function (reason) {
+    //     $log.error('Error while removing geofence', reason);
+    //     $ionicLoading.show({
+    //       template: 'Error while removing geofence',
+    //       duration: 1500,
+    //     });
+    //   });
+    // },
 
     removeAll() {
       const self = this;
