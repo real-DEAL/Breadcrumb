@@ -3,7 +3,6 @@
 
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
-
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
 
@@ -58,7 +57,6 @@ angular.module('breadcrumb')
 
   $scope.toggleInfo = () => {
     $scope.info.show = !$scope.info.show;
-    console.log($scope.info.show);
   };
 
   $scope.trailTypes = [
@@ -223,24 +221,16 @@ angular.module('breadcrumb')
 
 
   $scope.add = (arg) => {
-    console.warn(arg, 'arg from add()');
-
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
-      // $scope.initMap();
       $scope.crumbs.push(crumb);
-      console.warn($scope.crumbs.length, '$scope.crumbs.length')
       if ($scope.crumbs.length > 1) {
-        console.log(arg.geometry.location.lat(), 'latitude in arg from add()')
-
         $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
         $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
         $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
-        console.warn($scope.crumbs, 'crumbs array');
-        console.warn($scope.geofence, 'geofence updated');
       }
     }
   };
@@ -279,10 +269,8 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
-    console.log($scope.crumbs, 'crumbs from ReviewMap')
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
-      console.log(data);
       $scope.loading = { display: 'none' };
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;

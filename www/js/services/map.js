@@ -47,7 +47,6 @@ angular.module('breadcrumb').factory('Map', function () {
   };
 
   const addPath = (directions) => {
-    console.warn(directions, 'directions check')
     let obj = {};
     const request = {
       origin: directions[0].address,
@@ -55,7 +54,6 @@ angular.module('breadcrumb').factory('Map', function () {
       destination: directions[directions.length - 2].address,
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
-    console.log(request, 'the request')
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {
         if (status === google.maps.DirectionsStatus.OK) {
