@@ -1,5 +1,5 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('ListFact', function ($http) {
+angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
   const closeStyle = {
     height: '95px',
     'transition-duration': '250ms',
@@ -19,7 +19,7 @@ angular.module('breadcrumb').factory('ListFact', function ($http) {
     // let link = 'http://192.168.99.100/trails';
     let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
-      link += `?id=${localStorage.getItem('trail')}`;
+      link += `?id=${$rootScope.trailID}`;
     } else if (request) {
       link += '?';
       // TODO: search by username

@@ -2,6 +2,8 @@ angular.module('breadcrumb')
 .controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
   $scope.loading = null;
 
+  $scope.trailID = null;
+
   $scope.page = {
     description: true,
     map: false,
@@ -19,24 +21,22 @@ angular.module('breadcrumb')
 
   $scope.crumbs = [];
 
-  $scope.trail = ListFact.get('id').then((trails) => {
-    $scope.trail = trails[0];
-    $scope.crumbs = trails[0].crumb;
-    Geofence.addOrUpdate($scope.crumbs[0]);
-    $scope.loading = { display: 'none' };
-  });
-
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
 
-  $scope.startTrail = ListFact.get('id').then((trails) => {
-    $scope.trail = trails[0];
-    $scope.crumbs = trails[0].crumb;
-    $scope.loading = { display: 'none' };
-  });
+  $scope.startTrail = () => {
+    ListFact.get('id').then((trails) => {
+      $scope.trail = trails[0];
+      $scope.crumbs = trails[0].crumb;
+      $scope.trailID = $rootScope.trailID;
+      $scope.loading = { display: 'none' };
+    });
+  };
 
-  $rootScope.$watch('pinged', () => {
-    if ($rootScope.pinged) {
-      $scope.switch('found');
+  $scope.trail = $scope.startTrail();
+
+  $rootScope.$watch('trailID', () => {
+    if ($rootScope.trailID !== $scope.trailID) {
+      $scope.startTrail();
     }
   });
 
@@ -70,6 +70,12 @@ angular.module('breadcrumb')
       default: $scope.page.description = true;
     }
   };
+
+  $rootScope.$watch('pinged', () => {
+    if ($rootScope.pinged) {
+      $scope.switch('found');
+    }
+  });
 
   $scope.media = (type) => {
     $scope.bubbles = {

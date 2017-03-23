@@ -87,7 +87,7 @@ angular.module('breadcrumb', [
     });
   });
 })
-.controller('AppCtrl', function ($scope, auth, store, $state) {
+.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state) {
   $scope.logout = () => {
     auth.signout();
     store.remove('token');
@@ -102,6 +102,8 @@ angular.module('breadcrumb', [
 
   $scope.setTrail = (id) => {
     localStorage.setItem('trail', id);
+    $rootScope.trailID = id;
+    console.log($rootScope)
   };
 
   // $scope.user = JSON.parse(localStorage.user).username;
