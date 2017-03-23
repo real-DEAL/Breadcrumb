@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence, $ionicLoading) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
   $scope.loading = null;
 
   $scope.page = {
@@ -41,7 +41,7 @@ angular.module('breadcrumb')
     // });
   });
 
-  $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video);
+  $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
   $rootScope.$watch('pinged', () => {
     if ($rootScope.pinged) {

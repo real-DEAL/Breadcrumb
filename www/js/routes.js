@@ -7,11 +7,6 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
-      // .state('test', {
-      //   url: '/test',
-      //   templateUrl: 'views/test.html',
-      //   controller: 'TrailFenceCtrl',
-      // })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
@@ -96,61 +91,6 @@ angular.module('breadcrumb')
           menuContent: {
             templateUrl: 'views/settings.html',
             controller: 'AuthCtrl',
-          },
-        },
-      })
-      // .state('app.geofences', {
-      //   url: '/geofences',
-      //   views: {
-      //     menuContent: {
-      //       templateUrl: 'views/geofence/geofences.html',
-      //       controller: 'GeofencesCtrl',
-      //     },
-      //   },
-      // })
-      .state('app.geofence-new', {
-        url: '/geofence/new/:longitude,:latitude',
-        views: {
-          menuContent: {
-            templateUrl: 'views/geofence/geofence.html',
-            controller: 'GeofenceCtrl',
-          },
-        },
-        resolve: {
-          geofence($stateParams, Geofence) {
-            return Geofence.create({
-              longitude: parseFloat($stateParams.longitude),
-              latitude: parseFloat($stateParams.latitude),
-            });
-          },
-        },
-      })
-      .state('app.geofence-edit', {
-        url: '/geofence/:geofenceId',
-        views: {
-          menuContent: {
-            templateUrl: 'views/geofence/geofence.html',
-            controller: 'GeofenceCtrl',
-          },
-        },
-        resolve: {
-          geofence($stateParams, Geofence, $q) {
-            const geofence = Geofence.findById($stateParams.geofenceId);
-
-            if (geofence) {
-              return $q.when(angular.copy(geofence));
-            }
-
-            return $q.reject(`Cannot find geofence with id: ${$stateParams.geofenceId}`);
-          },
-        },
-      })
-      .state('app.camera', {
-        url: '/camera',
-        views: {
-          menuContent: {
-            templateUrl: 'views/camera-testView.html',
-            controller: 'CameraCtrl',
           },
         },
       });
