@@ -88,10 +88,6 @@ angular.module('breadcrumb')
     rating: null,
   };
 
-  $scope.finish = () => {
-
-  };
-
   $scope.media = (type) => {
     $scope.bubbles = {
       top: '0px',
