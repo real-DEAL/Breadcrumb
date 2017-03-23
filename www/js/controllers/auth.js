@@ -19,7 +19,7 @@ angular.module('breadcrumb')
     if (!$scope.creds.email) {
       $scope.creds.email = profile.email;
     }
-    getUpdateUserFact(profile.user_id, {
+    getUpdateUserFact(profile, {
       username: $scope.creds.username,
       email: $scope.creds.email,
     });

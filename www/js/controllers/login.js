@@ -16,7 +16,7 @@ angular.module('breadcrumb')
 
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
-      store.set('profile', profile);
+      store.set('profile', profile.user_id);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
       $http({
