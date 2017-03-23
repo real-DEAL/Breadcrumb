@@ -3,6 +3,64 @@
 /* global localStorage */
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('Data', function () {
+  const trailTypes = () => ([
+    'adventure',
+    'mystery',
+    'casual',
+    'tour',
+    'scavenger',
+    'nature',
+    'history',
+  ].sort());
+
+  const transport = () => ({
+    WALKING: {
+      type: 'walk',
+      style: null,
+    },
+    BICYCLING: {
+      type: 'bicycle',
+      style: null,
+    },
+    TRANSIT: {
+      type: 'bus',
+      style: null,
+    },
+    DRIVING: {
+      type: 'car',
+      style: null,
+    },
+  });
+
+  const difficulties = () => ({
+    0: {
+      type: 'easy',
+      style: null,
+    },
+    1: {
+      type: 'medium',
+      style: null,
+    },
+    2: {
+      type: 'hard',
+      style: null,
+    },
+  });
+
+  const info = () => ({
+    show: false,
+    name: null,
+    text: null,
+    description: {
+      name: 'Description',
+      text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
+    },
+    rewardText: {
+      name: 'Reward Text',
+      text: 'This is what shows up when the traveler reaches the crumb!',
+    },
+  });
+
   const addresses = [
     '748 Camp St, New Orleans, LA 70130',
     '1546 Magazine St, New Orleans, LA 70130',
@@ -76,6 +134,10 @@ angular.module('breadcrumb').factory('Data', function () {
   };
 
   return {
+    info,
+    transport,
+    trailTypes,
+    difficulties,
     trail: trailMaker,
     address: randomFromArray(addresses),
     trailName: randomFromArray(trailNames),

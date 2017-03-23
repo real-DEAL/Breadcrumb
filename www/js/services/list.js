@@ -23,19 +23,26 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
     } else if (request) {
       console.log(request);
       link += '?';
-      // TODO: search by username
-      if (request.username) {
-        link += `user_id=${request.username}`;
+      let req;
+      for (req in request) {
+        if (req !== 'username' && request[req] !== null && request[req] !== 'Any') {
+          link += `${req}=${request[req]}&`;
+        }
       }
-      if (request.difficulty !== 'Any') {
-        link += `difficulty=${request.difficulty}`;
-      }
-      if (request.rating !== 'Any') {
-        link += `rating=${request.rating}`;
-      }
-      if (request.transport !== 'Any') {
-        link += `transport=${request.transport}`;
-      }
+      console.log(link);
+      // // TODO: search by username
+      // if (request.username) {
+      //   link += `user_id=${request.username}`;
+      // }
+      // if (request.difficulty !== 'Any') {
+      //   link += `difficulty=${request.difficulty}`;
+      // }
+      // if (request.rating !== 'Any') {
+      //   link += `rating=${request.rating}`;
+      // }
+      // if (request.transport !== 'Any') {
+      //   link += `transport=${request.transport}`;
+      // }
     }
     return $http({
       method: 'GET',

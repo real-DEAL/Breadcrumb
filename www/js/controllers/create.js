@@ -37,25 +37,17 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
-  $scope.info = {
-    show: false,
-    name: 'Description',
-    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
-  };
+  $scope.info = Data.info();
 
-  $scope.toggleInfo = () => {
+  $scope.toggleInfo = (type) => {
+    if (type) {
+      $scope.info.name = $scope.info[type].name;
+      $scope.info.text = $scope.info[type].text;
+    }
     $scope.info.show = !$scope.info.show;
   };
 
-  $scope.trailTypes = [
-    'adventure',
-    'mystery',
-    'casual',
-    'tour',
-    'scavenger',
-    'nature',
-    'history',
-  ].sort();
+  $scope.trailTypes = Data.trailTypes();
 
   $scope.step = 0;
 
@@ -78,28 +70,11 @@ angular.module('breadcrumb')
 
   $scope.obj = {};
 
-  $scope.difficulty = {
-    0: {
-      type: 'easy',
-      style: null,
-    },
-    1: {
-      type: 'medium',
-      style: null,
-    },
-    2: {
-      type: 'hard',
-      style: null,
-    },
-  };
+  $scope.difficulty = Data.difficulties();
 
   $scope.fillDifficulty = (diff) => {
-    const fill = {
-      color: 'purple',
-    };
-    $scope.difficulty[0].style = null;
-    $scope.difficulty[1].style = null;
-    $scope.difficulty[2].style = null;
+    const fill = { color: 'purple' };
+    $scope.difficulty = Data.difficulties();
     if (diff === 'easy') {
       $scope.trail.difficulty = 1;
       $scope.difficulty[0].style = fill;
@@ -117,30 +92,10 @@ angular.module('breadcrumb')
     }
   };
 
-  $scope.transport = {
-    WALKING: {
-      type: 'walk',
-      style: null,
-    },
-    BICYCLING: {
-      type: 'bicycle',
-      style: null,
-    },
-    TRANSIT: {
-      type: 'bus',
-      style: null,
-    },
-    DRIVING: {
-      type: 'car',
-      style: null,
-    },
-  };
+  $scope.transport = Data.transport();
 
   $scope.transChange = (type) => {
-    $scope.transport.WALKING.style = null;
-    $scope.transport.BICYCLING.style = null;
-    $scope.transport.TRANSIT.style = null;
-    $scope.transport.DRIVING.style = null;
+    $scope.transport = Data.transport();
     $scope.transport[type].style = Style.activeTransport();
   };
 

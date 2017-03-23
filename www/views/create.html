@@ -27,54 +27,52 @@
       <label class="item item-input">
         <input type="text" style="font-size: 25px" class="center s-2x" ng-model="trail.name" placeholder="Name of trail">
       </label>
-      <!-- <div class="card"> -->
 
-        <!-- TRAIL DESCRIPTION -->
-        <label class="list item item-input">
-          <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
-        </label>
+      <!-- TRAIL DESCRIPTION -->
+      <label class="list item item-input">
+        <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
+      </label>
 
-        <!-- TRAIL TYPE -->
-        <div class="row list center">
-          <div class="col col-30">
-            Type:
-          </div>
-          <div class="col dark center" ng-click="changeStep(false)">
-            <i class="ion-arrow-left-b s-2x"></i>
-          </div>
-          <div class="col dark center">
-            <span>{{ trailTypes[step] }}</span>
-          </div>
-          <div class="col dark center" ng-click="changeStep(true)">
-            <i class="ion-arrow-right-b s-2x"></i>
-          </div>
+      <!-- TRAIL TYPE -->
+      <div class="row list center">
+        <div class="col col-30">
+          Type:
         </div>
-
-        <!-- TRAIL DIFFICULTY -->
-        <div class="list row center">
-          <div class="col">
-            Difficulty:
-          </div>
-          <div class="col s-2x">
-            <i
-              class="ion-ribbon-b padding"
-              ng-repeat="(key, level) in difficulty"
-              ng-style="difficulty[key].style"
-              ng-click="fillDifficulty(level.type)"
-            ></i>
-          </div>
+        <div class="col dark center" ng-click="changeStep(false)">
+          <i class="ion-arrow-left-b s-2x"></i>
         </div>
-
-        <!-- TRAIL TRANSPORT AND MONEY -->
-        <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
-
-          <!-- TRANSPORT -->
-          <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col" ng-click="trail.transport = name"></i>
-
-          <!-- MONEY -->
-          <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
+        <div class="col dark center">
+          <span>{{ trailTypes[step] }}</span>
         </div>
-      <!-- </div> -->
+        <div class="col dark center" ng-click="changeStep(true)">
+          <i class="ion-arrow-right-b s-2x"></i>
+        </div>
+      </div>
+
+      <!-- TRAIL DIFFICULTY -->
+      <div class="list row center">
+        <div class="col">
+          Difficulty:
+        </div>
+        <div class="col s-2x">
+          <i
+            class="ion-ribbon-b padding"
+            ng-repeat="(key, level) in difficulty"
+            ng-style="difficulty[key].style"
+            ng-click="fillDifficulty(level.type)"
+          ></i>
+        </div>
+      </div>
+
+      <!-- TRAIL TRANSPORT AND MONEY -->
+      <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
+
+        <!-- TRANSPORT -->
+        <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col" ng-click="trail.transport = name"></i>
+
+        <!-- MONEY -->
+        <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
+      </div>
 
       <button class="button button-block margin-n" ng-click="add()" ng-if="!crumbs.length">
         Create trail!
@@ -110,7 +108,7 @@
 
         <!-- DESCRIPTION -->
         <div class="item item-icon-right textbox">
-          <i class="energized icon ion-information-circled" ng-click="toggleInfo()"></i>
+          <i class="energized icon ion-information-circled" ng-click="toggleInfo('description')"></i>
           <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
         </div>
 
@@ -151,7 +149,7 @@
 
         <!-- CRUMB TEXT -->
         <div class="item item-icon-right textbox">
-          <i class="positive icon ion-information-circled" ng-click="toggleInfo()"></i>
+          <i class="positive icon ion-information-circled" ng-click="toggleInfo('rewardText')"></i>
           <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
         </div>
 

@@ -80,8 +80,8 @@ angular.module('breadcrumb')
 
   $scope.search = {
     username: null,
-    trailName: null,
-    trailLength: 'Any',
+    name: null,
+    type: 'Any',
     transport: 'Any',
     rating: 'Any',
     difficulty: 'Any',

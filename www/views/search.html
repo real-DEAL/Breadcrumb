@@ -19,38 +19,8 @@
 
       <!-- TRAIL NAME -->
       <label class="item item-input textbox">
-        <input type="text" placeholder="Trail name" ng-model="search.trailName">
+        <input type="text" placeholder="Trail name" ng-model="search.name">
       </label>
-
-      <!-- TRAIL LENGTH -->
-      <div class="list">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Trail length
-          </div>
-          <select ng-model="search.trailLength">
-            <option selected>less than 5 miles</option>
-            <option>between 5 and 15 miles</option>
-            <option>greater than 15 miles</option>
-          </select>
-        </label>
-      </div>
-
-      <!-- TRANSPORT -->
-      <div class="list">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Transport
-          </div>
-          <select ng-model="search.transport">
-            <option selected>Any</option>
-            <option>Walk</option>
-            <option>Bike</option>
-            <option>Car</option>
-            <option>Public transportation</option>
-          </select>
-        </label>
-      </div>
 
       <!-- RATING -->
       <div class="list">
@@ -83,6 +53,22 @@
           </select>
         </label>
       </div>
+    </div>
+
+    <!-- TRANSPORT -->
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Transport
+        </div>
+        <select ng-model="search.transport">
+          <option selected>Any</option>
+          <option>Walk</option>
+          <option>Bike</option>
+          <option>Car</option>
+          <option>Public transportation</option>
+        </select>
+      </label>
     </div>
 
   </ion-content>
