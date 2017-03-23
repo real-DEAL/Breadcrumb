@@ -40,21 +40,22 @@ angular.module('breadcrumb').factory('Map', function () {
         location: '',
         stopover: true,
       };
-      obj.location = point.location;
+      obj.location = point.address;
       arr.push(obj);
     });
     return arr;
   };
 
   const addPath = (directions) => {
-    directions.shift();
+    console.warn(directions, 'directions check')
     let obj = {};
     const request = {
-      origin: directions[0].location,
+      origin: directions[0].address,
       waypoints: wayPointsMakers(directions),
-      destination: directions[directions.length - 2].location,
+      destination: directions[directions.length - 2].address,
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
+    console.log(request, 'the request')
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {
         if (status === google.maps.DirectionsStatus.OK) {

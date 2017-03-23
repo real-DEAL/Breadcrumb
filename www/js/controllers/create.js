@@ -193,7 +193,7 @@ angular.module('breadcrumb')
     ar: null,
     latitude: null,
     longitude: null,
-    address: Data.address(),
+    address: null,
     left: 2.5,
     style: { 'animation-name': 'moveInFromRight' },
   });
@@ -223,24 +223,27 @@ angular.module('breadcrumb')
 
 
   $scope.add = (arg) => {
+    console.warn(arg, 'arg from add()');
+
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
-      console.warn(arg, 'arg from add()');
       // $scope.initMap();
       $scope.crumbs.push(crumb);
-      if ($scope.trail.crumbs > 1) {
-        $scope.crumbs[$scope.trail.crumbs - 2].latitude = arg.geometry.location.lat();
-        $scope.crumbs[$scope.trail.crumbs - 2].longitude = arg.geometry.location.lng();
-        $scope.crumbs[$scope.trail.crumbs - 2].address = arg.formatted_address;
+      console.warn($scope.crumbs.length, '$scope.crumbs.length')
+      if ($scope.crumbs.length > 1) {
+        console.log(arg.geometry.location.lat(), 'latitude in arg from add()')
+
+        $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
+        $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
+        $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
         console.warn($scope.crumbs, 'crumbs array');
         console.warn($scope.geofence, 'geofence updated');
       }
     }
   };
-
 
   $scope.remove = (index) => {
     $scope.crumbs.splice(index, 1);
@@ -276,6 +279,7 @@ angular.module('breadcrumb')
   $scope.reviewMap = () => {
     $scope.loading = null;
     $scope.review.check = true;
+    console.log($scope.crumbs, 'crumbs from ReviewMap')
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
       console.log(data);

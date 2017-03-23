@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <ion-view>
   <div class="loading" ng-style="loading"></div>
@@ -97,41 +96,44 @@
         <!-- NAME -->
         <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }} name" ng-if="media">
         <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
-      </div>
-
-      <div class="card">
-
-        <div class="row item item-divider center map-div">
-
-          <!-- map -->
+      <div class="row item item-divider center">
           <div id="mapid"></div>
 
           <div style="width: 100%; position: absolute; top: 0px; bottom: 0px;" data-tap-disabled="true">
             <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
           </div>
+        <h1 class="title col">
+          <input class="clearInput" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }}">
+        </h1>
+        <div class="col col-10">
+          <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
         </div>
-          <!-- map ends -->
+      </div>
+
+      <div class="card">
 
         <div ng-if="!media">
-
           <!-- DESCRIPTION -->
           <div class="item item-icon-right textbox">
             <i class="energized icon ion-information-circled" ng-click="toggleInfo()"></i>
             <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
           </div>
 
-
           <!-- LOCATION -->
           <div class="item item-icon-right textbox">
             <i class="positive icon ion-navigate" ng-click="test()"></i>
+            <!-- <input class="full" type="text" ng-model="crumb.location" placeholder="Location"> -->
             <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
+            <!-- <div class="col col-10" ng-click="test()"> -->
+              <i class="positive icon ion-navigate s-1x"></i>
+            <!-- </div> -->
           </div>
 
           <!-- MEDIA SWITCH BUTTON -->
           <div class="item item-divider center" ng-click="toggleMedia('media')">
             <h1>UPLOAD MEDIA</h1>
-          </div>
 
+          </div>
           <!-- BUTTONS -->
           <div class="row" ng-if="!media">
             <div class="col">
@@ -149,7 +151,6 @@
               </button>
             </div>
           </div>
-
         </div>
 
         <!-- CRUMB MEDIA -->
@@ -190,28 +191,11 @@
             <h1>FINISH MEDIA</h1>
           </div>
         </div>
-
       </div>
 
-      <!-- BUTTONS -->
-      <!-- <div class="row" ng-if="!media">
-        <div class="col">
-          <button class="button button-block" ng-click="move(100)">
-            Prev crumb
-          </button>
-        </div>
-        <div class="col">
-          <button class="button button-block" ng-click="move(-100)"
-          ng-if="crumbs.length > $index + 1">
-            Next crumb
-          </button>
-          <button class="button button-block button-energized" ng-click="add()" ng-if="crumbs.length === $index + 1">
-            Add crumb!
-          </button>
-        </div>
-      </div> -->
-
+<!-- copied stuff was here -->
     </div>
+  </div>
 
     <div class="abs card review" ng-style="review.style">
       <div class="item item-divider center">
@@ -237,20 +221,21 @@
         </div>
       </div>
     </div>
+    <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
+      <div class="title">Review and submit</div>
+    </div>
+
+    <div class="tabs tabs-icon-top" ng-if="review.check">
+      <a class="tab-item" ng-click="reset()">
+        <i class="icon ion-compose"></i>
+        Edit
+      </a>
+      <a class="tab-item" ng-click="submit()">
+        <i class="icon ion-checkmark-round"></i>
+        Submit
+      </a>
+    </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-royal" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
-    <div class="title">Review and submit</div>
-  </div>
 
-  <div class="tabs tabs-icon-top" ng-if="review.check">
-    <a class="tab-item" ng-click="reset()">
-      <i class="icon ion-compose"></i>
-      Edit
-    </a>
-    <a class="tab-item" ng-click="submit()">
-      <i class="icon ion-checkmark-round"></i>
-      Submit
-    </a>
-  </div>
 </ion-view>

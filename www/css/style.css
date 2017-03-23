@@ -220,6 +220,9 @@
   width: 100%;
 }
 
+.map-div {
+  height: 250px;
+}
 .margin-n {
   margin: 0;
 }
