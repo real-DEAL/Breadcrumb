@@ -1,9 +1,5 @@
 angular.module('breadcrumb')
-<<<<<<< HEAD
 .controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence) {
-=======
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
->>>>>>> (debug) fix yotube vid not loading, clean up geofence factory, move camera controller and make into factory instead
   $scope.loading = null;
 
   $scope.trailID = null;
