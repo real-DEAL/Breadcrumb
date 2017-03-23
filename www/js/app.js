@@ -81,10 +81,15 @@ angular.module('breadcrumb', [
       if (!auth.isAuthenticated) {
         const token = store.get('token');
         if (token) {
-          auth.authenticate(store.get('profile'), token);
+          auth.authenticate(store.get('profile'), token, null, null, store.get('refreshToken'));
         }
       }
     });
+
+    if (store.get('token') && store.get('user')) {
+      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+      $state.go('app.dashboard');
+    }
   });
 })
 .controller('AppCtrl', function ($scope, $rootScope, auth, store, $state) {
@@ -106,7 +111,9 @@ angular.module('breadcrumb', [
     console.log($rootScope)
   };
 
-  // $scope.user = JSON.parse(localStorage.user).username;
+  if (store.get('user')) {
+    $scope.user = store.get('user').username;
+  }
 
   $scope.overflowStyle = {
     'max-height': '125px',

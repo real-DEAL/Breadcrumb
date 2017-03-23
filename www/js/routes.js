@@ -98,7 +98,7 @@ angular.module('breadcrumb')
     authProvider.init({
       domain: 'defields923.auth0.com',
       clientID: 'WjzyvWzAQ8jN72gc0NR6pWBEG8gWM2Wn',
-      loginState: 'login',
+      loginState: 'start',
     });
     $urlRouterProvider.otherwise('/start');
 
