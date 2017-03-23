@@ -21,7 +21,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
     if (request === 'id') {
       link += `?id=${$rootScope.trailID}`;
     } else if (request) {
-      console.log(request);
       link += '?';
       let req;
       for (req in request) {
@@ -30,19 +29,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
         }
       }
       console.log(link);
-      // // TODO: search by username
-      // if (request.username) {
-      //   link += `user_id=${request.username}`;
-      // }
-      // if (request.difficulty !== 'Any') {
-      //   link += `difficulty=${request.difficulty}`;
-      // }
-      // if (request.rating !== 'Any') {
-      //   link += `rating=${request.rating}`;
-      // }
-      // if (request.transport !== 'Any') {
-      //   link += `transport=${request.transport}`;
-      // }
     }
     return $http({
       method: 'GET',

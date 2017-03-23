@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $state, ListFact) {
+.controller('ListCtrl', function ($scope, $state, ListFact, Data) {
   $scope.specificTransport = false;
   $scope.loading = null;
 
@@ -77,6 +77,17 @@ angular.module('breadcrumb')
   };
 
   // SEARCH
+
+  $scope.stars = Data.stars();
+
+  $scope.difficulties = Data.difficulties();
+
+  $scope.transport = Data.transport();
+
+  $scope.searchToggle = (type, value, fill) => {
+    $scope[type] = Data.fillIcons(type, value, fill);
+    $scope.search[type] = value;
+  };
 
   $scope.search = {
     username: null,

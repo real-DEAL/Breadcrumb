@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence) {
   $scope.loading = null;
 
   $scope.trailID = null;
@@ -76,6 +76,21 @@ angular.module('breadcrumb')
       $scope.switch('found');
     }
   });
+
+  $scope.stars = Data.stars();
+
+  $scope.ratingToggle = (value) => {
+    $scope.stars = Data.fillIcons('stars', value);
+    $scope.postTrail.rating = value;
+  };
+
+  $scope.postTrail = {
+    rating: null,
+  };
+
+  $scope.finish = () => {
+
+  };
 
   $scope.media = (type) => {
     $scope.bubbles = {

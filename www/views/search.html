@@ -23,54 +23,51 @@
       </label>
 
       <!-- RATING -->
-      <div class="list">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Rating
-          </div>
-          <select ng-model="search.rating">
-            <option selected>Any</option>
-            <option>5 stars</option>
-            <option>4 stars</option>
-            <option>3 stars</option>
-            <option>2 stars</option>
-            <option>1 star</option>
-          </select>
-        </label>
+      <div class="list row center">
+        <div class="col col-25">
+          Rating:
+        </div>
+        <div class="col s-2x right">
+          <i
+            class="ion-android-star padding"
+            ng-repeat="star in stars"
+            ng-style="star.style"
+            ng-click="searchToggle('stars', $index, { color: 'gold' })"
+          ></i>
+        </div>
       </div>
 
       <!-- DIFFICULTY -->
-      <div class="list">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Difficulty
-          </div>
-          <select ng-model="search.difficulty">
-            <option selected>Any</option>
-            <option>Low</option>
-            <option>Medium</option>
-            <option>High</option>
-          </select>
-        </label>
-      </div>
-    </div>
-
-    <!-- TRANSPORT -->
-    <div class="list">
-      <label class="item item-input item-select">
-        <div class="input-label">
-          Transport
+      <div class="list row center">
+        <div class="col col-25">
+          Difficulty:
         </div>
-        <select ng-model="search.transport">
-          <option selected>Any</option>
-          <option>Walk</option>
-          <option>Bike</option>
-          <option>Car</option>
-          <option>Public transportation</option>
-        </select>
-      </label>
-    </div>
+        <div class="col s-2x right">
+          <i
+            class="ion-ribbon-b padding"
+            ng-repeat="diff in difficulties"
+            ng-style="diff.style"
+            ng-click="searchToggle('difficulties', $index, { color: 'purple' })"
+          ></i>
+        </div>
+      </div>
 
+      <!-- TRANSPORT -->
+      <div class="list row center">
+        <div class="col col-25">
+          Transport:
+        </div>
+        <div class="col s-2x right">
+          <i
+            class="ion-android-{{ type.type }} padding"
+            ng-repeat="(name, type) in transport"
+            ng-style="type.style"
+            ng-click="searchToggle('transport', name, { color: '#33CD61' })"
+          ></i>
+        </div>
+      </div>
+
+    </div>
   </ion-content>
 
   <div class="bar bar-footer bar-balanced">
