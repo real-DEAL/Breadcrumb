@@ -1,13 +1,23 @@
+/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
+/* global TransitionType */
+
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
-    const style = Style.moveLeft(move);
+
+    const style = {
+      left: move,
+      'transition-duration': '250ms',
+    };
     crumb.style = style;
   };
 
   const moveY = (crumb, num) => {
-    const style = Style.moveVertial(num);
+    const style = {
+      'transition-duration': '1000ms',
+      transform: `translate(0px, ${num}px)`,
+    };
     crumb.style = style;
   };
 
@@ -35,13 +45,13 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
-  $scope.info = Data.info();
+  $scope.info = {
+    show: false,
+    name: 'Description',
+    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
+  };
 
-  $scope.toggleInfo = (type) => {
-    if (type) {
-      $scope.info.name = $scope.info[type].name;
-      $scope.info.text = $scope.info[type].text;
-    }
+  $scope.toggleInfo = () => {
     $scope.info.show = !$scope.info.show;
   };
 
@@ -65,8 +75,10 @@ angular.module('breadcrumb')
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
 
-  $scope.location = {}; // this is the shared scope with the directive and is in the View
-    // how can I replace this ?
+  $scope.location = {
+    lat: 29.9511,
+    lng: -90.0715,
+  };
 
   $scope.obj = {};
 
@@ -92,8 +104,14 @@ angular.module('breadcrumb')
   $scope.transport = Data.transport();
 
   $scope.transChange = (type) => {
-    $scope.transport = Data.transport();
-    $scope.transport[type].style = Style.activeTransport();
+    $scope.transport.WALKING.style = null;
+    $scope.transport.BICYCLING.style = null;
+    $scope.transport.TRANSIT.style = null;
+    $scope.transport.DRIVING.style = null;
+    $scope.transport[type].style = {
+      'background-color': '#F8F8F8',
+      'border-radius': '50px',
+    };
   };
 
   // MONEY
@@ -102,7 +120,11 @@ angular.module('breadcrumb')
     $scope.trail.requires_money = !boolean;
     if (boolean) $scope.moneyStyle = null;
     else {
-      $scope.moneyStyle = Style.activeMoney();
+      $scope.moneyStyle = {
+        'background-color': '#F8F8F8',
+        'border-radius': '50px',
+        color: '#33CD61',
+      };
     }
   };
 
@@ -112,7 +134,7 @@ angular.module('breadcrumb')
 
   $scope.review = {
     check: false,
-    style: Style.displayNone,
+    style: { display: 'none' },
   };
 
   $scope.trail = trailMaker();
@@ -156,17 +178,31 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
+
   $scope.add = (arg) => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
+      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
-      if ($scope.crumbs.length > 1) {
-        $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
-        $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
-        $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
-      }
+      // if (arg) {
+        // currently the location.lat and location.lng is being updated
+        // if ($scope.crumbs.length > 1) {
+        //   console.warn(arg, 'arg')
+        //   $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
+        //   $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
+        //   $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
+        // }
+      // } else {
+        if ($scope.crumbs.length > 1) {
+          console.warn($scope.center.lat, 'center.lat is updated')
+          $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
+          $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
+          // TODO: get the formatted_address
+          // $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
+        }
+      // }
     }
   };
 
@@ -232,7 +268,9 @@ angular.module('breadcrumb')
     $scope.crumbs.forEach((crumb, index) => {
       moveReset(crumb, index + 1);
     });
-    $scope.review.style = Style.moveDown;
+    $scope.review.style = {
+      'animation-name': 'moveDown',
+    };
   };
 
   $scope.submit = () => {
@@ -243,47 +281,179 @@ angular.module('breadcrumb')
       $scope.reset();
       $scope.crumbs = [];
       $scope.trail = trailMaker();
-      $scope.loading = Style.displayNone;
-      $rootScope.refresh = true;
+      $scope.loading = { display: 'none' };
       $state.go('app.dashboard');
     });
   };
 
-
-// Leaflet Map ------------------------------------------------
-  $scope.geofence = {
-    latitude: 29.9511,
-    longitude: -90.0715,
-    radius: 13,
-  };
-  $scope.TransitionType = TransitionType;
-
-  $scope.center = {
-    lat: $scope.geofence.latitude,
-    lng: $scope.geofence.longitude,
-    zoom: 12,
-  };
-  $scope.markers = {
-    marker: {
-      draggable: true,
-      lat: $scope.geofence.latitude,
-      lng: $scope.geofence.longitude,
-      icon: {},
-    },
-  };
-  $scope.paths = {
-    circle: {
-      type: 'circle',
-      radius: $scope.geofence.radius,
-      latlngs: $scope.markers.marker,
-      clickable: false,
-    },
-  };
-
+  // this sets the default of the leaflet map
+  // ------------------------------------------------------------------------------
+  if (window.Android) {
+    angular.extend($scope, {
+      center: {
+        lat: 29.9511,
+        lng: -90.0715,
+        zoom: 15,
+        autoDiscover: true,
+      },
+      events: {},
+      layers: {
+        baselayers: {
+          osm: {
+            name: 'OpenStreetMap',
+            url: 'https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png',
+            type: 'xyz',
+          },
+        },
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  } else {
+    angular.extend($scope, {
+      center: {
+        lat: 29.9511,
+        lng: -90.0715,
+        zoom: 15,
+        autoDiscover: false,
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      events: {
+        map: {
+          enable: ['zoomstart', 'drag', 'click', 'mousemove'],
+          logic: 'emit',
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  }
   $scope.tiles = {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     options: {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
+  };
+
+  // this updates map when location from autocomplete changes $watch
+  // ==========================================================================
+
+
+  // $scope.$on('leafletDirectiveMap.move', (event, args) => {
+  //   // Get the Leaflet map from the triggered event.
+  //   const map = args.leafletEvent.target;
+  //   const center = (map.getCenter());
+  //   $scope.center.lat = center.lat;
+  //   $scope.center.lng = center.lng;
+  //   $scope.location.lat = center.lat;
+  //   $scope.location.lng = center.lng;
+  //   // $scope.updateMap();
+  //   $scope.markers = {
+  //     marker: {
+  //       lat: $scope.center.lat,
+  //       lng: $scope.center.lng,
+  //     },
+  //   };
+  //   console.warn($scope.location, '$scope.location at the same time');
+  // });
+  //
+  // $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+  //   const map = args.leafletEvent.target;
+  //   const center = (map.panTo());
+  //   $scope.center.lat = center.lat;
+  //   $scope.center.lng = center.lng;
+  //   console.warn('get new center', $scope.center);
+  // });
+  // TODO: this currently updates the center of the map the first time, but not the 2nd
+  $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+    const map = args.leafletEvent.target;
+    const center = map.getLatLng();
+    $scope.center.lat = center.lat; // this currently doesn't work
+    $scope.center.lng = center.lng;
+    // change the location which speaks to the input box in view
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+    // setInterval(() => {
+    //   $scope.updateMap();
+    // })
+
+    console.warn($scope.location, '$scope.location updated');
+    console.warn($scope.markers.marker, '$scope.markers.marker updated');
+    //TODO: how to make it work continually and let angular know to update the center as well???
+    // i mean the scope is clearly changing in the updateCoords function, but it's just updating
+    // the view!!! -- i want to use the panTo function for that reason!!!
+
+  });
+
+  $scope.updateMap = () => {
+    $scope.center = {
+      lat: $scope.location.lat,
+      lng: $scope.location.lng,
+      zoom: 15,
+    };
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+        draggable: true,
+      },
+    };
+  };
+
+  // TODO: when autocomplete updates, get its coordinates and use
+  // it to also update the marker on the map
+
+
+  $scope.place = {
+    address: '',
+  };
+  $scope.updateCoords = () => {
+    if ($scope.place.address.length >= 15) {
+      const geocoder = new google.maps.Geocoder();
+      console.warn($scope.place.address, 'the address');
+      geocoder.geocode({ address: $scope.place.address }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results) {
+              console.warn('Getting geocode lng', results[0].geometry.location.lat());
+              $scope.markers.marker.lat = results[0].geometry.location.lat();
+              $scope.markers.marker.lng = results[0].geometry.location.lng();
+              angular.extend($scope, {
+                center: {
+                  lat: results[0].geometry.location.lat(),
+                  lng: results[0].geometry.location.lng(),
+                  zoom: 15,
+                },
+              });
+              $scope.center.lat = results[0].geometry.location.lat();
+              $scope.center.lng = results[0].geometry.location.lng();
+
+            // listen to marker changed or place_changed, then get event and panto
+            // window.L.panTo($scope.center);
+            console.warn('center lat get updated', $scope.center.lat);
+            console.warn('markers lat get updated', $scope.markers.marker.lat);
+            $scope.$apply();
+          } else {
+            console.warn('Location not found');
+          }
+        } else {
+          console.warn(`Geocoder failed due to: ${status}`);
+        }
+      });
+    }
   };
 });

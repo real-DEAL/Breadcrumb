@@ -368,6 +368,10 @@ input {
   text-align:center;
   padding-top: 50px
 }
+.indent {
+  padding-left: 1.8em
+}
+
 
 .comment, .distance {
   text-shadow:0 1px #666;
