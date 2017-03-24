@@ -2,8 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data, $timeout, leafletData) {
-
+.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data, leafletData) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
 
@@ -323,40 +322,81 @@ angular.module('breadcrumb')
     });
   };
 
-  angular.extend($scope, {
-    center: {
-      lat: 29.9511,
-      lng: -90.0715,
-      zoom: 10,
-      // autoDiscover: true,
-    },
-    events: {},
-    layers: {
-      baselayers: {
-        osm: {
-          name: 'OpenStreetMap',
-          url: 'https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png',
-          type: 'xyz',
-        },
-      },
-    },
-    markers: {
-      marker: {
+  if (window.Android) {
+    angular.extend($scope, {
+      center: {
         lat: 29.9511,
         lng: -90.0715,
-        draggable: true,
+        zoom: 15,
+        autoDiscover: true,
       },
-    },
-    defaults: {
-      scrollWheelZoom: false,
-    },
-  });
+      events: {},
+      layers: {
+        baselayers: {
+          osm: {
+            name: 'OpenStreetMap',
+            url: 'https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png',
+            type: 'xyz',
+          },
+        },
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  } else {
+    angular.extend($scope, {
+      center: {
+        lat: 29.9511,
+        lng: -90.0715,
+        zoom: 15,
+        autoDiscover: false,
+      },
+      events: {},
+      layers: {
+        baselayers: {
+          googleTerrain: {
+              name: 'Google Terrain',
+              layerType: 'TERRAIN',
+              type: 'google'
+          },
+          googleHybrid: {
+              name: 'Google Hybrid',
+              layerType: 'HYBRID',
+              type: 'google'
+          },
+          googleRoadmap: {
+              name: 'Google Streets',
+              layerType: 'ROADMAP',
+              type: 'google'
+          }
+        }
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  }
 
   $scope.updateMap = () => {
     $scope.center = {
       lat: $scope.location.lat,
       lng: $scope.location.lng,
-      zoom: 10,
+      zoom: 15,
     };
     $scope.markers = {
       marker: {
@@ -365,99 +405,20 @@ angular.module('breadcrumb')
         draggable: true,
       },
     };
-    leafletData.getMap('mapid').then((map) => {
-      console.warn('Map loaded, getting exitingly extended!');
-      map.setView([$scope.center.lat, $scope.center.lng], $scope.center.zoom);
-
-      // angular.extend($scope.controls, {
-      //   myController:{
-      //     type: 'needs-to-be-created'
-      //   }
-      // });
-    });
-    console.warn($scope.center, 'center is updating well');
-    // console.warn($scope.markers.marker, 'markers -- they are updating well');
-  };
-
 
   $scope.$on('leafletDirectiveMap.move', (event, args) => {
     // Get the Leaflet map from the triggered event.
     const map = args.leafletEvent.target;
     const center = (map.getCenter());
-
-    // Update the center.
     $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
-    console.warn('leaflet move', $scope.center);
-    // You custom function that will set the Marker's center according to
-    // the $scope.center
-    // updateMarker();
-    // Update the marker.
-    // $scope.markers = {
-    //   marker: {
-    //     lat: center.lat,
-    //     lng: center.lng
-    //   }
-    // };
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+      },
+    };
   });
-  // $scope.markers = [];
-  // $scope.$on('leafletDirectiveMap.click', (event, args) => {
-  //   const leafEvent = args.leafletEvent;
-  //   $scope.markers.push({
-  //     lat: leafEvent.latlng.lat,
-  //     lng: leafEvent.latlng.lng,
-  //     draggable: true,
-  //   });
-  // });
-
-  // $timeout(function () {
-  //   // $scope.center = {
-  //   //   lat: 29.9511,
-  //   //   lng: -90.0715,
-  //   //   // lat: '',
-  //   //   // lng: '',
-  //   //   zoom: 13,
-  //   // };
-  //
-  // }, 2000);
-// Leaflet Map ------------------------------------------------
-  // $scope.geofence = {
-  //   latitude: 29.9511, //new orleans
-  //   longitude: -90.0715,
-  //   radius: 13,
-  // };
-  // $scope.TransitionType = TransitionType;
-  //
-  // $scope.center = {
-  //   lat: $scope.geofence.latitude,
-  //   lng: $scope.geofence.longitude,
-  //   zoom: 12,
-  // };
-  // $scope.markers = {
-  //   marker: {
-  //     draggable: true,
-  //     lat: $scope.geofence.latitude,
-  //     lng: $scope.geofence.longitude,
-  //     icon: {},
-  //   },
-  // };
-
-  // $scope.markers = {
-  //   marker: {
-  //     draggable: true,
-  //     lat: 22.3964,
-  //     lng: 114.1095,
-  //     icon: {},
-  //   },
-  // };
-  // $scope.paths = {
-  //   circle: {
-  //     type: 'circle',
-  //     radius: $scope.geofence.radius,
-  //     latlngs: $scope.markers.marker,
-  //     clickable: false,
-  //   },
-  // };
 
   $scope.tiles = {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
