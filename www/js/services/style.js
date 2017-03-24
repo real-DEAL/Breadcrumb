@@ -41,7 +41,7 @@ angular.module('breadcrumb').factory('Style', function () {
   });
 
   const overflowStyle = {
-    'max-height': '100px',
+    'max-height': '160px',
     overflow: 'scroll',
   };
 

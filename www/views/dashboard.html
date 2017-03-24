@@ -55,11 +55,11 @@
         <div class="row">
           <!-- MAP -->
           <div class="col center reviewMap">
-            <img ng-src="{{ trail.map }}" height="160px" width="160px" ng-click=mapToggle(trail.map) />
+            <img ng-src="{{ trail.map }}" height="160px" width="160px" ng-click="mapToggle(trail.map)" />
           </div>
 
           <!-- DESCRIPTION -->
-          <div class="col item-text-wrap scrollText" ng-style="overflowStyle">
+          <div class="col item-text-wrap scrollText" ng-style="overflowStyle" height="160px">
             <p>{{ trail.description }}</p>
             <p>Created by </p>
           </div>

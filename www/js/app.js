@@ -92,7 +92,7 @@ angular.module('breadcrumb', [
     }
   });
 })
-.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data) {
+.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
   $scope.logout = () => {
     auth.signout();
     store.remove('token');
@@ -116,7 +116,7 @@ angular.module('breadcrumb', [
     $scope.user = store.get('user').username;
   }
 
-  $scope.overflowStyle = Data.overflowStyle;
+  $scope.overflowStyle = Style.overflowStyle;
 
   $rootScope.refresh = false;
 });

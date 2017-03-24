@@ -81,10 +81,10 @@
 }
 
 .borderless {
-  border: 0px;
+  border: 0;
 }
 
-button.col.button.button-block {
+.col.button.button-block {
   margin: 0;
 }
 
@@ -232,8 +232,8 @@ button.col.button.button-block {
   /*height: 70%;*/
   width: 100%;
   position: absolute;
-  top: 0px;
-  bottom: 0px;
+  top: 0;
+  bottom: 0;
 }
 
 .map-div {
