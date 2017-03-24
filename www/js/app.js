@@ -1,6 +1,13 @@
 // Ionic Geofence example App
 
-angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
+angular.module('breadcrumb', [
+  'ionic',
+  'ionic.contrib.ui.tinderCards',
+  'leaflet-directive',
+  'auth0',
+  'angular-storage',
+  'angular-jwt',
+])
 .run(function (
   $window,
   $document,
@@ -9,10 +16,13 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
   $ionicPlatform,
   $log,
   $rootScope,
-  GeofencePluginMock
+  GeofencePluginMock,
+  auth,
+  store
 ) {
   $ionicPlatform.ready(function () {
-    $log.log('Ionic ready');
+    $rootScope.pinged = false;
+    // $log.log('Ionic ready');
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -22,7 +32,7 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
       $window.StatusBar.styleDefault();
     }
     if ($window.geofence === undefined) {
-      $log.warn('Geofence Plugin not found. Using mock instead.');
+      // $log.warn('Geofence Plugin not found. Using mock instead.');
       $window.geofence = GeofencePluginMock;
       $window.TransitionType = GeofencePluginMock.TransitionType;
     }
@@ -39,11 +49,7 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
               title: 'Geofence transition',
               text: 'Without notification',
             };
-            $ionicLoading.show({
-              template: `${geo.notification.title}: ${geo.notification.text}`,
-              noBackdrop: true,
-              duration: 2000,
-            });
+            $rootScope.pinged = true;
           });
         });
       }
@@ -70,13 +76,38 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
     $window.geofence.initialize(() => {
       $log.log('Geofence plugin initialized');
     });
-  });
 
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
-    $log.log('stateChangeError', error, toState, toParams, fromState, fromParams);
-    $state.go('geofences');
+    $rootScope.$on('$locationChangeStart', () => {
+      if (!auth.isAuthenticated) {
+        const token = store.get('token');
+        if (token) {
+          auth.authenticate(store.get('profile'), token);
+        }
+      }
+    });
   });
 })
-.controller('AppCtrl', function ($scope) {
-  $scope.scope = null;
+.controller('AppCtrl', function ($scope, auth, store, $state) {
+  $scope.logout = () => {
+    auth.signout();
+    store.remove('token');
+    store.remove('profile');
+    store.remove('refreshToken');
+    $state.go('start', {}, { reload: true });
+  };
+
+  $scope.test = (input) => {
+    console.warn(input);
+  };
+
+  $scope.setTrail = (id) => {
+    localStorage.setItem('trail', id);
+  };
+
+  // $scope.user = JSON.parse(localStorage.user).username;
+
+  $scope.overflowStyle = {
+    'max-height': '100px',
+    overflow: 'scroll',
+  };
 });

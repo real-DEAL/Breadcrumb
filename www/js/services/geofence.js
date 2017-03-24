@@ -1,8 +1,4 @@
-/* global UUIDjs */
-/* global TransitionType */
-/* global localStorage */
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('ionic-geofence').factory('Geofence', function (
+angular.module('breadcrumb').factory('Geofence', function (
   $rootScope,
   $window,
   $q,
@@ -22,7 +18,7 @@ angular.module('ionic-geofence').factory('Geofence', function (
         transitionType: TransitionType.ENTER,
         notification: {
           id: this.getNextNotificationId(),
-          title: 'Ionic geofence example',
+          title: 'You\'ve found a crumb!!!',
           text: '',
           icon: 'res://ic_menu_mylocation',
           openAppOnClick: true,
@@ -82,10 +78,25 @@ angular.module('ionic-geofence').factory('Geofence', function (
       return self._geofencesPromise.promise;
     },
 
-    addOrUpdate(geofence) {
+    addOrUpdate(crumb) {
       const self = this;
+      const geofence = {
+        id: UUIDjs.create().toString(),
+        latitude: crumb.latitude,
+        longitude: crumb.longitude,
+        radius: 100,
+        transitionType: 1,
+        notification: {
+          id: this.getNextNotificationId(),
+          title: crumb.title,
+          text: crumb.name,
+          icon: crumb.icon,
+          openAppOnClick: true,
+        },
+        challenge: crumb.challenge,
+      };
 
-      return $window.geofence.addOrUpdate(geofence).then(function () {
+      return $window.geofence.addOrUpdate(geofence).then(() => {
         const searched = self.findById(geofence.id);
 
         if (!searched) {
@@ -101,9 +112,7 @@ angular.module('ionic-geofence').factory('Geofence', function (
     },
 
     findById(id) {
-      const geoFences = this._geofences.filter(function (g) {
-        return g.id === id;
-      });
+      const geoFences = this._geofences.filter(g => g.id === id);
 
       if (geoFences.length > 0) {
         return geoFences[0];
