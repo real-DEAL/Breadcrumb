@@ -88,8 +88,7 @@ angular.module('breadcrumb')
   $scope.location = {
     lat: 29.9511,
     lng: -90.0715,
-  }; // this is the shared scope with the directive and is in the View
-    // how can I replace this ?
+  };
 
   $scope.$on('transferUp', (event, data) => {
     $scope.location.lat = data.coords.geometry.location.lat();
@@ -360,25 +359,6 @@ angular.module('breadcrumb')
         autoDiscover: false,
       },
       events: {},
-      layers: {
-        baselayers: {
-          googleTerrain: {
-              name: 'Google Terrain',
-              layerType: 'TERRAIN',
-              type: 'google'
-          },
-          googleHybrid: {
-              name: 'Google Hybrid',
-              layerType: 'HYBRID',
-              type: 'google'
-          },
-          googleRoadmap: {
-              name: 'Google Streets',
-              layerType: 'ROADMAP',
-              type: 'google'
-          }
-        }
-      },
       markers: {
         marker: {
           lat: 29.9511,
@@ -405,6 +385,7 @@ angular.module('breadcrumb')
         draggable: true,
       },
     };
+  };
 
   $scope.$on('leafletDirectiveMap.move', (event, args) => {
     // Get the Leaflet map from the triggered event.
@@ -412,12 +393,16 @@ angular.module('breadcrumb')
     const center = (map.getCenter());
     $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+    $scope.updateMap();
     $scope.markers = {
       marker: {
         lat: $scope.center.lat,
         lng: $scope.center.lng,
       },
     };
+    console.warn($scope.location, '$scope.location at the same time')
   });
 
   $scope.tiles = {
