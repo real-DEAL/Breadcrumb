@@ -2,7 +2,7 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data, Style) {
+.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = Style.moveLeft(move);
@@ -70,26 +70,11 @@ angular.module('breadcrumb')
 
   $scope.obj = {};
 
-  $scope.difficulty = Data.difficulties();
+  $scope.difficulties = Data.difficulties();
 
-  $scope.fillDifficulty = (diff) => {
-    const fill = { color: 'purple' };
-    $scope.difficulty = Data.difficulties();
-    if (diff === 'easy') {
-      $scope.trail.difficulty = 1;
-      $scope.difficulty[0].style = fill;
-    }
-    if (diff === 'medium') {
-      $scope.trail.difficulty = 2;
-      $scope.difficulty[0].style = fill;
-      $scope.difficulty[1].style = fill;
-    }
-    if (diff === 'hard') {
-      $scope.trail.difficulty = 3;
-      $scope.difficulty[0].style = fill;
-      $scope.difficulty[1].style = fill;
-      $scope.difficulty[2].style = fill;
-    }
+  $scope.fillDifficulties = (index) => {
+    $scope.difficulties = Data.fillIcons('difficulties', index, { color: 'purple' });
+    $scope.trail.difficulty = index + 1;
   };
 
   $scope.transport = Data.transport();
@@ -159,7 +144,6 @@ angular.module('breadcrumb')
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
-      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       if ($scope.crumbs.length > 1) {
@@ -210,9 +194,9 @@ angular.module('breadcrumb')
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
       $scope.trail.length = data.miles;
-      moveY($scope.trail, -475);
+      moveY($scope.trail, -100);
       $scope.crumbs.forEach((crumb) => {
-        moveY(crumb, -400);
+        moveY(crumb, -100);
       });
       $scope.review.style = Style.moveUp;
       $scope.$apply();
@@ -237,6 +221,7 @@ angular.module('breadcrumb')
       $scope.crumbs = [];
       $scope.trail = trailMaker();
       $scope.loading = Style.displayNone;
+      $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };

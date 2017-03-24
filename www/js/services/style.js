@@ -7,7 +7,7 @@ angular.module('breadcrumb').factory('Style', function () {
 
   const moveVertial = num => ({
     'transition-duration': '1000ms',
-    transform: `translate(0px, ${num}px)`,
+    transform: `translate(0px, ${num}%)`,
   });
 
   const moveLeft = move => ({
@@ -40,6 +40,11 @@ angular.module('breadcrumb').factory('Style', function () {
     color: '#33CD61',
   });
 
+  const overflowStyle = {
+    'max-height': '100px',
+    overflow: 'scroll',
+  };
+
   return {
     displayNone,
     moveVertial,
@@ -49,5 +54,6 @@ angular.module('breadcrumb').factory('Style', function () {
     moveReset,
     activeTransport,
     activeMoney,
+    overflowStyle,
   };
 });

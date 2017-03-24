@@ -57,9 +57,9 @@
         <div class="col s-2x">
           <i
             class="ion-ribbon-b padding"
-            ng-repeat="(key, level) in difficulty"
-            ng-style="difficulty[key].style"
-            ng-click="fillDifficulty(level.type)"
+            ng-repeat="diff in difficulties"
+            ng-style="diff.style"
+            ng-click="fillDifficulties($index)"
           ></i>
         </div>
       </div>
@@ -100,7 +100,6 @@
       <div ng-if="!media">
         <!-- MAP -->
         <div class="row item item-divider center map-div">
-
           <div class="map" data-tap-disabled="true">
             <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
           </div>

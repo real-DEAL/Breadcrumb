@@ -2,18 +2,31 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $state, ListFact, Data) {
+.controller('ListCtrl', function ($scope, $rootScope, $state, ListFact, Data, Style) {
   $scope.specificTransport = false;
   $scope.loading = null;
 
-  $scope.trail = {
-    name: 'My first trail',
-    transport: 2,
-    rating: 3,
-    difficulty: 3,
-    length: 25,
-    progress: 50,
-    style: ListFact.close,
+  // $scope.trail = {
+  //   name: 'My first trail',
+  //   transport: 2,
+  //   rating: 3,
+  //   difficulty: 3,
+  //   length: 25,
+  //   progress: 50,
+  //   style: ListFact.close,
+  // };
+
+  $scope.mapSrc = null;
+
+  $scope.mapShow = Style.displayNone;
+
+  $scope.mapToggle = (src) => {
+    if (!src) {
+      $scope.mapShow = Style.displayNone;
+    } else {
+      $scope.mapSrc = src;
+      $scope.mapShow = null;
+    }
   };
 
   $scope.toggle = index => (
@@ -24,7 +37,7 @@ angular.module('breadcrumb')
 
   $scope.open = (index) => {
     $scope.trails[index].style = {
-      height: '650px',
+      height: '400px',
       overflow: 'hidden',
       'transition-duration': '250ms',
     };
@@ -74,6 +87,20 @@ angular.module('breadcrumb')
       $scope.loading = { display: 'none' };
       $scope.trailsCache = ListFact.filter(trails, 'name');
     });
+  };
+
+  $rootScope.$watch('refresh', () => {
+    if ($rootScope.refresh) {
+      $rootScope.refresh = false;
+      $scope.refresh();
+    }
+  });
+
+  $scope.pickTrail = (id, index) => {
+    console.log('pick', id, index);
+    $rootScope.trailID = id;
+    $scope.close(index);
+    console.log($rootScope);
   };
 
   // SEARCH

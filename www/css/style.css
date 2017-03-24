@@ -80,6 +80,14 @@
   z-index: 99;
 }
 
+.borderless {
+  border: 0px;
+}
+
+button.col.button.button-block {
+  margin: 0;
+}
+
 .loading {
   background-image: url('../img/loading.gif');
 }
@@ -91,7 +99,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .clearInput {
