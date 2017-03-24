@@ -6,16 +6,6 @@ angular.module('breadcrumb')
   $scope.specificTransport = false;
   $scope.loading = null;
 
-  // $scope.trail = {
-  //   name: 'My first trail',
-  //   transport: 2,
-  //   rating: 3,
-  //   difficulty: 3,
-  //   length: 25,
-  //   progress: 50,
-  //   style: ListFact.close,
-  // };
-
   $scope.mapSrc = null;
 
   $scope.mapShow = Style.displayNone;
