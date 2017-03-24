@@ -1,4 +1,37 @@
 angular.module('breadcrumb').factory('Data', function () {
+  const menu = [
+    {
+      name: 'Search',
+      icon: 'ion-search',
+      link: 'app.search',
+    },
+    {
+      name: 'Dashboard',
+      icon: 'ion-navicon-round',
+      link: 'app.dashboard',
+    },
+    {
+      name: 'Profile',
+      icon: 'ion-person',
+      link: 'app.profile',
+    },
+    {
+      name: 'Make trail',
+      icon: 'ion-edit',
+      link: 'app.create',
+    },
+    {
+      name: 'Settings',
+      icon: 'ion-wrench',
+      link: 'app.settings',
+    },
+    // {
+    //   name: 'Log out',
+    //   icon: 'ion-log-out',
+    //   link: null,
+    // },
+  ];
+
   const iconArrayMaker = (num) => {
     const obj = {};
     let i;
@@ -171,6 +204,7 @@ angular.module('breadcrumb').factory('Data', function () {
 
   return {
     info,
+    menu,
     rating,
     transport,
     trailTypes,
