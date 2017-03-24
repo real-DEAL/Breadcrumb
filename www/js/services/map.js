@@ -62,7 +62,7 @@ angular.module('breadcrumb').factory('Map', function () {
           };
           resolve(obj);
         } else {
-          reject('failed');
+          reject('error');
         }
         return obj;
       });
