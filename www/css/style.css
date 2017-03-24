@@ -80,6 +80,14 @@
   z-index: 99;
 }
 
+.borderless {
+  border: 0;
+}
+
+.col.button.button-block {
+  margin: 0;
+}
+
 .loading {
   background-image: url('../img/loading.gif');
 }
@@ -91,7 +99,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  border-radius: 15px;
+  border-radius: 5px;
 }
 
 .clearInput {
@@ -220,8 +228,16 @@
   width: 100%;
 }
 
+.map {
+  /*height: 70%;*/
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
 .map-div {
-  height: 250px;
+  height: 150px;
 }
 .margin-n {
   margin: 0;
@@ -261,9 +277,3 @@
   display: inline;
   font-size: 2.5em;
 }
-
-
-
-/*#map {
-   height: 100%;
- }*/

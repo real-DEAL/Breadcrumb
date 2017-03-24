@@ -12,7 +12,7 @@
   <ion-content>
 
     <!-- CRUMB EXPLANATION -->
-    <div ng-if="page.description" class="margin-top">
+    <div ng-if="page.description" class="padding">
 
       <!-- TRAIL NAME -->
       <h1 class="t-center">{{ trail.name }}</h1>
@@ -56,7 +56,7 @@
             <i class="center-v ion-document-text"></i>
           </div>
           <div class="center bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="media('ar')">
-            <i class="center-v ion-camera center"></i>
+            <i class="center-v ion-load-b center"></i>
           </div>
           <div class="center bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
             <i class="center-v ion-image"></i>
@@ -96,7 +96,7 @@
             <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
           </div>
           <div ng-if="page.media.ar">
-            {{ crumbs[crumb] }}
+            This is where Augmented Reality would go, but we don't have it set yet!
           </div>
         </div>
 
@@ -118,12 +118,14 @@
 
         <div class="rating">
           <h4>Rate this trail?</h4>
-          <ul class="energized">
-            <li><i class="ion-android-star-outline s-2x"></i></li>
-            <li><i class="ion-android-star-outline s-2x"></i></li>
-            <li><i class="ion-android-star-outline s-2x"></i></li>
-            <li><i class="ion-android-star-outline s-2x"></i></li>
-            <li><i class="ion-android-star-outline s-2x"></i></li>
+          <ul class="">
+            <li ng-repeat="star in stars">
+              <i
+                class="ion-android-star s-2x"
+                ng-style="star.style"
+                ng-click="ratingToggle($index)"
+              ></i>
+            </li>
           </ul>
         </div>
 

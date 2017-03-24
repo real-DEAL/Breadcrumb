@@ -2,34 +2,22 @@
 /* global TransitionType */
 
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $state, Trail, Map, Data) {
+.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
-
-    const style = {
-      left: move,
-      'transition-duration': '250ms',
-    };
+    const style = Style.moveLeft(move);
     crumb.style = style;
   };
 
   const moveY = (crumb, num) => {
-    const style = {
-      'transition-duration': '1000ms',
-      transform: `translate(0px, ${num}px)`,
-    };
+    const style = Style.moveVertial(num);
     crumb.style = style;
   };
 
   const moveReset = (crumb, index) => {
     crumb.left = 100 * index;
     const move = `${crumb.left += 2.5}%`;
-    const style = {
-      'transition-duration': '1000ms',
-      top: '0px',
-      left: move,
-    };
-    crumb.style = style;
+    crumb.style = Style.moveReset(move);
   };
 
   const trailMaker = () => ({
@@ -49,25 +37,17 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
-  $scope.info = {
-    show: false,
-    name: 'Description',
-    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
-  };
+  $scope.info = Data.info();
 
-  $scope.toggleInfo = () => {
+  $scope.toggleInfo = (type) => {
+    if (type) {
+      $scope.info.name = $scope.info[type].name;
+      $scope.info.text = $scope.info[type].text;
+    }
     $scope.info.show = !$scope.info.show;
   };
 
-  $scope.trailTypes = [
-    'adventure',
-    'mystery',
-    'casual',
-    'tour',
-    'scavenger',
-    'nature',
-    'history',
-  ].sort();
+  $scope.trailTypes = Data.trailTypes();
 
   $scope.step = 0;
 
@@ -90,84 +70,25 @@ angular.module('breadcrumb')
 
   $scope.obj = {};
 
-  $scope.difficulty = {
-    0: {
-      type: 'easy',
-      style: null,
-    },
-    1: {
-      type: 'medium',
-      style: null,
-    },
-    2: {
-      type: 'hard',
-      style: null,
-    },
+  $scope.difficulties = Data.difficulties();
+
+  $scope.fillDifficulties = (index) => {
+    $scope.difficulties = Data.fillIcons('difficulties', index, { color: 'purple' });
+    $scope.trail.difficulty = index + 1;
   };
 
-  $scope.fillDifficulty = (diff) => {
-    const fill = {
-      color: 'purple',
-    };
-    $scope.difficulty[0].style = null;
-    $scope.difficulty[1].style = null;
-    $scope.difficulty[2].style = null;
-    if (diff === 'easy') {
-      $scope.trail.difficulty = 1;
-      $scope.difficulty[0].style = fill;
-    }
-    if (diff === 'medium') {
-      $scope.trail.difficulty = 2;
-      $scope.difficulty[0].style = fill;
-      $scope.difficulty[1].style = fill;
-    }
-    if (diff === 'hard') {
-      $scope.trail.difficulty = 3;
-      $scope.difficulty[0].style = fill;
-      $scope.difficulty[1].style = fill;
-      $scope.difficulty[2].style = fill;
-    }
-  };
-
-  $scope.transport = {
-    WALKING: {
-      type: 'walk',
-      style: null,
-    },
-    BICYCLING: {
-      type: 'bicycle',
-      style: null,
-    },
-    TRANSIT: {
-      type: 'bus',
-      style: null,
-    },
-    DRIVING: {
-      type: 'car',
-      style: null,
-    },
-  };
+  $scope.transport = Data.transport();
 
   $scope.transChange = (type) => {
-    $scope.transport.WALKING.style = null;
-    $scope.transport.BICYCLING.style = null;
-    $scope.transport.TRANSIT.style = null;
-    $scope.transport.DRIVING.style = null;
-    $scope.transport[type].style = {
-      'background-color': '#F8F8F8',
-      'border-radius': '50px',
-    };
+    $scope.transport = Data.transport();
+    $scope.transport[type].style = Style.activeTransport();
   };
 
   $scope.money = (boolean) => {
     $scope.trail.requires_money = !boolean;
     if (boolean) $scope.moneyStyle = null;
     else {
-      $scope.moneyStyle = {
-        'background-color': '#F8F8F8',
-        'border-radius': '50px',
-        color: '#33CD61',
-      };
+      $scope.moneyStyle = Style.activeMoney();
     }
   };
 
@@ -175,7 +96,7 @@ angular.module('breadcrumb')
 
   $scope.review = {
     check: false,
-    style: { display: 'none' },
+    style: Style.displayNone,
   };
 
   $scope.trail = trailMaker();
@@ -219,12 +140,10 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
-
   $scope.add = (arg) => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
-      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       if ($scope.crumbs.length > 1) {
@@ -271,17 +190,15 @@ angular.module('breadcrumb')
     $scope.review.check = true;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
-      $scope.loading = { display: 'none' };
+      $scope.loading = Style.displayNone;
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
       $scope.trail.length = data.miles;
-      moveY($scope.trail, -475);
+      moveY($scope.trail, -100);
       $scope.crumbs.forEach((crumb) => {
-        moveY(crumb, -400);
+        moveY(crumb, -100);
       });
-      $scope.review.style = {
-        'animation-name': 'moveUp',
-      };
+      $scope.review.style = Style.moveUp;
       $scope.$apply();
     });
   };
@@ -292,9 +209,7 @@ angular.module('breadcrumb')
     $scope.crumbs.forEach((crumb, index) => {
       moveReset(crumb, index + 1);
     });
-    $scope.review.style = {
-      'animation-name': 'moveDown',
-    };
+    $scope.review.style = Style.moveDown;
   };
 
   $scope.submit = () => {
@@ -305,7 +220,8 @@ angular.module('breadcrumb')
       $scope.reset();
       $scope.crumbs = [];
       $scope.trail = trailMaker();
-      $scope.loading = { display: 'none' };
+      $scope.loading = Style.displayNone;
+      $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };

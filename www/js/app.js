@@ -92,7 +92,7 @@ angular.module('breadcrumb', [
     }
   });
 })
-.controller('AppCtrl', function ($scope, auth, store, $state) {
+.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
   $scope.logout = () => {
     auth.signout();
     store.remove('token');
@@ -109,14 +109,14 @@ angular.module('breadcrumb', [
 
   $scope.setTrail = (id) => {
     localStorage.setItem('trail', id);
+    $rootScope.trailID = id;
   };
 
   if (store.get('user')) {
     $scope.user = store.get('user').username;
   }
 
-  $scope.overflowStyle = {
-    'max-height': '125px',
-    overflow: 'scroll',
-  };
+  $scope.overflowStyle = Style.overflowStyle;
+
+  $rootScope.refresh = false;
 });

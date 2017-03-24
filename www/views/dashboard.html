@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <ion-view >
   <div class="loading" ng-style="loading"></div>
+  <div ng-style="mapShow" ng-click="mapToggle()">
+    <div class="black t-center"></div>
+    <img class="info" ng-src="{{ mapSrc }}" alt="">
+  </div>
+
 
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header bar-stable" align-title="center">
@@ -47,24 +52,27 @@
       </div>
 
       <div class="card">
+        <div class="row">
+          <!-- MAP -->
+          <div class="col center reviewMap">
+            <img ng-src="{{ trail.map }}" height="160px" width="160px" ng-click="mapToggle(trail.map)" />
+          </div>
 
-        <!-- MAP -->
-        <div class="center reviewMap">
-          <img ng-src="{{ trail.map }}" />
+          <!-- DESCRIPTION -->
+          <div class="col item-text-wrap scrollText" ng-style="overflowStyle" height="160px">
+            <p>{{ trail.description }}</p>
+            <p>Created by </p>
+          </div>
         </div>
-
-        <!-- DESCRIPTION -->
-        <div class="item item-text-wrap scrollText" ng-style="overflowStyle">{{ trail.description }}</div>
 
         <!-- GO BUTTON -->
         <div class="row">
-          <button class="col button button-block" ng-if="!trail.progress" ng-click="setTrail(trail.id)" ui-sref="app.trail">
-            GO!
-          </button>
-
-          <button class="col button button-block" ng-if="trail.progress">
-            <span ng-if="100 - trail.progress < 20">Only</span>
-            {{ 100 - trail.progress }}% remaining! Let's go!
+          <button class="col button button-block" ng-click="pickTrail(trail.id, $index)" ui-sref="app.trail">
+            <span ng-if="!trail.progress">Start!</span>
+            <span ng-if="trail.progress">
+              <span ng-if="100 - trail.progress < 20">Only</span>
+              {{ 100 - trail.progress }}% remaining! Let's go!
+            </span>
           </button>
         </div>
       </div>

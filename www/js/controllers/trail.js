@@ -1,6 +1,8 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, ListFact, Geofence) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence) {
   $scope.loading = null;
+
+  $scope.trailID = null;
 
   $scope.page = {
     description: true,
@@ -19,33 +21,22 @@ angular.module('breadcrumb')
 
   $scope.crumbs = [];
 
-  $scope.trail = ListFact.get('id').then((trails) => {
-    trails[0].crumb.sort((a, b) => a.order_number - b.order_number);
-    $scope.trail = trails[0];
-    $scope.crumbs = trails[0].crumb;
-    Geofence.addOrUpdate($scope.crumbs[0]);
-    $scope.loading = { display: 'none' };
-    // $scope.crumbs.unshift({
-    //   data: null,
-    //   id: 31,
-    //   trail_id: 14,
-    //   order_number: 0,
-    //   clue: 'Someone\'s Circle',
-    //   description: 'A famous genera\'s statue, surrounded by controversy!',
-    //   name: 'Lee\'s Circle',
-    // media_text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    //   image: 'http://res.cloudinary.com/realdeal/image/upload/v1490205277/breadfalls_cnvvbe.gif',
-    //   video: 'https://www.youtube.com/embed/ZuA6bPvHvwE',
-    //   ar: null,
-    //   audio: null,
-    // });
-  });
-
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
-  $rootScope.$watch('pinged', () => {
-    if ($rootScope.pinged) {
-      $scope.switch('found');
+  $scope.startTrail = () => {
+    ListFact.get('id').then((trails) => {
+      $scope.trail = trails[0];
+      $scope.crumbs = trails[0].crumb;
+      $scope.trailID = $rootScope.trailID;
+      $scope.loading = { display: 'none' };
+    });
+  };
+
+  $scope.trail = $scope.startTrail();
+
+  $rootScope.$watch('trailID', () => {
+    if ($rootScope.trailID !== $scope.trailID) {
+      $scope.startTrail();
     }
   });
 
@@ -53,11 +44,12 @@ angular.module('breadcrumb')
     switch (type) {
       case 'description':
         $scope.page.description = false;
-        // TODO: delete 56, just for testing
-        // $scope.page.found = true;
+        $scope.page.found = true;
+        Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
         break;
       case 'found':
         $scope.page.found = true;
+        $scope.page.description = false;
         break;
       case 'next':
         $scope.crumb += 1;
@@ -66,16 +58,34 @@ angular.module('breadcrumb')
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
+          $scope.bubbles = { top: '320px' };
           $scope.page.finish = true;
         } else {
-          Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
           $scope.page.found = false;
           $scope.page.media.show = false;
+          $scope.bubbles = { top: '320px' };
           $scope.page.description = true;
         }
         break;
       default: $scope.page.description = true;
     }
+  };
+
+  $rootScope.$watch('pinged', () => {
+    if ($rootScope.pinged) {
+      $scope.switch('found');
+    }
+  });
+
+  $scope.stars = Data.stars();
+
+  $scope.ratingToggle = (value) => {
+    $scope.stars = Data.fillIcons('stars', value);
+    $scope.postTrail.rating = value;
+  };
+
+  $scope.postTrail = {
+    rating: null,
   };
 
   $scope.media = (type) => {

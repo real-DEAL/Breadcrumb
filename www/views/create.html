@@ -27,53 +27,51 @@
       <label class="item item-input">
         <input type="text" style="font-size: 25px" class="center s-2x" ng-model="trail.name" placeholder="Name of trail">
       </label>
-      <div class="card">
 
-        <!-- TRAIL DESCRIPTION -->
-        <label class="list item item-input">
-          <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
-        </label>
+      <!-- TRAIL DESCRIPTION -->
+      <label class="list item item-input">
+        <textarea type="text" ng-model="trail.description" placeholder="Tells us about your trail"></textarea>
+      </label>
 
-        <!-- TRAIL TYPE -->
-        <div class="row list center">
-          <div class="col col-30">
-            Type:
-          </div>
-          <div class="col dark center" ng-click="changeStep(false)">
-            <i class="ion-arrow-left-b s-2x"></i>
-          </div>
-          <div class="col dark center">
-            <span>{{ trailTypes[step] }}</span>
-          </div>
-          <div class="col dark center" ng-click="changeStep(true)">
-            <i class="ion-arrow-right-b s-2x"></i>
-          </div>
+      <!-- TRAIL TYPE -->
+      <div class="row list center">
+        <div class="col col-25">
+          Type:
         </div>
-
-        <!-- TRAIL DIFFICULTY -->
-        <div class="list row center">
-          <div class="col">
-            Difficulty:
-          </div>
-          <div class="col s-2x">
-            <i
-              class="ion-ribbon-b padding"
-              ng-repeat="(key, level) in difficulty"
-              ng-style="difficulty[key].style"
-              ng-click="fillDifficulty(level.type)"
-            ></i>
-          </div>
+        <div class="col dark center" ng-click="changeStep(false)">
+          <i class="ion-arrow-left-b s-2x"></i>
         </div>
-
-        <!-- TRAIL TRANSPORT AND MONEY -->
-        <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
-
-          <!-- TRANSPORT -->
-          <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col" ng-click="trail.transport = name"></i>
-
-          <!-- MONEY -->
-          <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
+        <div class="col dark center">
+          <span>{{ trailTypes[step] }}</span>
         </div>
+        <div class="col dark center" ng-click="changeStep(true)">
+          <i class="ion-arrow-right-b s-2x"></i>
+        </div>
+      </div>
+
+      <!-- TRAIL DIFFICULTY -->
+      <div class="list row center">
+        <div class="col col-25">
+          Difficulty:
+        </div>
+        <div class="col s-2x">
+          <i
+            class="ion-ribbon-b padding"
+            ng-repeat="diff in difficulties"
+            ng-style="diff.style"
+            ng-click="fillDifficulties($index)"
+          ></i>
+        </div>
+      </div>
+
+      <!-- TRAIL TRANSPORT AND MONEY -->
+      <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
+
+        <!-- TRANSPORT -->
+        <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col" ng-click="trail.transport = name"></i>
+
+        <!-- MONEY -->
+        <i class="ion-cash col dark" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
       </div>
 
       <button class="button button-block margin-n" ng-click="add()" ng-if="!crumbs.length">
@@ -99,98 +97,89 @@
         <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
       </div>
 
-      <div class="card">
-
+      <div ng-if="!media">
+        <!-- MAP -->
         <div class="row item item-divider center map-div">
-
-          <!-- map -->
-          <div id="mapid"></div>
-
-          <div style="width: 100%; position: absolute; top: 0px; bottom: 0px;" data-tap-disabled="true">
+          <div class="map" data-tap-disabled="true">
             <leaflet resizeable markers="markers" paths="paths" center="center" tiles="tiles" width="100%" height="100%"></leaflet>
           </div>
         </div>
-          <!-- map ends -->
 
-        <div ng-if="!media">
-
-          <!-- DESCRIPTION -->
-          <div class="item item-icon-right textbox">
-            <i class="energized icon ion-information-circled" ng-click="toggleInfo()"></i>
-            <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
-          </div>
-
-
-          <!-- LOCATION -->
-          <div class="item item-icon-right textbox">
-            <i class="positive icon ion-navigate" ng-click="test()"></i>
-            <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
-          </div>
-
-          <!-- MEDIA SWITCH BUTTON -->
-          <div class="item item-divider center" ng-click="toggleMedia('media')">
-            <h1>UPLOAD MEDIA</h1>
-          </div>
-
-          <!-- BUTTONS -->
-          <div class="row" ng-if="!media">
-            <div class="col">
-              <button class="button button-block" ng-click="move(100)">
-                Prev crumb
-              </button>
-            </div>
-            <div class="col">
-              <button class="button button-block" ng-click="move(-100)"
-              ng-if="crumbs.length > $index + 1">
-                Next crumb
-              </button>
-              <button class="button button-block button-energized" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
-                Add crumb!
-              </button>
-            </div>
-          </div>
-
+        <!-- DESCRIPTION -->
+        <div class="item item-icon-right textbox">
+          <i class="energized icon ion-information-circled" ng-click="toggleInfo('description')"></i>
+          <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
         </div>
 
-        <!-- CRUMB MEDIA -->
-        <div ng-if="media">
 
-          <!-- CRUMB TEXT -->
-          <div class="item item-icon-right textbox">
-            <i class="positive icon ion-information-circled" ng-click="toggleInfo()"></i>
-            <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
+        <!-- LOCATION -->
+        <div class="item item-icon-right textbox">
+          <i class="positive icon ion-navigate" ng-click="test()"></i>
+          <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
+        </div>
+
+        <!-- MEDIA SWITCH BUTTON -->
+        <div class="item item-divider center" ng-click="toggleMedia('media')">
+          <h1>UPLOAD MEDIA</h1>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="row" ng-if="!media">
+          <div class="col">
+            <button class="button button-block" ng-click="move(100)">
+              Prev crumb
+            </button>
           </div>
-
-          <!-- MEDIA UPLOAD BUTTONS -->
-          <div class="center padding margin-v">
-            <div class="center bubble inline" ng-click="toggleMedia('image')">
-              <i class="center-v ion-camera center"></i>
-            </div>
-            <div class="center bubble inline" ng-click="toggleMedia('audio')">
-              <i class="center-v ion-mic-a"></i>
-            </div>
-            <div class="center bubble inline" ng-click="toggleMedia('video')">
-              <i class="center-v ion-ios-videocam"></i>
-            </div>
-          </div>
-
-          <div>
-            <label class="item item-input" ng-if="mediaType.image">
-              <input type="text" placeholder="Image link" ng-model="crumb.image">
-            </label>
-            <label class="item item-input" ng-if="mediaType.audio">
-              <input type="text" placeholder="Audio link" ng-model="crumb.audio">
-            </label>
-            <label class="item item-input" ng-if="mediaType.video">
-              <input type="text" placeholder="Video link" ng-model="crumb.video">
-            </label>
-          </div>
-
-          <div class="item item-divider center" ng-click="toggleMedia('media')">
-            <h1>FINISH MEDIA</h1>
+          <div class="col">
+            <button class="button button-block" ng-click="move(-100)"
+            ng-if="crumbs.length > $index + 1">
+              Next crumb
+            </button>
+            <button class="button button-block button-energized" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
+              Add crumb!
+            </button>
           </div>
         </div>
 
+      </div>
+
+      <!-- CRUMB MEDIA -->
+      <div ng-if="media">
+
+        <!-- CRUMB TEXT -->
+        <div class="item item-icon-right textbox">
+          <i class="positive icon ion-information-circled" ng-click="toggleInfo('rewardText')"></i>
+          <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
+        </div>
+
+        <!-- MEDIA UPLOAD BUTTONS -->
+        <div class="center padding margin-v">
+          <div class="center bubble inline" ng-click="toggleMedia('image')">
+            <i class="center-v ion-camera center"></i>
+          </div>
+          <div class="center bubble inline" ng-click="toggleMedia('audio')">
+            <i class="center-v ion-mic-a"></i>
+          </div>
+          <div class="center bubble inline" ng-click="toggleMedia('video')">
+            <i class="center-v ion-ios-videocam"></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="item item-input" ng-if="mediaType.image">
+            <input type="text" placeholder="Image link" ng-model="crumb.image">
+          </label>
+          <label class="item item-input" ng-if="mediaType.audio">
+            <input type="text" placeholder="Audio link" ng-model="crumb.audio">
+          </label>
+          <label class="item item-input" ng-if="mediaType.video">
+            <input type="text" placeholder="Video link" ng-model="crumb.video">
+          </label>
+        </div>
+
+        <div class="item item-divider center" ng-click="toggleMedia('media')">
+          <h1>FINISH MEDIA</h1>
+        </div>
       </div>
 
     </div>
@@ -214,8 +203,8 @@
       <!-- CRUMBS -->
       <div ng-style="overflowStyle">
         <div ng-repeat="crumb in trail.crumbs track by $index" class="row">
-          <div class="col col-10">{{ $index + 1 }}</div>
-          <div class="col">{{ crumb.location }}</div>
+          <div class="col col-10 t-center">{{ $index + 1 }}</div>
+          <div class="col">{{ crumb.address }}</div>
         </div>
       </div>
     </div>
