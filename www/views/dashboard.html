@@ -15,9 +15,9 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content class="egg-b">
 
-    <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
+    <div ng-repeat="trail in trails track by $index" ng-style="trail.style" class="mint-b">
 
       <div class="row item item-divider" ng-click="toggle($index)">
         <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
