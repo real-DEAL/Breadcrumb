@@ -77,6 +77,7 @@ angular.module('breadcrumb')
     lng: -90.0715,
   };
 
+
   $scope.obj = {};
 
   // DIFFICULTIES
@@ -323,6 +324,7 @@ angular.module('breadcrumb')
         zoom: 15,
         autoDiscover: false,
       },
+
       markers: {
         marker: {
           lat: 29.9511,
@@ -413,6 +415,7 @@ angular.module('breadcrumb')
     };
   };
 
+
   // TODO: when autocomplete updates, get its coordinates and use
   // it to also update the marker on the map
 
@@ -453,5 +456,32 @@ angular.module('breadcrumb')
         }
       });
     }
+  };
+
+
+  $scope.$on('leafletDirectiveMap.move', (event, args) => {
+    // Get the Leaflet map from the triggered event.
+    const map = args.leafletEvent.target;
+    const center = (map.getCenter());
+    $scope.center.lat = center.lat;
+    $scope.center.lng = center.lng;
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+    $scope.updateMap();
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+      },
+    };
+    console.warn($scope.location, '$scope.location at the same time');
+  });
+
+  $scope.tiles = {
+    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    options: {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+
   };
 });
