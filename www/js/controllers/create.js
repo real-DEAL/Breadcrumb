@@ -71,10 +71,10 @@ angular.module('breadcrumb')
 
   // DIFFICULTIES
 
-  $scope.difficulties = Data.difficulties();
+  $scope.difficulty = Data.difficulty();
 
   $scope.fillDifficulties = (index) => {
-    $scope.difficulties = Data.fillIcons('difficulties', index, { color: 'purple' });
+    $scope.difficulty = Data.fillIcons('difficulty', index, { color: 'purple' });
     $scope.trail.difficulty = index + 1;
   };
 
@@ -206,10 +206,14 @@ angular.module('breadcrumb')
       $scope.review.style = Style.moveUp;
       $scope.review.check = true;
       $scope.$apply();
-    });
-    if (!$scope.review.check) {
+    })
+    .catch((err) => {
+      console.log(err);
       $scope.toggleInfo('errorMap');
-    }
+    });
+    // if (!$scope.review.check) {
+    //
+    // }
     $scope.loading = Style.displayNone;
   };
 

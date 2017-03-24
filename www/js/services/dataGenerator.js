@@ -40,14 +40,14 @@ angular.module('breadcrumb').factory('Data', function () {
     },
   });
 
-  const difficulties = () => iconArrayMaker(3);
+  const difficulty = () => iconArrayMaker(3);
 
-  const stars = () => iconArrayMaker(5);
+  const rating = () => iconArrayMaker(5);
 
   const dataTypes = {
-    stars,
+    rating,
     transport,
-    difficulties,
+    difficulty,
   };
 
   const fillIcons = (type, value, fill) => {
@@ -69,6 +69,15 @@ angular.module('breadcrumb').factory('Data', function () {
     }
     return data;
   };
+
+  const searchRequest = () => ({
+    username: null,
+    name: null,
+    type: 'Any',
+    transport: 'Any',
+    rating: 'Any',
+    difficulty: 'Any',
+  });
 
   const info = () => ({
     show: false,
@@ -114,7 +123,7 @@ angular.module('breadcrumb').factory('Data', function () {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
       description: '',
       transport: tran,
-      stars: arrayMaker(trailStars),
+      rating: arrayMaker(trailStars),
       emptyStars: arrayMaker(emptyStars),
       difficulty: arrayMaker(difficulty),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
@@ -162,13 +171,14 @@ angular.module('breadcrumb').factory('Data', function () {
 
   return {
     info,
-    stars,
+    rating,
     transport,
     trailTypes,
     fillIcons,
     iconArrayMaker,
     arrayMaker,
-    difficulties,
+    difficulty,
+    searchRequest,
     trail: trailMaker,
     address: randomFromArray(addresses),
     trailName: randomFromArray(trailNames),
