@@ -128,6 +128,16 @@
         </div>
 
 
+          <!-- LOCATION -->
+          <div class="item item-icon-right textbox">
+            <i class="positive icon ion-navigate" ng-click="test()"></i>
+            <!-- TODO -->
+            <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
+            <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-bind="location" ng-model="location.formatted_address">
+            <!-- <input type="text" gm-places-autocomplete id="autocomplete" ng-model="autocomplete.autocomplete" style="width: 300px;"/> -->
+          </div>
+
+
         <!-- BUTTONS -->
         <div class="row" ng-if="!media">
           <div class="col">

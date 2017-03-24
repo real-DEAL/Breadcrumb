@@ -5,6 +5,8 @@ angular.module('breadcrumb', [
   'auth0',
   'angular-storage',
   'angular-jwt',
+  'gm',
+  'angularReverseGeocode',
 ])
 .run(function (
   $window,
