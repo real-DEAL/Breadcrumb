@@ -18,8 +18,8 @@ angular.module('breadcrumb')
   };
 
   const trailMaker = () => ({
-    name: Data.trailName(),
-    description: Data.description(),
+    name: null,
+    description: null,
     type: $scope.trailTypes[0],
     difficulty: null,
     map: null,
@@ -44,6 +44,8 @@ angular.module('breadcrumb')
     $scope.info.show = !$scope.info.show;
   };
 
+  // TRAIL TYPES
+
   $scope.trailTypes = Data.trailTypes();
 
   $scope.step = 0;
@@ -67,6 +69,8 @@ angular.module('breadcrumb')
 
   $scope.obj = {};
 
+  // DIFFICULTIES
+
   $scope.difficulties = Data.difficulties();
 
   $scope.fillDifficulties = (index) => {
@@ -74,12 +78,16 @@ angular.module('breadcrumb')
     $scope.trail.difficulty = index + 1;
   };
 
+  // TRANSPORT
+
   $scope.transport = Data.transport();
 
   $scope.transChange = (type) => {
     $scope.transport = Data.transport();
     $scope.transport[type].style = Style.activeTransport();
   };
+
+  // MONEY
 
   $scope.money = (boolean) => {
     $scope.trail.requires_money = !boolean;
@@ -91,6 +99,8 @@ angular.module('breadcrumb')
 
   $scope.moneyStyle = null;
 
+  // REVIEW
+
   $scope.review = {
     check: false,
     style: Style.displayNone,
@@ -100,7 +110,7 @@ angular.module('breadcrumb')
 
   $scope.crumb = () => ({
     clue: null,
-    description: Data.crumbDescription(),
+    description: null,
     name: null,
     media_text: null,
     image: null,
@@ -198,7 +208,6 @@ angular.module('breadcrumb')
       $scope.$apply();
     });
     if (!$scope.review.check) {
-      console.log('There\'s been an error');
       $scope.toggleInfo('errorMap');
     }
     $scope.loading = Style.displayNone;
