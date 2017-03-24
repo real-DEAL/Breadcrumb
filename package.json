@@ -36,6 +36,7 @@
   "dependencies": {
     "cloudinary": "^1.8.0",
     "cordova-plugin-geolocation": "^2.4.2",
+    "leaflet-plugins": "^3.0.0",
     "lodash": "^4.17.4"
   }
 }
