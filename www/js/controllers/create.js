@@ -224,7 +224,6 @@ angular.module('breadcrumb')
     .catch((err) => {
       console.warn(err);
       $scope.toggleInfo('errorMap');
-    });
     $scope.loading = Style.displayNone;
   };
 
