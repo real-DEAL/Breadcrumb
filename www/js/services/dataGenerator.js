@@ -1,4 +1,3 @@
-const _ = window._;
 angular.module('breadcrumb').factory('Data', function () {
   const iconArrayMaker = (num) => {
     const obj = {};
