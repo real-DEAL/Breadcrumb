@@ -1,7 +1,5 @@
-angular.module('breadcrumb').factory('CameraFact', function (
-  $scope
-) {
-  $scope.takePicture = () => {
+angular.module('breadcrumb').factory('CameraFact', function () {
+  const takePicture = () => {
     const onSuccess = (imageData) => {
       const image = document.getElementById('myImage');
       image.src = `data:image/jpeg;base64,${imageData}`;
@@ -14,5 +12,9 @@ angular.module('breadcrumb').factory('CameraFact', function (
       quality: 50,
       destinationType: Camera.DestinationType.DATA_URL,
     });
+  };
+
+  return {
+    takePicture,
   };
 });

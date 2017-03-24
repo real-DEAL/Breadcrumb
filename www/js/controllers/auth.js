@@ -1,6 +1,3 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
-
 angular.module('breadcrumb')
 .controller('AuthCtrl', function ($scope, store, getUpdateUserFact) {
   $scope.test = input => console.warn(input);

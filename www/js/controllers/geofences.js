@@ -1,6 +1,4 @@
 angular.module('breadcrumb').controller('GeofencesCtrl', function (
-/* eslint no-param-reassign: ["error", { "props": false }]*/
-/* global someFunction google:true, angular:true, window:true*/
   $scope,
   $ionicActionSheet,
   $timeout,

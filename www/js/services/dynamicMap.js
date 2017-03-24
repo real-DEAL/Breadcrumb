@@ -1,5 +1,5 @@
 const bread = angular.module('breadcrumb');
-bread.factory('DynamicMap', function ($scope, $cordovaGeolocation) {
+bread.factory('DynamicMap', function ($scope) {
   const latLng = new google.maps.LatLng(43.07493, -89.381388);
   // TODO: connect $scope.location to make the LatLng and see if it will show up
   // TODO: also fix the buttons for Add Crumb for underneath the map
