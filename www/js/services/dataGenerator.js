@@ -1,4 +1,19 @@
 angular.module('breadcrumb').factory('Data', function () {
+  const child = () => {
+    const children = [
+      '../img/child1.png',
+      '../img/child2.png',
+      '../img/child3.png',
+      '../img/child4.png',
+      '../img/child5.png',
+      '../img/child6.png',
+      '../img/child7.png',
+      '../img/child8.png',
+    ];
+    const index = Math.floor(Math.random() * 8);
+    return children[index];
+  };
+
   const menu = [
     {
       name: 'Search',
@@ -205,6 +220,7 @@ angular.module('breadcrumb').factory('Data', function () {
   return {
     info,
     menu,
+    child,
     rating,
     transport,
     trailTypes,
