@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<ion-view>
-  <ion-nav-buttons side="left">
+<ion-view ng-style="{background: 'transparent'}">
   <ion-header-bar class="bar-positive" align-title="center">
     <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     <h1 class="title">Ionic Geofence</h1>
-    <div class="buttons pull-right">
-      <button class="button pull-right" ng-click="takePicture()"> Picture</button>
-    </div>
   </ion-header-bar>
-  </ion-nav-buttons>
-  <ion-content>
-    <div class="card">
-      <img id="myImage" ng-style="{width:'200px',height:'600px',background:'transparent'}"/>
+  <ion-content ng-style="{background: 'transparent'}">
+    <div class="buttons pull-right">
+      <button class="button pull-right" ng-click="videoOverlay()">start</button>
+    </div>
+    <div class="buttons pull-right">
+      <button class="button pull-right" ng-click="stopVideoOverlay()">stop</button>
+    </div>
+    <div id="commentRender" class="card" ng-style="{background: 'transparent'}">
+      <br><div id="spot"></div>
     </div>
   </ion-content>
 </ion-view>

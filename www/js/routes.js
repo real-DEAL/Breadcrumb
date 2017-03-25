@@ -7,6 +7,11 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
+      .state('test', {
+        url: '/test',
+        templateUrl: 'views/camera-testView.html',
+        controller: 'AugRealCtrl',
+      })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
@@ -100,7 +105,7 @@ angular.module('breadcrumb')
       clientID: 'WjzyvWzAQ8jN72gc0NR6pWBEG8gWM2Wn',
       loginState: 'start',
     });
-    $urlRouterProvider.otherwise('/start');
+    $urlRouterProvider.otherwise('/test');
 
     jwtOptionsProvider.config({
       whiteListedDomains: [
