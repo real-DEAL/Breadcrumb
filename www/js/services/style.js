@@ -1,6 +1,18 @@
 angular.module('breadcrumb').factory('Style', function () {
   const displayNone = { display: 'none' };
 
+  const activeTrail = {
+    height: '375px',
+    overflow: 'hidden',
+    'transition-duration': '250ms',
+  };
+
+  const inactiveTrail = {
+    height: '105px',
+    'transition-duration': '250ms',
+    overflow: 'hidden',
+  };
+
   const moveVertial = num => ({
     'transition-duration': '1000ms',
     transform: `translate(0px, ${num}%)`,
@@ -26,14 +38,15 @@ angular.module('breadcrumb').factory('Style', function () {
   };
 
   const activeTransport = () => ({
-    'background-color': '#F8F8F8',
+    'background-color': '#95cebb',
     'border-radius': '50px',
+    color: '#fbf0ed',
   });
 
   const activeMoney = () => ({
-    'background-color': '#F8F8F8',
+    'background-color': '#95cebb',
     'border-radius': '50px',
-    color: '#33CD61',
+    color: '#fbf0ed',
   });
 
   const overflowStyle = {
@@ -42,6 +55,8 @@ angular.module('breadcrumb').factory('Style', function () {
   };
 
   return {
+    activeTrail,
+    inactiveTrail,
     displayNone,
     moveVertial,
     moveLeft,
