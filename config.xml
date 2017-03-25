@@ -19,6 +19,7 @@
   <access origin="http://*.54.203.104.113/"/>
   <access origin="http://172.24.2.65:8100"/>
   <access origin="http://54.203.104.113/users"/>
+  <access origin="http://172.24.2.139:8100"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
