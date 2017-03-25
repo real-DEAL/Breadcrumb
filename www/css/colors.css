@@ -33,7 +33,6 @@
 }
 
 .egg-t {
-<<<<<<< HEAD
   color: #e2c7a2;
 }
 
@@ -43,16 +42,14 @@
 
 .mint-t {
   color: #73aa95;
-=======
-  color: #e4dfbf;
 }
 
 .egg-b, item-content {
-  background-color: #e4dfbf;
+  background-color: #e2c7a2;
 }
 
 .mint-t {
-  color: #95cebb;
+  color: #73aa95;
 }
 
 .mint-b {
