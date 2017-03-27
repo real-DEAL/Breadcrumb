@@ -24,11 +24,11 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
     return $http({
       method: 'POST',
       // url: 'http://54.203.104.113/trails',
-      // url: 'http://192.168.99.100:3000/trails',
+      url: 'http://192.168.99.100:3000/trails',
       header: {
         'Access-Control-Allow-Origin': '*',
       },
-      //TODO: add access_token
+      // TODO: add access_token
       data: trail,
       json: true,
     })
