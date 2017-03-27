@@ -358,7 +358,6 @@ angular.module('breadcrumb')
     },
   };
 
-  // this updates map when location from autocomplete changes $watch
   // ==========================================================================
 
 
