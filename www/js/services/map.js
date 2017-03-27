@@ -43,6 +43,7 @@ angular.module('breadcrumb').factory('Map', function () {
   };
 
   const addPath = (directions) => {
+    console.warn(directions, 'the directions added from Add()')
     let obj = {};
     const end = directions.length - 2;
     // const a = new google.maps.LatLng(directions[0].latitude, directions[0].longitude);
@@ -58,8 +59,10 @@ angular.module('breadcrumb').factory('Map', function () {
 
     // _.C {}lat: ()lng: ()__proto__: Object
     const request = {
-      origin: a,
-      destination: b,
+      // origin: new google.maps.LatLng(29.951065, -90.071533),
+      // destination: new google.maps.LatLng(40.730610, -73.935242),
+      origin: new google.maps.LatLng(directions[0].latitude, directions[0].longitude),
+      destination: new google.maps.LatLng(directions[directions.length - 2].latitude, directions[directions.length - 2].longitude),
       // origin: directions[0].address,
 //       origin: new google.maps.LatLng(
 // 29.949840396909128, -90.0719690322876),

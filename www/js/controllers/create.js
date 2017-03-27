@@ -507,82 +507,11 @@ angular.module('breadcrumb')
     // $scope.updateMap();
 
     console.warn($scope.location, 'change in marker');
-
-    // $scope.$watch('location', () => {
-    //   $scope.markers =
-    // }, true);
-    // $timeout(() => {
-    //   // angular.extend($scope, {
-    //   //   markers: {
-    //   //     marker: {
-    //   //       lat: center.lat,
-    //   //       lng: center.lat,
-    //   //       draggable: true,
-    //   //     },
-    //   //   },
-    //   // });
-      // $scope.$apply(() => {
-      //   $scope.markers.marker.lat = center.lat;
-      //   $scope.markers.marker.lng = center.lng;
-      // });
-    //
-    // });
-    // $scope.$watchGroup((['center.lat', 'center.lng']), () => {
-    //    $scope.markers.marker.lat = center.lat;
-    //    $scope.markers.marker.lng = center.lng;
-    // });
-    // $scope.$apply();
-    // $scope.$apply(() => {
-    //   $scope.markers.marker.lat = center.lat;
-    //   $scope.markers.marker.lng = center.lng;
-    // });
-
-    // $scope.safeApply(function() {
-    //   // im extending the marker to the new marker location when it moves
-    //   angular.extend($scope, {
-    //     markers: {
-    //       marker: {
-    //         lat: center.lat,
-    //         lng: center.lat,
-    //         draggable: true,
-    //       },
-    //     },
-    //   });
-    // });
-    // console.warn($scope.markers, 'marker info')
-
-    // TODO: HOW TO MAKE THE REVERSE GEOCODE UPDATE WITH THE NEW MARKERS coords
-    // _.defer(() => {
-
-    //   $scope.$apply();
-    // });
-
-    // $scope.$watch('location', () => {
-    //   $scope.markers = {
-    //     marker: {
-    //       lat: $scope.center.lat,
-    //       lng: $scope.center.lng,
-    //     },
-    //   };
-    // });
-    //
-    // $scope.$evalAsync(() => {
-    //   angular.extend($scope, {
-    //     markers: {
-    //       marker: {
-    //         lat: center.lat,
-    //         lng: center.lat,
-    //         draggable: true,
-    //       },
-    //     },
-    //   });
-    // });
-    console.warn($scope.markers.marker.lng, '$evalAsync');
+    console.warn($scope.markers.marker.lng, '$scope.markers.marker.lng');
 
     // when the marker changes, make sure that it populates the input box
 
   });
-
 
 
   // $scope.markers = [];
