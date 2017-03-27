@@ -7,11 +7,6 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
-      // .state('test', {
-      //   url: '/test',
-      //   templateUrl: 'views/camera-testView.html',
-      //   controller: 'AugRealCtrl',
-      // })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
