@@ -20,27 +20,19 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
         trail.difficulty = 3;
       }
     }
+    trail.crumbs = crumbs;
     return $http({
       method: 'POST',
-      url: 'http://54.203.104.113/trails',
-      // url: 'http://192.168.99.100/trails',
+      // url: 'http://54.203.104.113/trails',
+      // url: 'http://192.168.99.100:3000/trails',
+      url: 'http://192.168.99.100:3000/trails',
+      header: {
+        'Access-Control-Allow-Origin': '*',
+      },
       data: trail,
       json: true,
     })
-    .then((response) => {
-      const trailId = response.data.data[0].id;
-      crumbs.forEach((crumb, index) => {
-        crumb.trail_id = trailId;
-        crumb.order_number = index + 1;
-        return $http({
-          method: 'POST',
-          url: 'http://54.203.104.113/crumbs',
-          // url: 'http://192.168.99.100/crumbs',
-          data: crumb,
-          json: true,
-        });
-      });
-    })
+    .then(response => response)
     .catch(err => err);
   };
   return {
