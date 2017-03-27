@@ -4,20 +4,14 @@ angular.module('breadcrumb')
 .controller('ProfileCtrl', function ($scope, ListFact, UserFact, Data, store) {
   $scope.user = store.get('user');
 
-  console.log($scope.user.username);
-
   const populateUserTrails = () => {
-    UserFact.getUser($scope.user.username)
-    .then((res) => {
-      ListFact.get({user_id: 1})
-      .then((trails) => {
-        console.log(trails);
-        $scope.userTrails.push(trails[0]);
-        $scope.userTrails.push(trails[1]);
-        $scope.userTrails.push(trails[2]);
-      });
+    ListFact.get({ user_id: $scope.user.id })
+    .then((trails) => {
+      $scope.userTrails.push(trails[0]);
+      $scope.userTrails.push(trails[1]);
+      $scope.userTrails.push(trails[2]);
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
   };
 
   const populatePastTrails = () => {
