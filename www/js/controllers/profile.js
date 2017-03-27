@@ -3,7 +3,6 @@ angular.module('breadcrumb')
   $scope.loading = null;
 
   $scope.user = store.get('user');
-
   const populateUserTrails = () => {
     ListFact.get({ user_id: $scope.user.id })
     .then((trails) => {
