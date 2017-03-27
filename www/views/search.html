@@ -8,7 +8,7 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content class="blueGradient">
+  <ion-content class="worldBackground">
 
     <div class="card light-b">
 
@@ -32,7 +32,7 @@
             class="ion-android-star padding"
             ng-repeat="star in rating"
             ng-style="star.style"
-            ng-click="searchToggle('rating', $index, { color: 'gold' })"
+            ng-click="searchToggle('rating', $index, { color: '#db6a32' })"
           ></i>
         </div>
       </div>
@@ -47,7 +47,7 @@
             class="ion-ribbon-b padding"
             ng-repeat="diff in difficulty"
             ng-style="diff.style"
-            ng-click="searchToggle('difficulty', $index, { color: 'purple' })"
+            ng-click="searchToggle('difficulty', $index, { color: '#3a7ec7' })"
           ></i>
         </div>
       </div>
@@ -62,7 +62,7 @@
             class="ion-android-{{ type.type }} padding"
             ng-repeat="(name, type) in transport"
             ng-style="type.style"
-            ng-click="searchToggle('transport', name, { color: '#33CD61' })"
+            ng-click="searchToggle('transport', name, { color: '#73aa95' })"
           ></i>
         </div>
       </div>

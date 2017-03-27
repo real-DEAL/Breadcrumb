@@ -9,7 +9,7 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content class="light-b">
+  <ion-content>
 
     <!-- CRUMB EXPLANATION -->
     <div ng-if="page.description" class="padding">
@@ -24,9 +24,9 @@
         </div>
 
         <!-- CRUMB NAME -->
-        <div class="item item-text-wrap">
+        <h4 class="t-center">
           {{ crumbs[crumb].clue }}
-        </div>
+        </h4>
 
         <!-- IMAGE -->
         <div class="item item-text-wrap">
@@ -40,7 +40,7 @@
       </div>
 
       <div class="t-center margin-top">
-        <button class="button" ng-click="switch('description')">Let's go!</button>
+        <button class="button button-b" ng-click="switch('description')">Let's go!</button>
       </div>
     </div>
 
@@ -53,19 +53,19 @@
         <!-- MEDIA BUTTONS -->
         <div class="bubbles" ng-style="bubbles">
           <div class="mint-b bubble float float27 inline" ng-if="crumbs[crumb].text" ng-click="media('text')">
-            <i class="center-v ion-document-text"></i>
+            <i class="light-t center-v ion-document-text"></i>
           </div>
           <div class="maroon-b bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="media('ar')">
-            <i class="center-v ion-load-b center"></i>
+            <i class="light-t center-v ion-load-b center"></i>
           </div>
           <div class="cream-b bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
-            <i class="center-v ion-image"></i>
+            <i class="light-t center-v ion-image"></i>
           </div>
           <div class="eggshell-b bubble float float37 inline" ng-if="crumbs[crumb].video" ng-click="media('video')">
-            <i class="center-v ion-ios-videocam"></i>
+            <i class="light-t center-v ion-ios-videocam"></i>
           </div>
           <div class="rust-b bubble float float22 inline" ng-if="crumbs[crumb].audio" ng-click="media('audio')">
-            <i class="center-v ion-headphone"></i>
+            <i class="light-t center-v ion-headphone"></i>
           </div>
         </div>
         <div ng-if="page.media.show" style="height: 110px;"></div>
@@ -103,12 +103,12 @@
       </div>
 
       <div class="t-center">
-        <button class="button" ng-click="switch('next')">Continue!</button>
+        <button class="button button-a" ng-click="switch('next')">Continue!</button>
       </div>
     </div>
 
     <!-- FINISHED -->
-    <div ng-if="page.finish" class="margin-top">
+    <div ng-if="page.finish" class="margin-top t-center">
 
       <div class="card t-center" style="min-height: 450px;">
         <div class="finish">
@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      <button class="button" ui-sref="app.dashboard">Back to dashboard</button>
+      <button class="button button-a" ui-sref="app.dashboard">Back to dashboard</button>
 
     </div>
 

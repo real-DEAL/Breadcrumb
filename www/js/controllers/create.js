@@ -75,7 +75,15 @@ angular.module('breadcrumb')
   $scope.difficulty = Data.difficulty();
 
   $scope.fillDifficulties = (index) => {
-    $scope.difficulty = Data.fillIcons('difficulty', index, { color: 'purple' });
+    let fill;
+    if (index === 0) {
+      fill = { color: '#3a7ec7' };
+    } else if (index === 1) {
+      fill = { color: '#db6a32' };
+    } else if (index === 2) {
+      fill = { color: '#a0030c' };
+    }
+    $scope.difficulty = Data.fillIcons('difficulty', index, fill);
     $scope.trail.difficulty = index + 1;
   };
 
@@ -200,9 +208,9 @@ angular.module('breadcrumb')
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
       $scope.trail.length = data.miles;
-      moveY($scope.trail, -100);
+      moveY($scope.trail, -120);
       $scope.crumbs.forEach((crumb) => {
-        moveY(crumb, -100);
+        moveY(crumb, -120);
       });
       $scope.review.style = Style.moveUp;
       $scope.review.check = true;

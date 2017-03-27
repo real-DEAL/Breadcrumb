@@ -25,7 +25,7 @@ angular.module('breadcrumb').factory('Style', function () {
 
   const moveReset = move => ({
     'transition-duration': '1000ms',
-    top: '0px',
+    top: '2.5%',
     left: move,
   });
 

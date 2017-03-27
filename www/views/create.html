@@ -20,7 +20,7 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content scroll="false">
+  <ion-content scroll="false" class="worldBackground">
     <!-- TRAIL INFO -->
     <div class="abs card" ng-style="trail.style" on-swipe-left="cardSwipedLeft(0)">
       <!-- TRAIL NAME -->
@@ -75,10 +75,10 @@
       </div>
 
       <div class="padding">
-        <button class="button button-block" ng-click="add()" ng-if="!crumbs.length">
+        <button class="button-a button button-block" ng-click="add()" ng-if="!crumbs.length">
           Create trail!
         </button>
-        <button class="button button-block" ng-click="move(-100)"
+        <button class="button-b button button-block" ng-click="move(-100)"
         ng-if="crumbs.length">
           Next crumb
         </button>
@@ -97,7 +97,7 @@
 
         <!-- NAME -->
         <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }} name" ng-if="media">
-        <i class="assertive icon ion-trash-b s-1x" ng-click="remove($index)"></i>
+        <i class="icon ion-trash-b s-1x" ng-click="remove($index)" style="color: #a0030c"></i>
       </div>
 
       <div ng-if="!media">
@@ -110,14 +110,14 @@
 
         <!-- DESCRIPTION -->
         <div class="item item-icon-right textbox">
-          <i class="energized icon ion-information-circled" ng-click="toggleInfo('description')"></i>
+          <i class="icon ion-information-circled" ng-click="toggleInfo('description')" style="color: #73aa95"></i>
           <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
         </div>
 
 
         <!-- LOCATION -->
         <div class="item item-icon-right textbox">
-          <i class="positive icon ion-navigate" ng-click="test()"></i>
+          <i class="icon ion-navigate" ng-click="test()" style="color: #3a7ec7"></i>
           <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
         </div>
 
@@ -129,16 +129,16 @@
         <!-- BUTTONS -->
         <div class="row" ng-if="!media">
           <div class="col">
-            <button class="button button-block" ng-click="move(100)">
+            <button class="button button-b button-block" ng-click="move(100)">
               Prev crumb
             </button>
           </div>
           <div class="col">
-            <button class="button button-block" ng-click="move(-100)"
+            <button class="button button-b button-block" ng-click="move(-100)"
             ng-if="crumbs.length > $index + 1">
               Next crumb
             </button>
-            <button class="button button-block button-energized" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
+            <button class="button button-a button-block" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
               Add crumb!
             </button>
           </div>
@@ -151,7 +151,7 @@
 
         <!-- CRUMB TEXT -->
         <div class="item item-icon-right textbox">
-          <i class="positive icon ion-information-circled" ng-click="toggleInfo('rewardText')"></i>
+          <i class="icon ion-information-circled" ng-click="toggleInfo('rewardText')" style="color: #73aa95"></i>
           <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
         </div>
 
@@ -213,18 +213,26 @@
     </div>
   </ion-content>
 
-  <div class="bar bar-footer" ng-click="reviewMap()" ng-if="crumbs.length > 1 && !review.check">
+  <div class="footer" ng-click="reviewMap()" ng-if="crumbs.length > 2 && !review.check">
     <div class="center">Review and submit</div>
   </div>
 
-  <div class="tabs tabs-icon-top" ng-if="review.check">
-    <a class="tab-item" ng-click="reset()">
-      <i class="icon ion-compose"></i>
-      Edit
-    </a>
-    <a class="tab-item" ng-click="submit()">
-      <i class="icon ion-checkmark-round"></i>
-      Submit
-    </a>
+  <div class="footer" ng-if="review.check">
+    <div class="row" style="width: 350px">
+      <div class="col col-25"></div>
+      <div class="col col-25 right">
+        <a class="tab-item" ng-click="reset()">
+          <i class="icon ion-compose egg-t"></i>
+          Edit
+        </a>
+      </div>
+      <div class="col col-25">
+        <a class="tab-item" ng-click="submit()">
+          <i class="icon ion-checkmark-round egg-t"></i>
+          Submit
+        </a>
+      </div>
+      <div class="col col-25"></div>
+    </div>
   </div>
 </ion-view>

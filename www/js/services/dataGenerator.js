@@ -102,7 +102,7 @@ angular.module('breadcrumb').factory('Data', function () {
     const base = dataTypes[type]();
     const data = {};
     if (!fill) {
-      fill = { color: 'gold' };
+      fill = { color: '#db6a32' };
     }
     _.each(base, (val, key) => {
       data[key] = base[key];
