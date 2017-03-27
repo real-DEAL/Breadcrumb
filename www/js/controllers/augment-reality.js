@@ -1,4 +1,4 @@
-let $ = window.$
+const $ = window.$;
 angular.module('breadcrumb')
 .controller('AugRealCtrl', function ($scope, Geofence, $ionicLoading, AugRealFact) {
   let watchAccelerometerID = null;
@@ -34,6 +34,8 @@ angular.module('breadcrumb')
         ezar.getBackCamera().start();
         startAccelerometer();
         startCompass();
+        $('#spot').css('display', 'block');
+        // $('#comment').css('display', 'block');
       }, (err) => {
         console.error(`unable to init ezar: ${err}`);
       });
@@ -43,8 +45,8 @@ angular.module('breadcrumb')
     ezar.getBackCamera().stop();
     stopAccelerometer();
     stopCompass();
-    $('#spot').empty().remove();
-    $('commentRender').html('<br><div id="spot"></div>');
+    $('#spot').css('display', 'none');
+    // $('#comment').css('display', 'none');
   };
   $scope.displayComment = (comment) => {
     $ionicLoading.show({

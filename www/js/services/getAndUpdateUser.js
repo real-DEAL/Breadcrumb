@@ -1,6 +1,6 @@
 angular.module('breadcrumb')
 .factory('getUpdateUserFact', function ($http, $state, store) {
-  return (socialID, userInfo) => {
+  return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
       url: 'http://54.203.104.113/users',
@@ -11,6 +11,19 @@ angular.module('breadcrumb')
     })
     .then((response) => {
       const data = response.data.data[0];
+      if (deleteAcct) {
+        const user = store.get('user');
+        return $http({
+          method: 'DELETE',
+          url: `http://54.203.104.113/users/${user.id}`,
+          json: true,
+        })
+        .then(() => {
+          store.remove('profile');
+          store.remove('user');
+          $state.go('settings');
+        });
+      }
       userInfo.social_login = socialID;
       userInfo.password = socialID;
 
@@ -44,6 +57,7 @@ angular.module('breadcrumb')
       })
       .then((res) => {
         store.set('user', res.data.data[0]);
+        store.remove('email');
         $state.go('app.dashboard');
       })
       .catch((error) => {
@@ -51,7 +65,7 @@ angular.module('breadcrumb')
       });
     })
     .catch((error) => {
-      console.error(error);
+      console.error(error.data.error);
     });
   };
 });
