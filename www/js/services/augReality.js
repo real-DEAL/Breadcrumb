@@ -1,6 +1,7 @@
 // let $ = window.$;
 
 angular.module('breadcrumb').factory('AugRealFact', function () {
+  // TODO: replace with data from database
   const messages = [
     { username: 'broHeim', text: 'sup bro', bearing: 130 },
     { username: 'fuckingButtMunch', text: 'hey man', bearing: 39 },

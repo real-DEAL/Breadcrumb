@@ -25,3 +25,4 @@ app/components
 .io-config.json
 notes.js
 www/views/test.html
+www/views/camera-testView.html
