@@ -32,8 +32,6 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
     restrict: 'A',
     scope: {
       location: '=?bind',
-      // center: '=',
-      // geofence: '=',
     },
     link: ($scope, element) => {
       $scope.search = {};

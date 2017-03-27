@@ -503,6 +503,7 @@ angular.module('breadcrumb')
     // change the location which speaks to the input box in view
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
+
     // $scope.updateMap();
 
     console.warn($scope.location, 'change in marker');
