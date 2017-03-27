@@ -1,7 +1,3 @@
-/*ion-content {
-  background: #3a7ec7;
-}*/
-
 .menu .scroll-content {
   background-color: #3a7ec7;
   background-image: url('../img/swirl.gif');
@@ -90,29 +86,13 @@
 }
 
 .footer {
-  color: #e2c7a2;
   position: absolute;
   bottom: 0;
   height: 75px;
-<<<<<<< HEAD
   width: 100%;
+  color: #e2c7a2;
+  text-align: center;
   text-shadow: 0 1px 5px #222222;
   font-size: 2em;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-=======
-  /*background-color: #3a7ec7;*/
-  color: #fab1a0;
-  text-align: center;
-  text-shadow: 2px 2px 2px #222222;
-  font-size: 2em;
-  font-weight: bold;
-  background: #3a7ec7;
-  background: -webkit-linear-gradient(left top, #3a7ec7, #4d92db); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #3a7ec7, #4d92db); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #3a7ec7, #4d92db); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #3a7ec7, #4d92db); /* Standard syntax */
->>>>>>> (feature) add user id to trail upon creation
 }
