@@ -28,6 +28,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       url: link,
     })
     .then((response) => {
+      console.log(response);
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;

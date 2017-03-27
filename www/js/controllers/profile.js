@@ -1,7 +1,9 @@
 /* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
 
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($scope, ListFact, UserFact, Data, store) {
+.controller('ProfileCtrl', function ($scope, ListFact, UserFact, Data, Style, store) {
+  $scope.loading = null;
+
   $scope.user = store.get('user');
 
   const populateUserTrails = () => {
@@ -20,6 +22,7 @@ angular.module('breadcrumb')
       $scope.pastTrails.push(trails[0]);
       $scope.pastTrails.push(trails[1]);
       $scope.pastTrails.push(trails[2]);
+      $scope.loading = Style.displayNone;
     });
   };
 

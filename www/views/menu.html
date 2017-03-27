@@ -8,24 +8,23 @@
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu side="left" width="200" class="eggshell-b">
+  <ion-side-menu side="left" width="200" class="">
     <header class="bar bar-header" menu-toggle="left">
       <h1 class="title">{{ user }}</h1>
     </header>
-    <ion-content class="has-header eggshell-b">
+    <ion-content class="has-header">
       <ion-list>
         <ion-item
           ng-repeat="link in links"
           nav-clear
           menu-close
-          class="mint-t mint-l"
+          class="menu-item"
           ui-sref="{{ link.link }}"
         >
           <i class="{{ link.icon }} margin-h"></i> {{ link.name }}
         </ion-item>
-        <ion-item nav-clear menu-close class="mint-t mint-l" ng-click="logout()">
-          <i class="ion-log-out margin-h"></i>
-          Log out
+        <ion-item nav-clear menu-close class="menu-item" ui-sref="#" ng-click="logout()">
+          <i class="ion-log-out margin-h"></i> Log out
         </ion-item>
       </ion-list>
     </ion-content>

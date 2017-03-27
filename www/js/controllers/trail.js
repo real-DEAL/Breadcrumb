@@ -24,6 +24,7 @@ angular.module('breadcrumb')
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
   $scope.startTrail = () => {
+    $scope.loading = null;
     ListFact.get('id').then((trails) => {
       $scope.trail = trails[0];
       $scope.crumbs = trails[0].crumb;

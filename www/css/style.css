@@ -1,4 +1,10 @@
-/* Empty. Add your own CSS if you like */
+body {
+  color: #3f3f3f;
+}
+
+i {
+  color: #573d38;
+}
 
 @keyframes moveUp {
     0%   {transform: translate(0px, 0px)}
@@ -362,8 +368,9 @@ input {
 
 .blueGradient {
   background: #3a7ec7;
-  background: -webkit-linear-gradient(left top, #3a7ec7, #c8f0ef); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(bottom right, #3a7ec7, #c8f0ef); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(bottom right, #3a7ec7, #c8f0ef); /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to bottom right, #3a7ec7, #c8f0ef); /* Standard syntax */
+  background: -webkit-linear-gradient(#3a7ec7, #c8f0ef); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#3a7ec7, #c8f0ef); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#3a7ec7, #c8f0ef); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#3a7ec7, #c8f0ef); /* Standard syntax */
+  background: #3a7ec7 url('../img/static-world.png') no-repeat bottom center;
 }

@@ -63,9 +63,9 @@ angular.module('breadcrumb')
 
   $scope.trails = null;
 
-  $scope.refresh = () => {
+  $scope.refresh = (params) => {
     $scope.loading = null;
-    $scope.trailsCache = ListFact.get().then((trails) => {
+    $scope.trailsCache = ListFact.get(params).then((trails) => {
       $scope.trails = ListFact.filter(trails, 'name');
       $scope.loading = Style.displayNone;
       $scope.trailsCache = ListFact.filter(trails, 'name');
@@ -104,11 +104,11 @@ angular.module('breadcrumb')
     if (request.difficulty !== 'Any') {
       request.difficulty += 1;
     }
-    ListFact.get(request);
+    $state.go('app.dashboard');
+    $scope.refresh(request);
     $scope.rating = Data.rating();
     $scope.difficulty = Data.difficulty();
     $scope.transport = Data.transport();
     $scope.search = Data.searchRequest();
-    $state.go('app.dashboard');
   };
 });
