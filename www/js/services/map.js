@@ -33,12 +33,13 @@ angular.module('breadcrumb').factory('Map', function () {
     const wypts = directions.slice(1, directions.length - 2);
     wypts.forEach((point) => {
       const obj = {
-        location: '',
+        location: new google.maps.LatLng(point.latitude, point.longitude),
         stopover: true,
       };
-      obj.location = point.address;
+      // obj.location = point.address;
       arr.push(obj);
     });
+
     return arr;
   };
 
@@ -46,31 +47,10 @@ angular.module('breadcrumb').factory('Map', function () {
     console.warn(directions, 'the directions added from Add()')
     let obj = {};
     const end = directions.length - 2;
-    // const a = new google.maps.LatLng(directions[0].latitude, directions[0].longitude);
-    // const a = new google.maps.LatLng(29.949840396909128, -100.0719690322876);
-    const a = 'Chicago, IL';
-    const b = 'Los Angeles, CA';
-    // const a = {lat: 29.949840396909128, lng: -90.0719690322876};
-    // const b = new google.maps.LatLng(directions[end].latitude, directions[end].longitude);
-    // const b = new google.maps.LatLng(29.94757211353841, -90.0794792175293);
-
-    // const b = {lat: 29.94757211353841, lng: -90.0794792175293};
-    // console.warn(a, b, 'a,b', directions[0], 'whats wrong with the directions');
-
-    // _.C {}lat: ()lng: ()__proto__: Object
     const request = {
-      // origin: new google.maps.LatLng(29.951065, -90.071533),
-      // destination: new google.maps.LatLng(40.730610, -73.935242),
       origin: new google.maps.LatLng(directions[0].latitude, directions[0].longitude),
-      destination: new google.maps.LatLng(directions[directions.length - 2].latitude, directions[directions.length - 2].longitude),
-      // origin: directions[0].address,
-//       origin: new google.maps.LatLng(
-// 29.949840396909128, -90.0719690322876),
-// destination: new google.maps.LatLng(
-// 29.94757211353841, -90.0794792175293),
-      // waypoints: wayPointsMakers(directions),
-      // destination: directions[directions.length - 2].address,
-      // destination: new google.maps.LatLng(51.2244, -13.12221),
+      destination: new google.maps.LatLng(directions[end].latitude, directions[end].longitude),
+      waypoints: wayPointsMakers(directions),
       travelMode: google.maps.DirectionsTravelMode.DRIVING,
     };
     console.warn(request, 'request')

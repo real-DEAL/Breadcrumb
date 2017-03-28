@@ -131,10 +131,11 @@
           <!-- LOCATION -->
           <div class="item item-icon-right textbox">
             <i class="positive icon ion-navigate" ng-click="test()"></i>
-            <!-- TODO -->
-            <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
-            <!-- <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-bind="location" ng-model="location.formatted_address"> -->
+            <!-- <input class="col" type="text" placeholder="Location" location-suggestion location="location" lat="{{markers.marker.lng}}" lng="{{markers.marker.lng}}" ng-model="location.formatted_address"> -->
             <!-- <input type="text" gm-places-autocomplete id="autocomplete" ng-model="autocomplete.autocomplete" style="width: 300px;"/> -->
+            <input type="text" gm-places-autocomplete id="autocomplete" style="width: 300px;"/>
+            <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
+
           </div>
 
 

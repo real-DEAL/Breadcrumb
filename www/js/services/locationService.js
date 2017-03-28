@@ -31,7 +31,7 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
   return {
     restrict: 'A',
     scope: {
-      location: '=?bind',
+      location: '=',
     },
     link: ($scope, element) => {
       $scope.search = {};
@@ -69,6 +69,25 @@ bread.directive('locationSuggestion', function ($ionicModal, LocationService) {
           });
         };
       });
+      // scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+      //   const geocoder = new google.maps.Geocoder();
+      //   const latlng = new google.maps.LatLng(attrs.lat, attrs.lng);
+      //   geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+      //     if (status === google.maps.GeocoderStatus.OK) {
+      //       if (results[1]) {
+      //         const markerAddress = results[1].formatted_address;
+      //         scope.location = markerAddress;
+      //         $scope.location = markerAddress;
+      //         scope.place = markerAddress;
+      //         console.warn('Geocode is being emitted');
+      //       } else {
+      //         element.text('Location not found');
+      //       }
+      //     } else {
+      //       element.text(`Geocoder failed due to: ${status}`);
+      //     }
+      //   });
+      // });
     },
   };
 });
