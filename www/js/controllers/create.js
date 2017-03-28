@@ -77,13 +77,6 @@ angular.module('breadcrumb')
     lng: -90.0715,
   };
 
-
-  $scope.$on('transferUpCtrl', (event, data) => {
-    $scope.location = data.coords;
-    console.warn('Geocode is being transfered up');
-  })
-
-
   $scope.obj = {};
 
   // DIFFICULTIES
@@ -493,14 +486,8 @@ angular.module('breadcrumb')
   });
 
   $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
-    console.warn(event, 'event');
-    console.warn(args, 'args');
-    // now make this new args populate the input value !!!!
     const map = args.leafletEvent.target;
-    // const center = (map.getCenter());
     const center = map.getLatLng();
-    // console.log(map.panTo(center), 'going to pan to the center ')
-    // change the center based on where you placed the marker
     $scope.center.lat = center.lat; // this currently doesn't work
     $scope.center.lng = center.lng;
     // change the location which speaks to the input box in view
@@ -509,8 +496,25 @@ angular.module('breadcrumb')
     // $scope.updateMap();
     console.warn($scope.location, '$scope.location updated');
     console.warn($scope.markers.marker, '$scope.markers.marker updated');
-    // LocationShared.data = markers.marker;
   });
+
+
+    // $scope.$on('transferUp', (event, data) => {
+    //   $scope.location.lat = data.coords.geometry.location.lat();
+    //   $scope.location.lng = data.coords.geometry.location.lng();
+    //   console.warn('on working', $scope.location, data);
+    //   $scope.$watch('location', () => {
+    //     $scope.updateMap();
+    //   }, true);
+    // });
+
+    $scope.$on('transferUpCtrl', (event, data) => {
+      $scope.location = data.coords;
+      console.warn('Geocode is being transfered up');
+    })
+
+  // TODO: when autocomplete updates, get its coordinates and use
+  // it to also update the marker on the map
 
   // $scope.$broadcast('geocodeToAddress', {
   //   lat: $scope.center.lat,
@@ -543,61 +547,43 @@ angular.module('breadcrumb')
     },
 
   };
-  $scope.place = '';
+  $scope.place = {
+    address: '',
+  };
+
+  $scope.updateCoords = function() {
+    if ($scope.place.address.length >= 10 ) {
+      //go through geocode
+      const geocoder = new google.maps.Geocoder();
+      console.warn($scope.place.address, 'the address')
+      geocoder.geocode({ 'address': $scope.place.address }, function (results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              if (results) {
+                  console.warn('Getting geocode lng', results[0].geometry.location.lat())
+                  $scope.markers.marker.lat = results[0].geometry.location.lat();
+                  $scope.markers.marker.lng = results[0].geometry.location.lng();
+                  console.warn('markers lat get updated', $scope.markers.marker.lat)
+
+              } else {
+                  console.warn('Location not found');
+              }
+          } else {
+              console.warn('Geocoder failed due to: ' + status);
+          }
+      });
+    }
+  };
+  // // when input box is filled
+  // if (document.getElementById('place') !== null) {
+  //   $scope.place.address = document.getElementById('place').value;
+  // }
+
+
   $scope.$watch('place', (event) => {
     $scope.location.formatted_address = event;
-  })
+    console.warn($scope.place, 'place address is being $watched')
 
-  // $scope.lat = undefined;
-  // $scope.lng = undefined;
-  // // $scope.autocomplete = {
-  // //   autocomplete: '',
-  // // };
-  // let autocomplete = '';
+  });
 
-  $scope.initAutocomplete = () => {
-      // Create the autocomplete object, restricting the search to geographical
-      // location types.
-    autocomplete = new google.maps.places.Autocomplete(
-          /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-          { types: ['geocode'] });
-      // When the user selects an address from the dropdown, populate the address
-      // fields in the form.
-    autocomplete.addListener('place_changed', $scope.fillInAddress);
-  };
 
-  $scope.fillInAddress = () => {
-    // Get the place details from the autocomplete object.
-    const place = autocomplete.getPlace();
-    console.warn(autocomplete, 'did it work?');
-    for (let component in componentForm) {
-      document.getElementById(component).value = '';
-      document.getElementById(component).disabled = false;
-    }
-
-    // Get each component of the address from the place details
-    // and fill the corresponding field on the form.
-    for (let i = 0; i < place.address_components.length; i++) {
-      const addressType = place.address_components[i].types[0];
-      if (componentForm[addressType]) {
-        var val = place.address_components[i][componentForm[addressType]];
-
-        document.getElementById(addressType).value = val;
-      }
-    }
-  };
-
-  // $scope.$on('gmPlacesAutocomplete::placeChanged', function () {
-  //   // cannot getPlace() of undefined
-  //   console.warn($scope.autocomplete, 'does ngmodel work')
-  //   const auto = $scope.autocomplete.gm_accessors_;
-  //
-  //   // const auto = $scope.autocomplete.gm_accessors_.place.Ac.formattedPrediction;
-  //   console.warn(auto, 'auto');
-  //   const location = auto.getPlace().geometry.location;
-  //   $scope.lat = location.lat();
-  //   $scope.lng = location.lng();
-  //   console.warn($scope.lat, 'lat');
-  //   $scope.$apply();
-  // });
 });
