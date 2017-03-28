@@ -1,7 +1,3 @@
-/* global UUIDjs */
-/* global TransitionType */
-/* global localStorage */
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('Data', function () {
   const iconArrayMaker = (num) => {
     const obj = {};
@@ -57,13 +53,12 @@ angular.module('breadcrumb').factory('Data', function () {
   const fillIcons = (type, value, fill) => {
     const base = dataTypes[type]();
     const data = {};
-    let val;
     if (!fill) {
       fill = { color: 'gold' };
     }
-    for (val in base) {
-      data[val] = base[val];
-    }
+    _.each(base, (val, key) => {
+      data[key] = base[key];
+    });
     if (type === 'transport') {
       data[value].style = fill;
     } else {

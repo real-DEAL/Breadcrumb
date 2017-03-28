@@ -1,5 +1,3 @@
-// Ionic Geofence example App
-
 angular.module('breadcrumb', [
   'ionic',
   'ionic.contrib.ui.tinderCards',

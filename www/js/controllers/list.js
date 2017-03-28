@@ -1,6 +1,3 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
-
 angular.module('breadcrumb')
 .controller('ListCtrl', function ($scope, $rootScope, $state, ListFact, Data, Style) {
   $scope.specificTransport = false;

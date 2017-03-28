@@ -1,6 +1,53 @@
 angular.module('breadcrumb')
 .factory('getUpdateUserFact', function ($http, $state, store) {
-  return (socialID, userInfo) => {
+  const putUserInfo = (userIf, userData) =>
+    $http({
+      method: 'PUT',
+      url: 'http://54.203.104.113/users',
+      data: userIf,
+      json: true,
+      params: {
+        id: userData.id,
+      },
+    })
+    .then((res) => {
+      store.set('user', res.data.data[0]);
+      $state.go('app.dashboard');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  const postUserInfo = userIf =>
+    $http({
+      method: 'POST',
+      url: 'http://54.203.104.113/users',
+      data: userIf,
+      json: true,
+    })
+    .then((res) => {
+      store.set('user', res.data.data[0]);
+      store.remove('email');
+      $state.go('app.dashboard');
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  const deleteUserInfo = userData =>
+    $http({
+      method: 'DELETE',
+      url: `http://54.203.104.113/users/${userData.id}`,
+      json: true,
+    })
+    .then(() => {
+      store.remove('profile');
+      store.remove('user');
+      $state.go('start');
+    });
+
+
+  return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
       url: 'http://54.203.104.113/users',
@@ -11,44 +58,19 @@ angular.module('breadcrumb')
     })
     .then((response) => {
       const data = response.data.data[0];
+      const pic = store.get('pic');
       userInfo.social_login = socialID;
       userInfo.password = socialID;
-
-      const pic = store.get('pic');
       if (pic) {
         userInfo.profile_picture = pic;
       }
-      if (data) {
-        return $http({
-          method: 'PUT',
-          url: 'http://54.203.104.113/users',
-          data: userInfo,
-          json: true,
-          params: {
-            id: data[0].id,
-          },
-        })
-        .then((res) => {
-          store.set('user', res.data.data[0]);
-          $state.go('app.dashboard');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+
+      if (deleteAcct) {
+        return deleteUserInfo(data);
+      } else if (data) {
+        return putUserInfo(userInfo, data);
       }
-      return $http({
-        method: 'POST',
-        url: 'http://54.203.104.113/users',
-        data: userInfo,
-        json: true,
-      })
-      .then((res) => {
-        store.set('user', res.data.data[0]);
-        $state.go('app.dashboard');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      return postUserInfo(userInfo);
     })
     .catch((error) => {
       console.error(error);

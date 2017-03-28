@@ -26,6 +26,7 @@ angular.module('breadcrumb')
         url: '/settings',
         templateUrl: 'views/settingsNoUser.html',
         controller: 'AuthCtrl',
+        cache: false,
       })
       .state('app', {
         url: '/app',
@@ -93,6 +94,7 @@ angular.module('breadcrumb')
             controller: 'AuthCtrl',
           },
         },
+        cache: false,
       });
 
     authProvider.init({

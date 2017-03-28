@@ -1,6 +1,3 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
-
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style) {
   const moveX = (crumb, num) => {

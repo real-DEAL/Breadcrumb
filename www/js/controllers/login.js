@@ -17,6 +17,7 @@ angular.module('breadcrumb')
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
       store.set('profile', profile.user_id);
+      store.set('email', profile.email);
       store.set('pic', profile.picture);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
@@ -26,6 +27,7 @@ angular.module('breadcrumb')
         json: true,
         params: {
           social_login: profile.user_id,
+          token: idToken,
         },
       })
       .then((response) => {

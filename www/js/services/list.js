@@ -1,4 +1,4 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
+const _ = window._;
 angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
   const closeStyle = {
     height: '95px',
@@ -22,13 +22,12 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
       link += `?id=${$rootScope.trailID}`;
     } else if (request) {
       link += '?';
-      let req;
-      for (req in request) {
-        if (req !== 'username' && request[req] !== null && request[req] !== 'Any') {
-          link += `${req}=${request[req]}&`;
+
+      _.each(request, (val, req) => {
+        if (req !== 'username' && val !== null && val !== 'Any') {
+          link += `${req}=${val}&`;
         }
-      }
-      console.log(link);
+      });
     }
     return $http({
       method: 'GET',

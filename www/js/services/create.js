@@ -1,9 +1,3 @@
-/* global UUIDjs */
-/* global TransitionType */
-/* global localStorage */
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-/* eslint camelcase: "off" */
-
 angular.module('breadcrumb').factory('Trail', function ($http) {
   const submitTrail = (trail, crumbs) => {
     const length = trail.length.replace(/\D/g, '');

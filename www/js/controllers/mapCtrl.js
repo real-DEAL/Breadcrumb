@@ -1,6 +1,3 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-/* global TransitionType */
-
 angular.module('breadcrumb')
   .controller('MapCtrl', function ($scope) {
     $scope.location = {
