@@ -521,21 +521,48 @@ angular.module('breadcrumb')
   //   };
   //   console.warn($scope.location, '$scope.location at the same time');
   // });
-
-  // TODO: this is supposed to update the center of the map
+  //
   // $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
   //   const map = args.leafletEvent.target;
-  //   const center = map.getLatLng();
-  //   $scope.center.lat = center.lat; // this currently doesn't work
+  //   const center = (map.panTo());
+  //   $scope.center.lat = center.lat;
   //   $scope.center.lng = center.lng;
-  //   // change the location which speaks to the input box in view
-  //   $scope.location.lat = center.lat;
-  //   $scope.location.lng = center.lng;
-  //   // $scope.updateMap();
-  //   console.warn($scope.location, '$scope.location updated');
-  //   console.warn($scope.markers.marker, '$scope.markers.marker updated');
+  //   console.warn('get new center', $scope.center);
   // });
+  // TODO: this currently updates the center of the map the first time, but not the 2nd
+  $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+    const map = args.leafletEvent.target;
+    const center = map.getLatLng();
+    $scope.center.lat = center.lat; // this currently doesn't work
+    $scope.center.lng = center.lng;
+    // change the location which speaks to the input box in view
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+    setInterval(() => {
+      $scope.updateMap();
+    })
+    console.warn($scope.location, '$scope.location updated');
+    console.warn($scope.markers.marker, '$scope.markers.marker updated');
+    //TODO: how to make it work continually and let angular know to update the center as well???
+    // i mean the scope is clearly changing in the updateCoords function, but it's just updating
+    //the view!!! -- i want to use the panTo function for that reason!!!
 
+  });
+
+  $scope.updateMap = () => {
+    $scope.center = {
+      lat: $scope.location.lat,
+      lng: $scope.location.lng,
+      zoom: 15,
+    };
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+        draggable: true,
+      },
+    };
+  };
 
   // TODO: when autocomplete updates, get its coordinates and use
   // it to also update the marker on the map
@@ -554,7 +581,7 @@ angular.module('breadcrumb')
   };
 
   $scope.updateCoords = () => {
-    if ($scope.place.address.length >= 10) {
+    if ($scope.place.address.length >= 15) {
       const geocoder = new google.maps.Geocoder();
       console.warn($scope.place.address, 'the address');
       geocoder.geocode({ address: $scope.place.address }, function (results, status) {
@@ -563,6 +590,18 @@ angular.module('breadcrumb')
             console.warn('Getting geocode lng', results[0].geometry.location.lat());
             $scope.markers.marker.lat = results[0].geometry.location.lat();
             $scope.markers.marker.lng = results[0].geometry.location.lng();
+            angular.extend($scope, {
+              center: {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng(),
+                zoom: 15,
+              },
+            });
+            $scope.center.lat = results[0].geometry.location.lat();
+            $scope.center.lng = results[0].geometry.location.lng();
+            // listen to marker changed or place_changed, then get event and panto
+            // window.L.panTo($scope.center);
+            console.warn('center lat get updated', $scope.center.lat);
             console.warn('markers lat get updated', $scope.markers.marker.lat);
             $scope.$apply();
           } else {
