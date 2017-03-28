@@ -3,11 +3,13 @@ angular.module('breadcrumb')
   const putUserInfo = (userIf, userData) =>
     $http({
       method: 'PUT',
-      url: 'http://54.203.104.113/users',
+      url: 'http://192.168.99.100:3000/users',
+      // url: 'http://54.203.104.113/users',
       data: userIf,
       json: true,
       params: {
         id: userData.id,
+        access_token: store.get('access_token'),
       },
     })
     .then((res) => {
@@ -21,7 +23,8 @@ angular.module('breadcrumb')
   const postUserInfo = userIf =>
     $http({
       method: 'POST',
-      url: 'http://54.203.104.113/users',
+      url: 'http://192.168.99.100:3000/users',
+      // url: 'http://54.203.104.113/users',
       data: userIf,
       json: true,
     })
@@ -37,7 +40,8 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
-      url: `http://54.203.104.113/users/${userData.id}`,
+      // url: `http://192.168.99.100:3000/users/${userData.id}?access_token=${store.get('access_token')}`,
+      url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
       json: true,
     })
     .then(() => {
@@ -50,7 +54,8 @@ angular.module('breadcrumb')
   return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
-      url: 'http://54.203.104.113/users',
+      // url: `http://54.203.104.113/users?access_token=${store.get('access_token')}`,
+      url: `http://192.168.99.100:3000/users?access_token=${store.get('access_token')}`,
       json: true,
       params: {
         social_login: socialID,
