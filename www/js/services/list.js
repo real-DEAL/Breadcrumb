@@ -10,8 +10,8 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    // let link = 'http://192.168.99.100/trails';
-    let link = 'http://54.203.104.113/trails';
+    let link = 'http://192.168.99.100:3000/trails';
+    // let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
       link += `?id=${$rootScope.trailID}`;
     } else if (request) {
@@ -26,6 +26,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     return $http({
       method: 'GET',
       url: link,
+
     })
     .then((response) => {
       console.log(response);
@@ -51,7 +52,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      url: `http://54.203.104.113/trails/${trail.id}`,
+      url: `http://54.203.104.113:3000/trails/${trail.id}`,
       // url: `http://192.168.99.100/trails/${trail.id}`,
     })
     .then(res => console.warn(res))
