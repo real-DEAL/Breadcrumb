@@ -1,6 +1,8 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact) {
   $scope.loading = null;
+
+  $scope.opacity = true;
 
   $scope.trailID = null;
 
@@ -14,7 +16,7 @@ angular.module('breadcrumb')
   };
 
   $scope.bubbles = {
-    top: '320px',
+    top: '375px',
   };
 
   $scope.crumb = 0;
@@ -59,12 +61,12 @@ angular.module('breadcrumb')
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '320px' };
+          $scope.bubbles = { top: '375px' };
           $scope.page.finish = true;
         } else {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '320px' };
+          $scope.bubbles = { top: '375px' };
           $scope.page.description = true;
         }
         break;
@@ -74,9 +76,13 @@ angular.module('breadcrumb')
 
   $scope.startAR = () => {
     AugRealFact.startAR();
+    $scope.media('ar');
+    $scope.opacity = false;
   };
 
   $scope.stopAR = () => {
+    $scope.media('show');
+    $scope.opacity = true;
     AugRealFact.stopAR();
   };
 
@@ -98,11 +104,8 @@ angular.module('breadcrumb')
   };
 
   $scope.media = (type) => {
-    if (type === 'ar') {
-      $scope.startAR();
-    }
     $scope.bubbles = {
-      top: '0px',
+      top: '50px',
     };
     $scope.page.media = {
       show: true,
