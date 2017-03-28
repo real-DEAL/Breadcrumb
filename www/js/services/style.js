@@ -95,6 +95,10 @@ angular.module('breadcrumb').factory('Style', function () {
     overflow: 'scroll',
   };
 
+  const bubbleUp = { top: '75px' };
+
+  const bubbleDown = { top: '400px' };
+
   return {
     theme,
     activeTrail,
@@ -108,5 +112,7 @@ angular.module('breadcrumb').factory('Style', function () {
     activeTransport,
     activeMoney,
     overflowStyle,
+    bubbleUp,
+    bubbleDown,
   };
 });

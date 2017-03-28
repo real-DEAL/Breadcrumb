@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ion-view>
+<ion-view style="{background: 'transparent'}">
   <div class="loading" ng-style="loading"></div>
 
   <ion-nav-buttons side="left">
@@ -10,7 +10,7 @@
   </ion-nav-buttons>
 
   <div ng-if="page.media.ar">
-    <div id="commentRender" class="card" ng-style="{background: 'transparent'}">
+    <div id="commentRender">
       <br><div id="spot"></div>
     </div>
     <div class="footer" ng-click="stopAR()">Exit</div>
@@ -19,10 +19,10 @@
   <ion-content ng-style="theme.static" ng-if="opacity">
 
     <!-- CRUMB EXPLANATION -->
-    <div ng-if="page.description" class="padding">
+    <div ng-if="page.description" class="padding margin-top-big">
 
       <!-- TRAIL NAME -->
-      <h1 class="t-center">{{ trail.name }}</h1>
+      <h1 class="t-center egg-t">{{ trail.name }}</h1>
 
       <div class="card t-center">
         <!-- CRUMB NUMBER -->
@@ -53,7 +53,7 @@
 
 
     <!-- DISCOVERY -->
-    <div ng-if="page.found" class="margin-top" style="margin-top: 50px">
+    <div ng-if="page.found" class="margin-top-big">
 
       <div class="card light-b t-center" style="min-height: 450px;">
 

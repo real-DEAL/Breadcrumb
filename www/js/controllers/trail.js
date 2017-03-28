@@ -15,9 +15,7 @@ angular.module('breadcrumb')
     finish: false,
   };
 
-  $scope.bubbles = {
-    top: '375px',
-  };
+  $scope.bubbles = Style.bubbleDown;
 
   $scope.crumb = 0;
 
@@ -61,12 +59,12 @@ angular.module('breadcrumb')
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '375px' };
+          $scope.bubbles = Style.bubbleDown;
           $scope.page.finish = true;
         } else {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '375px' };
+          $scope.bubbles = Style.bubbleDown;
           $scope.page.description = true;
         }
         break;
@@ -104,9 +102,7 @@ angular.module('breadcrumb')
   };
 
   $scope.media = (type) => {
-    $scope.bubbles = {
-      top: '50px',
-    };
+    $scope.bubbles = Style.bubbleUp;
     $scope.page.media = {
       show: true,
       image: false,
