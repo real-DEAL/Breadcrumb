@@ -29,8 +29,7 @@ angular.module('breadcrumb')
       json: true,
     })
     .then((res) => {
-      console.log(res)
-      store.set('access_token', res.data.data[0].access_token)
+      store.set('access_token', res.data.data[0].access_token);
       store.set('user', res.data.data[0]);
       store.remove('email');
       $state.go('app.dashboard');

@@ -31,10 +31,8 @@ angular.module('breadcrumb')
         },
       })
       .then((response) => {
-        console.log(response);
         const data = response.data.data[0];
         if (data) {
-          console.log('userid',profile.user_id)
           data.grant_type = 'password';
           data.username = data.username;
           data.social_login = profile.user_id;
