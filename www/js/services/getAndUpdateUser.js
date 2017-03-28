@@ -9,6 +9,7 @@ angular.module('breadcrumb')
       json: true,
       params: {
         id: userData.id,
+        access_token: store.get('access_token'),
       },
     })
     .then((res) => {
@@ -39,8 +40,8 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
-      // url: 'http://192.168.99.100:3000/users/${userData.id}',
-      url: `http://54.203.104.113/users/${userData.id}`,
+      // url: `http://192.168.99.100:3000/users/${userData.id}?access_token=${store.get('access_token')}`,
+      url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
       json: true,
     })
     .then(() => {
@@ -53,8 +54,8 @@ angular.module('breadcrumb')
   return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
-      // url: 'http://54.203.104.113/users',
-      url: 'http://192.168.99.100:3000/users',
+      // url: `http://54.203.104.113/users?access_token=${store.get('access_token')}`,
+      url: `http://192.168.99.100:3000/users?access_token=${store.get('access_token')}`,
       json: true,
       params: {
         social_login: socialID,
@@ -68,7 +69,6 @@ angular.module('breadcrumb')
       if (pic) {
         userInfo.profile_picture = pic;
       }
-<<<<<<< HEAD
 
       if (deleteAcct) {
         return deleteUserInfo(data);
@@ -76,41 +76,6 @@ angular.module('breadcrumb')
         return putUserInfo(userInfo, data);
       }
       return postUserInfo(userInfo);
-=======
-      if (data) {
-        return $http({
-          method: 'PUT',
-          // url: 'http://54.203.104.113/users',
-          url: 'http://192.168.99.100:3000/users',
-          data: userInfo,
-          json: true,
-          params: {
-            id: data[0].id,
-          },
-        })
-        .then((res) => {
-          store.set('user', res.data.data[0]);
-          $state.go('app.dashboard');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      }
-      return $http({
-        method: 'POST',
-        // url: 'http://54.203.104.113/users',
-        url: 'http://192.168.99.100:3000/users',
-        data: userInfo,
-        json: true,
-      })
-      .then((res) => {
-        store.set('user', res.data.data[0]);
-        $state.go('app.dashboard');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
->>>>>>> (feature) alter routes to receive new auth Tokens from api server
     })
     .catch((error) => {
       console.error(error);
