@@ -1,6 +1,29 @@
 angular.module('breadcrumb').factory('Style', function () {
   const displayNone = { display: 'none' };
 
+  const themes = [
+    {
+      style: {
+        'background-image': 'linear-gradient(#3a7ec7, #c8f0ef)',
+      },
+      background: '../img/big-mountains.png',
+    },
+    {
+      style: {
+        'background-image': 'linear-gradient(#c8f0ef, #3a7ec7)',
+      },
+      background: '../img/big-houses.png',
+    },
+    {
+      style: {
+        'background-image': 'linear-gradient(#3f3f3f, #3a7ec7)',
+      },
+      background: '../img/big-city.png',
+    },
+  ];
+
+  const theme = () => themes[Math.floor(Math.random() * themes.length)];
+
   const activeTrail = {
     height: '375px',
     overflow: 'hidden',
@@ -55,6 +78,7 @@ angular.module('breadcrumb').factory('Style', function () {
   };
 
   return {
+    theme,
     activeTrail,
     inactiveTrail,
     displayNone,
