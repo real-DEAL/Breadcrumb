@@ -1,5 +1,6 @@
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
+
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
 
@@ -497,48 +498,48 @@ angular.module('breadcrumb')
     console.warn($scope.location, '$scope.location updated');
     console.warn($scope.markers.marker, '$scope.markers.marker updated');
   });
+  }
+
+  // this updates map when location from autocomplete changes $watch
+  // ==========================================================================
 
 
-    // $scope.$on('transferUp', (event, data) => {
-    //   $scope.location.lat = data.coords.geometry.location.lat();
-    //   $scope.location.lng = data.coords.geometry.location.lng();
-    //   console.warn('on working', $scope.location, data);
-    //   $scope.$watch('location', () => {
-    //     $scope.updateMap();
-    //   }, true);
-    // });
+  // $scope.$on('leafletDirectiveMap.move', (event, args) => {
+  //   // Get the Leaflet map from the triggered event.
+  //   const map = args.leafletEvent.target;
+  //   const center = (map.getCenter());
+  //   $scope.center.lat = center.lat;
+  //   $scope.center.lng = center.lng;
+  //   $scope.location.lat = center.lat;
+  //   $scope.location.lng = center.lng;
+  //   // $scope.updateMap();
+  //   $scope.markers = {
+  //     marker: {
+  //       lat: $scope.center.lat,
+  //       lng: $scope.center.lng,
+  //     },
+  //   };
+  //   console.warn($scope.location, '$scope.location at the same time');
+  // });
 
-    $scope.$on('transferUpCtrl', (event, data) => {
-      $scope.location = data.coords;
-      console.warn('Geocode is being transfered up');
-    })
+  // TODO: this is supposed to update the center of the map
+  // $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+  //   const map = args.leafletEvent.target;
+  //   const center = map.getLatLng();
+  //   $scope.center.lat = center.lat; // this currently doesn't work
+  //   $scope.center.lng = center.lng;
+  //   // change the location which speaks to the input box in view
+  //   $scope.location.lat = center.lat;
+  //   $scope.location.lng = center.lng;
+  //   // $scope.updateMap();
+  //   console.warn($scope.location, '$scope.location updated');
+  //   console.warn($scope.markers.marker, '$scope.markers.marker updated');
+  // });
+
 
   // TODO: when autocomplete updates, get its coordinates and use
   // it to also update the marker on the map
 
-  // $scope.$broadcast('geocodeToAddress', {
-  //   lat: $scope.center.lat,
-  //   lng: $scope.center.lng,
-  // });
-  // $rootScope.$on('rootScope:broadcast', function (event, data) {
-  //   lat: $scope.center.lat,
-  //   lng: $scope.center.lng,
-  //   console.warn(data); // 'Broadcast!'
-  // });
-
-  // when the marker changes, make sure that it populates the input box
-  // firing an event downwards
-
-
-  // $scope.markers = [];
-  // $scope.$on('leafletDirectiveMap.click', (event, args) => {
-  //   const leafEvent = args.leafletEvent;
-  //   $scope.markers.push({
-  //     lat: leafEvent.latlng.lat,
-  //     lng: leafEvent.latlng.lng,
-  //     draggable: true,
-  //   });
-  // });
 
   $scope.tiles = {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
@@ -547,43 +548,30 @@ angular.module('breadcrumb')
     },
 
   };
+
   $scope.place = {
     address: '',
   };
 
-  $scope.updateCoords = function() {
-    if ($scope.place.address.length >= 10 ) {
-      //go through geocode
+  $scope.updateCoords = () => {
+    if ($scope.place.address.length >= 10) {
       const geocoder = new google.maps.Geocoder();
-      console.warn($scope.place.address, 'the address')
-      geocoder.geocode({ 'address': $scope.place.address }, function (results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-              if (results) {
-                  console.warn('Getting geocode lng', results[0].geometry.location.lat())
-                  $scope.markers.marker.lat = results[0].geometry.location.lat();
-                  $scope.markers.marker.lng = results[0].geometry.location.lng();
-                  console.warn('markers lat get updated', $scope.markers.marker.lat)
-
-              } else {
-                  console.warn('Location not found');
-              }
+      console.warn($scope.place.address, 'the address');
+      geocoder.geocode({ address: $scope.place.address }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results) {
+            console.warn('Getting geocode lng', results[0].geometry.location.lat());
+            $scope.markers.marker.lat = results[0].geometry.location.lat();
+            $scope.markers.marker.lng = results[0].geometry.location.lng();
+            console.warn('markers lat get updated', $scope.markers.marker.lat);
           } else {
-              console.warn('Geocoder failed due to: ' + status);
+            console.warn('Location not found');
           }
+        } else {
+          console.warn(`Geocoder failed due to: ${status}`);
+        }
       });
     }
   };
-  // // when input box is filled
-  // if (document.getElementById('place') !== null) {
-  //   $scope.place.address = document.getElementById('place').value;
-  // }
-
-
-  // $scope.$watch('place', (event) => {
-  //   $scope.location.formatted_address = event;
-  //   console.warn($scope.place, 'place address is being $watched')
-  //
-  // });
-
 
 });
