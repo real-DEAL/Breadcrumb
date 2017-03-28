@@ -78,10 +78,10 @@ angular.module('breadcrumb', [
       }
     });
 
-    if (store.get('token') && store.get('user')) {
-      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
-      $state.go('app.dashboard');
-    }
+    // if (store.get('token') && store.get('user')) {
+    //   auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+    //   $state.go('app.dashboard');
+    // }
   });
 })
 
