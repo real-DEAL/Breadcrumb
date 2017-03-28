@@ -21,7 +21,6 @@ angular.module('breadcrumb')
       store.set('pic', profile.picture);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
-      console.log('profile',profile);
       $http({
         method: 'GET',
         // url: 'http://54.203.104.113/users',
