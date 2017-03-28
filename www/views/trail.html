@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ion-view >
+<ion-view>
   <div class="loading" ng-style="loading"></div>
 
   <ion-nav-buttons side="left">
@@ -9,7 +9,14 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content ng-style="theme.static">
+  <div ng-if="page.media.ar">
+    <div id="commentRender" class="card" ng-style="{background: 'transparent'}">
+      <br><div id="spot"></div>
+    </div>
+    <div class="footer" ng-click="stopAR()">Exit</div>
+  </div>
+
+  <ion-content ng-style="theme.static" ng-if="opacity">
 
     <!-- CRUMB EXPLANATION -->
     <div ng-if="page.description" class="padding">
@@ -46,7 +53,7 @@
 
 
     <!-- DISCOVERY -->
-    <div ng-if="page.found" class="margin-top">
+    <div ng-if="page.found" class="margin-top" style="margin-top: 50px">
 
       <div class="card light-b t-center" style="min-height: 450px;">
 
@@ -55,7 +62,7 @@
           <div class="mint-b bubble float float27 inline" ng-if="crumbs[crumb].text" ng-click="media('text')">
             <i class="light-t center-v ion-document-text"></i>
           </div>
-          <div class="maroon-b bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="media('ar')">
+          <div class="maroon-b bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="startAR()">
             <i class="light-t center-v ion-load-b center"></i>
           </div>
           <div class="cream-b bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
@@ -96,9 +103,6 @@
             <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
           </div>
           <div ng-if="page.media.ar">
-            <div id="commentRender" class="card" ng-style="{background: 'transparent'}">
-              <br><div id="spot"></div>
-            </div>
           </div>
         </div>
 
