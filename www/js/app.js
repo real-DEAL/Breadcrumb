@@ -86,7 +86,6 @@ angular.module('breadcrumb', [
     // }
   });
 })
-<<<<<<< HEAD
 .controller('AppCtrl', function (
   $scope,
   $rootScope,
@@ -97,10 +96,6 @@ angular.module('breadcrumb', [
   Style,
   $http
 ) {
-=======
-.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style, $http) {
-  $scope.links = Data.menu;
->>>>>>> (feature) begin implimenting color scheme, coloring app
   $scope.logout = () => {
     const user = store.get('user');
     $http({
