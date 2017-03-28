@@ -27,6 +27,7 @@ angular.module('breadcrumb')
         json: true,
         params: {
           social_login: profile.user_id,
+          token: idToken,
         },
       })
       .then((response) => {
