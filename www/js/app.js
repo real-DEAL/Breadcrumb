@@ -20,9 +20,6 @@ angular.module('breadcrumb', [
 ) {
   $ionicPlatform.ready(function () {
     $rootScope.pinged = false;
-    // $log.log('Ionic ready');
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -63,10 +60,6 @@ angular.module('breadcrumb', [
             noBackdrop: true,
             duration: 2000,
           });
-
-          // $state.go('geofence', {
-          //   geofenceId: notificationData.id,
-          // });
         });
       }
     };

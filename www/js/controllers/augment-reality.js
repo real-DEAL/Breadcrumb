@@ -12,7 +12,8 @@ angular.module('breadcrumb')
   };
   const stopAccelerometer = () => {
     if (watchAccelerometerID) {
-      navigator.accelerometer.clearWatch(watchAccelerometerID);
+      const accel = navigator.accelerometer.clearWatch(watchAccelerometerID);
+      accel.then(() => console.warn('Accelerometer off'));
       watchAccelerometerID = null;
     }
   };
@@ -23,18 +24,22 @@ angular.module('breadcrumb')
   };
   const stopCompass = () => {
     if (watchCompassID) {
-      navigator.compass.clearWatch(watchCompassID);
+      const watch = navigator.compass.clearWatch(watchCompassID);
+      watch.then(() => console.warn('Compass off'));
       watchCompassID = null;
     }
   };
 
+  // $scope.messages = AugRealFact.messages;
+
   $scope.videoOverlay = () => {
     if (window.ezar) {
       ezar.initializeVideoOverlay(() => {
+        $('#spot').css('display', 'block');
+        $('.comment').css('display', 'block');
         ezar.getBackCamera().start();
         startAccelerometer();
         startCompass();
-        $('#spot').css('display', 'block');
       }, (err) => {
         console.error(`unable to init ezar: ${err}`);
       });
@@ -42,15 +47,9 @@ angular.module('breadcrumb')
   };
   $scope.stopVideoOverlay = () => {
     ezar.getBackCamera().stop();
+    $('#spot').css('display', 'none');
+    $('.comment').css('display', 'none');
     stopAccelerometer();
     stopCompass();
-    $('#spot').css('display', 'none');
-  };
-  $scope.displayComment = (comment) => {
-    $ionicLoading.show({
-      template: `Notification clicked: ${comment}`,
-      noBackdrop: true,
-      duration: 5000,
-    });
   };
 });
