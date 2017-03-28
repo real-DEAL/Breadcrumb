@@ -16,9 +16,11 @@ angular.module('breadcrumb')
 
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
-      store.set('profile', profile);
+      store.set('profile', profile.user_id);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
+      store.set('email', profile.email);
+      store.set('pic', profile.picture);
       $http({
         method: 'GET',
         // url: 'http://54.203.104.113/users',
@@ -29,11 +31,13 @@ angular.module('breadcrumb')
         },
       })
       .then((response) => {
+        console.log(response);
         const data = response.data.data[0];
-        data.grant_type = 'password';
-        data.username = data.username;
-        data.social_login = profile.user_id;
         if (data) {
+          console.log('userid',profile.user_id)
+          data.grant_type = 'password';
+          data.username = data.username;
+          data.social_login = profile.user_id;
           $http({
             method: 'POST',
             // url: 'http://54.203.104.113//v1/access_tokens',

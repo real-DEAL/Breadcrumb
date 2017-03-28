@@ -29,6 +29,8 @@ angular.module('breadcrumb')
       json: true,
     })
     .then((res) => {
+      console.log(res)
+      store.set('access_token', res.data.data[0].access_token)
       store.set('user', res.data.data[0]);
       store.remove('email');
       $state.go('app.dashboard');
@@ -40,8 +42,8 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
-      // url: `http://192.168.99.100:3000/users/${userData.id}?access_token=${store.get('access_token')}`,
-      url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
+      url: `http://192.168.99.100:3000/users/${userData.id}?access_token=${store.get('access_token')}`,
+      // url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
       json: true,
     })
     .then(() => {
