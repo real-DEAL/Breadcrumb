@@ -92,16 +92,25 @@ angular.module('breadcrumb', [
   store,
   $state,
   Data,
-  Style
+  Style,
+  $http
 ) {
   $scope.logout = () => {
-    auth.signout();
-    store.remove('token');
-    store.remove('profile');
-    store.remove('refreshToken');
-    store.remove('pic');
-    store.remove('user');
-    $state.go('start', {}, { reload: true });
+    const user = store.get('user');
+    $http({
+      // url: `localhost:3000/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
+      url: `http://192.168.99.100:3000/v1/access_tokens/${user.id}?access_token=${store.get('access_token')}`,
+      // url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
+      method: 'DELETE',
+    }).then(() => {
+      auth.signout();
+      store.remove('token');
+      store.remove('profile');
+      store.remove('refreshToken');
+      store.remove('pic');
+      store.remove('user');
+      $state.go('start', {}, { reload: true });
+    }).catch((err) => { console.error(err); });
   };
 
   $scope.test = (input) => {
