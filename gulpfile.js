@@ -6,35 +6,57 @@ const cp = require('child_process');
 const protractor = require('gulp-protractor').protractor;
 const runSequence = require('run-sequence');
 const path = require('path');
-let appium_process;
+
+let appiumProcess;
 
 require('dotenv').load();
+
+function killEmulator() {
+  sh.exec('adb -s emulator-5554 emu kill');
+}
+
+function runTestOn(server, device) {
+  return gulp.src(['./tests/e2e/**/*_test.js'])
+    .pipe(protractor({
+      configFile: `tests/e2e/${server}.config.js`,
+      args: [`--params.avd=${device}`],
+    }))
+    .on('error', function (e) { console.error(gutil.colors.red(e)); })
+    .on('end', killEmulator);
+}
+
+function cleanup() {
+  if (appiumProcess) {
+    appiumProcess.kill('SIGINT');
+  }
+  killEmulator();
+}
 
 gulp.task('default', ['test:integration:local']);
 
 gulp.task('set-play-services-location-version', function () {
-    sh.exec('sed -i "s/play-services-location:+/play-services-location:6.5.87/g" platforms/android/project.properties');
+  sh.exec('sed -i "s/play-services-location:+/play-services-location:6.5.87/g" platforms/android/project.properties');
 });
 
 gulp.task('build-debug', ['set-play-services-location-version'], function (callback) {
-    cp.exec('ionic build android', function (error) {
-        if (error) {
-            return callback(error);
-        }
-        callback();
-    });
+  cp.exec('ionic build android', function (error) {
+    if (error) {
+      return callback(error);
+    }
+    return callback();
+  });
 });
 
 gulp.task('start-appium', function (callback) {
-    appium_process = cp.spawn('appium', ['--chromedriver-executable', '/home/tomasz/.bin/chromedriver']);
+  appiumProcess = cp.spawn('appium', ['--chromedriver-executable', '/home/tomasz/.bin/chromedriver']);
 
-    appium_process.stdout.on('data', function (data) {
-        if (data.toString().indexOf('Appium REST http interface listener started') > -1) {
-            callback();
-        }
+  appiumProcess.stdout.on('data', function (data) {
+    if (data.toString().indexOf('Appium REST http interface listener started') > -1) {
+      callback();
+    }
   });
 
-  appium_process.stderr.pipe(process.stderr);
+  appiumProcess.stderr.pipe(process.stderr);
 });
 
 gulp.task('protractor:local:android-4.4.2', runTestOn.bind(null, 'local', 'android-4.4.2'));
@@ -55,20 +77,6 @@ gulp.task('test:integration:local', ['build-debug', 'start-appium'], function (c
     }
     );
 });
-
-function killEmulator() {
-  sh.exec('adb -s emulator-5554 emu kill');
-}
-
-function runTestOn(server, device) {
-  return gulp.src(['./tests/e2e/**/*_test.js'])
-    .pipe(protractor({
-      configFile: `tests/e2e/${server}.config.js`,
-      args: [`--params.avd=${device}`],
-    }))
-    .on('error', function (e) { console.error(gutil.colors.red(e)); })
-    .on('end', killEmulator);
-}
 
 gulp.task('test:integration:sauce', ['upload-apk-to-sauce'], function () {
   return runTestOn('sauce', 'all');
@@ -97,13 +105,6 @@ gulp.task('git-check', function (done) {
   }
   done();
 });
-
-function cleanup() {
-  if (appium_process) {
-    appium_process.kill('SIGINT');
-  }
-  killEmulator();
-}
 
 process.once('uncaughtException', function (error) {
   cleanup();
