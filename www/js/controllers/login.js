@@ -45,7 +45,7 @@ angular.module('breadcrumb')
             data,
           }).then((tokendata) => {
             data.access_token = tokendata.data.data[0].access_token;
-            store.set('access_token', tokendata.data.data[0].access_token);
+            store.set('access_token',tokendata.data.data[0].access_token)
           }).catch((error) => { console.error(`There was an Error logging in ${error}`); });
           store.set('user', data);
           return $state.go('app.dashboard');
