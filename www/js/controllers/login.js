@@ -21,7 +21,6 @@ angular.module('breadcrumb')
       store.set('pic', profile.picture);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
-      console.log('profile',profile);
       $http({
         method: 'GET',
         // url: 'http://54.203.104.113/users',
@@ -37,16 +36,16 @@ angular.module('breadcrumb')
         data.grant_type = 'password';
         data.username = data.username;
         data.social_login = profile.user_id;
-        console.log(data)
         if (data) {
           $http({
             method: 'POST',
             // url: 'http://54.203.104.113//v1/access_tokens',
             url: 'http://192.168.99.100:3000/v1/access_tokens',
             json: true,
-            data: data,
+            data,
           }).then((tokendata) => {
             data.access_token = tokendata.data.data[0].access_token;
+            store.set('access_token', tokendata.data.data[0].access_token);
           }).catch((error) => { console.error(`There was an Error logging in ${error}`); });
           store.set('user', data);
           return $state.go('app.dashboard');
