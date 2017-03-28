@@ -27,7 +27,6 @@ angular.module('breadcrumb').factory('Trail', function ($http) {
       header: {
         'Access-Control-Allow-Origin': '*',
       },
-      // TODO: add access_token
       data: trail,
       json: true,
     })
