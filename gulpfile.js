@@ -55,9 +55,9 @@ gulp.task('start-appium', function (callback) {
       callback();
     }
   });
-
-  appiumProcess.stderr.pipe(process.stderr);
 });
+
+appiumProcess.stderr.pipe(process.stderr);
 
 gulp.task('protractor:local:android-4.4.2', runTestOn.bind(null, 'local', 'android-4.4.2'));
 gulp.task('protractor:local:android-5.0.1', runTestOn.bind(null, 'local', 'android-5.0.1'));
@@ -75,7 +75,7 @@ gulp.task('test:integration:local', ['build-debug', 'start-appium'], function (c
       callback();
       process.exit(0);
     }
-    );
+  );
 });
 
 gulp.task('test:integration:sauce', ['upload-apk-to-sauce'], function () {
