@@ -9,7 +9,7 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content ng-style="theme.static">
 
     <!-- CRUMB EXPLANATION -->
     <div ng-if="page.description" class="padding">
@@ -96,7 +96,9 @@
             <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
           </div>
           <div ng-if="page.media.ar">
-            This is where Augmented Reality would go, but we don't have it set yet!
+            <div id="commentRender" class="card" ng-style="{background: 'transparent'}">
+              <br><div id="spot"></div>
+            </div>
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence, AugRealFact) {
   $scope.loading = null;
 
   $scope.trailID = null;
@@ -72,6 +72,14 @@ angular.module('breadcrumb')
     }
   };
 
+  $scope.startAR = () => {
+    AugRealFact.startAR();
+  };
+
+  $scope.stopAR = () => {
+    AugRealFact.stopAR();
+  };
+
   $rootScope.$watch('pinged', () => {
     if ($rootScope.pinged) {
       $scope.switch('found');
@@ -90,6 +98,9 @@ angular.module('breadcrumb')
   };
 
   $scope.media = (type) => {
+    if (type === 'ar') {
+      $scope.startAR();
+    }
     $scope.bubbles = {
       top: '0px',
     };
