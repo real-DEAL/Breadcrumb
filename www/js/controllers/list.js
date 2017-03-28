@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $rootScope, $state, ListFact, Data, Style) {
+.controller('ListCtrl', function ($scope, $rootScope, $state, store, ListFact, Data, Style) {
   $scope.specificTransport = false;
   $scope.loading = null;
 
@@ -80,6 +80,7 @@ angular.module('breadcrumb')
   });
 
   $scope.pickTrail = (id, index) => {
+    ListFact.getSaved(store.get('user').id, id);
     $rootScope.trailID = id;
     $scope.close(index);
   };
