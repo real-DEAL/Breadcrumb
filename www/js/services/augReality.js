@@ -64,7 +64,6 @@ angular.module('breadcrumb').factory('AugRealFact', function () {
 
 
   const videoOverlay = () => {
-    console.log(window.ezar);
     if (window.ezar) {
       ezar.initializeVideoOverlay(() => {
         $('#spot').css('display', 'block');
