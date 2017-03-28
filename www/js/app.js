@@ -92,14 +92,10 @@ angular.module('breadcrumb', [
   store,
   $state,
   Data,
-  Style,
-  $http
+  Style
 ) {
   $scope.logout = () => {
     auth.signout();
-    // $http({
-    //   url:
-    // })
     store.remove('token');
     store.remove('profile');
     store.remove('refreshToken');
