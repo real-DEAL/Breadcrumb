@@ -1,5 +1,5 @@
 const _ = window._;
-angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
+angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, store) {
   const closeStyle = {
     height: '95px',
     'transition-duration': '250ms',
@@ -29,10 +29,10 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
         }
       });
     }
+    console.log(link);
     return $http({
       method: 'GET',
-      url: link,
-
+      url: `${link}?access_token=${store.get('access_token')}`,
     })
     .then((response) => {
       const data = [];
