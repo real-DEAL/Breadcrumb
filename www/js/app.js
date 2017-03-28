@@ -20,9 +20,6 @@ angular.module('breadcrumb', [
 ) {
   $ionicPlatform.ready(function () {
     $rootScope.pinged = false;
-    // $log.log('Ionic ready');
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -63,10 +60,6 @@ angular.module('breadcrumb', [
             noBackdrop: true,
             duration: 2000,
           });
-
-          // $state.go('geofence', {
-          //   geofenceId: notificationData.id,
-          // });
         });
       }
     };
@@ -84,10 +77,10 @@ angular.module('breadcrumb', [
       }
     });
 
-    if (store.get('token') && store.get('user')) {
-      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
-      $state.go('app.dashboard');
-    }
+    // if (store.get('token') && store.get('user')) {
+    //   auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+    //   $state.go('app.dashboard');
+    // }
   });
 })
 .controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
