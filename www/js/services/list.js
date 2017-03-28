@@ -1,5 +1,4 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style) {
+angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
   const arrayMaker = (num) => {
     const arr = [];
     let i;
@@ -25,11 +24,9 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     }
     return $http({
       method: 'GET',
-      url: link,
-
+      url: `${link}?access_token=${store.get('access_token')}`,
     })
     .then((response) => {
-      console.log(response);
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;

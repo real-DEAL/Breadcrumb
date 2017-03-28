@@ -105,6 +105,7 @@ angular.module('breadcrumb', [
     }).then(() => {
       auth.signout();
       store.remove('token');
+      store.remove('access_token');
       store.remove('profile');
       store.remove('refreshToken');
       store.remove('pic');
