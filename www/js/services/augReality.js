@@ -1,5 +1,3 @@
-// let $ = window.$;
-
 angular.module('breadcrumb').factory('AugRealFact', function () {
   // TODO: replace with data from database
   const messages = [
@@ -11,12 +9,12 @@ angular.module('breadcrumb').factory('AugRealFact', function () {
   const calculateDirection = (degree) => {
     let detected = 0;
     $('#spot').html('');
-    for (let i = 0; i < messages.length; i += 1) {
+    messages.forEach((val, i) => {
       const fontSize = 6;
       const fontColor = 'white';
-      $('#spot').append(`<div class="comment" data-id=${i} ng-click='displayComment(messages[i].text)' style="display:block;margin-left:${(((messages[i].bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].text}</div></div>`);
+      $('#spot').append(`<div class="comment" data-id=${i} style="display:block;margin-left:${(((messages[i].bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].text}</div></div>`);
       detected = 1;
-    }
+    });
     if (!detected) {
       $('#spot').html('');
     }

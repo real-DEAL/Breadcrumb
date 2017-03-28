@@ -102,6 +102,7 @@ angular.module('breadcrumb')
       clientID: 'WjzyvWzAQ8jN72gc0NR6pWBEG8gWM2Wn',
       loginState: 'start',
     });
+
     $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({
