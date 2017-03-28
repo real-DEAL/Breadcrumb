@@ -3,7 +3,8 @@ angular.module('breadcrumb')
   const putUserInfo = (userIf, userData) =>
     $http({
       method: 'PUT',
-      url: 'http://54.203.104.113/users',
+      url: 'http://192.168.99.100:3000/users',
+      // url: 'http://54.203.104.113/users',
       data: userIf,
       json: true,
       params: {
@@ -21,7 +22,8 @@ angular.module('breadcrumb')
   const postUserInfo = userIf =>
     $http({
       method: 'POST',
-      url: 'http://54.203.104.113/users',
+      url: 'http://192.168.99.100:3000/users',
+      // url: 'http://54.203.104.113/users',
       data: userIf,
       json: true,
     })
@@ -37,6 +39,7 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
+      // url: 'http://192.168.99.100:3000/users/${userData.id}',
       url: `http://54.203.104.113/users/${userData.id}`,
       json: true,
     })
@@ -65,7 +68,6 @@ angular.module('breadcrumb')
       if (pic) {
         userInfo.profile_picture = pic;
       }
-<<<<<<< HEAD
 
       if (deleteAcct) {
         return deleteUserInfo(data);
@@ -73,41 +75,6 @@ angular.module('breadcrumb')
         return putUserInfo(userInfo, data);
       }
       return postUserInfo(userInfo);
-=======
-      if (data) {
-        return $http({
-          method: 'PUT',
-          // url: 'http://54.203.104.113/users',
-          url: 'http://192.168.99.100:3000/users',
-          data: userInfo,
-          json: true,
-          params: {
-            id: data[0].id,
-          },
-        })
-        .then((res) => {
-          store.set('user', res.data.data[0]);
-          $state.go('app.dashboard');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-      }
-      return $http({
-        method: 'POST',
-        // url: 'http://54.203.104.113/users',
-        url: 'http://192.168.99.100:3000/users',
-        data: userInfo,
-        json: true,
-      })
-      .then((res) => {
-        store.set('user', res.data.data[0]);
-        $state.go('app.dashboard');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
->>>>>>> (feature) alter routes to receive new auth Tokens from api server
     })
     .catch((error) => {
       console.error(error);
