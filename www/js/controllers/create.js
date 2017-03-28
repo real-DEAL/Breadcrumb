@@ -538,9 +538,10 @@ angular.module('breadcrumb')
     // change the location which speaks to the input box in view
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
-    setInterval(() => {
-      $scope.updateMap();
-    })
+    // setInterval(() => {
+    //   $scope.updateMap();
+    // })
+
     console.warn($scope.location, '$scope.location updated');
     console.warn($scope.markers.marker, '$scope.markers.marker updated');
     //TODO: how to make it work continually and let angular know to update the center as well???
@@ -587,21 +588,23 @@ angular.module('breadcrumb')
       geocoder.geocode({ address: $scope.place.address }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results) {
-            console.warn('Getting geocode lng', results[0].geometry.location.lat());
-            $scope.markers.marker.lat = results[0].geometry.location.lat();
-            $scope.markers.marker.lng = results[0].geometry.location.lng();
-            angular.extend($scope, {
-              center: {
-                lat: results[0].geometry.location.lat(),
-                lng: results[0].geometry.location.lng(),
-                zoom: 15,
-              },
-            });
-            $scope.center.lat = results[0].geometry.location.lat();
-            $scope.center.lng = results[0].geometry.location.lng();
+              console.warn('Getting geocode lng', results[0].geometry.location.lat());
+              $scope.markers.marker.lat = results[0].geometry.location.lat();
+              $scope.markers.marker.lng = results[0].geometry.location.lng();
+              angular.extend($scope, {
+                center: {
+                  lat: results[0].geometry.location.lat(),
+                  lng: results[0].geometry.location.lng(),
+                  zoom: 15,
+                },
+              });
+              $scope.center.lat = results[0].geometry.location.lat();
+              $scope.center.lng = results[0].geometry.location.lng();
+
             // listen to marker changed or place_changed, then get event and panto
             // window.L.panTo($scope.center);
             console.warn('center lat get updated', $scope.center.lat);
+            
             console.warn('markers lat get updated', $scope.markers.marker.lat);
             $scope.$apply();
           } else {
