@@ -59,9 +59,6 @@ angular.module('breadcrumb').factory('Data', function () {
     _.each(base, (val, key) => {
       data[key] = base[key];
     });
-    // for (val in base) {
-    //   data[val] = base[val];
-    // }
     if (type === 'transport') {
       data[value].style = fill;
     } else {

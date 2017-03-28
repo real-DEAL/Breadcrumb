@@ -28,11 +28,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http) {
           link += `${req}=${val}&`;
         }
       });
-      // for (req in request) {
-      //   if (req !== 'username' && request[req] !== null && request[req] !== 'Any') {
-      //     link += `${req}=${request[req]}&`;
-      //   }
-      // }
     }
     return $http({
       method: 'GET',

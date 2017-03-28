@@ -22,14 +22,6 @@ angular.module('breadcrumb').factory('AugRealFact', function () {
     }
   };
 
-  // const displayComment = (comment) => {
-  //   $ionicLoading.show({
-  //     template: `Notification clicked: ${comment}`,
-  //     noBackdrop: true,
-  //     duration: 5000,
-  //   });
-  // };
-
   const onAccelerometerSuccess = () => {};
 
   const onAccelerometerError = () => console.error('Accelerometer error');

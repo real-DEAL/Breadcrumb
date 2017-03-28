@@ -35,7 +35,6 @@ angular.module('breadcrumb')
         startAccelerometer();
         startCompass();
         $('#spot').css('display', 'block');
-        // $('#comment').css('display', 'block');
       }, (err) => {
         console.error(`unable to init ezar: ${err}`);
       });
@@ -46,7 +45,6 @@ angular.module('breadcrumb')
     stopAccelerometer();
     stopCompass();
     $('#spot').css('display', 'none');
-    // $('#comment').css('display', 'none');
   };
   $scope.displayComment = (comment) => {
     $ionicLoading.show({
