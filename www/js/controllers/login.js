@@ -16,41 +16,24 @@ angular.module('breadcrumb')
 
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
-      store.set('profile', profile.user_id);
-      store.set('email', profile.email);
-      store.set('pic', profile.picture);
+      store.set('profile', profile);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
       $http({
         method: 'GET',
-        // url: 'http://54.203.104.113/users',
-        url: 'http://192.168.99.100:3000/users',
+        url: 'http://54.203.104.113/users',
         json: true,
         params: {
           social_login: profile.user_id,
-          token: idToken,
         },
       })
       .then((response) => {
         const data = response.data.data[0];
-        data.grant_type = 'password';
-        data.username = data.username;
-        data.social_login = profile.user_id;
         if (data) {
-          $http({
-            method: 'POST',
-            // url: 'http://54.203.104.113//v1/access_tokens',
-            url: 'http://192.168.99.100:3000/v1/access_tokens',
-            json: true,
-            data,
-          }).then((tokendata) => {
-            data.access_token = tokendata.data.data[0].access_token;
-            store.set('access_token', tokendata.data.data[0].access_token);
-          }).catch((error) => { console.error(`There was an Error logging in ${error}`); });
-          store.set('user', data);
-          return $state.go('app.dashboard');
+          store.set('username', data.username);
+          $state.go('app.dashboard');
         }
-        return $state.go('settings');
+        $state.go('settings');
       });
     }, (error) => {
       console.error('There was an error logging in', error);
