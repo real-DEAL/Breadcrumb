@@ -564,6 +564,7 @@ angular.module('breadcrumb')
             $scope.markers.marker.lat = results[0].geometry.location.lat();
             $scope.markers.marker.lng = results[0].geometry.location.lng();
             console.warn('markers lat get updated', $scope.markers.marker.lat);
+            $scope.$apply();
           } else {
             console.warn('Location not found');
           }
