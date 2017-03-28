@@ -9,13 +9,11 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    let link = 'http://192.168.99.100:3000/trails';
+    let link = 'http://192.168.99.100:3000/trails?';
     // let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
-      link += `?id=${$rootScope.trailID}`;
+      link += `/id=${$rootScope.trailID}`;
     } else if (request) {
-      link += '?';
-
       _.each(request, (val, req) => {
         if (req !== 'username' && val !== null && val !== 'Any') {
           link += `${req}=${val}&`;
@@ -24,7 +22,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     }
     return $http({
       method: 'GET',
-      url: `${link}?access_token=${store.get('access_token')}`,
+      url: `${link}&access_token=${store.get('access_token')}`,
     })
     .then((response) => {
       const data = [];
@@ -49,8 +47,8 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      url: `http://54.203.104.113:3000/trails/${trail.id}`,
-      // url: `http://192.168.99.100/trails/${trail.id}`,
+      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
+      url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${store.get('access_token')}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
