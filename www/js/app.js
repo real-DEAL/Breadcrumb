@@ -77,19 +77,28 @@ angular.module('breadcrumb', [
       }
     });
 
-    // if (store.get('token') && store.get('user')) {
-    //   auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
-    //   $state.go('app.dashboard');
-    // }
+    if (store.get('token') && store.get('user')) {
+      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+      $state.go('app.dashboard');
+    }
   });
 })
-.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
-  $scope.links = Data.menu;
 
-  $scope.theme = Style.theme();
-
+.controller('AppCtrl', function (
+  $scope,
+  $rootScope,
+  auth,
+  store,
+  $state,
+  Data,
+  Style,
+  $http
+) {
   $scope.logout = () => {
     auth.signout();
+    // $http({
+    //   url:
+    // })
     store.remove('token');
     store.remove('profile');
     store.remove('refreshToken');
@@ -101,6 +110,10 @@ angular.module('breadcrumb', [
   $scope.test = (input) => {
     console.warn(input);
   };
+
+  $scope.links = Data.menu;
+
+  $scope.theme = Style.theme();
 
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
