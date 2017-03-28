@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <ion-side-menus>
 
-  <ion-pane ion-side-menu-content>
-    <ion-nav-bar class="bar-stable">
+  <ion-pane ion-side-menu-content drag-content="false">
+    <ion-nav-bar class="bar">
       <!-- <ion-nav-back-button class="button-clear"><i class="icon ion-chevron-left"></i> Back</ion-nav-back-button> -->
     </ion-nav-bar>
     <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
   </ion-pane>
 
-  <ion-side-menu side="left">
-    <header class="bar bar-header bar-stable">
-      <h1 class="title">Left</h1>
+  <ion-side-menu side="left" width="200" class="">
+    <header class="bar bar-header" menu-toggle="left">
+      <h1 class="title">{{ user }}</h1>
     </header>
     <ion-content class="has-header">
       <ion-list>
-        <ion-item nav-clear menu-close href="#/app/geofences">
-          Geofences
+        <ion-item
+          ng-repeat="link in links"
+          nav-clear
+          menu-close
+          class="menu-item"
+          ui-sref="{{ link.link }}"
+        >
+          <i class="{{ link.icon }} margin-h"></i> {{ link.name }}
         </ion-item>
-        <ion-item nav-clear menu-close href="#/app/geofence/new/:longitude,:latitude">
-          Map
-        </ion-item>
-        <ion-item nav-clear menu-close href="#/app/playlists">
-          Playlists
+        <ion-item nav-clear menu-close class="menu-item" ui-sref="#" ng-click="logout()">
+          <i class="ion-log-out margin-h"></i> Log out
         </ion-item>
       </ion-list>
     </ion-content>

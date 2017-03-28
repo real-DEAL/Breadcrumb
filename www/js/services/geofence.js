@@ -1,8 +1,4 @@
-/* global UUIDjs */
-/* global TransitionType */
-/* global localStorage */
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
-angular.module('ionic-geofence').factory('Geofence', function (
+angular.module('breadcrumb').factory('Geofence', function (
   $rootScope,
   $window,
   $q,
@@ -12,25 +8,6 @@ angular.module('ionic-geofence').factory('Geofence', function (
   const geofenceService = {
     _geofences: [],
     _geofencesPromise: null,
-
-    create(attributes) {
-      const defaultGeofence = {
-        id: UUIDjs.create().toString(),
-        latitude: 50,
-        longitude: 50,
-        radius: 100,
-        transitionType: TransitionType.ENTER,
-        notification: {
-          id: this.getNextNotificationId(),
-          title: 'Ionic geofence example',
-          text: '',
-          icon: 'res://ic_menu_mylocation',
-          openAppOnClick: true,
-        },
-      };
-
-      return angular.extend(defaultGeofence, attributes);
-    },
 
     loadFromLocalStorage() {
       const result = localStorage.geofences;
@@ -65,27 +42,24 @@ angular.module('ionic-geofence').factory('Geofence', function (
       return this.loadFromLocalStorage();
     },
 
-    getAll() {
+    addOrUpdate(crumb) {
       const self = this;
+      const geofence = {
+        id: UUIDjs.create().toString(),
+        latitude: Number(crumb.latitude),
+        longitude: Number(crumb.longitude),
+        radius: 100,
+        transitionType: 1,
+        notification: {
+          id: this.getNextNotificationId(),
+          title: crumb.title,
+          text: crumb.name,
+          icon: crumb.icon,
+          openAppOnClick: true,
+        },
+      };
 
-      if (!self._geofencesPromise) {
-        self._geofencesPromise = $q.defer();
-        self.loadFromDevice().then(function (geofences) {
-          self._geofences = geofences;
-          self._geofencesPromise.resolve(geofences);
-        }, function (reason) {
-          $log.error('Error fetching geofences', reason);
-          self._geofencesPromise.reject(reason);
-        });
-      }
-
-      return self._geofencesPromise.promise;
-    },
-
-    addOrUpdate(geofence) {
-      const self = this;
-
-      return $window.geofence.addOrUpdate(geofence).then(function () {
+      return $window.geofence.addOrUpdate(geofence).then(() => {
         const searched = self.findById(geofence.id);
 
         if (!searched) {
@@ -101,9 +75,7 @@ angular.module('ionic-geofence').factory('Geofence', function (
     },
 
     findById(id) {
-      const geoFences = this._geofences.filter(function (g) {
-        return g.id === id;
-      });
+      const geoFences = this._geofences.filter(g => g.id === id);
 
       if (geoFences.length > 0) {
         return geoFences[0];
@@ -112,24 +84,24 @@ angular.module('ionic-geofence').factory('Geofence', function (
       return undefined;
     },
 
-    remove(geofence) {
-      const self = this;
-
-      $ionicLoading.show({
-        template: 'Removing geofence...',
-      });
-      $window.geofence.remove(geofence.id).then(function () {
-        $ionicLoading.hide();
-        self._geofences.splice(self._geofences.indexOf(geofence), 1);
-        self.saveToLocalStorage();
-      }, function (reason) {
-        $log.error('Error while removing geofence', reason);
-        $ionicLoading.show({
-          template: 'Error while removing geofence',
-          duration: 1500,
-        });
-      });
-    },
+    // remove(geofence) {
+    //   const self = this;
+    //
+    //   $ionicLoading.show({
+    //     template: 'Removing geofence...',
+    //   });
+    //   $window.geofence.remove(geofence.id).then(function () {
+    //     $ionicLoading.hide();
+    //     self._geofences.splice(self._geofences.indexOf(geofence), 1);
+    //     self.saveToLocalStorage();
+    //   }, function (reason) {
+    //     $log.error('Error while removing geofence', reason);
+    //     $ionicLoading.show({
+    //       template: 'Error while removing geofence',
+    //       duration: 1500,
+    //     });
+    //   });
+    // },
 
     removeAll() {
       const self = this;

@@ -1,5 +1,381 @@
-/* Empty. Add your own CSS if you like */
+body {
+  color: #3f3f3f;
+}
+
+i {
+  color: #573d38;
+}
+
+@keyframes moveUp {
+    0%   {transform: translate(0px, 0px)}
+    100% {transform: translate(0px, -820px)}
+}
+
+@keyframes moveDown {
+    0%   {transform: translate(0px, -820px)}
+    100% {transform: translate(0px, 0px)}
+}
+
+@keyframes moveInFromRight {
+    0%   {transform: translate(100%, 0px)}
+    100% {transform: translate(0%, 0px)}
+}
+
+@keyframes float {
+    0%   {transform: translate(0px, 0px)}
+    50%   {transform: translate(0px, 30px)}
+    100% {transform: translate(0px, 0px)}
+}
+
+@keyframes walk {
+    0%   {transform: translate(-10px, 0px) rotate(-10deg);}
+    50%   {transform: translate(10px, 0px) rotate(10deg);}
+    100% {transform: translate(-10px, 0px) rotate(-10deg);}
+}
+
+@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+
+.shadow {
+  filter: drop-shadow(2px 2px 5px #222);
+}
+
+.world-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.rotate {
+  position: relative;
+  left: 50%;
+  margin-left: -600px;
+  animation: spin 25s linear infinite;
+  -moz-animation: spin 25s linear infinite;
+  -webkit-animation: spin 25s linear infinite;
+}
+
+.stars {
+  position: absolute;
+  top: 0;
+  left: -1012.5px;
+  animation: spin 75s linear infinite;
+  -moz-animation: spin 75s linear infinite;
+  -webkit-animation: spin 75s linear infinite;
+  z-index: 0;
+}
+
+.children {
+  width: 300px;
+  text-align: center;
+  position: absolute;
+  top: 400px;
+  z-index: 100;
+}
+
+.child {
+  animation: walk 0.5s linear infinite;
+  width: 60px;
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+.low-button {
+  position: absolute;
+  top: 575px;
+  text-decoration: none;
+  font-size: 3em;
+  font-weight: bold;
+  color: #e2c7a2;
+}
+
+.center-h {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.round {
+  border-radius: 50%;
+}
+
+.float-container {
+  margin: 25px 0 50px;
+}
+
+.float {
+  animation-name: float;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.float22 {
+  animation-duration: 2200ms;
+}
+
+.float27 {
+  animation-duration: 2700ms;
+}
+
+.float32 {
+  animation-duration: 3200ms;
+}
+
+.float37 {
+  animation-duration: 3700ms;
+}
+
+.float42 {
+  animation-name: float;
+  animation-duration: 4200ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+.logo {
+  background-image: url('../img/logo.gif');
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  height: 200px;
+  width: 200px;
+  border-radius: 100px;
+  margin: 25px auto;
+}
+
+.black, .loading {
+  background-color: #000;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  opacity: 0.5;
+  position: absolute;
+  z-index: 99;
+}
+
+.borderless {
+  border: 0;
+}
+
+.loading {
+  background-image: url('../img/loading.gif');
+}
+
+.info {
+  width: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  border-radius: 5px;
+}
+
+input {
+  width: 100%;
+  height: 150%;
+  margin: 0;
+  background: transparent;
+}
 
 .platform-android .action-sheet-cancel {
-    display: block !important;
+  display: block;
+}
+
+.left {
+  text-align: left;
+}
+
+.t-center {
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 10px;
+}
+
+.center {
+  text-align: center;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.right {
+  text-align: right;
+}
+
+.profilePic {
+  background-color: grey;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  border-radius: 75px;
+}
+
+.noOverflow {
+  height: 500px;
+  overflow: hidden;
+}
+
+.abs {
+  position: absolute;
+  top: 2.5%;
+  left: 5%;
+  width: 90%;
+  margin: auto;
+  animation-duration: 250ms;
+  animation-fill-mode: forwards;
+}
+
+.createCard {
+  height: 600px;
+}
+
+.review {
+  position: absolute;
+  top: 835px;
+  animation-duration: 1000ms;
+}
+
+.textbox {
+  height: 65px;
+}
+
+.w-75 {
+  width: 70%;
+  margin: auto;
+}
+
+.s-1x {
+  font-size: 1.5em;
+}
+
+.s-1-5x {
+  font-size: 1.5em;
+}
+
+.s-2x {
+  font-size: 2em;
+}
+
+.bubbles {
+  position: absolute;
+  width: 95%;
+  transition-duration: 1000ms;
+  margin: 10px 0 35px;
+}
+
+.bubble {
+  font-size: 2em;
+  color: white;
+  background: black;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  margin: 0 5px;
+  position: relative;
+}
+
+.margin-n {
+  margin: 0;
+}
+
+.margin-h {
+  margin: 0 10px;
+}
+
+.margin-v {
+  margin: 10px 0;
+}
+
+.padding-h {
+  padding: 0 10px;
+}
+
+.padding-v {
+  padding: 10px 0;
+}
+
+.padding-b {
+  padding: 10px 0 20px 0;
+}
+
+#map {
+  height: 250px;
+  width: 100%;
+}
+
+.map {
+  /*height: 70%;*/
+  width: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.map-div {
+  height: 150px;
+}
+.margin-n {
+  margin: 0;
+}
+
+.center-v {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.full {
+  width: 100%;
+}
+
+.transparent {
+  background: transparent;
+}
+
+.finish {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 75px);
+}
+
+.rating {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 250px);
+}
+
+.rating li {
+  display: inline;
+  font-size: 2.5em;
+}
+
+#spot {
+  text-align:center;
+}
+
+.comment, .distance {
+  text-shadow:0 1px #666;
+}
+
+.comment {
+  padding:15px;
+  font-weight:bold;
+  background-color:rgba(204,34,34,0.5);
+  border-radius:40px;
+  margin-bottom:10px;
+}
+
+.worldBackground {
+  background: #3a7ec7 url('../img/static-world.png') no-repeat bottom center;
 }

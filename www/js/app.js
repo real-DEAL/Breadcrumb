@@ -1,6 +1,11 @@
-// Ionic Geofence example App
-
-angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
+angular.module('breadcrumb', [
+  'ionic',
+  'ionic.contrib.ui.tinderCards',
+  'leaflet-directive',
+  'auth0',
+  'angular-storage',
+  'angular-jwt',
+])
 .run(function (
   $window,
   $document,
@@ -9,12 +14,12 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
   $ionicPlatform,
   $log,
   $rootScope,
-  GeofencePluginMock
+  GeofencePluginMock,
+  auth,
+  store
 ) {
   $ionicPlatform.ready(function () {
-    $log.log('Ionic ready');
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    $rootScope.pinged = false;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -39,11 +44,7 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
               title: 'Geofence transition',
               text: 'Without notification',
             };
-            $ionicLoading.show({
-              template: `${geo.notification.title}: ${geo.notification.text}`,
-              noBackdrop: true,
-              duration: 2000,
-            });
+            $rootScope.pinged = true;
           });
         });
       }
@@ -59,10 +60,6 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
             noBackdrop: true,
             duration: 2000,
           });
-
-          $state.go('geofence', {
-            geofenceId: notificationData.id,
-          });
         });
       }
     };
@@ -70,13 +67,54 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
     $window.geofence.initialize(() => {
       $log.log('Geofence plugin initialized');
     });
-  });
 
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
-    $log.log('stateChangeError', error, toState, toParams, fromState, fromParams);
-    $state.go('geofences');
+    $rootScope.$on('$locationChangeStart', () => {
+      if (!auth.isAuthenticated) {
+        const token = store.get('token');
+        if (token) {
+          auth.authenticate(store.get('profile'), token, null, null, store.get('refreshToken'));
+        }
+      }
+    });
+
+    if (store.get('token') && store.get('user')) {
+      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+      $state.go('app.dashboard');
+    }
   });
 })
-.controller('AppCtrl', function ($scope) {
-  $scope.scope = null;
+.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
+  $scope.links = Data.menu;
+
+  $scope.theme = Style.theme();
+
+  $scope.logout = () => {
+    auth.signout();
+    store.remove('token');
+    store.remove('profile');
+    store.remove('refreshToken');
+    store.remove('pic');
+    store.remove('user');
+    $state.go('start', {}, { reload: true });
+  };
+
+  $scope.test = (input) => {
+    console.warn(input);
+  };
+
+  $scope.child1 = Data.child();
+  $scope.child2 = Data.child();
+
+  $scope.setTrail = (id) => {
+    localStorage.setItem('trail', id);
+    $rootScope.trailID = id;
+  };
+
+  if (store.get('user')) {
+    $scope.user = store.get('user').username;
+  }
+
+  $scope.overflowStyle = Style.overflowStyle;
+
+  $rootScope.refresh = false;
 });
