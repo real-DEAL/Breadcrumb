@@ -20,6 +20,7 @@ angular.module('breadcrumb', [
 ) {
   $ionicPlatform.ready(function () {
     $rootScope.pinged = false;
+    $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
