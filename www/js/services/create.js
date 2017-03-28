@@ -1,6 +1,5 @@
 angular.module('breadcrumb').factory('Trail', function ($http) {
   const submitTrail = (trail, crumbs) => {
-    console.log(trail.user_id);
     const length = trail.length.replace(/[^0-9.]/g, '');
     trail.length = length;
     if (!trail.transport) {
