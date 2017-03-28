@@ -195,6 +195,10 @@ input {
   margin-top: 10px;
 }
 
+.margin-top-big {
+  margin-top: 75px;
+}
+
 .center {
   text-align: center;
   align-items: center;
