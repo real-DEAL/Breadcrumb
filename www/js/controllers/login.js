@@ -16,9 +16,7 @@ angular.module('breadcrumb')
 
       // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
-      store.set('profile', profile.user_id);
-      store.set('email', profile.email);
-      store.set('pic', profile.picture);
+      store.set('profile', profile);
       store.set('token', idToken);
       store.set('refreshToken', refreshToken);
       $http({
@@ -28,7 +26,6 @@ angular.module('breadcrumb')
         json: true,
         params: {
           social_login: profile.user_id,
-          token: idToken,
         },
       })
       .then((response) => {
@@ -49,7 +46,7 @@ angular.module('breadcrumb')
             return $state.go('app.dashboard');
           }).catch((error) => { console.error(`There was an Error logging in ${error}`); });
         }
-        return $state.go('settings');
+        $state.go('settings');
       });
     }, (error) => {
       console.error('There was an error logging in', error);
