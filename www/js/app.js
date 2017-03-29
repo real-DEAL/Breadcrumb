@@ -20,6 +20,7 @@ angular.module('breadcrumb', [
 ) {
   $ionicPlatform.ready(function () {
     $rootScope.pinged = false;
+    $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -83,11 +84,16 @@ angular.module('breadcrumb', [
     }
   });
 })
-.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style) {
-  $scope.links = Data.menu;
 
-  $scope.theme = Style.theme();
-
+.controller('AppCtrl', function (
+  $scope,
+  $rootScope,
+  auth,
+  store,
+  $state,
+  Data,
+  Style
+) {
   $scope.logout = () => {
     auth.signout();
     store.remove('token');
@@ -101,6 +107,10 @@ angular.module('breadcrumb', [
   $scope.test = (input) => {
     console.warn(input);
   };
+
+  $scope.links = Data.menu;
+
+  $scope.theme = Style.theme();
 
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();

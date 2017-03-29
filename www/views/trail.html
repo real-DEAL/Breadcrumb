@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<ion-view style="{background: 'transparent'}">
+<ion-view ng-style="{background: 'transparent'}">
   <div class="loading" ng-style="loading"></div>
 
   <ion-nav-buttons side="left">
@@ -10,7 +10,7 @@
   </ion-nav-buttons>
 
   <div ng-if="page.media.ar">
-    <div id="commentRender">
+    <div id="commentRender" ng-style="{background: 'transparent'}">
       <br><div id="spot"></div>
     </div>
     <div class="footer" ng-click="stopAR()">Exit</div>
@@ -101,8 +101,6 @@
           </div>
           <div ng-if="page.media.video">
             <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <div ng-if="page.media.ar">
           </div>
         </div>
 

@@ -76,11 +76,13 @@ angular.module('breadcrumb')
     AugRealFact.startAR();
     $scope.media('ar');
     $scope.opacity = false;
+    $rootScope.toggleSide = false;
   };
 
   $scope.stopAR = () => {
     $scope.media('show');
     $scope.opacity = true;
+    $rootScope.toggleSide = true;
     AugRealFact.stopAR();
   };
 
