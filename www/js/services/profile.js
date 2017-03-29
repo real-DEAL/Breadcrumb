@@ -13,7 +13,7 @@ angular.module('breadcrumb')
   const updateUser = (id, updates) => (
     $http({
       method: 'PUT',
-      url: `http://54.203.104.113/${id}`,
+      url: `http://54.203.104.113/users/${id}`,
       json: true,
       data: updates,
     })

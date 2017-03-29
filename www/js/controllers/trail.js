@@ -58,7 +58,7 @@ angular.module('breadcrumb')
         $scope.crumb = data.position || 0;
         $scope.trailID = $rootScope.trailID;
         $scope.loading = { display: 'none' };
-        UserFact.updateUser(store.get('user').id, { current_trail: data.id });
+        UserFact.updateUser(store.get('user').id, { current_trail: $scope.trail.id });
       });
     });
   };
