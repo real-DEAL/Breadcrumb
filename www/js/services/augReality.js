@@ -1,11 +1,11 @@
-angular.module('breadcrumb').factory('AugRealFact', function ($http) {
+angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
   // TODO: replace with data from database
   const messages = [
     { username: 'broHeim', text: 'sup bro', bearing: 130 },
     { username: 'Munch', text: 'hey man', bearing: 39 },
     { username: 'ali', text: 'yooo', bearing: 273 },
   ];
-  // TODO: uncomment when database is available and inject 'store'
+  // TODO: uncomment when database is available
   // const user = store.get('user');
   // $http({
   //   url: 'http://54.203.104.113/ar_messages',

@@ -84,25 +84,6 @@ angular.module('breadcrumb').factory('Geofence', function (
       return undefined;
     },
 
-    // remove(geofence) {
-    //   const self = this;
-    //
-    //   $ionicLoading.show({
-    //     template: 'Removing geofence...',
-    //   });
-    //   $window.geofence.remove(geofence.id).then(function () {
-    //     $ionicLoading.hide();
-    //     self._geofences.splice(self._geofences.indexOf(geofence), 1);
-    //     self.saveToLocalStorage();
-    //   }, function (reason) {
-    //     $log.error('Error while removing geofence', reason);
-    //     $ionicLoading.show({
-    //       template: 'Error while removing geofence',
-    //       duration: 1500,
-    //     });
-    //   });
-    // },
-
     removeAll() {
       const self = this;
 
