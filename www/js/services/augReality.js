@@ -1,10 +1,29 @@
-angular.module('breadcrumb').factory('AugRealFact', function () {
+angular.module('breadcrumb').factory('AugRealFact', function ($http) {
   // TODO: replace with data from database
   const messages = [
     { username: 'broHeim', text: 'sup bro', bearing: 130 },
     { username: 'Munch', text: 'hey man', bearing: 39 },
     { username: 'ali', text: 'yooo', bearing: 273 },
   ];
+  // TODO: uncomment when database is available and inject 'store'
+  // const user = store.get('user');
+  // $http({
+  //   url: 'http://54.203.104.113/ar_messages',
+  //   method: 'GET',
+  //   params: {
+  //     access_token: user.access_token,
+  //   },
+  // })
+  // .then((res) => {
+  //   // TODO: where on res is the data?
+  // })
+  // .catch(() => {
+  //   messages = [
+  //     { username: 'broHeim', text: 'sup bro', bearing: 130 },
+  //     { username: 'friendlyfello', text: 'hey man', bearing: 39 },
+  //     { username: 'ali', text: 'yooo', bearing: 273 },
+  //   ];
+  // });
 
   const calculateDirection = (degree) => {
     let detected = 0;
