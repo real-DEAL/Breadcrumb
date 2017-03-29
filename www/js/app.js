@@ -79,11 +79,10 @@ angular.module('breadcrumb', [
         }
       }
     });
-
-    // if (store.get('token') && store.get('user')) {
-    //   auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
-    //   $state.go('app.dashboard');
-    // }
+    if (store.get('token') && store.get('user')) {
+      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+      $state.go('app.dashboard');
+    }
   });
 })
 .controller('AppCtrl', function (
@@ -99,7 +98,6 @@ angular.module('breadcrumb', [
   $scope.logout = () => {
     const user = store.get('user');
     $http({
-      // url: `localhost:3000/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
       url: `http://192.168.99.100:3000/v1/access_tokens/${user.id}?access_token=${store.get('access_token')}`,
       // url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
       method: 'DELETE',

@@ -2,9 +2,20 @@
 <ion-view ng-style="{background: 'transparent'}">
   <div class="loading" ng-style="loading"></div>
 
+  <div class="black"  ng-if="leaving" ng-click="leave()"></div>
+  <div class="card info t-center" ng-if="leaving">
+    <div class="item item-divider">
+      Save and quit?
+    </div>
+    <div class="row margin-v">
+      <div class="col col-50 button button-b margin-h" ng-click="quit()">Quit</div>
+      <div class="col col-50 button button-a margin-h" ng-click="saveQuit()">Save and Quit</div>
+    </div>
+  </div>
+
   <ion-nav-buttons side="left">
     <ion-header-bar class="bar bar-header" align-title="center">
-      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <button ng-click="leave()" class="button button-icon icon ion-chevron-left"></button>
       <h1 class="title">Trail</h1>
     </ion-header-bar>
   </ion-nav-buttons>
@@ -96,7 +107,6 @@
             <img ng-src="{{ crumbs[crumb].image }}" alt="" width="300">
           </div>
           <div ng-if="page.media.audio">
-            // TODO: fix, currently just rendering raw object data
             {{ crumbs[crumb].audio }}
           </div>
           <div ng-if="page.media.video">
@@ -112,12 +122,13 @@
     </div>
 
     <!-- FINISHED -->
-    <div ng-if="page.finish" class="margin-top t-center">
+    <div ng-if="page.finish" class="margin-top-big t-center">
 
       <div class="card t-center" style="min-height: 450px;">
         <div class="finish">
           <h1>Congrats!</h1>
           <h3>You finished the trail!!</h3>
+          <h4>You earned <b>{{ score }}</b> points!</h4>
         </div>
 
         <div class="rating">
@@ -134,7 +145,7 @@
         </div>
       </div>
 
-      <button class="button button-a" ui-sref="app.dashboard">Back to dashboard</button>
+      <button class="button button-a" ng-click="submit()" ui-sref="app.dashboard">Back to dashboard</button>
 
     </div>
 

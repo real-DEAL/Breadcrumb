@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $rootScope, $state, ListFact, Data, Style) {
+.controller('ListCtrl', function ($scope, $rootScope, $state, store, ListFact, Data, Style) {
   $scope.specificTransport = false;
   $scope.loading = null;
 
@@ -35,7 +35,6 @@ angular.module('breadcrumb')
     $scope.trails[index].style = Style.inactiveTrail;
   };
 
-// TODO: splice deleted trail from dashboard display
   $scope.delete = (trail, index) => {
     $scope.trails.splice(index, 1);
     ListFact.del(trail);
@@ -44,8 +43,8 @@ angular.module('breadcrumb')
   $scope.filter = (type, value) => {
     $scope.loading = null;
     $scope.trails = ListFact.filter($scope.trails, type, value);
-    $scope.loading = Style.displayNone;
     if (type === 'transport') $scope.specificTransport = true;
+    $scope.loading = Style.displayNone;
   };
 
   $scope.reset = () => {

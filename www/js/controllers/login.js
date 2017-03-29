@@ -23,8 +23,8 @@ angular.module('breadcrumb')
       store.set('pic', profile.picture);
       $http({
         method: 'GET',
-        // url: 'http://54.203.104.113/users',
-        url: 'http://192.168.99.100:3000/users',
+        url: 'http://54.203.104.113/users',
+        // url: 'http://192.168.99.100:3000/users',
         json: true,
         params: {
           social_login: profile.user_id,
@@ -38,8 +38,8 @@ angular.module('breadcrumb')
         if (data) {
           $http({
             method: 'POST',
-            // url: 'http://54.203.104.113//v1/access_tokens',
-            url: 'http://192.168.99.100:3000/v1/access_tokens',
+            url: 'http://54.203.104.113/v1/access_tokens',
+            // url: 'http://192.168.99.100:3000/v1/access_tokens',
             json: true,
             data,
           }).then((tokendata) => {

@@ -1,10 +1,34 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, UserFact, Geofence, AugRealFact) {
   $scope.loading = null;
 
   $scope.opacity = true;
 
   $scope.trailID = null;
+
+  $scope.leaving = null;
+
+  $scope.savedID = null;
+
+  $scope.leave = () => {
+    $scope.leaving = !$scope.leaving;
+  };
+
+  $scope.quit = () => {
+    $state.go('app.dashboard');
+  };
+
+  $scope.save = (input) => {
+    const user = store.get('user').id;
+    const id = $scope.savedID;
+    const update = input || { position: $scope.crumb };
+    ListFact.updateSaved(user, id, update);
+  };
+
+  $scope.saveQuit = () => {
+    $scope.save();
+    $scope.quit();
+  };
 
   $scope.page = {
     description: true,
@@ -27,9 +51,34 @@ angular.module('breadcrumb')
     $scope.loading = null;
     ListFact.get('id').then((trails) => {
       $scope.trail = trails[0];
-      $scope.crumbs = trails[0].crumb;
-      $scope.trailID = $rootScope.trailID;
-      $scope.loading = { display: 'none' };
+      ListFact.getSaved(store.get('user').id, $scope.trail.id)
+      .then((data) => {
+        $scope.savedID = data.id;
+        $scope.crumbs = trails[0].crumb;
+        $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
+        $scope.crumb = data.position || 0;
+        $scope.trailID = $rootScope.trailID;
+        $scope.loading = { display: 'none' };
+        UserFact.updateUser(store.get('user').id, { current_trail: $scope.trail.id });
+      });
+    });
+  };
+
+  $scope.finishTrail = () => {
+    $scope.crumb = 0;
+    const updates = {
+      position: $scope.crumb,
+      time_finished: new Date(),
+    };
+    UserFact.getUser(store.get('user').username)
+    .then((data) => {
+      const newScore = data.score + $scope.score;
+      const newTrailCount = (data.total_completed || 0) + 1;
+      UserFact.updateUser(data.id, {
+        score: newScore,
+        total_completed: newTrailCount,
+      });
+      $scope.save(updates);
     });
   };
 
@@ -56,16 +105,21 @@ angular.module('breadcrumb')
         $scope.crumb += 1;
         $rootScope.pinged = false;
         Geofence.removeAll();
+        if ($scope.crumb > $scope.crumbs.length) {
+          $scope.crumb = 0;
+        }
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
           $scope.page.finish = true;
+          $scope.finishTrail();
         } else {
           $scope.page.found = false;
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
           $scope.page.description = true;
+          $scope.save();
         }
         break;
       default: $scope.page.description = true;
@@ -96,7 +150,7 @@ angular.module('breadcrumb')
 
   $scope.ratingToggle = (value) => {
     $scope.rating = Data.fillIcons('rating', value);
-    $scope.postTrail.rating = value;
+    $scope.postTrail.rating = value + 1;
   };
 
   $scope.postTrail = {
@@ -114,5 +168,18 @@ angular.module('breadcrumb')
       text: false,
     };
     $scope.page.media[type] = true;
+  };
+
+  $scope.submit = () => {
+    if ($scope.postTrail.rating) {
+      ListFact.get('id')
+      .then((data) => {
+        const updates = {
+          rating: data[0].rating + $scope.postTrail.rating,
+          ratings: data[0].ratings + 5,
+        };
+        ListFact.update($scope.trail.id, updates);
+      });
+    }
   };
 });

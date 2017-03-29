@@ -32,7 +32,7 @@
         <div class="col">{{ user.trail.name }}</div>
         <div class="col center">{{ user.trail.progress }} complete</div>
         <div class="col right">
-          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in user.trail.rating track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in user.trail.emptyStars track by $index"></i>
+          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in user.trail.ratingArray track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in user.trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
@@ -45,7 +45,7 @@
       <div class="row" ng-repeat="trail in userTrails track by $index">
         <div class="col">{{ trail.name }}</div>
         <div class="col right">
-          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.rating track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars track by $index"></i>
+          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.ratingArray track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
@@ -58,7 +58,7 @@
       <div class="row" ng-repeat="trail in pastTrails track by $index">
         <div class="col">{{ trail.name }}</div>
         <div class="col right">
-          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.rating"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars"></i>
+          <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.ratingArray"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars"></i>
         </div>
       </div>
       <div class="item item-divider">
