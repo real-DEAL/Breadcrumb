@@ -145,7 +145,6 @@ angular.module('breadcrumb')
 
   $scope.postTrail = {
     rating: null,
-    ratings: 5,
   };
 
   $scope.media = (type) => {
@@ -162,14 +161,15 @@ angular.module('breadcrumb')
   };
 
   $scope.submit = () => {
-    ListFact.get('id')
-    .then((data) => {
-      console.log(data[0]);
-      const updates = {
-        rating: data[0].rating + $scope.postTrail.rating,
-        ratings: data[0].ratings + 5,
-      };
-      ListFact.update($scope.trail.id, updates);
-    });
+    if ($scope.postTrail.rating) {
+      ListFact.get('id')
+      .then((data) => {
+        const updates = {
+          rating: data[0].rating + $scope.postTrail.rating,
+          ratings: data[0].ratings + 5,
+        };
+        ListFact.update($scope.trail.id, updates);
+      });
+    }
   };
 });
