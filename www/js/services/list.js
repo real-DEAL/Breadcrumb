@@ -11,8 +11,9 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    // let link = 'http://54.203.104.113/trails?';
-    let link = 'http://192.168.99.100:3000/trails?';
+    let link = 'http://localhost:3000/trails?';
+    // let link = 'http://192.168.99.100:3000/trails?';
+    // let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
       link += `id=${$rootScope.trailID}&`;
     } else if (request) {
@@ -62,8 +63,9 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${code}`,
-      url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${code}`,
+      url: `http://localhost:3000/trails/${trail.id}?&access_token=${store.get('access_token')}`,
+      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
+      // url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${store.get('access_token')}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
