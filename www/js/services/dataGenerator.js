@@ -170,14 +170,14 @@ angular.module('breadcrumb').factory('Data', function () {
     const tran = Math.floor(Math.random() * 4) + 1;
     const trailStars = Math.floor(Math.random() * 6);
     const emptyStars = 5 - trailStars;
-    const difficulty = Math.floor(Math.random() * 5) + 1;
+    const diff = Math.floor(Math.random() * 5) + 1;
     return {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
       description: '',
       transport: tran,
       rating: arrayMaker(trailStars),
       emptyStars: arrayMaker(emptyStars),
-      difficulty: arrayMaker(difficulty),
+      difficulty: arrayMaker(diff),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
       progress: Math.floor(Math.random() * 100),
       style: closeStyle,

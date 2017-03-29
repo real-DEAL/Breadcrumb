@@ -1,9 +1,10 @@
 angular.module('breadcrumb')
-.factory('getUpdateUserFact', function ($http, $state, store) {
+.factory('getUpdateUserFact', function ($rootScope, $http, $state, store) {
   const putUserInfo = (userIf, userData) =>
     $http({
       method: 'PUT',
-      url: `http://54.203.104.113/users/${userData.id}`,
+      // url: `${$rootScope.IP}/users${userData.id}`,
+      url: `http://54.203.104.113/users${userData.id}`,
       data: userIf,
       json: true,
       params: {
@@ -21,6 +22,7 @@ angular.module('breadcrumb')
   const postUserInfo = userIf =>
     $http({
       method: 'POST',
+      // url: `${$rootScope.IP}/users`,
       url: 'http://54.203.104.113/users',
       data: userIf,
       json: true,
@@ -38,6 +40,7 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
+      // url: `${$rootScope.IP}/users/${userData.id}?access_token=${store.get('access_token')}`,
       url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
       json: true,
     })
@@ -51,7 +54,7 @@ angular.module('breadcrumb')
   return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
-      url: `http://54.203.104.113/users?access_token=${store.get('access_token')}`,
+      url: `${$rootScope.IP}/users?access_token=${store.get('access_token')}`,
       json: true,
       params: {
         social_login: socialID,

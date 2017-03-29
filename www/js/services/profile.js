@@ -1,9 +1,11 @@
 angular.module('breadcrumb')
-.factory('UserFact', function ($http) {
+.factory('UserFact', function ($http, $rootScope, store) {
+  const code = store.get('access_token');
+
   const getUser = username => (
     $http({
       method: 'GET',
-      url: `http://54.203.104.113/users?username=${username}`,
+      url: `${$rootScope.IP}/users?username=${username}`,
       json: true,
     })
     .then(response => response.data.data[0])
@@ -13,7 +15,7 @@ angular.module('breadcrumb')
   const updateUser = (id, updates) => (
     $http({
       method: 'PUT',
-      url: `http://54.203.104.113/users/${id}`,
+      url: `${$rootScope.IP}/users/${id}?access_token=${code}`,
       json: true,
       data: updates,
     })

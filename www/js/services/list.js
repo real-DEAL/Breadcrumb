@@ -11,7 +11,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    let link = 'http://54.203.104.113/trails?';
+    let link = `${$rootScope.IP}/trails?`;
     if (request === 'id') {
       link += `id=${$rootScope.trailID}&`;
     } else if (request) {
@@ -48,7 +48,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const updateTrail = (id, updates) => {
     $http({
       method: 'PUT',
-      url: `http://54.203.104.113/trails/${id}`,
+      url: `${$rootScope.IP}/trails/${id}`,
       params: {
         access_token: code,
       },
@@ -61,7 +61,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
+      url: `${$rootScope.IP}/trails/${trail.id}?access_token=${code}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
@@ -70,7 +70,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const makeSavedTrail = (user, trail) => (
     $http({
       method: 'POST',
-      url: 'http://54.203.104.113/savedtrails',
+      url: `${$rootScope.IP}/savedtrails`,
       params: {
         access_token: code,
       },
@@ -86,7 +86,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const getSavedTrail = (user, trail) => (
     $http({
       method: 'GET',
-      url: 'http://54.203.104.113/savedtrails',
+      url: `${$rootScope.IP}/savedtrails`,
       params: {
         user_id: user,
         trail_id: trail,
@@ -105,7 +105,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const updateSavedTrail = (user, id, updates) => {
     $http({
       method: 'PUT',
-      url: `http://54.203.104.113/savedtrails/${id}`,
+      url: `${$rootScope.IP}/savedtrails/${id}`,
       params: {
         access_token: code,
       },

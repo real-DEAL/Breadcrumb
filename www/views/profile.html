@@ -18,10 +18,9 @@
             <h2 style="color: white">{{ user.username }}</h2>
           </div>
         </div>
-        <div class="col center">
-          <h3>Score: {{ user.score || 0 }}</h3>
-          <p>Completed trails: {{ user.total_completed || 0 }}
-          <br>Total time: {{ user.totalTime || 0 }}</p>
+        <div class="col center egg-t">
+          <h3 class="egg-t">Score: {{ user.score || 0 }}</h3>
+          <p>Completed trails: {{ user.total_completed || 0 }}</p>
         </div>
       </div>
     </div>
@@ -36,7 +35,7 @@
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">CONTINUE LATEST TRAIL</a>
+        <a ui-sref="app.trail">CONTINUE LATEST TRAIL</a>
       </div>
     </div>
 
@@ -49,7 +48,7 @@
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">VIEW MORE TRAILS YOU'VE MADE</a>
+        <a ui-sref="app.dashboard" ng-click="setFilter({user_id: user.id})">VIEW MORE TRAILS YOU'VE MADE</a>
       </div>
     </div>
 
@@ -62,7 +61,7 @@
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">VIEW MORE OF YOUR PAST TRAILS</a>
+        <a ui-sref="app.dashboard" ng-click="setFilter()">VIEW MORE OF YOUR PAST TRAILS</a>
       </div>
     </div>
   </ion-content>

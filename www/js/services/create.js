@@ -1,5 +1,5 @@
 angular.module('breadcrumb').factory('Trail', function ($http, store) {
-  const submitTrail = (trail, crumbs) => {
+  const submitTrail = ($rootScope, trail, crumbs) => {
     const length = trail.length.replace(/[^0-9.]/g, '');
     trail.length = length;
     if (!trail.transport) {
@@ -22,7 +22,7 @@ angular.module('breadcrumb').factory('Trail', function ($http, store) {
     trail.crumbs = crumbs;
     return $http({
       method: 'POST',
-      url: `http://54.203.104.113/trails?access_token=${store.get('access_token')}`,
+      url: `${$rootScope.IP}/trails?access_token=${store.get('access_token')}`,
       header: {
         'Access-Control-Allow-Origin': '*',
       },

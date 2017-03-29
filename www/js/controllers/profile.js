@@ -3,6 +3,7 @@ angular.module('breadcrumb')
   $scope.loading = null;
 
   $scope.user = store.get('user');
+
   const populateUserTrails = () => {
     ListFact.get({ user_id: $scope.user.id })
     .then((trails) => {
@@ -24,6 +25,8 @@ angular.module('breadcrumb')
   };
 
   const getTrails = () => {
+    $scope.userTrails = [];
+    $scope.pastTrails = [];
     UserFact.getUser($scope.user.username)
     .then((data) => {
       $scope.pastTrails.push(data.savedtrail[0]);
@@ -38,6 +41,14 @@ angular.module('breadcrumb')
     });
   };
 
+  const getUser = () => {
+    UserFact.getUser($scope.user.username)
+    .then((user) => {
+      $scope.user = user;
+      getTrails();
+    });
+  };
+
   $scope.userPic = {
     'background-image': `url('${store.get('user').profile_picture}')`,
     'background-position': 'center',
@@ -48,5 +59,7 @@ angular.module('breadcrumb')
 
   $scope.pastTrails = [];
 
-  getTrails();
+  $scope.$on('$ionicView.beforeEnter', () => {
+    getUser();
+  });
 });
