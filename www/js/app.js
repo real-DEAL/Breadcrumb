@@ -86,7 +86,6 @@ angular.module('breadcrumb', [
     // }
   });
 })
-
 .controller('AppCtrl', function (
   $scope,
   $rootScope,
