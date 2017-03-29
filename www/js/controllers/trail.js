@@ -55,6 +55,7 @@ angular.module('breadcrumb')
       .then((data) => {
         $scope.savedID = data.id;
         $scope.crumbs = trails[0].crumb;
+        $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
         $scope.crumb = data.position || 0;
         $scope.trailID = $rootScope.trailID;
         $scope.loading = { display: 'none' };
@@ -69,7 +70,11 @@ angular.module('breadcrumb')
       position: $scope.crumb,
       time_finished: new Date(),
     };
-    $scope.save(updates);
+    UserFact.getUser(store.get('user').username)
+    .then((data) => {
+      UserFact.updateUser(data.id, { score: data.score + $scope.score });
+      $scope.save(updates);
+    });
   };
 
   $scope.trail = $scope.startTrail();
