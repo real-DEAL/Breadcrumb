@@ -117,22 +117,38 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     .catch(err => console.error(err));
   };
 
-  const filterListItems = (list, type, value) => {
-    const items = list.slice();
-    if (value) {
-      return items.filter(item => item[type] === value);
-    } else if (type === 'rating') {
+  const typeObj = {
+    transport: false,
+    length: false,
+    difficulty: false,
+    stars: true,
+  };
+
+  const itemSort = (items, type) => {
+    if (typeObj[type]) {
+      typeObj[type] = !typeObj[type];
       return items.sort((a, b) => {
         if (a[type] > b[type]) return -1;
         if (a[type] < b[type]) return 1;
         return 0;
       });
     }
+    typeObj[type] = !typeObj[type];
     return items.sort((a, b) => {
       if (a[type] < b[type]) return -1;
       if (a[type] > b[type]) return 1;
       return 0;
     });
+  };
+
+  const filterListItems = (list, type, value) => {
+    const items = list.slice();
+    if (value) {
+      return items.filter(item => item[type] === value);
+    } else if (type === 'stars' // or should it be 'rating'?) {
+      return itemSort(items, type);
+    }
+    return itemSort(items, type);
   };
 
   return {
