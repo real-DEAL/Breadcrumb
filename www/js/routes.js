@@ -7,11 +7,6 @@ angular.module('breadcrumb')
     jwtOptionsProvider
   ) {
     $stateProvider
-      .state('trailMap', {
-        url: '/trailmap',
-        templateUrl: 'views/trailMap.html',
-        controller: 'TrailMapCtrl',
-      })
       .state('start', {
         url: '/start',
         templateUrl: 'views/start.html',
@@ -108,7 +103,7 @@ angular.module('breadcrumb')
       loginState: 'start',
     });
 
-    $urlRouterProvider.otherwise('/trailmap');
+    $urlRouterProvider.otherwise('/start');
 
     jwtOptionsProvider.config({
       whiteListedDomains: [

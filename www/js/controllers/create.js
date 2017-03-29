@@ -1,6 +1,5 @@
 angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
-
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
 
@@ -178,30 +177,17 @@ angular.module('breadcrumb')
   };
 
 
-  $scope.add = (arg) => {
+  $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
       $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
-      // if (arg) {
-        // currently the location.lat and location.lng is being updated
-        // if ($scope.crumbs.length > 1) {
-        //   console.warn(arg, 'arg')
-        //   $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
-        //   $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
-        //   $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
-        // }
-      // } else {
-        if ($scope.crumbs.length > 1) {
-          console.warn($scope.center.lat, 'center.lat is updated')
-          $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
-          $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
-          // TODO: get the formatted_address
-          // $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
-        }
-      // }
+      if ($scope.crumbs.length > 1) {
+        $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
+        $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
+      }
     }
   };
 
@@ -331,19 +317,11 @@ angular.module('breadcrumb')
           logic: 'emit',
         },
       },
-
-
       markers: {
         marker: {
           lat: 29.9511,
           lng: -90.0715,
           draggable: true,
-        },
-      },
-      events: {
-        map: {
-          enable: ['zoomstart', 'drag', 'click', 'mousemove'],
-          logic: 'emit',
         },
       },
       defaults: {
@@ -358,53 +336,13 @@ angular.module('breadcrumb')
     },
   };
 
-  // ==========================================================================
-
-
-  // $scope.$on('leafletDirectiveMap.move', (event, args) => {
-  //   // Get the Leaflet map from the triggered event.
-  //   const map = args.leafletEvent.target;
-  //   const center = (map.getCenter());
-  //   $scope.center.lat = center.lat;
-  //   $scope.center.lng = center.lng;
-  //   $scope.location.lat = center.lat;
-  //   $scope.location.lng = center.lng;
-  //   // $scope.updateMap();
-  //   $scope.markers = {
-  //     marker: {
-  //       lat: $scope.center.lat,
-  //       lng: $scope.center.lng,
-  //     },
-  //   };
-  //   console.warn($scope.location, '$scope.location at the same time');
-  // });
-  //
-  // $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
-  //   const map = args.leafletEvent.target;
-  //   const center = (map.panTo());
-  //   $scope.center.lat = center.lat;
-  //   $scope.center.lng = center.lng;
-  //   console.warn('get new center', $scope.center);
-  // });
-  // TODO: this currently updates the center of the map the first time, but not the 2nd
   $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
     const map = args.leafletEvent.target;
     const center = map.getLatLng();
-    $scope.center.lat = center.lat; // this currently doesn't work
+    $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
-    // change the location which speaks to the input box in view
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
-    // setInterval(() => {
-    //   $scope.updateMap();
-    // })
-
-    console.warn($scope.location, '$scope.location updated');
-    console.warn($scope.markers.marker, '$scope.markers.marker updated');
-    //TODO: how to make it work continually and let angular know to update the center as well???
-    // i mean the scope is clearly changing in the updateCoords function, but it's just updating
-    // the view!!! -- i want to use the panTo function for that reason!!!
-
   });
 
 
@@ -423,11 +361,6 @@ angular.module('breadcrumb')
     };
   };
 
-
-  // TODO: when autocomplete updates, get its coordinates and use
-  // it to also update the marker on the map
-
-
   $scope.place = {
     address: '',
   };
@@ -438,23 +371,17 @@ angular.module('breadcrumb')
       geocoder.geocode({ address: $scope.place.address }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results) {
-              console.warn('Getting geocode lng', results[0].geometry.location.lat());
-              $scope.markers.marker.lat = results[0].geometry.location.lat();
-              $scope.markers.marker.lng = results[0].geometry.location.lng();
-              angular.extend($scope, {
-                center: {
-                  lat: results[0].geometry.location.lat(),
-                  lng: results[0].geometry.location.lng(),
-                  zoom: 15,
-                },
-              });
-              $scope.center.lat = results[0].geometry.location.lat();
-              $scope.center.lng = results[0].geometry.location.lng();
-
-            // listen to marker changed or place_changed, then get event and panto
-            // window.L.panTo($scope.center);
-            console.warn('center lat get updated', $scope.center.lat);
-            console.warn('markers lat get updated', $scope.markers.marker.lat);
+            $scope.markers.marker.lat = results[0].geometry.location.lat();
+            $scope.markers.marker.lng = results[0].geometry.location.lng();
+            angular.extend($scope, {
+              center: {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng(),
+                zoom: 15,
+              },
+            });
+            $scope.center.lat = results[0].geometry.location.lat();
+            $scope.center.lng = results[0].geometry.location.lng();
             $scope.$apply();
           } else {
             console.warn('Location not found');
@@ -466,36 +393,19 @@ angular.module('breadcrumb')
     }
   };
 
-
   $scope.$on('leafletDirectiveMap.move', (event, args) => {
-    // Get the Leaflet map from the triggered event.
     const map = args.leafletEvent.target;
     const center = (map.getCenter());
     $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
-    // $scope.updateMap();
     $scope.markers = {
       marker: {
         lat: $scope.center.lat,
         lng: $scope.center.lng,
       },
     };
-    console.warn($scope.location, '$scope.location at the same time');
-  });
-
-  $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
-    const map = args.leafletEvent.target;
-    const center = map.getLatLng();
-    $scope.center.lat = center.lat; // this currently doesn't work
-    $scope.center.lng = center.lng;
-    // change the location which speaks to the input box in view
-    $scope.location.lat = center.lat;
-    $scope.location.lng = center.lng;
-    // $scope.updateMap();
-    console.warn($scope.location, '$scope.location updated');
-    console.warn($scope.markers.marker, '$scope.markers.marker updated');
   });
 
 
@@ -615,5 +525,6 @@ angular.module('breadcrumb')
       });
     }
   };
+
 
 });
