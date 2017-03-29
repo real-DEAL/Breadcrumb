@@ -1,4 +1,3 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
   const code = () => store.get('access_token');
 
