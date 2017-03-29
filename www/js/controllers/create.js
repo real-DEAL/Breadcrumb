@@ -483,7 +483,6 @@ angular.module('breadcrumb')
       },
     };
     console.warn($scope.location, '$scope.location at the same time');
-
   });
 
   $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
@@ -498,7 +497,7 @@ angular.module('breadcrumb')
     console.warn($scope.location, '$scope.location updated');
     console.warn($scope.markers.marker, '$scope.markers.marker updated');
   });
-  }
+
 
   // this updates map when location from autocomplete changes $watch
   // ==========================================================================
@@ -604,7 +603,7 @@ angular.module('breadcrumb')
             // listen to marker changed or place_changed, then get event and panto
             // window.L.panTo($scope.center);
             console.warn('center lat get updated', $scope.center.lat);
-            
+
             console.warn('markers lat get updated', $scope.markers.marker.lat);
             $scope.$apply();
           } else {
