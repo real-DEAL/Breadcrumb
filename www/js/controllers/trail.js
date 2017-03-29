@@ -141,8 +141,6 @@ angular.module('breadcrumb')
   $scope.ratingToggle = (value) => {
     $scope.rating = Data.fillIcons('rating', value);
     $scope.postTrail.rating = value + 1;
-    console.log($scope.trail);
-    console.log($scope.postTrail);
   };
 
   $scope.postTrail = {
@@ -167,6 +165,11 @@ angular.module('breadcrumb')
     ListFact.get('id')
     .then((data) => {
       console.log(data[0]);
+      const updates = {
+        rating: data[0].rating + $scope.postTrail.rating,
+        ratings: data[0].ratings + 5,
+      };
+      ListFact.update($scope.trail.id, updates);
     });
   };
 });

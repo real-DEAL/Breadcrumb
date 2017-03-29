@@ -29,7 +29,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     .then((response) => {
       const data = [];
       response.data.data.forEach((trail) => {
-        console.log(trail.rating);
         trail.style = Style.inactiveTrail;
         const possible = trail.ratings || trail.rating * 5;
         const rating = Math.round((trail.rating / possible) * 5);
@@ -45,6 +44,19 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     .catch((err) => {
       console.error(err);
     });
+  };
+
+  const updateTrail = (id, updates) => {
+    $http({
+      method: 'PUT',
+      url: `http://192.168.99.100:3000/trails/${id}`,
+      params: {
+        access_token: code,
+      },
+      data: updates,
+    })
+    .then(res => console.warn(res))
+    .catch(err => console.error(err));
   };
 
   const deleteTrail = (trail) => {
@@ -126,6 +138,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   return {
     get: getTrails,
     del: deleteTrail,
+    update: updateTrail,
     getSaved: getSavedTrail,
     updateSaved: updateSavedTrail,
     range: arrayMaker,
