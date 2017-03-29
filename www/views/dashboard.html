@@ -39,7 +39,7 @@
 
           <!-- LENGTH -->
           <div class="col left" ng-click="filter('length')">
-            {{ trail.length }}
+            {{ trail.length }} miles
           </div>
 
           <!-- DIFFICULTY -->
@@ -84,7 +84,7 @@
     </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-balanced" ng-click="reset()" ng-if="specificTransport">
+  <div class="footer" ng-click="reset()" ng-if="specificTransport">
     <div class="title">View all transport types</div>
   </div>
 </ion-view>

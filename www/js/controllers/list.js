@@ -35,7 +35,6 @@ angular.module('breadcrumb')
     $scope.trails[index].style = Style.inactiveTrail;
   };
 
-// TODO: splice deleted trail from dashboard display
   $scope.delete = (trail, index) => {
     $scope.trails.splice(index, 1);
     ListFact.del(trail);
@@ -80,7 +79,6 @@ angular.module('breadcrumb')
   });
 
   $scope.pickTrail = (id, index) => {
-    ListFact.getSaved(store.get('user').id, id);
     $rootScope.trailID = id;
     $scope.close(index);
   };

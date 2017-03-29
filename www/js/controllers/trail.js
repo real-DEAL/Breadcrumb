@@ -1,10 +1,34 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, Geofence, AugRealFact) {
   $scope.loading = null;
 
   $scope.opacity = true;
 
   $scope.trailID = null;
+
+  $scope.leaving = null;
+
+  $scope.savedID = null;
+
+  $scope.leave = () => {
+    $scope.leaving = !$scope.leaving;
+  };
+
+  $scope.quit = () => {
+    $state.go('app.dashboard');
+  };
+
+  $scope.save = (input) => {
+    const user = store.get('user').id;
+    const id = $scope.savedID;
+    const update = input || { position: $scope.crumb };
+    ListFact.updateSaved(user, id, update);
+  };
+
+  $scope.saveQuit = () => {
+    $scope.save();
+    $scope.quit();
+  };
 
   $scope.page = {
     description: true,
@@ -27,10 +51,25 @@ angular.module('breadcrumb')
     $scope.loading = null;
     ListFact.get('id').then((trails) => {
       $scope.trail = trails[0];
-      $scope.crumbs = trails[0].crumb;
-      $scope.trailID = $rootScope.trailID;
-      $scope.loading = { display: 'none' };
+      ListFact.getSaved(store.get('user').id, $scope.trail.id)
+      .then((data) => {
+        $scope.savedID = data.id;
+        $scope.crumbs = trails[0].crumb;
+        $scope.crumb = data.position || 0;
+        console.log('Current crumb number is', $scope.crumb);
+        $scope.trailID = $rootScope.trailID;
+        $scope.loading = { display: 'none' };
+      });
     });
+  };
+
+  $scope.finishTrail = () => {
+    $scope.crumb = 0;
+    const updates = {
+      position: $scope.crumb,
+      time_finished: new Date(),
+    };
+    $scope.save(updates);
   };
 
   $scope.trail = $scope.startTrail();
@@ -56,16 +95,21 @@ angular.module('breadcrumb')
         $scope.crumb += 1;
         $rootScope.pinged = false;
         Geofence.removeAll();
+        if ($scope.crumb > $scope.crumbs.length) {
+          $scope.crumb = 0;
+        }
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
           $scope.page.finish = true;
+          $scope.finishTrail();
         } else {
           $scope.page.found = false;
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
           $scope.page.description = true;
+          $scope.save();
         }
         break;
       default: $scope.page.description = true;

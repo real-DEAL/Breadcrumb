@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
+  const code = store.get('access_token');
   const arrayMaker = (num) => {
     const arr = [];
     let i;
@@ -10,10 +11,10 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
+    // let link = 'http://54.203.104.113/trails?';
     let link = 'http://192.168.99.100:3000/trails?';
-    // let link = 'http://54.203.104.113/trails';
     if (request === 'id') {
-      link += `/id=${$rootScope.trailID}`;
+      link += `id=${$rootScope.trailID}&`;
     } else if (request) {
       _.each(request, (val, req) => {
         if (req !== 'username' && val !== null && val !== 'Any') {
@@ -23,10 +24,9 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     }
     return $http({
       method: 'GET',
-      url: `${link}&access_token=${store.get('access_token')}`,
+      url: `${link}&access_token=${code}`,
     })
     .then((response) => {
-      console.log(response);
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;
@@ -49,68 +49,60 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
-      url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${store.get('access_token')}`,
+      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${code}`,
+      url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${code}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
   };
 
-  const getOrMakeSavedTrail = (user, trail) => {
-    console.log(user, trail);
+  const makeSavedTrail = (user, trail) => (
     $http({
-      method: 'GET',
-      url: 'http://http://54.203.104.113/savedtrails/',
+      method: 'POST',
+      url: 'http://192.168.99.100:3000/savedtrails',
       params: {
+        access_token: code,
+      },
+      data: {
         user_id: user,
         trail_id: trail,
       },
     })
-    .then((res) => {
-      console.warn('Yay we made it', res);
-      if (!res.data.data.length) {
-        $http({
-          method: 'POST',
-          url: 'http://http://54.203.104.113/savedtrails/',
-          data: {
-            user_id: user,
-            trail_id: trail,
-          },
-        })
-        .then(data => console.warn('creating', data))
-        .catch(error => console.error('fuck', error));
-      }
-    })
-    .catch(err => console.error('check', err));
-  };
+    .then(res => res.data.data[0])
+    .catch(error => console.error(error))
+  );
 
-  // const updateSavedTrail = (user, trail) => {
-  //   console.log(user, trail);
-  //   $http({
-  //     method: 'GET',
-  //     url: 'http://192.168.99.100/savedtrails/',
-  //     params: {
-  //       user_id: user,
-  //       trail_id: trail,
-  //     },
-  //   })
-  //   .then((res) => {
-  //     console.warn(res);
-  //   })
-  //   .catch((err) => {
-  //     console.error('Trail is not yet saved', err);
-  //     $http({
-  //       method: 'POST',
-  //       url: 'http://192.168.99.100/savedtrails/',
-  //       params: {
-  //         user_id: user,
-  //         trail_id: trail,
-  //       },
-  //     })
-  //     .then(data => console.warn(data))
-  //     .catch(error => console.error(error));
-  //   });
-  // };
+  const getSavedTrail = (user, trail) => (
+    $http({
+      method: 'GET',
+      url: 'http://192.168.99.100:3000/savedtrails',
+      params: {
+        user_id: user,
+        trail_id: trail,
+        access_token: code,
+      },
+    })
+    .then((res) => {
+      if (!res.data.data[0]) {
+        return makeSavedTrail(user, trail);
+      }
+      return res.data.data[0];
+    })
+    .catch(() => makeSavedTrail(user, trail))
+  );
+
+  const updateSavedTrail = (user, id, updates) => {
+    $http({
+      method: 'PUT',
+      url: `http://192.168.99.100:3000/savedtrails/${id}`,
+      params: {
+        access_token: code,
+      },
+      data: updates,
+    })
+    .then(res => console.warn(res))
+    .catch(err => console.error(err));
+  };
 
   const filterListItems = (list, type, value) => {
     const items = list.slice();
@@ -133,8 +125,8 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   return {
     get: getTrails,
     del: deleteTrail,
-    getSaved: getOrMakeSavedTrail,
-    // updateSaved: updateSavedTrail,
+    getSaved: getSavedTrail,
+    updateSaved: updateSavedTrail,
     range: arrayMaker,
     filter: filterListItems,
   };

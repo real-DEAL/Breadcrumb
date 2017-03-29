@@ -3,7 +3,7 @@ angular.module('breadcrumb').factory('GeofencePluginMock', function ($q, $log) {
     addOrUpdate: (fences) => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin addOrUpdate', fences);
+      // $log.log('Mocked geofence plugin addOrUpdate', fences);
       deffered.resolve();
 
       return deffered.promise;
@@ -11,7 +11,7 @@ angular.module('breadcrumb').factory('GeofencePluginMock', function ($q, $log) {
     remove: (ids) => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin remove', ids);
+      // $log.log('Mocked geofence plugin remove', ids);
       deffered.resolve();
 
       return deffered.promise;
@@ -19,7 +19,7 @@ angular.module('breadcrumb').factory('GeofencePluginMock', function ($q, $log) {
     removeAll: () => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin removeAll');
+      // $log.log('Mocked geofence plugin removeAll');
       deffered.resolve();
 
       return deffered.promise;

@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('AuthCtrl', function ($scope, store, getUpdateUserFact) {
+.controller('AuthCtrl', function ($scope, store, getUpdateUserFact, Data) {
   $scope.test = input => console.warn(input);
 
   $scope.askIfYouAreSure = () => {
@@ -27,4 +27,7 @@ angular.module('breadcrumb')
       email: $scope.creds.email,
     }, deleteAccount);
   };
+
+  $scope.child1 = Data.child();
+  $scope.child2 = Data.child();
 });
