@@ -29,12 +29,13 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     .then((response) => {
       const data = [];
       response.data.data.forEach((trail) => {
+        console.log(trail.rating);
         trail.style = Style.inactiveTrail;
-        // TODO: Integrate actual algorithm to calculate rating from trail.score
-        const rating = trail.rating || Math.floor(Math.random() * 6);
+        const possible = trail.ratings || trail.rating * 5;
+        const rating = Math.round((trail.rating / possible) * 5);
         const emptyStars = 5 - rating;
         const difficulty = trail.difficulty;
-        trail.rating = arrayMaker(rating);
+        trail.ratingArray = arrayMaker(rating);
         trail.emptyStars = arrayMaker(emptyStars);
         trail.difficulty = arrayMaker(difficulty);
         data.push(trail);

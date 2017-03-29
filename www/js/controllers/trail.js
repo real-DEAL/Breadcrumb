@@ -140,11 +140,14 @@ angular.module('breadcrumb')
 
   $scope.ratingToggle = (value) => {
     $scope.rating = Data.fillIcons('rating', value);
-    $scope.postTrail.rating = value;
+    $scope.postTrail.rating = value + 1;
+    console.log($scope.trail);
+    console.log($scope.postTrail);
   };
 
   $scope.postTrail = {
     rating: null,
+    ratings: 5,
   };
 
   $scope.media = (type) => {
@@ -158,5 +161,12 @@ angular.module('breadcrumb')
       text: false,
     };
     $scope.page.media[type] = true;
+  };
+
+  $scope.submit = () => {
+    ListFact.get('id')
+    .then((data) => {
+      console.log(data[0]);
+    });
   };
 });
