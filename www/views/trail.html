@@ -3,13 +3,15 @@
   <div class="loading" ng-style="loading"></div>
 
   <div class="black"  ng-if="leaving" ng-click="leave()"></div>
-  <div class="card info t-center" ng-if="leaving">
-    <div class="item item-divider">
-      Save and quit?
-    </div>
-    <div class="row margin-v">
-      <div class="col col-50 button button-b margin-h" ng-click="quit()">Quit</div>
-      <div class="col col-50 button button-a margin-h" ng-click="saveQuit()">Save and Quit</div>
+  <div class="full">
+    <div class="card info t-center margin-n" ng-if="leaving">
+      <div class="item item-divider">
+        Save and quit?
+      </div>
+      <div class="row margin-v" style="width: 85%">
+        <div class="col col-50 button button-b margin-h" ng-click="quit()">Quit</div>
+        <div class="col col-50 button button-a margin-h" ng-click="saveQuit()">Save/Quit</div>
+      </div>
     </div>
   </div>
 

@@ -4,7 +4,7 @@
   <div class="loading" ng-style="loading"></div>
   <div class="black"  ng-if="info.show" ng-click="toggleInfo()"></div>
 
-  <div class="card info t-center" ng-if="leaving">
+  <div class="card info t-center margin-n" ng-if="info.show">
     <div class="item item-divider">
       {{ info.name }}
     </div>
@@ -116,28 +116,17 @@
           <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
         </div>
 
-
         <!-- LOCATION -->
         <div class="item item-icon-right textbox">
-          <i class="icon ion-navigate" ng-click="test()" style="color: #3a7ec7"></i>
-          <input class="col" type="text" placeholder="Location" location-suggestion location="location" ng-model="location.formatted_address">
+          <i class="positive icon ion-navigate" ng-click="test()"></i>
+          <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="place.address"/>
+          <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
         </div>
-
 
         <!-- MEDIA SWITCH BUTTON -->
         <div class="item item-divider center" ng-click="toggleMedia('media')">
           <h1>UPLOAD MEDIA</h1>
         </div>
-
-
-          <!-- LOCATION -->
-          <div class="item item-icon-right textbox">
-            <i class="positive icon ion-navigate" ng-click="test()"></i>
-            <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="place.address" style="width: 500px;"/>
-            <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
-
-          </div>
-
 
         <!-- BUTTONS -->
         <div class="row" ng-if="!media">

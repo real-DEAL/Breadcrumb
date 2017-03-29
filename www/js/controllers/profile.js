@@ -15,12 +15,17 @@ angular.module('breadcrumb')
   };
 
   const populatePastTrails = () => {
-    $scope.pastTrails.forEach((req, index) => {
-      ListFact.get(req)
-      .then((trails) => {
-        $scope.pastTrails[index] = trails[0];
-      });
-    });
+    // TODO: this is totally broken, needs to find actual trails users have been on
+    // ListFact.getSaved($scope.user.id)
+    // .then((trail) => {
+    //   console.log(trail);
+    //   ListFact.get({ id: trail.trail_id })
+    //   .then((data) => {
+    //     console.log(data);
+    //   });
+    //   // $scope.pastTrails[index] = trail[0];
+    // $scope.loading = Style.displayNone;
+    // });
     $scope.loading = Style.displayNone;
   };
 
@@ -29,9 +34,9 @@ angular.module('breadcrumb')
     $scope.pastTrails = [];
     UserFact.getUser($scope.user.username)
     .then((data) => {
-      $scope.pastTrails.push(data.savedtrail[0]);
-      $scope.pastTrails.push(data.savedtrail[1]);
-      $scope.pastTrails.push(data.savedtrail[2]);
+      // $scope.pastTrails.push(data.savedtrail[0]);
+      // $scope.pastTrails.push(data.savedtrail[1]);
+      // $scope.pastTrails.push(data.savedtrail[2]);
       ListFact.get({ id: data.current_trail })
       .then((trail) => {
         $scope.user.trail = trail[0];
