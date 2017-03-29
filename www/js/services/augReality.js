@@ -21,7 +21,7 @@ angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
   //   messages = [
   //     { username: 'broHeim', text: 'sup bro', bearing: 130 },
   //     { username: 'friendlyfello', text: 'hey man', bearing: 39 },
-  //     { username: 'ali', text: 'yooo', bearing: 273 },
+  //     { username: 'ali', text: 'yooo that's sick', bearing: 273 },
   //   ];
   // });
 
