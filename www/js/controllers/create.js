@@ -2,19 +2,12 @@ angular.module('breadcrumb')
 .controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
-
-    const style = {
-      left: move,
-      'transition-duration': '250ms',
-    };
+    const style = Style.moveLeft(move);
     crumb.style = style;
   };
 
   const moveY = (crumb, num) => {
-    const style = {
-      'transition-duration': '1000ms',
-      transform: `translate(0px, ${num}px)`,
-    };
+    const style = Style.moveVertial(num);
     crumb.style = style;
   };
 
@@ -42,13 +35,13 @@ angular.module('breadcrumb')
 
   $scope.loading = { display: 'none' };
 
-  $scope.info = {
-    show: false,
-    name: 'Description',
-    text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',
-  };
+  $scope.info = Data.info();
 
-  $scope.toggleInfo = () => {
+  $scope.toggleInfo = (type) => {
+    if (type) {
+      $scope.info.name = $scope.info[type].name;
+      $scope.info.text = $scope.info[type].text;
+    }
     $scope.info.show = !$scope.info.show;
   };
 
@@ -102,37 +95,28 @@ angular.module('breadcrumb')
 
 
   $scope.transChange = (type) => {
-    $scope.transport.WALKING.style = null;
-    $scope.transport.BICYCLING.style = null;
-    $scope.transport.TRANSIT.style = null;
-    $scope.transport.DRIVING.style = null;
-    $scope.transport[type].style = {
-      'background-color': '#F8F8F8',
-      'border-radius': '50px',
-    };
+    $scope.transport = Data.transport();
+    $scope.transport[type].style = Style.activeTransport();
   };
 
   // MONEY
 
-  $scope.money = (boolean) => {
-    $scope.trail.requires_money = !boolean;
-    if (boolean) $scope.moneyStyle = null;
-    else {
-      $scope.moneyStyle = {
-        'background-color': '#F8F8F8',
-        'border-radius': '50px',
-        color: '#33CD61',
-      };
-    }
-  };
 
-  $scope.moneyStyle = null;
+    $scope.money = (boolean) => {
+      $scope.trail.requires_money = !boolean;
+      if (boolean) $scope.moneyStyle = null;
+      else {
+        $scope.moneyStyle = Style.activeMoney();
+      }
+    };
+
+    $scope.moneyStyle = null;
 
   // REVIEW
 
   $scope.review = {
     check: false,
-    style: { display: 'none' },
+    style: Style.displayNone,
   };
 
   $scope.trail = trailMaker();
@@ -263,7 +247,8 @@ angular.module('breadcrumb')
       $scope.reset();
       $scope.crumbs = [];
       $scope.trail = trailMaker();
-      $scope.loading = { display: 'none' };
+      $scope.loading = Style.displayNone;
+      $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };

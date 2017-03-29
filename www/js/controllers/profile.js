@@ -1,5 +1,3 @@
-/* eslint no-bitwise: ["error", { "allow": ["^=", "&"] }] */
-
 angular.module('breadcrumb')
 .controller('ProfileCtrl', function ($scope, ListFact, UserFact, Data, Style, store) {
   $scope.loading = null;
