@@ -5,6 +5,8 @@ angular.module('breadcrumb', [
   'auth0',
   'angular-storage',
   'angular-jwt',
+  'gm',
+  'angularReverseGeocode',
 ])
 .run(function (
   $window,
@@ -20,6 +22,7 @@ angular.module('breadcrumb', [
 ) {
   $ionicPlatform.ready(function () {
     $rootScope.pinged = false;
+    $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -77,13 +80,22 @@ angular.module('breadcrumb', [
       }
     });
 
-    if (store.get('token') && store.get('user')) {
-      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
-      $state.go('app.dashboard');
-    }
+    // if (store.get('token') && store.get('user')) {
+    //   auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+    //   $state.go('app.dashboard');
+    // }
   });
 })
-.controller('AppCtrl', function ($scope, $rootScope, auth, store, $state, Data, Style, $http) {
+.controller('AppCtrl', function (
+  $scope,
+  $rootScope,
+  auth,
+  store,
+  $state,
+  Data,
+  Style,
+  $http
+) {
   $scope.logout = () => {
     const user = store.get('user');
     $http({
@@ -106,6 +118,13 @@ angular.module('breadcrumb', [
   $scope.test = (input) => {
     console.warn(input);
   };
+
+  $scope.links = Data.menu;
+
+  $scope.theme = Style.theme();
+
+  $scope.child1 = Data.child();
+  $scope.child2 = Data.child();
 
   $scope.setTrail = (id) => {
     localStorage.setItem('trail', id);

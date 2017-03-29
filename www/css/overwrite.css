@@ -1,0 +1,104 @@
+/*ion-content {
+  background: #3a7ec7;
+}*/
+
+.menu .scroll-content {
+  background-color: #3a7ec7;
+  background-image: url('../img/swirl.gif');
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
+
+.menu-item {
+  color: #e2c7a2;
+  font-size: 1.5em;
+}
+
+.menu-item i {
+  padding: 5px 10px;
+  color: #3a7ec7;
+  background: #f1dfcf;
+  border-radius: 50%;
+}
+
+.bar, .item, .item-content, .item-complex,
+.item-complex .item-content {
+  background: none;
+  border: none;
+}
+
+.item-complex .item-content {
+  padding: 15px 10px 15px 10px;
+}
+
+.bar {
+  background-color: #573d38;
+  box-shadow: 0 0 5px #fbf0ed;
+}
+
+.bar .title, .bar .button {
+  color: #e2c7a2;
+}
+
+.card {
+  border-radius: 10px;
+  margin: 15px 15px 20px 15px;
+  background-color: #fbf0ed;
+}
+
+.item-divider {
+  padding-top: 15px;
+  background-color: #f1dfcf;
+  box-shadow: 0 0 5px 0 #573d38;
+}
+
+.row {
+  width: auto;
+}
+
+.row+.row {
+  margin: 0;
+  padding-top: 10px;
+  padding: 5px;
+  border: none;
+}
+
+.button,
+.button.button-block,
+.button.button-full {
+  margin: 0;
+  font-weight: bold;
+  box-shadow: 0 0 5px 0 #573d38;
+}
+
+.button-a {
+  color: #e2c7a2;
+  background-color: #573d38;
+}
+.button-a:hover, .button-a:active {
+  color: #e2c7a2;
+  background-color: #2d1510;
+}
+
+.button-b {
+  color: #573d38;
+  background-color: #e2c7a2;
+}
+.button-b:hover, .button-b:active {
+  color: #573d38;
+  background-color: #f9e6d6;
+}
+
+.footer {
+  color: #e2c7a2;
+  position: absolute;
+  bottom: 0;
+  height: 75px;
+  width: 100%;
+  text-shadow: 0 1px 5px #222222;
+  font-size: 2em;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

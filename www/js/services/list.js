@@ -1,11 +1,4 @@
-const _ = window._;
-angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, store) {
-  const closeStyle = {
-    height: '95px',
-    'transition-duration': '250ms',
-    overflow: 'hidden',
-  };
-
+angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
   const arrayMaker = (num) => {
     const arr = [];
     let i;
@@ -34,12 +27,12 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, st
     .then((response) => {
       const data = [];
       response.data.data.forEach((trail) => {
-        trail.style = closeStyle;
+        trail.style = Style.inactiveTrail;
         // TODO: Integrate actual algorithm to calculate rating from trail.score
-        const stars = trail.rating || Math.floor(Math.random() * 6);
-        const emptyStars = 5 - stars;
+        const rating = trail.rating || Math.floor(Math.random() * 6);
+        const emptyStars = 5 - rating;
         const difficulty = trail.difficulty;
-        trail.stars = arrayMaker(stars);
+        trail.rating = arrayMaker(rating);
         trail.emptyStars = arrayMaker(emptyStars);
         trail.difficulty = arrayMaker(difficulty);
         data.push(trail);
@@ -65,7 +58,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, st
     const items = list.slice();
     if (value) {
       return items.filter(item => item[type] === value);
-    } else if (type === 'stars') {
+    } else if (type === 'rating') {
       return items.sort((a, b) => {
         if (a[type] > b[type]) return -1;
         if (a[type] < b[type]) return 1;
@@ -82,7 +75,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, st
   return {
     get: getTrails,
     del: deleteTrail,
-    close: closeStyle,
     range: arrayMaker,
     filter: filterListItems,
   };

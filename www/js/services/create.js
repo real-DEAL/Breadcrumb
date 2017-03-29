@@ -1,11 +1,13 @@
 angular.module('breadcrumb').factory('Trail', function ($http, store) {
   const submitTrail = (trail, crumbs) => {
-    const length = trail.length.replace(/\D/g, '');
+    const length = trail.length.replace(/[^0-9.]/g, '');
+    trail.length = length;
     if (!trail.transport) {
       trail.transport = 'WALKING';
       if (length > 5) {
         trail.transport = 'BICYCLING';
-      } else if (length > 20) {
+      }
+      if (length > 20) {
         trail.transport = 'DRIVING';
       }
     }

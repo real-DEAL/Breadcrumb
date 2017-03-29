@@ -17,17 +17,13 @@ angular.module('breadcrumb')
   };
 
   $scope.toggle = index => (
-    $scope.trails[index].style.height === '95px' ?
+    $scope.trails[index].style.height === '105px' ?
     $scope.open(index) :
     $scope.close(index)
   );
 
   $scope.open = (index) => {
-    $scope.trails[index].style = {
-      height: '400px',
-      overflow: 'hidden',
-      'transition-duration': '250ms',
-    };
+    $scope.trails[index].style = Style.activeTrail;
     $scope.trails.forEach((trail, place) => {
       if (place !== index) {
         $scope.close(place);
@@ -36,7 +32,7 @@ angular.module('breadcrumb')
   };
 
   $scope.close = (index) => {
-    $scope.trails[index].style = ListFact.close;
+    $scope.trails[index].style = Style.inactiveTrail;
   };
 
 // TODO: splice deleted trail from dashboard display
@@ -48,7 +44,7 @@ angular.module('breadcrumb')
   $scope.filter = (type, value) => {
     $scope.loading = null;
     $scope.trails = ListFact.filter($scope.trails, type, value);
-    $scope.loading = { display: 'none' };
+    $scope.loading = Style.displayNone;
     if (type === 'transport') $scope.specificTransport = true;
   };
 
@@ -56,22 +52,22 @@ angular.module('breadcrumb')
     $scope.loading = null;
     $scope.specificTransport = false;
     $scope.trails = ListFact.filter($scope.trailsCache, 'name');
-    $scope.loading = { display: 'none' };
+    $scope.loading = Style.displayNone;
   };
 
   $scope.trailsCache = ListFact.get().then((trails) => {
     $scope.trails = ListFact.filter(trails, 'name');
-    $scope.loading = { display: 'none' };
+    $scope.loading = Style.displayNone;
     $scope.trailsCache = ListFact.filter(trails, 'name');
   });
 
   $scope.trails = null;
 
-  $scope.refresh = () => {
+  $scope.refresh = (params) => {
     $scope.loading = null;
-    $scope.trailsCache = ListFact.get().then((trails) => {
+    $scope.trailsCache = ListFact.get(params).then((trails) => {
       $scope.trails = ListFact.filter(trails, 'name');
-      $scope.loading = { display: 'none' };
+      $scope.loading = Style.displayNone;
       $scope.trailsCache = ListFact.filter(trails, 'name');
     });
   };
@@ -90,9 +86,9 @@ angular.module('breadcrumb')
 
   // SEARCH
 
-  $scope.stars = Data.stars();
+  $scope.rating = Data.rating();
 
-  $scope.difficulties = Data.difficulties();
+  $scope.difficulty = Data.difficulty();
 
   $scope.transport = Data.transport();
 
@@ -101,17 +97,18 @@ angular.module('breadcrumb')
     $scope.search[type] = value;
   };
 
-  $scope.search = {
-    username: null,
-    name: null,
-    type: 'Any',
-    transport: 'Any',
-    rating: 'Any',
-    difficulty: 'Any',
-  };
+  $scope.search = Data.searchRequest();
 
   $scope.searchFilter = (request) => {
-    ListFact.get(request);
+    // TODO: Can't search by username, must get user ID first
+    if (request.difficulty !== 'Any') {
+      request.difficulty += 1;
+    }
     $state.go('app.dashboard');
+    $scope.refresh(request);
+    $scope.rating = Data.rating();
+    $scope.difficulty = Data.difficulty();
+    $scope.transport = Data.transport();
+    $scope.search = Data.searchRequest();
   };
 });

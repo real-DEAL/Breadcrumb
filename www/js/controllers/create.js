@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style) {
+.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = Style.moveLeft(move);
@@ -13,13 +13,14 @@ angular.module('breadcrumb')
 
   const moveReset = (crumb, index) => {
     crumb.left = 100 * index;
-    const move = `${crumb.left += 2.5}%`;
+    const move = `${crumb.left += 5}%`;
     crumb.style = Style.moveReset(move);
   };
 
   const trailMaker = () => ({
-    name: Data.trailName(),
-    description: Data.description(),
+    user_id: store.get('user').id,
+    name: null,
+    description: null,
     type: $scope.trailTypes[0],
     difficulty: null,
     map: null,
@@ -28,7 +29,7 @@ angular.module('breadcrumb')
     requires_money: false,
     transport: null,
     crumbs: {},
-    left: 2.5,
+    left: 5,
     style: null,
   });
 
@@ -43,6 +44,8 @@ angular.module('breadcrumb')
     }
     $scope.info.show = !$scope.info.show;
   };
+
+  // TRAIL TYPES
 
   $scope.trailTypes = Data.trailTypes();
 
@@ -62,34 +65,54 @@ angular.module('breadcrumb')
     $scope.trail.type = $scope.trailTypes[$scope.step];
   };
 
-  $scope.location = {}; // this is the shared scope with the directive and is in the View
-    // how can I replace this ?
+  $scope.location = {
+    lat: 29.9511,
+    lng: -90.0715,
+  };
 
   $scope.obj = {};
 
-  $scope.difficulties = Data.difficulties();
+  // DIFFICULTIES
+
+  $scope.difficulty = Data.difficulty();
 
   $scope.fillDifficulties = (index) => {
-    $scope.difficulties = Data.fillIcons('difficulties', index, { color: 'purple' });
+    let fill;
+    if (index === 0) {
+      fill = { color: '#3a7ec7' };
+    } else if (index === 1) {
+      fill = { color: '#db6a32' };
+    } else if (index === 2) {
+      fill = { color: '#a0030c' };
+    }
+    $scope.difficulty = Data.fillIcons('difficulty', index, fill);
     $scope.trail.difficulty = index + 1;
   };
 
+  // TRANSPORT
+
   $scope.transport = Data.transport();
+
 
   $scope.transChange = (type) => {
     $scope.transport = Data.transport();
     $scope.transport[type].style = Style.activeTransport();
   };
 
-  $scope.money = (boolean) => {
-    $scope.trail.requires_money = !boolean;
-    if (boolean) $scope.moneyStyle = null;
-    else {
-      $scope.moneyStyle = Style.activeMoney();
-    }
-  };
+  // MONEY
 
-  $scope.moneyStyle = null;
+
+    $scope.money = (boolean) => {
+      $scope.trail.requires_money = !boolean;
+      if (boolean) $scope.moneyStyle = null;
+      else {
+        $scope.moneyStyle = Style.activeMoney();
+      }
+    };
+
+    $scope.moneyStyle = null;
+
+  // REVIEW
 
   $scope.review = {
     check: false,
@@ -100,7 +123,7 @@ angular.module('breadcrumb')
 
   $scope.crumb = () => ({
     clue: null,
-    description: Data.crumbDescription(),
+    description: null,
     name: null,
     media_text: null,
     image: null,
@@ -110,7 +133,7 @@ angular.module('breadcrumb')
     latitude: null,
     longitude: null,
     address: null,
-    left: 2.5,
+    left: 5,
     style: { 'animation-name': 'moveInFromRight' },
   });
 
@@ -137,16 +160,17 @@ angular.module('breadcrumb')
     $scope.mediaType[type] = !state;
   };
 
-  $scope.add = (arg) => {
+
+  $scope.add = () => {
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
+      $scope.trail.crumbs += 1;
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       if ($scope.crumbs.length > 1) {
-        $scope.crumbs[$scope.crumbs.length - 2].latitude = arg.geometry.location.lat();
-        $scope.crumbs[$scope.crumbs.length - 2].longitude = arg.geometry.location.lng();
-        $scope.crumbs[$scope.crumbs.length - 2].address = arg.formatted_address;
+        $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
+        $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
       }
     }
   };
@@ -184,20 +208,24 @@ angular.module('breadcrumb')
 
   $scope.reviewMap = () => {
     $scope.loading = null;
-    $scope.review.check = true;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
-      $scope.loading = Style.displayNone;
       $scope.trail.map = data.image;
       $scope.trail.time = data.time;
       $scope.trail.length = data.miles;
-      moveY($scope.trail, -100);
+      moveY($scope.trail, -120);
       $scope.crumbs.forEach((crumb) => {
-        moveY(crumb, -100);
+        moveY(crumb, -120);
       });
       $scope.review.style = Style.moveUp;
+      $scope.review.check = true;
       $scope.$apply();
+    })
+    .catch((err) => {
+      console.warn(err);
+      $scope.toggleInfo('errorMap');
     });
+    $scope.loading = Style.displayNone;
   };
 
   $scope.reset = () => {
@@ -206,7 +234,9 @@ angular.module('breadcrumb')
     $scope.crumbs.forEach((crumb, index) => {
       moveReset(crumb, index + 1);
     });
-    $scope.review.style = Style.moveDown;
+    $scope.review.style = {
+      'animation-name': 'moveDown',
+    };
   };
 
   $scope.submit = () => {
@@ -223,41 +253,139 @@ angular.module('breadcrumb')
     });
   };
 
+  if (window.Android) {
+    angular.extend($scope, {
+      center: {
+        lat: 29.9511,
+        lng: -90.0715,
+        zoom: 15,
+        autoDiscover: true,
+      },
+      events: {},
+      layers: {
+        baselayers: {
+          osm: {
+            name: 'OpenStreetMap',
+            url: 'https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png',
+            type: 'xyz',
+          },
+        },
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  } else {
+    angular.extend($scope, {
+      center: {
+        lat: 29.9511,
+        lng: -90.0715,
+        zoom: 15,
+        autoDiscover: false,
+      },
 
-// Leaflet Map ------------------------------------------------
-  $scope.geofence = {
-    latitude: 29.9511,
-    longitude: -90.0715,
-    radius: 13,
-  };
-  $scope.TransitionType = TransitionType;
-
-  $scope.center = {
-    lat: $scope.geofence.latitude,
-    lng: $scope.geofence.longitude,
-    zoom: 12,
-  };
-  $scope.markers = {
-    marker: {
-      draggable: true,
-      lat: $scope.geofence.latitude,
-      lng: $scope.geofence.longitude,
-      icon: {},
-    },
-  };
-  $scope.paths = {
-    circle: {
-      type: 'circle',
-      radius: $scope.geofence.radius,
-      latlngs: $scope.markers.marker,
-      clickable: false,
-    },
-  };
-
+      events: {
+        map: {
+          enable: ['zoomstart', 'drag', 'click', 'mousemove'],
+          logic: 'emit',
+        },
+      },
+      markers: {
+        marker: {
+          lat: 29.9511,
+          lng: -90.0715,
+          draggable: true,
+        },
+      },
+      defaults: {
+        scrollWheelZoom: false,
+      },
+    });
+  }
   $scope.tiles = {
     url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     options: {
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     },
   };
+
+  $scope.place = {
+    address: '',
+  };
+
+  $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+    const map = args.leafletEvent.target;
+    const center = map.getLatLng();
+    $scope.center.lat = center.lat;
+    $scope.center.lng = center.lng;
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+  });
+
+
+  $scope.updateMap = () => {
+    $scope.center = {
+      lat: $scope.location.lat,
+      lng: $scope.location.lng,
+      zoom: 15,
+    };
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+        draggable: true,
+      },
+    };
+  };
+
+  $scope.updateCoords = () => {
+    if ($scope.place.address.length >= 15) {
+      const geocoder = new google.maps.Geocoder();
+      console.warn($scope.place.address, 'the address');
+      geocoder.geocode({ address: $scope.place.address }, function (results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+          if (results) {
+            $scope.markers.marker.lat = results[0].geometry.location.lat();
+            $scope.markers.marker.lng = results[0].geometry.location.lng();
+            angular.extend($scope, {
+              center: {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng(),
+                zoom: 15,
+              },
+            });
+            $scope.center.lat = results[0].geometry.location.lat();
+            $scope.center.lng = results[0].geometry.location.lng();
+            $scope.$apply();
+          } else {
+            console.warn('Location not found');
+          }
+        } else {
+          console.warn(`Geocoder failed due to: ${status}`);
+        }
+      });
+    }
+  };
+
+  $scope.$on('leafletDirectiveMap.move', (event, args) => {
+    const map = args.leafletEvent.target;
+    const center = (map.getCenter());
+    $scope.center.lat = center.lat;
+    $scope.center.lng = center.lng;
+    $scope.location.lat = center.lat;
+    $scope.location.lng = center.lng;
+    $scope.markers = {
+      marker: {
+        lat: $scope.center.lat,
+        lng: $scope.center.lng,
+      },
+    };
+  });
 });

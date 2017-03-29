@@ -33,7 +33,61 @@ angular.module('breadcrumb').factory('AugRealFact', function () {
     console.error(`Compass failed: ${compassError}`);
   };
 
+  let watchAccelerometerID = null;
+  let watchCompassID = null;
+
+  const startAccelerometer = () => {
+    const options = { frequency: 100 };
+    watchAccelerometerID =
+      navigator.accelerometer
+        .watchAcceleration(onAccelerometerSuccess, onAccelerometerError, options);
+  };
+  const stopAccelerometer = () => {
+    if (watchAccelerometerID) {
+      const accel = navigator.accelerometer.clearWatch(watchAccelerometerID);
+      accel.then(() => console.warn('Accelerometer off'));
+      watchAccelerometerID = null;
+    }
+  };
+  const startCompass = () => {
+    const options = { frequency: 100 };
+    watchCompassID =
+      navigator.compass.watchHeading(onCompassSuccess, onCompassError, options);
+  };
+  const stopCompass = () => {
+    if (watchCompassID) {
+      const watch = navigator.compass.clearWatch(watchCompassID);
+      watch.then(() => console.warn('Compass off'));
+      watchCompassID = null;
+    }
+  };
+
+
+  const videoOverlay = () => {
+    if (window.ezar) {
+      ezar.initializeVideoOverlay(() => {
+        $('#spot').css('display', 'block');
+        $('.comment').css('display', 'block');
+        ezar.getBackCamera().start();
+        startAccelerometer();
+        startCompass();
+      }, (err) => {
+        console.error(`unable to init ezar: ${err}`);
+      });
+    }
+  };
+
+  const stopVideoOverlay = () => {
+    ezar.getBackCamera().stop();
+    $('#spot').css('display', 'none');
+    $('.comment').css('display', 'none');
+    stopAccelerometer();
+    stopCompass();
+  };
+
   return {
+    startAR: videoOverlay,
+    stopAR: stopVideoOverlay,
     accelSucc: onAccelerometerSuccess,
     accelErr: onAccelerometerError,
     compSucc: onCompassSuccess,

@@ -1,6 +1,8 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, ListFact, Geofence) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact) {
   $scope.loading = null;
+
+  $scope.opacity = true;
 
   $scope.trailID = null;
 
@@ -13,9 +15,7 @@ angular.module('breadcrumb')
     finish: false,
   };
 
-  $scope.bubbles = {
-    top: '320px',
-  };
+  $scope.bubbles = Style.bubbleDown;
 
   $scope.crumb = 0;
 
@@ -24,6 +24,7 @@ angular.module('breadcrumb')
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
   $scope.startTrail = () => {
+    $scope.loading = null;
     ListFact.get('id').then((trails) => {
       $scope.trail = trails[0];
       $scope.crumbs = trails[0].crumb;
@@ -58,17 +59,31 @@ angular.module('breadcrumb')
         if ($scope.crumb === $scope.crumbs.length) {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '320px' };
+          $scope.bubbles = Style.bubbleDown;
           $scope.page.finish = true;
         } else {
           $scope.page.found = false;
           $scope.page.media.show = false;
-          $scope.bubbles = { top: '320px' };
+          $scope.bubbles = Style.bubbleDown;
           $scope.page.description = true;
         }
         break;
       default: $scope.page.description = true;
     }
+  };
+
+  $scope.startAR = () => {
+    AugRealFact.startAR();
+    $scope.media('ar');
+    $scope.opacity = false;
+    $rootScope.toggleSide = false;
+  };
+
+  $scope.stopAR = () => {
+    $scope.media('show');
+    $scope.opacity = true;
+    $rootScope.toggleSide = true;
+    AugRealFact.stopAR();
   };
 
   $rootScope.$watch('pinged', () => {
@@ -77,10 +92,10 @@ angular.module('breadcrumb')
     }
   });
 
-  $scope.stars = Data.stars();
+  $scope.rating = Data.rating();
 
   $scope.ratingToggle = (value) => {
-    $scope.stars = Data.fillIcons('stars', value);
+    $scope.rating = Data.fillIcons('rating', value);
     $scope.postTrail.rating = value;
   };
 
@@ -89,9 +104,7 @@ angular.module('breadcrumb')
   };
 
   $scope.media = (type) => {
-    $scope.bubbles = {
-      top: '0px',
-    };
+    $scope.bubbles = Style.bubbleUp;
     $scope.page.media = {
       show: true,
       image: false,

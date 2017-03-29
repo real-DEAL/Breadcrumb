@@ -1,4 +1,52 @@
 angular.module('breadcrumb').factory('Data', function () {
+  const child = () => {
+    const children = [
+      '../img/child1.png',
+      '../img/child2.png',
+      '../img/child3.png',
+      '../img/child4.png',
+      '../img/child5.png',
+      '../img/child6.png',
+      '../img/child7.png',
+      '../img/child8.png',
+    ];
+    const index = Math.floor(Math.random() * 8);
+    return children[index];
+  };
+
+  const menu = [
+    {
+      name: 'Search',
+      icon: 'ion-search',
+      link: 'app.search',
+    },
+    {
+      name: 'Dashboard',
+      icon: 'ion-navicon-round',
+      link: 'app.dashboard',
+    },
+    {
+      name: 'Profile',
+      icon: 'ion-person',
+      link: 'app.profile',
+    },
+    {
+      name: 'Make trail',
+      icon: 'ion-edit',
+      link: 'app.create',
+    },
+    {
+      name: 'Settings',
+      icon: 'ion-wrench',
+      link: 'app.settings',
+    },
+    // {
+    //   name: 'Log out',
+    //   icon: 'ion-log-out',
+    //   link: null,
+    // },
+  ];
+
   const iconArrayMaker = (num) => {
     const obj = {};
     let i;
@@ -40,21 +88,21 @@ angular.module('breadcrumb').factory('Data', function () {
     },
   });
 
-  const difficulties = () => iconArrayMaker(3);
+  const difficulty = () => iconArrayMaker(3);
 
-  const stars = () => iconArrayMaker(5);
+  const rating = () => iconArrayMaker(5);
 
   const dataTypes = {
-    stars,
+    rating,
     transport,
-    difficulties,
+    difficulty,
   };
 
   const fillIcons = (type, value, fill) => {
     const base = dataTypes[type]();
     const data = {};
     if (!fill) {
-      fill = { color: 'gold' };
+      fill = { color: '#db6a32' };
     }
     _.each(base, (val, key) => {
       data[key] = base[key];
@@ -70,6 +118,15 @@ angular.module('breadcrumb').factory('Data', function () {
     return data;
   };
 
+  const searchRequest = () => ({
+    username: null,
+    name: null,
+    type: 'Any',
+    transport: 'Any',
+    rating: 'Any',
+    difficulty: 'Any',
+  });
+
   const info = () => ({
     show: false,
     name: null,
@@ -81,6 +138,10 @@ angular.module('breadcrumb').factory('Data', function () {
     rewardText: {
       name: 'Reward Text',
       text: 'This is what shows up when the traveler reaches the crumb!',
+    },
+    errorMap: {
+      name: 'Error',
+      text: 'There was an error processing your request. Please check that you entered crumb addresses correctly and try again!',
     },
   });
 
@@ -110,7 +171,7 @@ angular.module('breadcrumb').factory('Data', function () {
       name: `Trail ${Math.floor(Math.random() * 100)}`,
       description: '',
       transport: tran,
-      stars: arrayMaker(trailStars),
+      rating: arrayMaker(trailStars),
       emptyStars: arrayMaker(emptyStars),
       difficulty: arrayMaker(difficulty),
       length: (Math.floor(Math.random() * 5) + 2) * tran,
@@ -158,13 +219,16 @@ angular.module('breadcrumb').factory('Data', function () {
 
   return {
     info,
-    stars,
+    menu,
+    child,
+    rating,
     transport,
     trailTypes,
     fillIcons,
     iconArrayMaker,
     arrayMaker,
-    difficulties,
+    difficulty,
+    searchRequest,
     trail: trailMaker,
     address: randomFromArray(addresses),
     trailName: randomFromArray(trailNames),
