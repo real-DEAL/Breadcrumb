@@ -14,12 +14,27 @@ angular.module('breadcrumb')
   };
 
   const populatePastTrails = () => {
-    ListFact.get()
-    .then((trails) => {
-      $scope.pastTrails.push(trails[0]);
-      $scope.pastTrails.push(trails[1]);
-      $scope.pastTrails.push(trails[2]);
-      $scope.loading = Style.displayNone;
+    $scope.pastTrails.forEach((req, index) => {
+      ListFact.get(req)
+      .then((trails) => {
+        $scope.pastTrails[index] = trails[0];
+      });
+    });
+    $scope.loading = Style.displayNone;
+  };
+
+  const getTrails = () => {
+    UserFact.getUser($scope.user.username)
+    .then((data) => {
+      $scope.pastTrails.push(data.savedtrail[0]);
+      $scope.pastTrails.push(data.savedtrail[1]);
+      $scope.pastTrails.push(data.savedtrail[2]);
+      ListFact.get({ id: data.current_trail })
+      .then((trail) => {
+        $scope.user.trail = trail[0];
+      });
+      populateUserTrails();
+      populatePastTrails();
     });
   };
 
@@ -33,6 +48,5 @@ angular.module('breadcrumb')
 
   $scope.pastTrails = [];
 
-  populateUserTrails();
-  populatePastTrails();
+  getTrails();
 });

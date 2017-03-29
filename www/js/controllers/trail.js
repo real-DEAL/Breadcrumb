@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, UserFact, Geofence, AugRealFact) {
   $scope.loading = null;
 
   $scope.opacity = true;
@@ -56,9 +56,9 @@ angular.module('breadcrumb')
         $scope.savedID = data.id;
         $scope.crumbs = trails[0].crumb;
         $scope.crumb = data.position || 0;
-        console.log('Current crumb number is', $scope.crumb);
         $scope.trailID = $rootScope.trailID;
         $scope.loading = { display: 'none' };
+        UserFact.updateUser(store.get('user').id, { current_trail: data.id });
       });
     });
   };
