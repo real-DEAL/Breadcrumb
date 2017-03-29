@@ -72,7 +72,12 @@ angular.module('breadcrumb')
     };
     UserFact.getUser(store.get('user').username)
     .then((data) => {
-      UserFact.updateUser(data.id, { score: data.score + $scope.score });
+      const newScore = data.score + $scope.score;
+      const newTrailCount = (data.total_completed || 0) + 1;
+      UserFact.updateUser(data.id, {
+        score: newScore,
+        total_completed: newTrailCount,
+      });
       $scope.save(updates);
     });
   };
