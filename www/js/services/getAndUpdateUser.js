@@ -53,19 +53,17 @@ angular.module('breadcrumb')
 
 
   return (socialID, userInfo, deleteAcct) => {
-    console.log(socialID,'social')
     $http({
       method: 'GET',
-      // url: `http://54.203.104.113/users`,
-      // url: `http://192.168.99.100:3000/users`,
-      url: `http://localhost:3000/users`,
+      // url: 'http://54.203.104.113/users',
+      // url: 'http://192.168.99.100:3000/users',
+      url: 'http://localhost:3000/users',
       json: true,
       params: {
         social_login: socialID,
       },
     })
     .then((response) => {
-      console.log(response, 'response')
       const data = response.data.data[0];
       const pic = store.get('pic');
       userInfo.social_login = socialID;
@@ -73,7 +71,6 @@ angular.module('breadcrumb')
       if (pic) {
         userInfo.profile_picture = pic;
       }
-      console.log(data, 'data')
       if (deleteAcct) {
         return deleteUserInfo(data);
       } else if (data) {
