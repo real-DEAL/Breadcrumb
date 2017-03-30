@@ -48,7 +48,6 @@ angular.module('breadcrumb')
   $scope.video = () => $sce.trustAsResourceUrl($scope.crumbs[$scope.crumb].video.replace('watch?v=', 'embed/'));
 
   $scope.startTrail = () => {
-    console.log('start');
     $scope.loading = null;
     ListFact.get('id').then((trails) => {
       $scope.trail = trails[0];
@@ -173,8 +172,8 @@ angular.module('breadcrumb')
 
   $scope.callMap = () => {
     TrailMapFact();
-  }
-  
+  };
+
   $scope.submit = () => {
     if ($scope.postTrail.rating) {
       ListFact.get('id')
