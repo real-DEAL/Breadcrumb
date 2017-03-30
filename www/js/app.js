@@ -21,6 +21,8 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
+      // TODO: LOCALHOST  IP
+    // $rootScope.IP = 'http://localhost:3000';
       // TODO: PERSONAL DOCKERS IP
     $rootScope.IP = 'http://192.168.99.100:3000';
       // TODO: PRODUCTION IP
@@ -84,6 +86,7 @@ angular.module('breadcrumb', [
       }
     });
     if (store.get('token') && store.get('user')) {
+      $rootScope.trailID = store.get('user').current_trail;
       auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
       $state.go('app.dashboard');
     }
@@ -133,8 +136,6 @@ angular.module('breadcrumb', [
 
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
-
-  $rootScope.trailID = store.get('user').current_trail;
 
   $scope.setTrail = (id) => {
     $rootScope.trailID = id;

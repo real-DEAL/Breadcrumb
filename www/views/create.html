@@ -117,8 +117,7 @@
         </div>
 
         <!-- LOCATION -->
-        <div class="item item-icon-right textbox">
-          <i class="positive icon ion-navigate" ng-click="test()"></i>
+        <div class="item textbox">
           <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="place.address"/>
           <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
         </div>
