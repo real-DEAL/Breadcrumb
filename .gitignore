@@ -7,9 +7,7 @@ bower_components/
 .eslintrc.js
 sampleDirective.js
 sampleView.js
-TrailMapCtrl.js
-trailMap.html
-mapDirections.js
+
 
 www/lib
 .env

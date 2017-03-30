@@ -1,5 +1,47 @@
 angular.module('breadcrumb')
-.controller('TrailMapCtrl', function ($scope) {
+.controller('TrailMapCtrl', function () {
+  launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, (isAvailable) => {
+    let app = '';
+    if (isAvailable) {
+      app = launchnavigator.APP.GOOGLE_MAPS;
+    } else {
+      console.warn('Google Maps not available - falling back to user selection');
+      app = launchnavigator.APP.USER_SELECT;
+    }
+    // origin
+    launchnavigator.navigate('London, UK', {
+      app,
+    });
+    // destination
+    // launchnavigator.navigate(destination, successCallback, errorCallback, options);
+    // launchnavigator.supportsTransportMode(app, platform, launchMode);
+    // launchnavigator.LAUNCH_MODE.TURN_BY_TURN
+  });
+  // document.addEventListener(`deviceready ${onDeviceReady}, ${false}`);
+  //
+  // function onDeviceReady() {
+  //   let scheme = '';
+  //
+  //     // Don't forget to add the org.apache.cordova.device plugin!
+  //   if (device.platform === 'iOS') {
+  //     scheme = 'twitter://';
+  //   } else if (device.platform === 'Android') {
+  //     scheme = 'com.twitter.android';
+  //   }
+  //   appAvailability.check(
+  //       scheme, // URI Scheme
+  //       function () {  // Success callback
+  //         window.open('twitter://user?screen_name=gajotres', '_system', 'location=no');
+  //         console.warn('Twitter is available');
+  //       },
+  //       function () {  // Error callback
+  //         window.open('https://twitter.com/gajotres', '_system', 'location=no');
+  //         console.warn('Twitter is not available');
+  //       }
+  //   );
+  // }
+
+
   // TODO: show where you are -- test on Android in regards to autoDiscover
   // TODO: give directions to the next crumb from where you are
       // retrieve from Database the next crumb based on which trail you're on
@@ -12,95 +54,5 @@ angular.module('breadcrumb')
 // how will it be retrieved from the Database
   // ListFact -- do this later
 
-  $scope.pointA = {
-    latitude: 29.12123143,
-    longitude: -90.23423423,
-  };
-  $scope.pointB = {
-    latitude: 29.12123123,
-    longitude: -90.23423443,
-  };
-  $scope.trail = [];
 
-  // $scope.initialize = () => {
-  //   $scope.trail.push($scope.pointA, $scope.pointB);
-  //   console.warn($scope.trail);
-  //   MapDirections.add($scope.trail)
-  //   .then((data) => {
-  //     console.warn(data, 'data');
-  //     // $scope.loading = { display: 'none' };
-  //     // $scope.trail.map = data.image;
-  //     // $scope.trail.time = data.time;
-  //     // $scope.trail.length = data.miles;
-  //     // $scope.$apply();
-  //   });
-  // };
-  // google.maps.event.addDomListener(window, 'load', function () {
-  //   new google.maps.places.SearchBox(document.getElementById('txtSource'));
-  //   new google.maps.places.SearchBox(document.getElementById('txtDestination'));
-  //   directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
-  // });
-
-  // $scope.initialize();
-  if (window.Android) {
-    angular.extend($scope, {
-      center: {
-        lat: 29.9511,
-        lng: -90.0715,
-        zoom: 15,
-        autoDiscover: true,
-      },
-      events: {},
-      layers: {
-        baselayers: {
-          osm: {
-            name: 'OpenStreetMap',
-            url: 'https://{s}.tiles.mapbox.com/v3/examples.map-i875mjb7/{z}/{x}/{y}.png',
-            type: 'xyz',
-          },
-        },
-      },
-      markers: {
-        marker: {
-          lat: 29.9511,
-          lng: -90.0715,
-          draggable: true,
-        },
-      },
-      defaults: {
-        scrollWheelZoom: false,
-      },
-    });
-  } else {
-    angular.extend($scope, {
-      center: {
-        lat: 29.9511,
-        lng: -90.0715,
-        zoom: 15,
-        autoDiscover: false,
-      },
-      events: {
-        map: {
-          enable: ['zoomstart', 'drag', 'click', 'mousemove'],
-          logic: 'emit',
-        },
-      },
-      markers: {
-        marker: {
-          lat: 29.9511,
-          lng: -90.0715,
-          draggable: true,
-        },
-      },
-      defaults: {
-        scrollWheelZoom: false,
-      },
-    });
-  }
-  $scope.tiles = {
-    url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    options: {
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    },
-  };
 });
