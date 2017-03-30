@@ -38,7 +38,7 @@ angular.module('breadcrumb')
         if (data) {
           $http({
             method: 'POST',
-            url: 'http://54.203.104.113//v1/access_tokens',
+            url: 'http://54.203.104.113/v1/access_tokens',
             json: true,
             data,
           }).then((tokendata) => {

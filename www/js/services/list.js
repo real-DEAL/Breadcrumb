@@ -9,7 +9,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    let link = 'http://54.203.104.113/trails';
+    let link = 'http://54.203.104.113/trails?';
     if (request === 'id') {
       link += `/id=${$rootScope.trailID}`;
     } else if (request) {

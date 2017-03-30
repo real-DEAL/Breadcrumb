@@ -3,7 +3,7 @@ angular.module('breadcrumb')
   const putUserInfo = (userIf, userData) =>
     $http({
       method: 'PUT',
-      url: 'http://54.203.104.113/users',
+      url: `http://54.203.104.113/users/${userData.id}`,
       data: userIf,
       json: true,
       params: {
