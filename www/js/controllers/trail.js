@@ -57,7 +57,7 @@ angular.module('breadcrumb')
         $scope.crumbs = trails[0].crumb;
         $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
         $scope.crumb = data.position || 0;
-        $scope.trailID = $rootScope.trailID;
+        // $scope.trailID = $rootScope.trailID;
         $scope.loading = { display: 'none' };
         UserFact.updateUser(store.get('user').id, { current_trail: $scope.trail.id });
       });
@@ -84,11 +84,11 @@ angular.module('breadcrumb')
 
   $scope.trail = $scope.startTrail();
 
-  $rootScope.$watch('trailID', () => {
-    if ($rootScope.trailID !== $scope.trailID) {
-      $scope.startTrail();
-    }
-  });
+  // $rootScope.$watch('trailID', () => {
+  //   if ($rootScope.trailID !== $scope.trailID) {
+  //     $scope.startTrail();
+  //   }
+  // });
 
   $scope.switch = (type) => {
     switch (type) {
@@ -172,8 +172,8 @@ angular.module('breadcrumb')
 
   $scope.callMap = () => {
     TrailMapFact();
-  }
-  
+  };
+
   $scope.submit = () => {
     if ($scope.postTrail.rating) {
       ListFact.get('id')
@@ -186,4 +186,8 @@ angular.module('breadcrumb')
       });
     }
   };
+
+  $scope.$on('$ionicView.beforeEnter', () => {
+    $scope.startTrail();
+  });
 });

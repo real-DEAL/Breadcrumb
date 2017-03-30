@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('LoginCtrl', function ($scope, auth, $state, store, getUpdateUserFact, $http) {
+.controller('LoginCtrl', function ($scope, $rootScope, auth, $state, store, getUpdateUserFact, $http) {
   $scope.doAuth = () => {
     auth.signin({
       socialBigButtons: true,
@@ -23,7 +23,7 @@ angular.module('breadcrumb')
       store.set('pic', profile.picture);
       $http({
         method: 'GET',
-        url: 'http://54.203.104.113/users',
+        url: `${$rootScope.IP}/users`,
         json: true,
         params: {
           social_login: profile.user_id,
@@ -37,7 +37,7 @@ angular.module('breadcrumb')
         if (data) {
           $http({
             method: 'POST',
-            url: 'http://54.203.104.113/v1/access_tokens',
+            url: `${$rootScope.IP}/v1/access_tokens`,
             json: true,
             data,
           }).then((tokendata) => {

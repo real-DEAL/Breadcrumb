@@ -21,6 +21,12 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
+      // TODO: LOCALHOST  IP
+    // $rootScope.IP = 'http://localhost:3000';
+      // TODO: PERSONAL DOCKERS IP
+    $rootScope.IP = 'http://192.168.99.100:3000';
+      // TODO: PRODUCTION IP
+    // $rootScope.IP = 'http://54.203.104.113';
     $rootScope.pinged = false;
     $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -80,6 +86,7 @@ angular.module('breadcrumb', [
       }
     });
     if (store.get('token') && store.get('user')) {
+      $rootScope.trailID = store.get('user').current_trail;
       auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
       $state.go('app.dashboard');
     }
@@ -99,7 +106,7 @@ angular.module('breadcrumb', [
     const user = store.get('user');
     // const accessToken = store.get('access_token');
     $http({
-      url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
+      url: `${$rootScope.IP}/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
       method: 'DELETE',
     }).then(() => {
       auth.signout();
@@ -117,6 +124,12 @@ angular.module('breadcrumb', [
     console.warn(input);
   };
 
+  $rootScope.filter = {};
+
+  $scope.setFilter = (request) => {
+    $rootScope.filter = request;
+  };
+
   $scope.links = Data.menu;
 
   $scope.theme = Style.theme();
@@ -124,10 +137,9 @@ angular.module('breadcrumb', [
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
 
-  $scope.setTrail = (id) => {
-    localStorage.setItem('trail', id);
-    $rootScope.trailID = id;
-  };
+  // $scope.setTrail = (id) => {
+  //   $rootScope.trailID = id;
+  // };
 
   if (store.get('user')) {
     $scope.user = store.get('user').username;

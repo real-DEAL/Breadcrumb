@@ -3,13 +3,15 @@
   <div class="loading" ng-style="loading"></div>
 
   <div class="black"  ng-if="leaving" ng-click="leave()"></div>
-  <div class="card info t-center" ng-if="leaving">
-    <div class="item item-divider">
-      Save and quit?
-    </div>
-    <div class="row margin-v">
-      <div class="col col-50 button button-b margin-h" ng-click="quit()">Quit</div>
-      <div class="col col-50 button button-a margin-h" ng-click="saveQuit()">Save and Quit</div>
+  <div class="full">
+    <div class="card info t-center margin-n" ng-if="leaving">
+      <div class="item item-divider">
+        Save and quit?
+      </div>
+      <div class="row margin-v" style="width: 85%">
+        <div class="col col-50 button button-b margin-h" ng-click="quit()">Quit</div>
+        <div class="col col-50 button button-a margin-h" ng-click="saveQuit()">Save/Quit</div>
+      </div>
     </div>
   </div>
 
@@ -27,127 +29,131 @@
     <div class="footer" ng-click="stopAR()">Exit</div>
   </div>
 
-  <ion-content ng-style="theme.static" ng-if="opacity">
+  <div ng-if="opacity">
+    <ion-content ng-style="theme.static">
 
-    <!-- CRUMB EXPLANATION -->
-    <div ng-if="page.description" class="padding margin-top-big">
+      <!-- CRUMB EXPLANATION -->
+      <div ng-if="page.description" class="padding margin-top">
 
-      <!-- TRAIL NAME -->
-      <h1 class="t-center egg-t">{{ trail.name }}</h1>
+        <!-- TRAIL NAME -->
+        <h1 class="t-center egg-t shadow">{{ trail.name }}</h1>
 
-      <div class="card t-center">
-        <!-- CRUMB NUMBER -->
-        <div class="item item-divider s-2x">
-          CLUE #{{ crumbs[crumb].order_number }}
+        <div class="card t-center">
+          <!-- CRUMB NUMBER -->
+          <div class="item item-divider s-2x">
+            CLUE #{{ crumbs[crumb].order_number }}
+          </div>
+
+          <!-- CRUMB NAME -->
+          <h4 class="t-center">
+            {{ crumbs[crumb].clue }}
+          </h4>
+
+          <!-- IMAGE -->
+          <div class="item item-text-wrap">
+            <img src="http://res.cloudinary.com/realdeal/image/upload/v1490889566/q.gif" height="100" alt="">
+          </div>
+
+          <!-- ADDRESS -->
+          <div class="item item-text-wrap">
+            {{ crumbs[crumb].description }}
+          </div>
         </div>
 
-        <!-- CRUMB NAME -->
-        <h4 class="t-center">
-          {{ crumbs[crumb].clue }}
-        </h4>
-
-        <!-- IMAGE -->
-        <div class="item item-text-wrap">
-          <img src="../../img/question.png" alt="">
-        </div>
-
-        <!-- ADDRESS -->
-        <div class="item item-text-wrap">
-          {{ crumbs[crumb].description }}
+        <div class="t-center margin-top">
+          <button class="button button-b" ng-click="callMap()">Let's go!</button>
         </div>
       </div>
 
-      <div class="t-center margin-top">
-        <button class="button button-b" ng-click="switch('description')">Let's go!</button>
-      </div>
-    </div>
 
+      <!-- DISCOVERY -->
+      <div ng-if="page.found" class="margin-top">
 
-    <!-- DISCOVERY -->
-    <div ng-if="page.found" class="margin-top-big">
+        <div class="card light-b t-center" style="min-height: 450px;">
 
-      <div class="card light-b t-center" style="min-height: 450px;">
-
-        <!-- MEDIA BUTTONS -->
-        <div class="bubbles" ng-style="bubbles">
-          <div class="mint-b bubble float float27 inline" ng-if="crumbs[crumb].text" ng-click="media('text')">
-            <i class="light-t center-v ion-document-text"></i>
+          <!-- MEDIA BUTTONS -->
+          <div class="bubbles" ng-style="bubbles">
+            <div class="mint-b bubble float float27 inline" ng-if="crumbs[crumb].text" ng-click="media('text')">
+              <i class="light-t center-v ion-document-text"></i>
+            </div>
+            <div class="maroon-b bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="startAR()">
+              <i class="light-t center-v ion-load-b center"></i>
+            </div>
+            <div class="cream-b bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
+              <i class="light-t center-v ion-image"></i>
+            </div>
+            <div class="eggshell-b bubble float float37 inline" ng-if="crumbs[crumb].video" ng-click="media('video')">
+              <i class="light-t center-v ion-ios-videocam"></i>
+            </div>
+            <div class="rust-b bubble float float22 inline" ng-if="crumbs[crumb].audio" ng-click="media('audio')">
+              <i class="light-t center-v ion-headphone"></i>
+            </div>
           </div>
-          <div class="maroon-b bubble float float42 inline" ng-if="crumbs[crumb].ar" ng-click="startAR()">
-            <i class="light-t center-v ion-load-b center"></i>
-          </div>
-          <div class="cream-b bubble float float32 inline" ng-if="crumbs[crumb].image" ng-click="media('image')">
-            <i class="light-t center-v ion-image"></i>
-          </div>
-          <div class="eggshell-b bubble float float37 inline" ng-if="crumbs[crumb].video" ng-click="media('video')">
-            <i class="light-t center-v ion-ios-videocam"></i>
-          </div>
-          <div class="rust-b bubble float float22 inline" ng-if="crumbs[crumb].audio" ng-click="media('audio')">
-            <i class="light-t center-v ion-headphone"></i>
-          </div>
-        </div>
-        <div ng-if="page.media.show" style="height: 110px;"></div>
+          <div ng-if="page.media.show" style="height: 110px;"></div>
 
-        <!-- CONGRATULATIONS -->
-        <h2 class="padding" ng-if="!page.media.show">
-          You found a crumb!
-          <!-- <br>{{ crumbs[crumb].name }}! -->
-        </h2>
+          <!-- CONGRATULATIONS -->
+          <h2 class="padding" ng-if="!page.media.show">
+            You found a crumb!
+            <!-- <br>{{ crumbs[crumb].name }}! -->
+          </h2>
 
-        <img ng-if="!page.media.show" src="http://res.cloudinary.com/realdeal/image/upload/v1490205277/breadbreadbread_uafnzb.gif" alt="" width="200" class="round">
-
-        <h4 ng-if="!page.media.show">Check out its cool content!</h4>
-
-        <!-- MEDIA -->
-        <div ng-if="page.media.show">
-          <div ng-if="page.media.text">
-            {{ crumbs[crumb].media_text }}
+          <div class="full float float22">
+            <img class="rotate-small" ng-if="!page.media.show" ng-src="http://res.cloudinary.com/realdeal/image/upload/v1490891679/found.gif" alt="">
           </div>
-          <div ng-if="page.media.image">
-            <img ng-src="{{ crumbs[crumb].image }}" alt="" width="300">
+
+          <h4 ng-if="!page.media.show">Check out its cool content!</h4>
+
+          <!-- MEDIA -->
+          <div ng-if="page.media.show">
+            <div ng-if="page.media.text">
+              {{ crumbs[crumb].media_text }}
+            </div>
+            <div ng-if="page.media.image">
+              <img ng-src="{{ crumbs[crumb].image }}" alt="" width="300">
+            </div>
+            <div ng-if="page.media.audio">
+              {{ crumbs[crumb].audio }}
+            </div>
+            <div ng-if="page.media.video">
+              <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
+            </div>
           </div>
-          <div ng-if="page.media.audio">
-            {{ crumbs[crumb].audio }}
-          </div>
-          <div ng-if="page.media.video">
-            <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
-          </div>
-        </div>
 
-      </div>
-
-      <div class="t-center">
-        <button class="button button-a" ng-click="switch('next')">Continue!</button>
-      </div>
-    </div>
-
-    <!-- FINISHED -->
-    <div ng-if="page.finish" class="margin-top-big t-center">
-
-      <div class="card t-center" style="min-height: 450px;">
-        <div class="finish">
-          <h1>Congrats!</h1>
-          <h3>You finished the trail!!</h3>
-          <h4>You earned <b>{{ score }}</b> points!</h4>
         </div>
 
-        <div class="rating">
-          <h4>Rate this trail?</h4>
-          <ul class="">
-            <li ng-repeat="star in rating">
-              <i
+        <div class="t-center">
+          <button class="button button-a" ng-click="switch('next')">Continue!</button>
+        </div>
+      </div>
+
+      <!-- FINISHED -->
+      <div ng-if="page.finish" class="margin-top t-center">
+
+        <div class="card t-center" style="min-height: 450px;">
+          <div class="finish">
+            <h1>Congrats!</h1>
+            <h3>You finished the trail!!</h3>
+            <h4>You earned <b>{{ score }}</b> points!</h4>
+          </div>
+
+          <div class="rating">
+            <h4>Rate this trail?</h4>
+            <ul class="">
+              <li ng-repeat="star in rating">
+                <i
                 class="ion-android-star s-2x"
                 ng-style="star.style"
                 ng-click="ratingToggle($index)"
-              ></i>
-            </li>
-          </ul>
+                ></i>
+              </li>
+            </ul>
+          </div>
         </div>
+
+        <button class="button button-a" ng-click="submit()" ui-sref="app.dashboard">Back to dashboard</button>
+
       </div>
 
-      <button class="button button-a" ng-click="submit()" ui-sref="app.dashboard">Back to dashboard</button>
-
-    </div>
-
-  </ion-content>
+    </ion-content>
+  </div>
 </ion-view>

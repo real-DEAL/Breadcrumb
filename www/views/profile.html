@@ -11,17 +11,16 @@
 
   <ion-content ng-style="theme.static">
     <!-- USER INFORMATION -->
-    <div class="padding">
+    <div class="padding shadow">
       <div class="row row-center">
         <div class="col">
           <div class="profilePic" ng-style="userPic">
-            <h2 style="color: white">{{ user.username }}</h2>
+            <h2 class="egg-t shadow">{{ user.username }}</h2>
           </div>
         </div>
         <div class="col center">
-          <h3>Score: {{ user.score || 0 }}</h3>
-          <p>Completed trails: {{ user.total_completed || 0 }}
-          <br>Total time: {{ user.totalTime || 0 }}</p>
+          <h3 class="egg-t">Score: {{ user.score || 0 }}</h3>
+          <h5 class="egg-t">Completed trails: {{ user.total_completed || 0 }}</h5>
         </div>
       </div>
     </div>
@@ -30,13 +29,12 @@
     <div class="card">
       <div class="row">
         <div class="col">{{ user.trail.name }}</div>
-        <div class="col center">{{ user.trail.progress }} complete</div>
-        <div class="col right">
+        <div class="col col-33 right">
           <i class="ion-ios-star rust-t s-1x" ng-repeat="star in user.trail.ratingArray track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in user.trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">CONTINUE LATEST TRAIL</a>
+        <a class="brown-t" ng-click="continue(user.current_trail)">CONTINUE LATEST TRAIL</a>
       </div>
     </div>
 
@@ -44,12 +42,12 @@
     <div class="card">
       <div class="row" ng-repeat="trail in userTrails track by $index">
         <div class="col">{{ trail.name }}</div>
-        <div class="col right">
+        <div class="col col-33 right">
           <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.ratingArray track by $index"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars track by $index"></i>
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">VIEW MORE TRAILS YOU'VE MADE</a>
+        <a class="brown-t" ui-sref="app.dashboard" ng-click="setFilter({user_id: user.id})">VIEW MORE TRAILS YOU'VE MADE</a>
       </div>
     </div>
 
@@ -57,12 +55,12 @@
     <div class="card">
       <div class="row" ng-repeat="trail in pastTrails track by $index">
         <div class="col">{{ trail.name }}</div>
-        <div class="col right">
+        <div class="col col-33 right">
           <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.ratingArray"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars"></i>
         </div>
       </div>
       <div class="item item-divider">
-        <a href="/">VIEW MORE OF YOUR PAST TRAILS</a>
+        <a class="brown-t" ui-sref="app.dashboard" ng-click="setFilter()">VIEW MORE OF YOUR PAST TRAILS</a>
       </div>
     </div>
   </ion-content>

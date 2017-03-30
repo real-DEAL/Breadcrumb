@@ -54,11 +54,13 @@ angular.module('breadcrumb')
     $scope.loading = Style.displayNone;
   };
 
-  $scope.trailsCache = ListFact.get().then((trails) => {
-    $scope.trails = ListFact.filter(trails, 'name');
-    $scope.loading = Style.displayNone;
-    $scope.trailsCache = ListFact.filter(trails, 'name');
-  });
+  // $scope.trailsCache = ListFact.get().then((trails) => {
+  //   $scope.trails = ListFact.filter(trails, 'name');
+  //   $scope.loading = Style.displayNone;
+  //   $scope.trailsCache = ListFact.filter(trails, 'name');
+  // });
+
+  $scope.trailsCache = null;
 
   $scope.trails = null;
 
@@ -80,6 +82,7 @@ angular.module('breadcrumb')
 
   $scope.pickTrail = (id, index) => {
     $rootScope.trailID = id;
+    console.log(id);
     $scope.close(index);
   };
 
@@ -104,10 +107,19 @@ angular.module('breadcrumb')
       request.difficulty += 1;
     }
     $state.go('app.dashboard');
-    $scope.refresh(request);
+    $rootScope.filter = request;
     $scope.rating = Data.rating();
     $scope.difficulty = Data.difficulty();
     $scope.transport = Data.transport();
     $scope.search = Data.searchRequest();
   };
+
+  $scope.$on('$ionicView.beforeEnter', () => {
+    ListFact.get($rootScope.filter).then((trails) => {
+      $scope.trails = ListFact.filter(trails, 'name');
+      $scope.loading = Style.displayNone;
+      $scope.trailsCache = ListFact.filter(trails, 'name');
+    });
+    $rootScope.filter = {};
+  });
 });

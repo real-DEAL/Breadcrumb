@@ -33,11 +33,17 @@ i {
     100% {transform: translate(-10px, 0px) rotate(-10deg);}
 }
 
-@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+@keyframes spin-clock { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-@-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+@-moz-keyframes spin-clock { 100% { -moz-transform: rotate(360deg); } }
 
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+@-webkit-keyframes spin-clock { 100% { -webkit-transform: rotate(360deg); } }
+
+@keyframes spin-counter { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+@-moz-keyframes spin-counter { 100% { -moz-transform: rotate(-360deg); } }
+
+@-webkit-keyframes spin-counter { 100% { -webkit-transform: rotate(-360deg); } }
 
 .shadow {
   filter: drop-shadow(2px 2px 5px #222);
@@ -52,9 +58,17 @@ i {
   position: relative;
   left: 50%;
   margin-left: -600px;
-  animation: spin 25s linear infinite;
-  -moz-animation: spin 25s linear infinite;
-  -webkit-animation: spin 25s linear infinite;
+  animation: spin-counter 25s linear infinite;
+  -moz-animation: spin-counter 25s linear infinite;
+  -webkit-animation: spin-counter 25s linear infinite;
+}
+
+.rotate-small {
+  position: relative;
+  width: 200px;
+  animation: spin-clock 3s linear infinite;
+  -moz-animation: spin-clock 3s linear infinite;
+  -webkit-animation: spin-clock 3s linear infinite;
 }
 
 .stars {
@@ -133,7 +147,7 @@ i {
 }
 
 .logo {
-  background-image: url('../img/logo.gif');
+  background-image: url('http://res.cloudinary.com/realdeal/image/upload/v1490885825/breadcrumb-logo.gif');
   background-position: center;
   background-size: cover;
   text-align: center;
