@@ -145,8 +145,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
     const items = list.slice();
     if (value) {
       return items.filter(item => item[type] === value);
-    } else if (type === 'stars' // or should it be 'rating'?) {
-      return itemSort(items, type);
     }
     return itemSort(items, type);
   };
