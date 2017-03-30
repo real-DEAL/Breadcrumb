@@ -137,9 +137,9 @@ angular.module('breadcrumb', [
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
 
-  $scope.setTrail = (id) => {
-    $rootScope.trailID = id;
-  };
+  // $scope.setTrail = (id) => {
+  //   $rootScope.trailID = id;
+  // };
 
   if (store.get('user')) {
     $scope.user = store.get('user').username;

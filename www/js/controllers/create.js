@@ -241,13 +241,14 @@ angular.module('breadcrumb')
   $scope.submit = () => {
     $scope.loading = null;
     $scope.crumbs.pop();
+    $scope.trail.name = $scope.trail.name || 'Untitled Trail';
     Trail.submit($scope.trail, $scope.crumbs)
     .then(() => {
       $scope.reset();
       $scope.crumbs = [];
       $scope.trail = trailMaker();
       $scope.loading = Style.displayNone;
-      $rootScope.refresh = true;
+      // $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };

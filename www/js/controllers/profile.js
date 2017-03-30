@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($scope, ListFact, UserFact, Data, Style, store) {
+.controller('ProfileCtrl', function ($state, $scope, $rootScope, ListFact, UserFact, Data, Style, store) {
   $scope.loading = null;
 
   $scope.user = store.get('user');
@@ -63,6 +63,11 @@ angular.module('breadcrumb')
   $scope.userTrails = [];
 
   $scope.pastTrails = [];
+
+  $scope.continue = () => {
+    $rootScope.trailID = $scope.user.current_trail;
+    $state.go('app.trail');
+  };
 
   $scope.$on('$ionicView.beforeEnter', () => {
     getUser();
