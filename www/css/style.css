@@ -133,7 +133,7 @@ i {
 }
 
 .logo {
-  background-image: url('../img/logo.gif');
+  background-image: url('http://res.cloudinary.com/realdeal/image/upload/v1490885825/breadcrumb-logo.gif');
   background-position: center;
   background-size: cover;
   text-align: center;
