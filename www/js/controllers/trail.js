@@ -84,12 +84,6 @@ angular.module('breadcrumb')
 
   $scope.trail = $scope.startTrail();
 
-  // $rootScope.$watch('trailID', () => {
-  //   if ($rootScope.trailID !== $scope.trailID) {
-  //     $scope.startTrail();
-  //   }
-  // });
-
   $scope.switch = (type) => {
     switch (type) {
       case 'description':
@@ -171,6 +165,7 @@ angular.module('breadcrumb')
   };
 
   $scope.callMap = () => {
+    $scope.switch('description');
     TrailMapFact();
   };
 
