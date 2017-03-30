@@ -387,4 +387,8 @@ input {
 
 .worldBackground {
   background: #3a7ec7 url('../img/static-world.png') no-repeat bottom center;
+  background: -webkit-linear-gradient(left top, #3a7ec7, #c8f0ef); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(bottom right, #3a7ec7, #c8f0ef); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(bottom right, #3a7ec7, #c8f0ef); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom right, #3a7ec7, #c8f0ef); /* Standard syntax */
 }

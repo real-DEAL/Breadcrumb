@@ -85,7 +85,6 @@ angular.module('breadcrumb', [
     }
   });
 })
-
 .controller('AppCtrl', function (
   $scope,
   $rootScope,
@@ -98,6 +97,7 @@ angular.module('breadcrumb', [
 ) {
   $scope.logout = () => {
     const user = store.get('user');
+    // const accessToken = store.get('access_token');
     $http({
       url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
       method: 'DELETE',

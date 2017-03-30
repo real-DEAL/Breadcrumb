@@ -102,15 +102,15 @@ angular.module('breadcrumb')
   // MONEY
 
 
-    $scope.money = (boolean) => {
-      $scope.trail.requires_money = !boolean;
-      if (boolean) $scope.moneyStyle = null;
-      else {
-        $scope.moneyStyle = Style.activeMoney();
-      }
-    };
+  $scope.money = (boolean) => {
+    $scope.trail.requires_money = !boolean;
+    if (boolean) $scope.moneyStyle = null;
+    else {
+      $scope.moneyStyle = Style.activeMoney();
+    }
+  };
 
-    $scope.moneyStyle = null;
+  $scope.moneyStyle = null;
 
   // REVIEW
 

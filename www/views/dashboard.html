@@ -15,14 +15,14 @@
     </ion-header-bar>
   </ion-nav-buttons>
 
-  <ion-content>
+  <ion-content class="egg-b">
 
-    <div ng-repeat="trail in trails track by $index" ng-style="trail.style">
+    <div ng-repeat="trail in trails track by $index" ng-style="trail.style" class="mint-b">
 
       <div class="row item item-divider" ng-click="toggle($index)">
         <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
         <div class="col center s-1x">{{ trail.name }}</div>
-        <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i>
+        <!-- <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i> -->
       </div>
 
       <div class="light-b padding-v padding-b">
@@ -39,7 +39,7 @@
 
           <!-- LENGTH -->
           <div class="col left" ng-click="filter('length')">
-            {{ trail.length }}
+            {{ trail.length }} miles
           </div>
 
           <!-- DIFFICULTY -->
@@ -49,7 +49,7 @@
 
           <!-- RATING -->
           <div class="col col-33 right" ng-click="filter('rating')">
-            <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.rating"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars"></i>
+            <i class="ion-ios-star rust-t s-1x" ng-repeat="star in trail.ratingArray"></i><i class="ion-ios-star-outline rust-t s-1x" ng-repeat="star in trail.emptyStars"></i>
           </div>
         </div>
 
@@ -84,7 +84,7 @@
     </div>
   </ion-content>
 
-  <div class="bar bar-footer bar-balanced" ng-click="reset()" ng-if="specificTransport">
+  <div class="footer" ng-click="reset()" ng-if="specificTransport">
     <div class="title">View all transport types</div>
   </div>
 </ion-view>

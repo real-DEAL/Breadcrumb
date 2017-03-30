@@ -35,7 +35,6 @@ function cleanup() {
 gulp.task('default', ['test:integration:local']);
 
 gulp.task('set-play-services-location-version', function () {
-// <<<<<<< HEAD
   sh.exec('sed -i "s/play-services-location:+/play-services-location:6.5.87/g" platforms/android/project.properties');
 });
 

@@ -7,7 +7,6 @@ angular.module('breadcrumb')
       data: userIf,
       json: true,
       params: {
-        id: userData.id,
         access_token: store.get('access_token'),
       },
     })
@@ -27,6 +26,7 @@ angular.module('breadcrumb')
       json: true,
     })
     .then((res) => {
+      store.set('access_token', res.data.data[0].access_token);
       store.set('user', res.data.data[0]);
       store.remove('email');
       $state.go('app.dashboard');
@@ -65,7 +65,6 @@ angular.module('breadcrumb')
       if (pic) {
         userInfo.profile_picture = pic;
       }
-
       if (deleteAcct) {
         return deleteUserInfo(data);
       } else if (data) {

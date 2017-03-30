@@ -3,7 +3,8 @@
 <ion-view>
   <div class="loading" ng-style="loading"></div>
   <div class="black"  ng-if="info.show" ng-click="toggleInfo()"></div>
-  <div class="card info t-center" ng-if="info.show">
+
+  <div class="card info t-center" ng-if="leaving">
     <div class="item item-divider">
       {{ info.name }}
     </div>

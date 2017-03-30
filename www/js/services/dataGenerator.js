@@ -131,6 +131,10 @@ angular.module('breadcrumb').factory('Data', function () {
     show: false,
     name: null,
     text: null,
+    setUsername: {
+      name: 'Error',
+      text: 'Something happened! Crap.',
+    },
     description: {
       name: 'Description',
       text: 'What do you want the traveler to know when they see where they\'re going next? This could be a clue, like a distinct feature of the area they\'re looking for, or a landmark they should look out for!',

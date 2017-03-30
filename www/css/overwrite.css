@@ -1,7 +1,3 @@
-/*ion-content {
-  background: #3a7ec7;
-}*/
-
 .menu .scroll-content {
   background-color: #3a7ec7;
   background-image: url('../img/swirl.gif');
@@ -90,15 +86,13 @@
 }
 
 .footer {
-  color: #e2c7a2;
   position: absolute;
   bottom: 0;
   height: 75px;
   width: 100%;
+  color: #e2c7a2;
+  text-align: center;
   text-shadow: 0 1px 5px #222222;
   font-size: 2em;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
 }
