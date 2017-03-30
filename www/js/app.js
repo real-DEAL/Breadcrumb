@@ -69,7 +69,7 @@ angular.module('breadcrumb', [
             noBackdrop: true,
             duration: 2000,
           });
-          // TODO stop app from reopening
+          // TODO stop app from reopenin
         });
       }
     };
