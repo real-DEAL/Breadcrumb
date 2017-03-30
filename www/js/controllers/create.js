@@ -248,7 +248,7 @@ angular.module('breadcrumb')
       $scope.crumbs = [];
       $scope.trail = trailMaker();
       $scope.loading = Style.displayNone;
-      // $rootScope.refresh = true;
+      $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };
