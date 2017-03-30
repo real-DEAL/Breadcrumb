@@ -97,9 +97,9 @@ angular.module('breadcrumb', [
 ) {
   $scope.logout = () => {
     const user = store.get('user');
+    // const accessToken = store.get('access_token');
     $http({
-      url: `http://192.168.99.100:3000/v1/access_tokens/${user.id}?access_token=${store.get('access_token')}`,
-      // url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
+      url: `http://54.203.104.113/v1/access_tokens/${user.id}?access_token=${user.access_token}`,
       method: 'DELETE',
     }).then(() => {
       auth.signout();
