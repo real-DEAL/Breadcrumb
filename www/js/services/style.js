@@ -107,9 +107,9 @@ angular.module('breadcrumb').factory('Style', function () {
     overflow: 'scroll',
   };
 
-  const bubbleUp = { top: '75px' };
+  const bubbleUp = { top: '0px' };
 
-  const bubbleDown = { top: '400px' };
+  const bubbleDown = { top: '325px' };
 
   return {
     theme,

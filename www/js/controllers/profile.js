@@ -66,6 +66,7 @@ angular.module('breadcrumb')
 
   $scope.continue = () => {
     $rootScope.trailID = $scope.user.current_trail;
+    console.log($scope.user.current_trail);
     $state.go('app.trail');
   };
 

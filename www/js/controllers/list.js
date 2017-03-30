@@ -82,6 +82,7 @@ angular.module('breadcrumb')
 
   $scope.pickTrail = (id, index) => {
     $rootScope.trailID = id;
+    console.log(id);
     $scope.close(index);
   };
 
