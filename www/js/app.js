@@ -24,9 +24,9 @@ angular.module('breadcrumb', [
       // TODO: LOCALHOST  IP
     // $rootScope.IP = 'http://localhost:3000';
       // TODO: PERSONAL DOCKERS IP
-    $rootScope.IP = 'http://192.168.99.100:3000';
+    // $rootScope.IP = 'http://192.168.99.100:3000';
       // TODO: PRODUCTION IP
-    // $rootScope.IP = 'http://54.203.104.113';
+    $rootScope.IP = 'http://54.203.104.113';
     $rootScope.pinged = false;
     $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
@@ -136,10 +136,6 @@ angular.module('breadcrumb', [
 
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
-
-  // $scope.setTrail = (id) => {
-  //   $rootScope.trailID = id;
-  // };
 
   if (store.get('user')) {
     $scope.user = store.get('user').username;

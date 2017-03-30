@@ -31,7 +31,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;
-        const possible = trail.ratings || trail.rating * 5;
+        const possible = trail.max_rating || trail.rating * 5;
         const rating = Math.round((trail.rating / possible) * 5);
         const emptyStars = 5 - rating;
         const difficulty = trail.difficulty;
@@ -81,7 +81,10 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
         trail_id: trail,
       },
     })
-    .then(res => res.data.data[0])
+    .then((res) => {
+      console.warn('creating it again')
+      return res.data.data[0]
+    })
     .catch(error => console.error(error))
   );
 
@@ -96,6 +99,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       },
     })
     .then((res) => {
+      console.warn('you made it to a trail that is already saved')
       if (!res.data.data[0]) {
         return makeSavedTrail(user, trail);
       }
@@ -105,6 +109,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   );
 
   const updateSavedTrail = (user, id, updates) => {
+    console.log(user, id, updates);
     $http({
       method: 'PUT',
       url: `${$rootScope.IP}/savedtrails/${id}`,

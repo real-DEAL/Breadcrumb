@@ -53,8 +53,10 @@ angular.module('breadcrumb')
       $scope.trail = trails[0];
       ListFact.getSaved(store.get('user').id, $scope.trail.id)
       .then((data) => {
-        $scope.savedID = data.id;
+        console.log(data);
+        $scope.savedID = data.trail_id;
         $scope.crumbs = trails[0].crumb;
+        console.log($scope.crumbs);
         $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
         $scope.crumb = data.position || 0;
         // $scope.trailID = $rootScope.trailID;
@@ -173,9 +175,10 @@ angular.module('breadcrumb')
     if ($scope.postTrail.rating) {
       ListFact.get('id')
       .then((data) => {
+        console.log(data[0]);
         const updates = {
           rating: data[0].rating + $scope.postTrail.rating,
-          ratings: data[0].ratings + 5,
+          max_rating: (data[0].max_rating || 0) + 5,
         };
         ListFact.update($scope.trail.id, updates);
       });

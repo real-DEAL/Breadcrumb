@@ -1,5 +1,6 @@
-angular.module('breadcrumb').factory('Trail', function ($http, store) {
-  const submitTrail = ($rootScope, trail, crumbs) => {
+angular.module('breadcrumb').factory('Trail', function ($http, $rootScope, store) {
+  const submitTrail = (trail, crumbs) => {
+    console.log(trail.length);
     const length = trail.length.replace(/[^0-9.]/g, '');
     trail.length = length;
     if (!trail.transport) {
