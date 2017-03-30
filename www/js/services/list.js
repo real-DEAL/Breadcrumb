@@ -111,7 +111,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       },
       data: updates,
     })
-    // .then(res => console.warn(res))
     .catch(err => console.error(err));
   };
 
