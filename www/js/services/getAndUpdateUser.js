@@ -51,7 +51,7 @@ angular.module('breadcrumb')
   return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
-      url: 'http://54.203.104.113/users',
+      url: `http://54.203.104.113/users?access_token=${store.get('access_token')}`,
       json: true,
       params: {
         social_login: socialID,

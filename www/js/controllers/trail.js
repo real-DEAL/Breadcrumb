@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, UserFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, UserFact, Geofence, AugRealFact, TrailMapFact) {
   $scope.loading = null;
 
   $scope.opacity = true;
@@ -170,6 +170,10 @@ angular.module('breadcrumb')
     $scope.page.media[type] = true;
   };
 
+  $scope.callMap = () => {
+    TrailMapFact();
+  }
+  
   $scope.submit = () => {
     if ($scope.postTrail.rating) {
       ListFact.get('id')
