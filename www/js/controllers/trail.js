@@ -1,5 +1,5 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact) {
+.controller('TrailCtrl', function ($scope, $sce, $rootScope, Data, Style, ListFact, Geofence, AugRealFact, TrailMapFact) {
   $scope.loading = null;
 
   $scope.opacity = true;
@@ -114,5 +114,9 @@ angular.module('breadcrumb')
       text: false,
     };
     $scope.page.media[type] = true;
+  };
+
+  $scope.callMap = () => {
+    TrailMapFact();
   };
 });
