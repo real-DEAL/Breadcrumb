@@ -13,8 +13,6 @@ angular.module('breadcrumb')
       autoclose: true,
       rememberLastLogin: false,
       closable: false,
-
-      // container: 'widget'
     }, (profile, idToken, accessToken, state, refreshToken) => {
       store.set('profile', profile.user_id);
       store.set('token', idToken);
