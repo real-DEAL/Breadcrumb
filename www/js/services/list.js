@@ -11,9 +11,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    // let link = 'http://localhost:3000/trails?';
-    let link = 'http://192.168.99.100:3000/trails?';
-    // let link = 'http://54.203.104.113/trails';
+    let link = 'http://54.203.104.113/trails?';
     if (request === 'id') {
       link += `id=${$rootScope.trailID}&`;
     } else if (request) {
@@ -50,7 +48,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const updateTrail = (id, updates) => {
     $http({
       method: 'PUT',
-      url: `http://192.168.99.100:3000/trails/${id}`,
+      url: `http://54.203.104.113/trails/${id}`,
       params: {
         access_token: code,
       },
@@ -63,9 +61,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      // url: `http://localhost:3000/trails/${trail.id}?&access_token=${store.get('access_token')}`,
-      // url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
-      url: `http://192.168.99.100:3000/trails/${trail.id}?access_token=${store.get('access_token')}`,
+      url: `http://54.203.104.113/trails/${trail.id}?&access_token=${store.get('access_token')}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
@@ -74,7 +70,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const makeSavedTrail = (user, trail) => (
     $http({
       method: 'POST',
-      url: 'http://192.168.99.100:3000/savedtrails',
+      url: 'http://54.203.104.113/savedtrails',
       params: {
         access_token: code,
       },
@@ -90,7 +86,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const getSavedTrail = (user, trail) => (
     $http({
       method: 'GET',
-      url: 'http://192.168.99.100:3000/savedtrails',
+      url: 'http://54.203.104.113/savedtrails',
       params: {
         user_id: user,
         trail_id: trail,
@@ -109,7 +105,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const updateSavedTrail = (user, id, updates) => {
     $http({
       method: 'PUT',
-      url: `http://192.168.99.100:3000/savedtrails/${id}`,
+      url: `http://54.203.104.113/savedtrails/${id}`,
       params: {
         access_token: code,
       },

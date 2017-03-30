@@ -22,9 +22,7 @@ angular.module('breadcrumb').factory('Trail', function ($http, store) {
     trail.crumbs = crumbs;
     return $http({
       method: 'POST',
-      // url: `http://localhost:3000/trails?access_token=${store.get('access_token')}`,
-      // url: `http://54.203.104.113/trails?access_token=${store.get('access_token')}`,
-      url: `http://192.168.99.100:3000/trails?access_token=${store.get('access_token')}`,
+      url: `http://54.203.104.113/trails?access_token=${store.get('access_token')}`,
       header: {
         'Access-Control-Allow-Origin': '*',
       },
