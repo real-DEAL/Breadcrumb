@@ -170,7 +170,14 @@ angular.module('breadcrumb')
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       if ($scope.crumbs.length > 1) {
-        $scope.crumbs[$scope.crumbs.length - 2].address = $scope.location.address;
+        if ($scope.crumb.address === '') {
+          $scope.crumbs[$scope.crumbs.length - 2].address = $scope.location.address;
+        } else {
+          $scope.crumbs[$scope.crumbs.length - 2].address = $scope.crumb.address;
+        }
+        console.warn($scope.crumb.address, 'crumb.address works');
+        console.warn($scope.location.address, 'location.address');
+        // $scope.crumbs[$scope.crumbs.length - 2].address = $scope.location.address;
         $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
         $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
         console.warn('does $scope.crumbs get reassigned', $scope.crumbs);
@@ -327,6 +334,7 @@ angular.module('breadcrumb')
   };
 
   $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
+    $scope.crumb.address = '';
     const map = args.leafletEvent.target;
     const center = map.getLatLng();
     $scope.center.lat = center.lat;
@@ -359,6 +367,9 @@ angular.module('breadcrumb')
       geocoder.geocode({ address: $scope.location.address }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results) {
+            $scope.crumb.address = results[0].formatted_address ? results[0].formatted_address : '';
+            console.warn($scope.crumb.address, 'the results');
+
             $scope.markers.marker.lat = results[0].geometry.location.lat();
             $scope.markers.marker.lng = results[0].geometry.location.lng();
             angular.extend($scope, {
