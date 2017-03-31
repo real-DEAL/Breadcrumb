@@ -6,9 +6,6 @@ angular.module('breadcrumb')
       method: 'GET',
       url: `${$rootScope.IP}/users?username=${username}`,
       json: true,
-      params: {
-        access_token: accToken,
-      },
     })
     .then(response => response.data.data[0])
     .catch(error => console.error(error))
@@ -17,7 +14,7 @@ angular.module('breadcrumb')
   const updateUser = (id, updates) => (
     $http({
       method: 'PUT',
-      url: `${$rootScope.IP}/users/${id}?access_token=${accToken}`,
+      url: `${$rootScope.IP}/users/${id}`,
       json: true,
       data: updates,
       params: {

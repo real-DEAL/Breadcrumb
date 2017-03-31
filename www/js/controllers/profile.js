@@ -1,5 +1,14 @@
 angular.module('breadcrumb')
-.controller('ProfileCtrl', function ($state, $scope, $rootScope, ListFact, UserFact, Data, Style, store) {
+.controller('ProfileCtrl', function (
+  $state,
+  $scope,
+  $rootScope,
+  ListFact,
+  UserFact,
+  Data,
+  Style,
+  store
+) {
   $scope.loading = null;
 
   $scope.user = store.get('user');
@@ -34,10 +43,16 @@ angular.module('breadcrumb')
     $scope.pastTrails = [];
     UserFact.getUser($scope.user.username)
     .then((data) => {
+      // console.log(data);
       // $scope.pastTrails.push(data.savedtrail[0]);
       // $scope.pastTrails.push(data.savedtrail[1]);
       // $scope.pastTrails.push(data.savedtrail[2]);
-      ListFact.get({ id: data.current_trail })
+      const currentTrail = data ? data.current_trail : 1;
+      const userId = data ? data.user_id : undefined;
+      ListFact.get({
+        user_id: userId,
+        current_trail: currentTrail,
+      })
       .then((trail) => {
         $scope.user.trail = trail[0];
       });

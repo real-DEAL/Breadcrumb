@@ -1,5 +1,18 @@
 angular.module('breadcrumb')
-.controller('TrailCtrl', function ($scope, $sce, $state, $rootScope, store, Data, Style, ListFact, UserFact, Geofence, AugRealFact, TrailMapFact) {
+.controller('TrailCtrl', function (
+  $scope,
+  $sce,
+  $state,
+  $rootScope,
+  store,
+  Data,
+  Style,
+  ListFact,
+  UserFact,
+  Geofence,
+  AugRealFact,
+  TrailMapFact
+) {
   $scope.loading = null;
 
   $scope.opacity = true;
@@ -15,6 +28,7 @@ angular.module('breadcrumb')
   };
 
   $scope.quit = () => {
+    store.remove('geofences');
     $state.go('app.dashboard');
   };
 

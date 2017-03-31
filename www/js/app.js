@@ -21,11 +21,6 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
-      // TODO: LOCALHOST  IP
-    // $rootScope.IP = 'http://localhost:3000';
-      // TODO: PERSONAL DOCKERS IP
-    // $rootScope.IP = 'http://192.168.99.100:3000';
-      // TODO: PRODUCTION IP
     $rootScope.IP = 'http://54.203.104.113';
     $rootScope.pinged = false;
     $rootScope.toggleSide = true;
@@ -117,11 +112,16 @@ angular.module('breadcrumb', [
       store.remove('refreshToken');
       store.remove('pic');
       store.remove('user');
+      store.remove('geofences');
       $state.go('start', {}, { reload: true });
     }).catch((err) => { console.error(err); });
   };
 
   $scope.load = () => Data.load();
+
+  $scope.$on('$ionicView.beforeEnter', () => {
+    $scope.user = store.get('user').username;
+  });
 
   $scope.test = (input) => {
     console.warn(input);
@@ -139,10 +139,6 @@ angular.module('breadcrumb', [
 
   $scope.child1 = Data.child();
   $scope.child2 = Data.child();
-
-  if (store.get('user')) {
-    $scope.user = store.get('user').username;
-  }
 
   $scope.overflowStyle = Style.overflowStyle;
 

@@ -1,29 +1,9 @@
 angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
-  // TODO: replace with data from database
-  const messages = [
-    { username: 'broHeim', text: 'sup bro', bearing: 130 },
-    { username: 'Munch', text: 'hey man', bearing: 39 },
-    { username: 'ali', text: 'yooo', bearing: 273 },
+  let messages = [
+    { username: 'broHeim', message: 'sup bro', bearing: 130 },
+    { username: 'Munch', message: 'hey man', bearing: 39 },
+    { username: 'ali', message: 'yooo', bearing: 273 },
   ];
-  // TODO: uncomment when database is available
-  // const user = store.get('user');
-  // $http({
-  //   url: 'http://54.203.104.113/ar_messages',
-  //   method: 'GET',
-  //   params: {
-  //     access_token: user.access_token,
-  //   },
-  // })
-  // .then((res) => {
-  //   // TODO: where on res is the data?
-  // })
-  // .catch(() => {
-  //   messages = [
-  //     { username: 'broHeim', text: 'sup bro', bearing: 130 },
-  //     { username: 'friendlyfello', text: 'hey man', bearing: 39 },
-  //     { username: 'ali', text: 'yooo that's sick', bearing: 273 },
-  //   ];
-  // });
 
   const calculateDirection = (degree) => {
     let detected = 0;
@@ -31,7 +11,7 @@ angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
     messages.forEach((val, i) => {
       const fontSize = 6;
       const fontColor = 'white';
-      $('#spot').append(`<div class="comment" data-id=${i} style="display:block;margin-left:${(((messages[i].bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].text}</div></div>`);
+      $('#spot').append(`<div class="comment" data-id=${i} style="display:block;margin-left:${(((messages[i].bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].message}</div></div>`);
       detected = 1;
     });
     if (!detected) {
@@ -63,8 +43,7 @@ angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
   };
   const stopAccelerometer = () => {
     if (watchAccelerometerID) {
-      const accel = navigator.accelerometer.clearWatch(watchAccelerometerID);
-      accel.then(() => console.warn('Accelerometer off'));
+      navigator.accelerometer.clearWatch(watchAccelerometerID);
       watchAccelerometerID = null;
     }
   };
@@ -83,17 +62,38 @@ angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
 
 
   const videoOverlay = () => {
-    if (window.ezar) {
-      ezar.initializeVideoOverlay(() => {
-        $('#spot').css('display', 'block');
-        $('.comment').css('display', 'block');
-        ezar.getBackCamera().start();
-        startAccelerometer();
-        startCompass();
-      }, (err) => {
-        console.error(`unable to init ezar: ${err}`);
-      });
-    }
+    const accToken = store.get('access_token');
+    const crumbId = store.get('geofences')[0].id;
+    $http({
+      url: 'http://54.203.104.113/ar_messages',
+      method: 'GET',
+      params: {
+        access_token: accToken,
+        crumb_id: crumbId,
+      },
+    })
+    .then((res) => {
+      messages = res.data.data;
+      // TODO: where on res is the data?
+      if (window.ezar) {
+        ezar.initializeVideoOverlay(() => {
+          $('#spot').css('display', 'block');
+          $('.comment').css('display', 'block');
+          ezar.getBackCamera().start();
+          startAccelerometer();
+          startCompass();
+        }, (err) => {
+          console.error(`unable to init ezar: ${err}`);
+        });
+      }
+    })
+    .catch(() => {
+      messages = [
+        { username: 'broHeim', message: 'sup bro', bearing: 130 },
+        { username: 'friendlyfello', message: 'hey man', bearing: 39 },
+        { username: 'ali', message: 'yooo that\'s sick', bearing: 273 },
+      ];
+    });
   };
 
   const stopVideoOverlay = () => {

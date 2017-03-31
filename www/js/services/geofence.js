@@ -45,7 +45,7 @@ angular.module('breadcrumb').factory('Geofence', function (
     addOrUpdate(crumb) {
       const self = this;
       const geofence = {
-        id: UUIDjs.create().toString(),
+        id: crumb.id,
         latitude: Number(crumb.latitude),
         longitude: Number(crumb.longitude),
         radius: 100,
