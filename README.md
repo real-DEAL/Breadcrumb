@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ![wireframe](assets/logo.png)
+=======
+![wireframe](www/img/logo.png)
+>>>>>>> (cleanup) Move and delete  unneccesary files form root scope
 # Breadcrumb
 
 ### About Breadcrumb
