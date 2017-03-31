@@ -43,6 +43,7 @@ angular.module('breadcrumb').factory('Map', function () {
   };
 
   const addPath = (directions, transport) => {
+    console.warn(transport, 'transport');
     let obj = {};
     const end = directions.length - 2;
     const request = {

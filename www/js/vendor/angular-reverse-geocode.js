@@ -19,8 +19,8 @@
         geocoder.geocode({ latLng: latlng }, function (results, status) {
           if (status === google.maps.GeocoderStatus.OK) {
             if (results[1]) {
-              scope.place.address = results[1].formatted_address;
-              console.warn('Reverse Geocode -- scope.place', scope.place.address);
+              scope.location.address = results[1].formatted_address;
+              console.warn('Reverse Geocode -- scope.location', scope.location.address);
               scope.$apply();
             } else {
               element.text('Location not found');
