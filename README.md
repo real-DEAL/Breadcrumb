@@ -18,6 +18,7 @@ Each trail will have multiple stop points for travelers to experience. The user 
 7. [Architecture](#Architecture)
 8. [Database Layout](#Database-Layout)
 
+
 ----
 ## The team ##
 
