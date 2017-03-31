@@ -100,8 +100,8 @@ angular.module('breadcrumb')
   $scope.switch = (type) => {
     switch (type) {
       case 'description':
-        $scope.page.description = false;
-        $scope.page.found = true;
+        // $scope.page.description = false;
+        // $scope.page.found = true;
         Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
         break;
       case 'found':
