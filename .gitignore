@@ -28,3 +28,4 @@ notes.js
 www/views/test.html
 www/views/camera-testView.html
 tests/createTest.js
+tests/testCreate.html
