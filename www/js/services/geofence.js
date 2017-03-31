@@ -17,7 +17,7 @@ angular.module('breadcrumb').factory('Geofence', function (
         try {
           geofences = angular.fromJson(result);
         } catch (ex) {
-          console.warn(ex);
+          console.error(ex);
         }
       }
       this._geofences = geofences;

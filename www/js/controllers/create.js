@@ -172,7 +172,6 @@ angular.module('breadcrumb')
 
 
   $scope.add = () => {
-    console.warn('add()');
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
