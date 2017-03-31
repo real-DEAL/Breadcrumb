@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 ![wireframe](assets/logo.png)
-=======
-![wireframe](www/img/logo.png)
->>>>>>> (cleanup) Move and delete  unneccesary files form root scope
 # Breadcrumb
 
 ### About Breadcrumb
@@ -21,6 +17,7 @@ Each trail will have multiple stop points for travelers to experience. The user 
 6. [Tech Stack](#Tech-Stack)
 7. [Architecture](#Architecture)
 8. [Database Layout](#Database-Layout)
+
 
 ----
 ## The team ##
