@@ -56,8 +56,7 @@ angular.module('breadcrumb')
         $scope.savedID = data.id;
         $scope.crumbs = trails[0].crumb;
         $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
-        $scope.crumb = data.position || 0;
-        // $scope.trailID = $rootScope.trailID;
+        $scope.crumb = data.position;
         $scope.loading = { display: 'none' };
         UserFact.updateUser(store.get('user').id, { current_trail: $scope.trail.id });
       });
@@ -82,13 +81,7 @@ angular.module('breadcrumb')
     });
   };
 
-  $scope.trail = $scope.startTrail();
-
-  // $rootScope.$watch('trailID', () => {
-  //   if ($rootScope.trailID !== $scope.trailID) {
-  //     $scope.startTrail();
-  //   }
-  // });
+  $scope.trail = null;
 
   $scope.switch = (type) => {
     switch (type) {
@@ -171,6 +164,7 @@ angular.module('breadcrumb')
   };
 
   $scope.callMap = () => {
+    $scope.switch('description');
     TrailMapFact();
   };
 
@@ -180,7 +174,7 @@ angular.module('breadcrumb')
       .then((data) => {
         const updates = {
           rating: data[0].rating + $scope.postTrail.rating,
-          ratings: data[0].ratings + 5,
+          max_rating: (data[0].max_rating || 0) + 5,
         };
         ListFact.update($scope.trail.id, updates);
       });

@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
 <ion-view>
-  <div class="loading" ng-style="loading"></div>
+  <div class="loading center" ng-style="loading">
+    <img class="center" style="margin-top: 50%" ng-src="{{ load() }}" alt="">
+  </div>
   <div class="black"  ng-if="info.show" ng-click="toggleInfo()"></div>
 
   <div class="card info t-center margin-n" ng-if="info.show">

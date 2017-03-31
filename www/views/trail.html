@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <ion-view ng-style="{background: 'transparent'}">
-  <div class="loading" ng-style="loading"></div>
+  <div class="loading center" ng-style="loading">
+    <img class="center" style="margin-top: 50%" ng-src="{{ load() }}" alt="">
+  </div>
 
   <div class="black"  ng-if="leaving" ng-click="leave()"></div>
   <div class="full">

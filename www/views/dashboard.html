@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <ion-view >
-  <div class="loading" ng-style="loading"></div>
+  <div class="loading center" ng-style="loading">
+    <img class="center" style="margin-top: 50%" ng-src="{{ load() }}" alt="">
+  </div>
   <div ng-style="mapShow" ng-click="mapToggle()">
     <div class="black t-center"></div>
     <img class="info" ng-src="{{ mapSrc }}" alt="">
@@ -22,7 +24,7 @@
       <div class="row item item-divider" ng-click="toggle($index)">
         <i class="ion-cash balanced margin-h s-1x left" ng-if="trail.requires_money"></i>
         <div class="col center s-1x">{{ trail.name }}</div>
-        <!-- <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i> -->
+        <i class="ion-backspace assertive margin-h s-1x right" ng-click="delete(trail, $index)"></i>
       </div>
 
       <div class="light-b padding-v padding-b">

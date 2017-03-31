@@ -42,14 +42,14 @@ angular.module('breadcrumb').factory('Map', function () {
     return arr;
   };
 
-  const addPath = (directions) => {
+  const addPath = (directions, transport) => {
     let obj = {};
     const end = directions.length - 2;
     const request = {
       origin: new google.maps.LatLng(directions[0].latitude, directions[0].longitude),
       destination: new google.maps.LatLng(directions[end].latitude, directions[end].longitude),
       waypoints: wayPointsMakers(directions),
-      travelMode: google.maps.DirectionsTravelMode.DRIVING,
+      travelMode: google.maps.DirectionsTravelMode[transport],
     };
     return new Promise(function (resolve, reject) {
       directionsService.route(request, (response, status) => {

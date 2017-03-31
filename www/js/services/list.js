@@ -1,6 +1,7 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_geofences", "_geofencesPromise"] }] */
 angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
-  const code = store.get('access_token');
+  const code = () => store.get('access_token');
+
   const arrayMaker = (num) => {
     const arr = [];
     let i;
@@ -11,25 +12,27 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    let link = `${$rootScope.IP}/trails?`;
+    const params = {};
+    const link = `${$rootScope.IP}/trails?`;
     if (request === 'id') {
-      link += `id=${$rootScope.trailID}&`;
+      params.id = $rootScope.trailID;
     } else if (request) {
       _.each(request, (val, req) => {
         if (req !== 'username' && val !== null && val !== 'Any') {
-          link += `${req}=${val}&`;
+          params[req] = val;
         }
       });
     }
     return $http({
       method: 'GET',
-      url: `${link}&access_token=${code}`,
+      url: `${link}&access_token=${code()}`,
+      params,
     })
     .then((response) => {
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;
-        const possible = trail.ratings || trail.rating * 5;
+        const possible = trail.max_rating;
         const rating = Math.round((trail.rating / possible) * 5);
         const emptyStars = 5 - rating;
         const difficulty = trail.difficulty;
@@ -50,7 +53,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       method: 'PUT',
       url: `${$rootScope.IP}/trails/${id}`,
       params: {
-        access_token: code,
+        access_token: code(),
       },
       data: updates,
     })
@@ -61,7 +64,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      url: `${$rootScope.IP}/trails/${trail.id}?access_token=${code}`,
+      url: `${$rootScope.IP}/trails/${trail.id}?access_token=${code()}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
@@ -72,11 +75,12 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       method: 'POST',
       url: `${$rootScope.IP}/savedtrails`,
       params: {
-        access_token: code,
+        access_token: code(),
       },
       data: {
         user_id: user,
         trail_id: trail,
+        position: 0,
       },
     })
     .then(res => res.data.data[0])
@@ -90,7 +94,7 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       params: {
         user_id: user,
         trail_id: trail,
-        access_token: code,
+        access_token: code(),
       },
     })
     .then((res) => {
@@ -107,11 +111,10 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       method: 'PUT',
       url: `${$rootScope.IP}/savedtrails/${id}`,
       params: {
-        access_token: code,
+        access_token: code(),
       },
       data: updates,
     })
-    // .then(res => console.warn(res))
     .catch(err => console.error(err));
   };
 
