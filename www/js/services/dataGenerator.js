@@ -10,8 +10,17 @@ angular.module('breadcrumb').factory('Data', function () {
       'http://res.cloudinary.com/realdeal/image/upload/v1490885791/child7.png',
       'http://res.cloudinary.com/realdeal/image/upload/v1490885792/child8.png',
     ];
-    const index = Math.floor(Math.random() * 8);
+    const index = Math.floor(Math.random() * children.length);
     return children[index];
+  };
+
+  const load = () => {
+    const loads = [
+      'http://res.cloudinary.com/realdeal/image/upload/v1490929344/load.gif',
+      'http://res.cloudinary.com/realdeal/image/upload/v1490929344/load2.gif',
+    ];
+    const index = Math.floor(Math.random() * loads.length);
+    return loads[index];
   };
 
   const menu = [
@@ -224,6 +233,7 @@ angular.module('breadcrumb').factory('Data', function () {
   return {
     info,
     menu,
+    load,
     child,
     rating,
     transport,

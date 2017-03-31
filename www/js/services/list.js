@@ -12,26 +12,27 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    let link = `${$rootScope.IP}/trails?`;
+    const params = {};
+    const link = `${$rootScope.IP}/trails?`;
     if (request === 'id') {
-      link += `id=${$rootScope.trailID}&`;
+      params.id = $rootScope.trailID;
     } else if (request) {
       _.each(request, (val, req) => {
         if (req !== 'username' && val !== null && val !== 'Any') {
-          link += `${req}=${val}&`;
+          params[req] = val;
         }
       });
     }
-    console.log(`${link}&access_token=${code()}`);
     return $http({
       method: 'GET',
       url: `${link}&access_token=${code()}`,
+      params,
     })
     .then((response) => {
       const data = [];
       response.data.data.forEach((trail) => {
         trail.style = Style.inactiveTrail;
-        const possible = trail.max_rating || trail.rating * 5;
+        const possible = trail.max_rating;
         const rating = Math.round((trail.rating / possible) * 5);
         const emptyStars = 5 - rating;
         const difficulty = trail.difficulty;
@@ -79,12 +80,10 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       data: {
         user_id: user,
         trail_id: trail,
+        position: 0,
       },
     })
-    .then((res) => {
-      console.warn('creating it again')
-      return res.data.data[0]
-    })
+    .then(res => res.data.data[0])
     .catch(error => console.error(error))
   );
 
@@ -99,7 +98,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
       },
     })
     .then((res) => {
-      console.warn('you made it to a trail that is already saved')
       if (!res.data.data[0]) {
         return makeSavedTrail(user, trail);
       }
@@ -109,7 +107,6 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   );
 
   const updateSavedTrail = (user, id, updates) => {
-    console.log(user, id, updates);
     $http({
       method: 'PUT',
       url: `${$rootScope.IP}/savedtrails/${id}`,

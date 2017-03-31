@@ -27,7 +27,7 @@ angular.module('breadcrumb')
     time: null,
     length: null,
     requires_money: false,
-    transport: null,
+    transport: 'WALKING',
     crumbs: {},
     left: 5,
     style: null,

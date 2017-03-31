@@ -120,6 +120,8 @@ angular.module('breadcrumb', [
     }).catch((err) => { console.error(err); });
   };
 
+  $scope.load = () => Data.load();
+
   $scope.test = (input) => {
     console.warn(input);
   };

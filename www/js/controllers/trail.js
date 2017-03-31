@@ -53,13 +53,10 @@ angular.module('breadcrumb')
       $scope.trail = trails[0];
       ListFact.getSaved(store.get('user').id, $scope.trail.id)
       .then((data) => {
-        console.log(data);
-        $scope.savedID = data.trail_id;
+        $scope.savedID = data.id;
         $scope.crumbs = trails[0].crumb;
-        console.log($scope.crumbs);
         $scope.score = $scope.trail.difficulty.length * 5 * $scope.crumbs.length;
-        $scope.crumb = data.position || 0;
-        // $scope.trailID = $rootScope.trailID;
+        $scope.crumb = data.position;
         $scope.loading = { display: 'none' };
         UserFact.updateUser(store.get('user').id, { current_trail: $scope.trail.id });
       });
@@ -84,7 +81,7 @@ angular.module('breadcrumb')
     });
   };
 
-  $scope.trail = $scope.startTrail();
+  $scope.trail = null;
 
   $scope.switch = (type) => {
     switch (type) {
@@ -175,7 +172,6 @@ angular.module('breadcrumb')
     if ($scope.postTrail.rating) {
       ListFact.get('id')
       .then((data) => {
-        console.log(data[0]);
         const updates = {
           rating: data[0].rating + $scope.postTrail.rating,
           max_rating: (data[0].max_rating || 0) + 5,
