@@ -1,5 +1,13 @@
 angular.module('breadcrumb')
-.controller('LoginCtrl', function ($scope, $rootScope, auth, $state, store, getUpdateUserFact, $http) {
+.controller('LoginCtrl', function (
+  $scope,
+  $rootScope,
+  auth,
+  $state,
+  store,
+  getUpdateUserFact,
+  $http
+) {
   $scope.doAuth = () => {
     auth.signin({
       socialBigButtons: true,
@@ -29,7 +37,9 @@ angular.module('breadcrumb')
       })
       .then((response) => {
         const data = response.data.data[0];
+        console.log('WOOOOO', data);
         if (data) {
+          console.log('HEYYY', data);
           data.grant_type = 'password';
           data.social_login = profile.user_id;
           $http({
@@ -43,8 +53,9 @@ angular.module('breadcrumb')
             store.set('user', data);
             return $state.go('app.dashboard');
           }).catch((error) => { console.error(`There was an Error logging in ${error}`); });
+        } else {
+          $state.go('settings');
         }
-        $state.go('settings');
       });
     }, (error) => {
       console.error('There was an error logging in', error);

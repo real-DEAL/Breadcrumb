@@ -1,6 +1,11 @@
-angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, Style, store) {
-  const code = () => store.get('access_token');
-
+angular.module('breadcrumb').factory('ListFact', function (
+  $rootScope,
+  $http,
+  Style,
+  store,
+  $state
+) {
+  const code = store.get('access_token');
   const arrayMaker = (num) => {
     const arr = [];
     let i;
@@ -11,13 +16,25 @@ angular.module('breadcrumb').factory('ListFact', function ($rootScope, $http, St
   };
 
   const getTrails = (request) => {
-    const params = {};
+    if (!code) {
+      store.remove('token');
+      store.remove('access_token');
+      store.remove('profile');
+      store.remove('refreshToken');
+      store.remove('pic');
+      store.remove('user');
+      store.remove('geofences');
+      return $state.go('start', {}, { reload: true });
+    }
+    const params = {
+      access_token: code,
+    };
     const link = `${$rootScope.IP}/trails?`;
     if (request === 'id') {
       params.id = $rootScope.trailID;
     } else if (request) {
       _.each(request, (val, req) => {
-        if (req !== 'username' && val !== null && val !== 'Any') {
+        if (req !== 'username' && val !== null && val !== 'Any' && val !== undefined) {
           params[req] = val;
         }
       });

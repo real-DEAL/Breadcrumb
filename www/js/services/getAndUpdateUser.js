@@ -3,8 +3,7 @@ angular.module('breadcrumb')
   const putUserInfo = (userIf, userData) =>
     $http({
       method: 'PUT',
-      // url: `${$rootScope.IP}/users${userData.id}`,
-      url: `http://54.203.104.113/users${userData.id}`,
+      url: `${$rootScope.IP}/users/${userData.id}`,
       data: userIf,
       json: true,
       params: {
@@ -13,7 +12,7 @@ angular.module('breadcrumb')
     })
     .then((res) => {
       store.set('user', res.data.data[0]);
-      $state.go('app.dashboard');
+      $state.go('app.dashboard', {}, { reload: true });
     })
     .catch((error) => {
       console.error(error);
@@ -22,8 +21,7 @@ angular.module('breadcrumb')
   const postUserInfo = userIf =>
     $http({
       method: 'POST',
-      // url: `${$rootScope.IP}/users`,
-      url: 'http://54.203.104.113/users',
+      url: `${$rootScope.IP}/users`,
       data: userIf,
       json: true,
     })
@@ -40,8 +38,7 @@ angular.module('breadcrumb')
   const deleteUserInfo = userData =>
     $http({
       method: 'DELETE',
-      // url: `${$rootScope.IP}/users/${userData.id}?access_token=${store.get('access_token')}`,
-      url: `http://54.203.104.113/users/${userData.id}?access_token=${store.get('access_token')}`,
+      url: `${$rootScope.IP}/users/${userData.id}?access_token=${store.get('access_token')}`,
       json: true,
     })
     .then(() => {
@@ -54,7 +51,7 @@ angular.module('breadcrumb')
   return (socialID, userInfo, deleteAcct) => {
     $http({
       method: 'GET',
-      url: `${$rootScope.IP}/users?access_token=${store.get('access_token')}`,
+      url: `${$rootScope.IP}/users`,
       json: true,
       params: {
         social_login: socialID,
@@ -65,15 +62,13 @@ angular.module('breadcrumb')
       const pic = store.get('pic');
       userInfo.social_login = socialID;
       userInfo.password = socialID;
-      if (pic) {
+      if (pic && !userInfo.profile_picture) {
         userInfo.profile_picture = pic;
       }
       if (deleteAcct) {
         return deleteUserInfo(data);
-      } else if (data) {
-        return putUserInfo(userInfo, data);
       }
-      return postUserInfo(userInfo);
+      return data ? putUserInfo(userInfo, data) : postUserInfo(userInfo);
     })
     .catch((error) => {
       console.error(error);

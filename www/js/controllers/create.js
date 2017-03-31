@@ -1,5 +1,14 @@
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
+.controller('CreateTrailCtrl', function (
+  $scope,
+  $rootScope,
+  $state,
+  Trail,
+  Map,
+  Data,
+  Style,
+  store
+) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = Style.moveLeft(move);
