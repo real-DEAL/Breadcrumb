@@ -1,7 +1,6 @@
 angular.module('breadcrumb')
 .factory('UserFact', function ($http, $rootScope, store) {
-  const code = store.get('access_token');
-
+  const accToken = store.get('access_token');
   const getUser = username => (
     $http({
       method: 'GET',
@@ -15,9 +14,12 @@ angular.module('breadcrumb')
   const updateUser = (id, updates) => (
     $http({
       method: 'PUT',
-      url: `${$rootScope.IP}/users/${id}?access_token=${code}`,
+      url: `${$rootScope.IP}/users/${id}`,
       json: true,
       data: updates,
+      params: {
+        access_token: accToken,
+      },
     })
     .then(response => response.data.data[0])
     .catch(error => console.error(error))

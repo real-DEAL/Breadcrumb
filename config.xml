@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.realdeal.breadcrumb" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Breadcrumb</name>
   <description>
@@ -11,7 +11,6 @@
   <access origin="*"/>
   <access origin="*.openstreetmap.org"/>
   <access origin="http://*.google.com"/>
-  <allow-navigation href="*.auth0.com"/>
   <access origin="*.auth0.com"/>
   <access origin="https://defields923.auth0.com/user/ssodata"/>
   <access origin="https://*.microsoft.com"/>
@@ -20,6 +19,9 @@
   <access origin="http://172.24.2.65:8100"/>
   <access origin="http://54.203.104.113/users"/>
   <access origin="http://172.24.2.139:8100"/>
+  <allow-navigation href="*.auth0.com"/>
+  <allow-navigation href="http://172.24.2.41:8100"/>
+  <allow-navigation href="http://192.168.99.1:8100"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
@@ -96,7 +98,6 @@
   <plugin name="cordova-plugin-geolocation" spec="~2.1.0"/>
   <plugin name="cordova-plugin-console" spec="~1.0.2"/>
   <plugin name="cordova-plugin-splashscreen" spec="~3.2.2"/>
-  <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
   <plugin name="cordova-plugin-add-swift-support" spec="~1.6.2"/>
   <plugin name="cordova-plugin-camera" spec="~2.4.0"/>
   <plugin name="cordova-plugin-compat" spec="~1.1.0"/>
@@ -107,4 +108,5 @@
   <plugin name="cordova-plugin-file-transfer" spec="~1.6.2"/>
   <plugin name="uk.co.workingedge.phonegap.plugin.launchnavigator" spec="~3.2.1"/>
   <plugin name="cordova-plugin-inappbrowser" spec="~1.7.0"/>
+  <icon src="resources/android/icon/drawable-xhdpi-icon.png"/>
 </widget>

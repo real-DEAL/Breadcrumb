@@ -62,10 +62,6 @@ angular.module('breadcrumb')
             templateUrl: 'views/create.html',
             controller: 'CreateTrailCtrl',
           },
-          'mapContent@app.create': {
-            templateUrl: 'views/map.html',
-            controller: 'MapCtrl',
-          },
         },
       })
       .state('app.search', {

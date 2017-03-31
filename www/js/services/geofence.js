@@ -17,7 +17,7 @@ angular.module('breadcrumb').factory('Geofence', function (
         try {
           geofences = angular.fromJson(result);
         } catch (ex) {
-          console.warn(ex);
+          console.error(ex);
         }
       }
       this._geofences = geofences;
@@ -45,7 +45,7 @@ angular.module('breadcrumb').factory('Geofence', function (
     addOrUpdate(crumb) {
       const self = this;
       const geofence = {
-        id: UUIDjs.create().toString(),
+        id: crumb.id,
         latitude: Number(crumb.latitude),
         longitude: Number(crumb.longitude),
         radius: 100,
@@ -83,25 +83,6 @@ angular.module('breadcrumb').factory('Geofence', function (
 
       return undefined;
     },
-
-    // remove(geofence) {
-    //   const self = this;
-    //
-    //   $ionicLoading.show({
-    //     template: 'Removing geofence...',
-    //   });
-    //   $window.geofence.remove(geofence.id).then(function () {
-    //     $ionicLoading.hide();
-    //     self._geofences.splice(self._geofences.indexOf(geofence), 1);
-    //     self.saveToLocalStorage();
-    //   }, function (reason) {
-    //     $log.error('Error while removing geofence', reason);
-    //     $ionicLoading.show({
-    //       template: 'Error while removing geofence',
-    //       duration: 1500,
-    //     });
-    //   });
-    // },
 
     removeAll() {
       const self = this;

@@ -1,5 +1,14 @@
 angular.module('breadcrumb')
-.controller('CreateTrailCtrl', function ($scope, $rootScope, $state, Trail, Map, Data, Style, store) {
+.controller('CreateTrailCtrl', function (
+  $scope,
+  $rootScope,
+  $state,
+  Trail,
+  Map,
+  Data,
+  Style,
+  store
+) {
   const moveX = (crumb, num) => {
     const move = `${crumb.left += num}%`;
     const style = Style.moveLeft(move);
@@ -163,7 +172,6 @@ angular.module('breadcrumb')
 
 
   $scope.add = () => {
-    console.warn('add()');
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
@@ -260,7 +268,7 @@ angular.module('breadcrumb')
       $scope.crumbs = [];
       $scope.trail = trailMaker();
       $scope.loading = Style.displayNone;
-      // $rootScope.refresh = true;
+      $rootScope.refresh = true;
       $state.go('app.dashboard');
     });
   };

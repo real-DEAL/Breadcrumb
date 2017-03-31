@@ -3,7 +3,6 @@
   <div class="loading center" ng-style="loading">
     <img class="center" style="margin-top: 50%" ng-src="{{ load() }}" alt="">
   </div>
-
   <div class="black"  ng-if="leaving" ng-click="leave()"></div>
   <div class="full">
     <div class="card info t-center margin-n" ng-if="leaving">
@@ -61,7 +60,6 @@
             {{ crumbs[crumb].description }}
           </div>
         </div>
-
         <div class="t-center margin-top">
           <button class="button button-b" ng-click="callMap()">Let's go!</button>
         </div>
@@ -70,7 +68,6 @@
 
       <!-- DISCOVERY -->
       <div ng-if="page.found" class="margin-top">
-
         <div class="card light-b t-center" style="min-height: 450px;">
 
           <!-- MEDIA BUTTONS -->
@@ -102,7 +99,6 @@
           <div class="full float float22">
             <img class="rotate-small" ng-if="!page.media.show" ng-src="http://res.cloudinary.com/realdeal/image/upload/v1490891679/found.gif" alt="">
           </div>
-
           <h4 ng-if="!page.media.show">Check out its cool content!</h4>
 
           <!-- MEDIA -->
@@ -120,7 +116,6 @@
               <iframe width="350" height="200" ng-src="{{ video() }}" frameborder="0" allowfullscreen></iframe>
             </div>
           </div>
-
         </div>
 
         <div class="t-center">
@@ -130,14 +125,12 @@
 
       <!-- FINISHED -->
       <div ng-if="page.finish" class="margin-top t-center">
-
         <div class="card t-center" style="min-height: 450px;">
           <div class="finish">
             <h1>Congrats!</h1>
             <h3>You finished the trail!!</h3>
             <h4>You earned <b>{{ score }}</b> points!</h4>
           </div>
-
           <div class="rating">
             <h4>Rate this trail?</h4>
             <ul class="">
@@ -151,11 +144,8 @@
             </ul>
           </div>
         </div>
-
         <button class="button button-a" ng-click="submit()" ui-sref="app.dashboard">Back to dashboard</button>
-
       </div>
-
     </ion-content>
   </div>
 </ion-view>

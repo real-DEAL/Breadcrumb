@@ -1,5 +1,13 @@
 angular.module('breadcrumb')
-.controller('ListCtrl', function ($scope, $rootScope, $state, store, ListFact, Data, Style) {
+.controller('ListCtrl', function (
+  $scope,
+  $rootScope,
+  $state,
+  store,
+  ListFact,
+  Data,
+  Style
+) {
   $scope.specificTransport = false;
   $scope.loading = null;
 
@@ -82,7 +90,6 @@ angular.module('breadcrumb')
 
   $scope.pickTrail = (id, index) => {
     $rootScope.trailID = id;
-    console.log(id);
     $scope.close(index);
   };
 
