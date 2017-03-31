@@ -175,12 +175,8 @@ angular.module('breadcrumb')
         } else {
           $scope.crumbs[$scope.crumbs.length - 2].address = $scope.crumb.address;
         }
-        console.warn($scope.crumb.address, 'crumb.address works');
-        console.warn($scope.location.address, 'location.address');
-        // $scope.crumbs[$scope.crumbs.length - 2].address = $scope.location.address;
         $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
         $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
-        console.warn('does $scope.crumbs get reassigned', $scope.crumbs);
       }
     }
   };
@@ -217,7 +213,6 @@ angular.module('breadcrumb')
   };
 
   $scope.reviewMap = () => {
-    console.warn($scope.trail.transport, 'Transport at ReviewMap()');
     $scope.loading = null;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
@@ -360,16 +355,12 @@ angular.module('breadcrumb')
   };
 
   $scope.updateCoords = () => {
-    console.warn($scope.location.address, 'the location.address');
     if ($scope.location.address.length >= 15) {
       const geocoder = new google.maps.Geocoder();
-      console.warn($scope.location.address, 'the address');
       geocoder.geocode({ address: $scope.location.address }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results) {
             $scope.crumb.address = results[0].formatted_address ? results[0].formatted_address : '';
-            console.warn($scope.crumb.address, 'the results');
-
             $scope.markers.marker.lat = results[0].geometry.location.lat();
             $scope.markers.marker.lng = results[0].geometry.location.lng();
             angular.extend($scope, {
@@ -397,8 +388,6 @@ angular.module('breadcrumb')
     const center = (map.getCenter());
     $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
-    // $scope.crumb.latitude = center.lat;
-    // $scope.crumb.longitude = center.lng;
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
     $scope.markers = {
