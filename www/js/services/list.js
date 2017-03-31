@@ -41,7 +41,7 @@ angular.module('breadcrumb').factory('ListFact', function (
     }
     return $http({
       method: 'GET',
-      url: `${link}&access_token=${code()}`,
+      url: `${link}`,
       params,
     })
     .then((response) => {
@@ -69,7 +69,7 @@ angular.module('breadcrumb').factory('ListFact', function (
       method: 'PUT',
       url: `${$rootScope.IP}/trails/${id}`,
       params: {
-        access_token: code(),
+        access_token: code,
       },
       data: updates,
     })
@@ -80,7 +80,7 @@ angular.module('breadcrumb').factory('ListFact', function (
   const deleteTrail = (trail) => {
     $http({
       method: 'DELETE',
-      url: `${$rootScope.IP}/trails/${trail.id}?access_token=${code()}`,
+      url: `${$rootScope.IP}/trails/${trail.id}?access_token=${code}`,
     })
     .then(res => console.warn(res))
     .catch(res => console.error(res));
@@ -91,7 +91,7 @@ angular.module('breadcrumb').factory('ListFact', function (
       method: 'POST',
       url: `${$rootScope.IP}/savedtrails`,
       params: {
-        access_token: code(),
+        access_token: code,
       },
       data: {
         user_id: user,
@@ -110,7 +110,7 @@ angular.module('breadcrumb').factory('ListFact', function (
       params: {
         user_id: user,
         trail_id: trail,
-        access_token: code(),
+        access_token: code,
       },
     })
     .then((res) => {
@@ -127,7 +127,7 @@ angular.module('breadcrumb').factory('ListFact', function (
       method: 'PUT',
       url: `${$rootScope.IP}/savedtrails/${id}`,
       params: {
-        access_token: code(),
+        access_token: code,
       },
       data: updates,
     })

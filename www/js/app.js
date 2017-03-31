@@ -99,7 +99,7 @@ angular.module('breadcrumb', [
   $http
 ) {
   $scope.logout = () => {
-    const user = store.get('user');
+    const user = store.get('user').username;
     const accessToken = store.get('access_token');
     $http({
       url: `${$rootScope.IP}/v1/access_tokens/${user.id}?access_token=${accessToken}`,
@@ -119,9 +119,9 @@ angular.module('breadcrumb', [
 
   $scope.load = () => Data.load();
 
-  $scope.$on('$ionicView.beforeEnter', () => {
-    $scope.user = store.get('user').username;
-  });
+  // $scope.$on('$ionicView.beforeEnter', () => {
+  //   $scope.user = store.get('user').username;
+  // });
 
   $scope.test = (input) => {
     console.warn(input);

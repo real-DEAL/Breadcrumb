@@ -11,7 +11,7 @@ angular.module('breadcrumb').factory('AugRealFact', function ($http, store) {
     messages.forEach((val, i) => {
       const fontSize = 6;
       const fontColor = 'white';
-      $('#spot').append(`<div class="comment" data-id=${i} style="display:block;margin-left:${(((messages[i].bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].message}</div></div>`);
+      $('#spot').append(`<div class="comment" data-id=${i} style="display:block;margin-left:${(((val.bearing - degree) * 5) + 50)}px;width:${($(window).width() - 100)}px;font-size:${fontSize}px;color:${fontColor}">${messages[i].username}<div>${messages[i].message}</div></div>`);
       detected = 1;
     });
     if (!detected) {
