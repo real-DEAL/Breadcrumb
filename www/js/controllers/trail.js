@@ -126,7 +126,7 @@ angular.module('breadcrumb')
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
           $scope.page.description = true;
-          $scope.save();
+          // $scope.save();
         }
         break;
       default: $scope.page.description = true;
