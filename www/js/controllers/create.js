@@ -68,6 +68,7 @@ angular.module('breadcrumb')
   $scope.location = {
     lat: 29.9511,
     lng: -90.0715,
+    address: '',
   };
 
   $scope.obj = {};
@@ -162,14 +163,17 @@ angular.module('breadcrumb')
 
 
   $scope.add = () => {
+    console.warn('add()');
     if (!$scope.review.check) {
       $scope.move(-100);
       $scope.trail.crumbs = $scope.crumbs.slice();
       const crumb = $scope.crumb();
       $scope.crumbs.push(crumb);
       if ($scope.crumbs.length > 1) {
+        $scope.crumbs[$scope.crumbs.length - 2].address = $scope.location.address;
         $scope.crumbs[$scope.crumbs.length - 2].latitude = $scope.center.lat;
         $scope.crumbs[$scope.crumbs.length - 2].longitude = $scope.center.lng;
+        console.warn('does $scope.crumbs get reassigned', $scope.crumbs);
       }
     }
   };
@@ -206,6 +210,7 @@ angular.module('breadcrumb')
   };
 
   $scope.reviewMap = () => {
+    console.warn($scope.trail.transport, 'Transport at ReviewMap()');
     $scope.loading = null;
     Map.add($scope.crumbs, $scope.trail.transport)
     .then((data) => {
@@ -230,6 +235,11 @@ angular.module('breadcrumb')
   $scope.reset = () => {
     $scope.review.check = false;
     moveReset($scope.trail, 0);
+    $scope.location = {
+      lat: '',
+      lng: '',
+      address: '',
+    };
     $scope.crumbs.forEach((crumb, index) => {
       moveReset(crumb, index + 1);
     });
@@ -316,10 +326,6 @@ angular.module('breadcrumb')
     },
   };
 
-  $scope.place = {
-    address: '',
-  };
-
   $scope.$on('leafletDirectiveMarker.dragend', (event, args) => {
     const map = args.leafletEvent.target;
     const center = map.getLatLng();
@@ -346,10 +352,11 @@ angular.module('breadcrumb')
   };
 
   $scope.updateCoords = () => {
-    if ($scope.place.address.length >= 15) {
+    console.warn($scope.location.address, 'the location.address');
+    if ($scope.location.address.length >= 15) {
       const geocoder = new google.maps.Geocoder();
-      console.warn($scope.place.address, 'the address');
-      geocoder.geocode({ address: $scope.place.address }, function (results, status) {
+      console.warn($scope.location.address, 'the address');
+      geocoder.geocode({ address: $scope.location.address }, function (results, status) {
         if (status === google.maps.GeocoderStatus.OK) {
           if (results) {
             $scope.markers.marker.lat = results[0].geometry.location.lat();
@@ -379,6 +386,8 @@ angular.module('breadcrumb')
     const center = (map.getCenter());
     $scope.center.lat = center.lat;
     $scope.center.lng = center.lng;
+    // $scope.crumb.latitude = center.lat;
+    // $scope.crumb.longitude = center.lng;
     $scope.location.lat = center.lat;
     $scope.location.lng = center.lng;
     $scope.markers = {

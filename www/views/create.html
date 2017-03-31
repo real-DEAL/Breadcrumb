@@ -119,9 +119,10 @@
         </div>
 
         <!-- LOCATION -->
-        <div class="item textbox">
-          <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="place.address"/>
-          <reverse-geocode lat="{{ markers.marker.lat }}" lng="{{ markers.marker.lng }}" />
+        <div class="item item-icon-right textbox">
+          <i class="positive icon ion-navigate" ng-click="test()"></i>
+          <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="location.address" style="width: 500px;"/>
+          <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
         </div>
 
         <!-- MEDIA SWITCH BUTTON -->
@@ -141,7 +142,7 @@
             ng-if="crumbs.length > $index + 1">
               Next crumb
             </button>
-            <button class="button button-a button-block" ng-click="add(location)" ng-if="crumbs.length === $index + 1">
+            <button class="button button-a button-block" ng-click="add()" ng-if="crumbs.length === $index + 1">
               Add crumb!
             </button>
           </div>
