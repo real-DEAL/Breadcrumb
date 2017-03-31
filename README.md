@@ -20,7 +20,7 @@ Each trail will have multiple stop points for travelers to experience. The user 
 
 
 ----
-## The team ##
+## The team
 
 - **Product owner**: [Eric Periou](https://github.com/eperiou/)
 - **Scrum Master**: [Olivia Sabo-Rush](https://github.com/livrush/)
@@ -36,7 +36,7 @@ Using geolocation and geofencing, the user receives hints and a map to ‘crumbs
 
 Breadcrumb enhances the tourist experience by providing an avenue of expression that enhances a usual walk and see experience. Anyone from tour guides, local musicians, theatre troupes and the general user have the tools to make an immersive and fun experience.
 
-## How to Get Started ##
+## How to Get Started
 
 Just download the app to your android device. After a brief signup form, pick an adventure and follow the crumbs for a fun filled Trek through the city.
 
@@ -59,7 +59,7 @@ Just download the app to your android device. After a brief signup form, pick an
 ## Database Layout ##
 ![Database](assets/database.png)
 
-### Other resource ###
+### Other resource
 
 Check out our sweet initial [press release](PRESS-RELEASE.md)!
 
