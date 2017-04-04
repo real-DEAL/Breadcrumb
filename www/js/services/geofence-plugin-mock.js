@@ -1,17 +1,17 @@
-angular.module('ionic-geofence').factory('GeofencePluginMock', function ($q, $log) {
+angular.module('breadcrumb').factory('GeofencePluginMock', function ($q) {
   return {
-    addOrUpdate: (fences) => {
+    addOrUpdate: (/* fences */) => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin addOrUpdate', fences);
+      // $log.log('Mocked geofence plugin addOrUpdate', fences);
       deffered.resolve();
 
       return deffered.promise;
     },
-    remove: (ids) => {
+    remove: (/* ids */) => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin remove', ids);
+      // $log.log('Mocked geofence plugin remove', ids);
       deffered.resolve();
 
       return deffered.promise;
@@ -19,7 +19,7 @@ angular.module('ionic-geofence').factory('GeofencePluginMock', function ($q, $lo
     removeAll: () => {
       const deffered = $q.defer();
 
-      $log.log('Mocked geofence plugin removeAll');
+      // $log.log('Mocked geofence plugin removeAll');
       deffered.resolve();
 
       return deffered.promise;

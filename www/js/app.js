@@ -1,6 +1,13 @@
-// Ionic Geofence example App
-
-angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
+angular.module('breadcrumb', [
+  'ionic',
+  'ionic.contrib.ui.tinderCards',
+  'leaflet-directive',
+  'auth0',
+  'angular-storage',
+  'angular-jwt',
+  'gm',
+  'angularReverseGeocode',
+])
 .run(function (
   $window,
   $document,
@@ -9,12 +16,14 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
   $ionicPlatform,
   $log,
   $rootScope,
-  GeofencePluginMock
+  GeofencePluginMock,
+  auth,
+  store
 ) {
   $ionicPlatform.ready(function () {
-    $log.log('Ionic ready');
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    $rootScope.IP = 'http://54.203.104.113';
+    $rootScope.pinged = false;
+    $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
       $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -39,11 +48,7 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
               title: 'Geofence transition',
               text: 'Without notification',
             };
-            $ionicLoading.show({
-              template: `${geo.notification.title}: ${geo.notification.text}`,
-              noBackdrop: true,
-              duration: 2000,
-            });
+            $rootScope.pinged = true;
           });
         });
       }
@@ -59,10 +64,7 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
             noBackdrop: true,
             duration: 2000,
           });
-
-          $state.go('geofence', {
-            geofenceId: notificationData.id,
-          });
+          // TODO stop app from reopenin
         });
       }
     };
@@ -70,13 +72,75 @@ angular.module('ionic-geofence', ['ionic', 'leaflet-directive'])
     $window.geofence.initialize(() => {
       $log.log('Geofence plugin initialized');
     });
-  });
 
-  $rootScope.$on('$stateChangeError', (event, toState, toParams, fromState, fromParams, error) => {
-    $log.log('stateChangeError', error, toState, toParams, fromState, fromParams);
-    $state.go('geofences');
+    $rootScope.$on('$locationChangeStart', () => {
+      if (!auth.isAuthenticated) {
+        const token = store.get('token');
+        if (token) {
+          auth.authenticate(store.get('profile'), token, null, null, store.get('refreshToken'));
+        }
+      }
+    });
+    if (store.get('token') && store.get('user')) {
+      $rootScope.trailID = store.get('user').current_trail;
+      auth.authenticate(store.get('profile'), store.get('token'), null, null, store.get('refreshToken'));
+      $state.go('app.dashboard');
+    }
   });
 })
-.controller('AppCtrl', function ($scope) {
-  $scope.scope = null;
+.controller('AppCtrl', function (
+  $scope,
+  $rootScope,
+  auth,
+  store,
+  $state,
+  Data,
+  Style,
+  $http
+) {
+  $scope.logout = () => {
+    const user = store.get('user').username;
+    const accessToken = store.get('access_token');
+    $http({
+      url: `${$rootScope.IP}/v1/access_tokens/${user.id}?access_token=${accessToken}`,
+      method: 'DELETE',
+    }).then(() => {
+      auth.signout();
+      store.remove('token');
+      store.remove('access_token');
+      store.remove('profile');
+      store.remove('refreshToken');
+      store.remove('pic');
+      store.remove('user');
+      store.remove('geofences');
+      $state.go('start', {}, { reload: true });
+    }).catch((err) => { console.error(err); });
+  };
+
+  $scope.load = () => Data.load();
+
+  // $scope.$on('$ionicView.beforeEnter', () => {
+  //   $scope.user = store.get('user').username;
+  // });
+
+  $scope.test = (input) => {
+    console.warn(input);
+  };
+
+  $rootScope.filter = {};
+
+  $scope.setFilter = (request) => {
+    $rootScope.filter = request;
+  };
+
+  $scope.links = Data.menu;
+
+  $scope.theme = Style.theme();
+
+  $scope.child1 = Data.child();
+  $scope.child2 = Data.child();
+
+  $scope.overflowStyle = Style.overflowStyle;
+
+  $rootScope.refresh = false;
 });

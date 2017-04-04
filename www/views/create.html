@@ -1,0 +1,242 @@
+
+<!DOCTYPE html>
+<ion-view>
+  <div class="loading center" ng-style="loading">
+    <img class="center" style="margin-top: 50%" ng-src="{{ load() }}" alt="">
+  </div>
+  <div class="black"  ng-if="info.show" ng-click="toggleInfo()"></div>
+
+  <div class="card info t-center margin-n" ng-if="info.show">
+    <div class="item item-divider">
+      {{ info.name }}
+    </div>
+    <div class="item item-text-wrap">
+      {{ info.text }}
+    </div>
+  </div>
+
+
+  <ion-nav-buttons side="left">
+    <ion-header-bar class="bar bar-header" align-title="center">
+      <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+      <h1 class="title">Create Trail</h1>
+    </ion-header-bar>
+  </ion-nav-buttons>
+
+  <ion-content scroll="false" ng-style="theme.static">
+    <!-- TRAIL INFO -->
+    <div class="abs card" ng-style="trail.style" on-swipe-left="cardSwipedLeft(0)">
+      <!-- TRAIL NAME -->
+      <label class="item item-input">
+        <input type="text" style="font-size: 25px" class="center" ng-model="trail.name" placeholder="Name of trail" maxlength="20" >
+      </label>
+
+      <!-- TRAIL DESCRIPTION -->
+      <label class="list item item-input">
+        <input type="text" ng-model="trail.description" placeholder="Tells us about your trail" />
+      </label>
+
+      <!-- TRAIL TYPE -->
+      <div class="row list center">
+        <div class="col col-25">
+          Type:
+        </div>
+        <div class="col dark center" ng-click="changeStep(false)">
+          <i class="ion-arrow-left-b s-2x"></i>
+        </div>
+        <div class="col dark center">
+          <span>{{ trailTypes[step] }}</span>
+        </div>
+        <div class="col dark center" ng-click="changeStep(true)">
+          <i class="ion-arrow-right-b s-2x"></i>
+        </div>
+      </div>
+
+      <!-- TRAIL DIFFICULTY -->
+      <div class="list row center">
+        <div class="col col-25">
+          Difficulty:
+        </div>
+        <div class="col s-2x">
+          <i
+            class="ion-ribbon-b padding"
+            ng-repeat="diff in difficulty"
+            ng-style="diff.style"
+            ng-click="fillDifficulties($index)"
+          ></i>
+        </div>
+      </div>
+
+      <!-- TRAIL TRANSPORT AND MONEY -->
+      <div class="row calm s-2x center" ng-click="transChange(trail.transport)">
+
+        <!-- TRANSPORT -->
+        <i ng-repeat="(name, type) in transport" ng-style="type.style" class="ion-android-{{ type.type }} col margin-h" ng-click="trail.transport = name"></i>
+
+        <!-- MONEY -->
+        <i class="ion-cash col dark margin-h" ng-style="moneyStyle" ng-click="money(trail.requires_money)"></i>
+      </div>
+
+      <div class="padding">
+        <button class="button-a button button-block" ng-click="add()" ng-if="!crumbs.length">
+          Create trail!
+        </button>
+        <button class="button-b button button-block" ng-click="move(-100)"
+        ng-if="crumbs.length">
+          Next crumb
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CRUMBS -->
+    <div class="abs card card-{{$index}}" ng-repeat="crumb in crumbs track by $index" on-swipe-left="cardSwipedLeft($index + 1)" on-swipe-right="cardSwipedRight($index + 1)" on-partial-swipe="cardPartialSwipe(amt)" ng-style="crumb.style">
+
+      <!-- NAMES -->
+      <div class="item item-divider item-icon-right">
+
+        <!-- CLUE -->
+        <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.clue" placeholder="crumb {{ $index + 1 }} clue" ng-if="!media">
+
+        <!-- NAME -->
+        <input class="full center transparent" style="font-size: 25px;" type="text" ng-model="crumb.name" placeholder="crumb {{ $index + 1 }} name" ng-if="media">
+        <i class="icon ion-trash-b s-1x" ng-click="remove($index)" style="color: #a0030c"></i>
+      </div>
+
+      <div ng-if="!media">
+        <!-- MAP -->
+        <div class="row item item-divider center map-div">
+
+          <div style="width: 100%; position: absolute; top: 0px; bottom: 0px;" data-tap-disabled="true">
+            <leaflet id="mapid" center="center" event-broadcast="events" resizeable markers="markers" paths="paths" tiles="tiles" width="100%" height="100%"></leaflet>
+          </div>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="item item-icon-right textbox">
+          <i class="icon ion-information-circled" ng-click="toggleInfo('description')" style="color: #73aa95"></i>
+          <input class="full" type="text" ng-model="crumb.description" placeholder="Directions">
+        </div>
+
+        <!-- LOCATION -->
+        <div class="item item-icon-right textbox">
+          <i class="positive icon ion-navigate" ng-click="test()"></i>
+          <input type="text" id="place" ng-change="updateCoords()" gm-places-autocomplete ng-model="location.address" style="width: 500px;"/>
+          <reverse-geocode lat="{{markers.marker.lat}}" lng="{{markers.marker.lng}}" />
+        </div>
+
+        <!-- MEDIA SWITCH BUTTON -->
+        <div class="item item-divider center" ng-click="toggleMedia('media')">
+          <h1>UPLOAD MEDIA</h1>
+        </div>
+
+        <!-- BUTTONS -->
+        <div class="row" ng-if="!media">
+          <div class="col">
+            <button class="button button-b button-block" ng-click="move(100)">
+              Prev crumb
+            </button>
+          </div>
+          <div class="col">
+            <button class="button button-b button-block" ng-click="move(-100)"
+            ng-if="crumbs.length > $index + 1">
+              Next crumb
+            </button>
+            <button class="button button-a button-block" ng-click="add()" ng-if="crumbs.length === $index + 1">
+              Add crumb!
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- CRUMB MEDIA -->
+      <div ng-if="media">
+
+        <!-- CRUMB TEXT -->
+        <div class="item item-icon-right textbox">
+          <i class="icon ion-information-circled" ng-click="toggleInfo('rewardText')" style="color: #73aa95"></i>
+          <input type="text" ng-model="crumb.media_text" placeholder="Crumb reveal text">
+        </div>
+
+        <!-- MEDIA UPLOAD BUTTONS -->
+        <div class="center padding margin-v">
+          <div class="center bubble inline" ng-click="toggleMedia('image')">
+            <i class="center-v ion-camera center"></i>
+          </div>
+          <div class="center bubble inline" ng-click="toggleMedia('audio')">
+            <i class="center-v ion-mic-a"></i>
+          </div>
+          <div class="center bubble inline" ng-click="toggleMedia('video')">
+            <i class="center-v ion-ios-videocam"></i>
+          </div>
+        </div>
+
+        <div>
+          <label class="item item-input" ng-if="mediaType.image">
+            <input type="text" placeholder="Image link" ng-model="crumb.image">
+          </label>
+          <label class="item item-input" ng-if="mediaType.audio">
+            <input type="text" placeholder="Audio link" ng-model="crumb.audio">
+          </label>
+          <label class="item item-input" ng-if="mediaType.video">
+            <input type="text" placeholder="Video link" ng-model="crumb.video">
+          </label>
+        </div>
+
+        <div class="item item-divider center" ng-click="toggleMedia('media')">
+          <h1>FINISH MEDIA</h1>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="abs card review" ng-style="review.style">
+      <div class="item item-divider center">
+        Review crumbs for <strong>{{ trail.name }}</strong>
+      </div>
+
+      <!-- MAP -->
+      <div class="center reviewMap">
+        <img src="{{ trail.map }}" />
+      </div>
+
+      <!-- TIME AND DISTANCE -->
+      <div class="row center">
+        <div class="col">Total time: <br><strong>{{ trail.time }}</strong></div>
+        <div class="col">Total distance: <br><strong>{{ trail.length }}</strong></div>
+      </div>
+
+      <!-- CRUMBS -->
+      <div ng-style="overflowStyle">
+        <div ng-repeat="crumb in trail.crumbs track by $index" class="row">
+          <div class="col col-10 t-center">{{ $index + 1 }}</div>
+          <div class="col">{{ crumb.address }}</div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <div class="footer" ng-click="reviewMap()" ng-if="crumbs.length > 2 && !review.check">
+    <div class="center">Review and submit</div>
+  </div>
+
+  <div class="footer" ng-if="review.check">
+    <div class="row" style="width: 350px">
+      <div class="col col-25"></div>
+      <div class="col col-25 right">
+        <a class="tab-item" ng-click="reset()">
+          <i class="icon ion-compose egg-t"></i>
+          Edit
+        </a>
+      </div>
+      <div class="col col-25">
+        <a class="tab-item" ng-click="submit()">
+          <i class="icon ion-checkmark-round egg-t"></i>
+          Submit
+        </a>
+      </div>
+      <div class="col col-25"></div>
+    </div>
+  </div>
+</ion-view>
