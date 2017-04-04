@@ -7,7 +7,6 @@
 
 Each trail will have multiple stop points for travelers to experience. The user will receive hints at each stop providing them with a. Challenges may utilize text, photos, videos, audio, or augmented reality. Upon completing each challenge users will have the opportunity to leave a comment/photo for that step of the trail. Users will gain points based on how well the fair on a trail, and can rate and review other users' trails when they finish.
 
-----------
 ## Table of Contents
 
 1. [The Team](#The-team)
@@ -19,8 +18,6 @@ Each trail will have multiple stop points for travelers to experience. The user 
 7. [Architecture](#Architecture)
 8. [Database Layout](#Database-Layout)
 
-
-----
 ## The team ##
 
 - **Product owner**: [Eric Periou](https://github.com/eperiou/)
@@ -28,8 +25,6 @@ Each trail will have multiple stop points for travelers to experience. The user 
 - **Development team**:
   - [Devin Fields](https://github.com/defields923/)
   - [Alice Lai](https://github.com/aplai168/)
-
-----------
 
 ## What is Breadcrumb? ##
 
@@ -42,8 +37,6 @@ Breadcrumb enhances the tourist experience by providing an avenue of expression 
 ## How to Get Started ##
 
 Just download the app to your android device. After a brief signup form, pick an adventure and follow the crumbs for a fun filled Trek through the city.
-
----
 
 ## Wireframe ##
 ![wireframe](assets/wireframe.png)
