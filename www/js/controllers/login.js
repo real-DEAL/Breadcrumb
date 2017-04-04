@@ -17,6 +17,8 @@ angular.module('breadcrumb')
         scope: 'openid offline_access',
         device: 'Mobile device',
       },
+      icon: 'http://res.cloudinary.com/realdeal/image/upload/v1490885825/breadcrumb-logo.gif',
+      // theme: 'auth',
       standalone: true,
       autoclose: true,
       rememberLastLogin: false,

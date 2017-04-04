@@ -1,4 +1,4 @@
-![wireframe](logo.png)
+![wireframe](assets/logo.png)
 # Breadcrumb
 
 ### About Breadcrumb
@@ -14,9 +14,10 @@ Each trail will have multiple stop points for travelers to experience. The user 
 2. [What is Breadcrumb? ](#What-is-Breadcrumb?)
 3. [How to Get Started](#How-to-Get-Started)
 4. [Wireframe](#Wireframe)
-5. [Tech Stack](#Tech-Stack)
-6. [Architecture](#Architecture)
-7. [Database Layout](#Database Layout)
+5. [Live App Wireframe](#Live-App-Wireframe)
+6. [Tech Stack](#Tech-Stack)
+7. [Architecture](#Architecture)
+8. [Database Layout](#Database-Layout)
 
 
 ----
@@ -34,7 +35,7 @@ Each trail will have multiple stop points for travelers to experience. The user 
 
 Breadcrumb is designed for the adventurer in all of us. Whether you want to get out and have a locals provided tour, a virtual scavenger hunt, or take in an exciting interactive experience you are just a few clicks away from taking part in an exciting adventure.
 
-Using geolocation and geofencing, the user receives hints and a map to ‘crumbs’ navigating them through an augmented tour of their surroundings. Crumblayer’s can leave clues, videos, and images to both guide and reward the user; facilitating a fun an interactive experience.
+Using geolocation and geofencing, the user receives hints and a map to ‘crumbs’ navigating them through an augmented tour of their surroundings. Crumblayers can leave clues, videos, and images to both guide and reward the user; facilitating a fun an interactive experience.
 
 Breadcrumb enhances the tourist experience by providing an avenue of expression that enhances a usual walk and see experience. Anyone from tour guides, local musicians, theatre troupes and the general user have the tools to make an immersive and fun experience.
 
@@ -45,22 +46,29 @@ Just download the app to your android device. After a brief signup form, pick an
 ---
 
 ## Wireframe ##
-![wireframe](www/img/wireframe.png)
+![wireframe](assets/wireframe.png)
+
+## Live App Wireframe ##
+![wireframe](assets/Flow1.png)
+![wireframe](assets/Flow2.png)
+![wireframe](assets/Flow3.png)
+![wireframe](assets/Flow4.png)
+![wireframe](assets/Flow5.png)
 
 ## Tech Stack ##
-![techstack](www/img/techstack.png)
+![techstack](assets/techstack.png)
 
 ## Architecture ##
-![service-architecture](www/img/servicearchitecture.png)
+![service-architecture](assets/servicearchitecture.png)
 
 ## Database Layout ##
-![Database](www/img/database.png)
+![Database](assets/database.png)
 
 ### Other resource ###
 
-Check out our sweet initial press release ![PRESS-RELEASE.md](PRESS-RELEASE.md)
+Check out our sweet initial [press release](PRESS-RELEASE.md)
 
-Or if you would like to contribute please read this =>![CONTRIBUTING.md](CONTRIBUTING.md)
+Or if you would like to contribute please read [this!](CONTRIBUTING.md)
 
 ### Roadmap
 
