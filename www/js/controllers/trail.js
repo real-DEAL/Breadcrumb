@@ -113,7 +113,6 @@ angular.module('breadcrumb')
         $scope.crumb += 1;
         $rootScope.pinged = false;
         Geofence.removeAll();
-        Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
         if ($scope.crumb > $scope.crumbs.length) {
           $scope.crumb = 0;
         }
@@ -124,6 +123,7 @@ angular.module('breadcrumb')
           $scope.page.finish = true;
           $scope.finishTrail();
         } else {
+          Geofence.addOrUpdate($scope.crumbs[$scope.crumb]);
           $scope.page.found = false;
           $scope.page.media.show = false;
           $scope.bubbles = Style.bubbleDown;
