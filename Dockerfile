@@ -17,4 +17,4 @@ RUN  bower install --allow-root
 RUN cd /app
 EXPOSE 8100 35729
 
-CMD ionic serve
+CMD ionic serve --nolivereload --nogulp --lab
