@@ -1,4 +1,4 @@
-FROM beevelop/ionic:latest
+FROM kahatie/ionic
 
 RUN mkdir -p /app
 WORKDIR /app
