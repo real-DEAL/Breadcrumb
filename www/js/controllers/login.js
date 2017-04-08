@@ -43,7 +43,6 @@ angular.module('breadcrumb')
           data.grant_type = 'password';
           data.social_login = profile.user_id;
           $http({
-
             method: 'POST',
             url: `${$rootScope.IP}/v1/access_tokens`,
             json: true,
