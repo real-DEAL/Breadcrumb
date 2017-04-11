@@ -21,7 +21,7 @@ angular.module('breadcrumb', [
   store
 ) {
   $ionicPlatform.ready(function () {
-    $rootScope.IP = 'http://54.244.155.187/:3000';
+    $rootScope.IP = 'http://54.244.155.187:3000';
     $rootScope.pinged = false;
     $rootScope.toggleSide = true;
     if ($window.cordova && $window.cordova.plugins.Keyboard) {
