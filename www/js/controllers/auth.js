@@ -18,6 +18,7 @@ angular.module('breadcrumb')
   $scope.creds = {};
   $scope.updateUser = (deleteAccount) => {
     const profile = store.get('profile');
+    $scope.creds.email = $scope.creds.email || store.get('email');
     const info = {};
     Object.entries($scope.creds).forEach((pair) => {
       if (pair[1] !== undefined) {

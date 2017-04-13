@@ -12,7 +12,7 @@ angular.module('breadcrumb')
     auth.signin({
       socialBigButtons: true,
       allowSignUpAction: true,
-      connections: ['Username-Password-Authentication', 'twitter', 'facebook'],
+      connections: ['Username-Password-Authentication'],
       authParams: {
         scope: 'openid offline_access',
         device: 'Mobile device',
